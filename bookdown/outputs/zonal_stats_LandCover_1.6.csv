@@ -1,0 +1,15 @@
+zone,land cover,sum,mean,how to aggregate
+1,No Data,3172638463,3320.966,excl
+2,Artificial,1.12E+11,3514.566,excl
+3,Croplands,64922857109,3205.843,
+4,Grassland,3.12E+11,4312.726,
+5,Tree covered,54967368915,2835.604,
+6,Shrubs covered,24639779615,5325.171,other
+7,Herbaceous vegetation flooded,1157612162,5782.538,other
+8,Mangroves,39739224118,2465.842,other
+9,Sparse vegetation,36112171533,1318.084,other
+10,Bare soil,1903327003,3072.38,other
+11,Snow and glaciers,10809353823,3855.598,other
+12,Waterbodies,973259346,3623.291,other
+13,Treecrops,8398997120,2507.86,cropland
+140,Paddy fields (rice/flooded crops),11682085332,2651.63,cropland

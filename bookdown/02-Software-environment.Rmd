@@ -1,0 +1,102 @@
+# Setting-up the software environment
+*Y. Yigini*
+
+This cookbook focuses on SOC modeling using open source digital mapping tools. The instructions in this chapter will guide the user through installing and manually configuring the software to be used for DSM procedures for Microsoft Windows desktop platform. Instructions for other platforms (e.g. Linux Flavours, MacOS) can be found through free online resources.
+
+## Use of R, RStudio and R Packages
+
+**R** is a language and environment for statistical computing. It provides a wide variety of statistical (e.g. linear modeling, statistical tests, time-series, classification, clustering, etc.) and graphical methods, and is highly extensible. 
+
+### Obtaining and installing R
+
+Installation files and instructions can be downloaded from the Comprehensive R Archive Network (CRAN).
+
+1. Go to the following link https://cran.r-project.org/ to download and install **R**. 
+2. Pick an installation file for your platform. 
+
+### Obtaining and installing RStudio
+
+Beginners will find it very hard to start using **R** because it has no Graphical User Interface (GUI). There are some GUIs which offer some of the functionality of **R**. **RStudio** makes **R** easier to use. It includes a code editor, debugging and visualization tools. Similar steps need to be followed to install **RStudio**.
+
+1. Go to https://www.rstudio.com/products/rstudio/download/ to download and install **RStudio**'s open source edition.
+2. On the download page, *RStudio Desktop, Open Source License* option should be selected.
+3. Pick an installation file for your platform. 
+
+### Getting started with R	
+
+* **R** manuals:                  http://cran.r-project.org/manuals.html
+* Contributed documentation:      http://cran.r-project.org/other-docs.html
+* Quick-**R**:                    http://www.statmethods.net/index.html
+* Stackoverflow **R** community:  https://stackoverflow.com/questions/tagged/r 
+
+## R packages
+
+When you download **R**, you get the basic **R** system which implements the **R** language. **R** becomes more useful with the large collection of packages that extend the basic functionality of it. **R** packages are developed by the **R** community.
+
+refer to: 
+  - tidyverse book (R for data science)
+  - caret (cookbook)
+  - https://rspatial.org/
+
+### Finding R packages
+
+The primary source for **R** packages is [CRAN’s](https://cran.r-project.org/) official website, where currently about 12,000 available packages are listed. For spatial applications, various packages are available. You can obtain information about the available packages directly on CRAN with the `available.packages()` function. The function returns a matrix of details corresponding to packages currently available at one or more repositories. An easier way to browse the list of packages is using the [*Task Views*](https://cran.r-project.org/web/views/) link, which groups together packages related to a given topic. 
+
+
+## GEE - google earth engine
+
+- general info
+
+```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Google Earth Engine code editor."}
+knitr::include_graphics("images/2.1_GEE_codeeditor.png")
+```
+
+
+- upload assets to GEE 
+
+```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Select files and filetype to be uploaded as GEE assets."}
+knitr::include_graphics("images/2.2_upload-assets-1.png")
+```
+
+
+```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Upload interface."}
+knitr::include_graphics("images/2.2_upload-assets-2.png")
+```
+
+- Explain how to import uploaded assets (?) ...
+
+## rgee - Extension to use google earth engine in R
+The rgee package enables users to interact with the GEE servers using the R language. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.
+
+```{r, eval = F}
+
+# Source: https://yabellini.github.io/curso_rgee/index.html
+# Yanina Bellini Saibene
+
+#install.packages('remotes')
+# remotes::install_github("r-spatial/rgee")
+```
+
+To be able to interact with the GEE via Python, it is necessary to install certain R packages but also the so-called "Miniconda" commmand prompt which acts as Python interpreter mediating between R and GEE. The 'ee_install()' function automatically downloads and install all the software that is needed.
+
+```{r}
+# load rgee package and install dependencies
+library(rgee)
+# ee_install() # installs miniconda
+```
+
+Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of our GEE account. The ee_Initialize command must be run every time we want to use rgee.
+
+```{r}
+# Initialize Google Earth Engine! (you need to create a user account)
+# ee_Initialize()
+
+
+# Useful functions
+
+#ee_check() # check the dependencies that do not belong to R
+#ee_clean_credentials() # to remove the user credentials
+#ee_clean_pyenv() # Delete variables of the system
+
+```
+

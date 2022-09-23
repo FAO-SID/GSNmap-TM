@@ -1,0 +1,237 @@
+--- 
+title: "Digital Soil Mapping Technical Manual"
+author: "GSP Secretariat and ITPS"
+date: ""
+#site: bookdown::bookdown_site
+output: 
+  bookdown::pdf_book:
+    fig_caption: yes
+header-includes:
+    - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
+    - \usepackage{titling}
+    - \usepackage{natbib}
+    - \usepackage{pdfpages}
+    - \usepackage{fancyhdr}
+    - \usepackage{booktabs}
+    - \usepackage{longtable}
+    - \usepackage{subfig}
+    - \usepackage{array}
+    - \usepackage{amsmath}
+    - \usepackage{multirow}
+    - \usepackage{wrapfig}
+    - \usepackage{bookmark}
+    - \usepackage[utf8]{inputenc}
+    - \usepackage{float}
+    - \usepackage{colortbl}
+    - \usepackage{pdflscape}
+    - \usepackage{tabu}
+    - \usepackage{threeparttable}
+    - \usepackage{threeparttablex}
+    - \usepackage[normalem]{ulem}
+    - \usepackage{makecell}
+    - \usepackage{xcolor}
+    - \DeclareUnicodeCharacter{2212}{\textendash}
+    - \usepackage{rotating, graphicx}
+documentclass: book
+csl: food-and-agriculture-organization-of-the-united-nations.csl
+bibliography: "reference-list.bib"
+link-citations: yes
+classoption: oneside
+papersize: b5
+fontsize: 10pt
+description: "Digital Soil Mapping Technical Manual"
+always_allow_html: yes
+template: null
+---
+
+
+```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE}
+options(knitr.table.format = "latex")
+options(width = 60)
+
+library(kableExtra)
+# Cache results
+knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40),tidy=FALSE, size="tiny", fig.cap = T)
+
+#reduce pdf file size
+knitr::opts_chunk$set(dev = 'jpeg')
+
+## redefine str for the width option
+str <- function(...){
+  utils::str(..., strict.width = "cut")}
+
+addline_format <- function(x,...){
+  gsub('\\s','\n',x)
+}
+underscore_to_space <- function(x,...){
+  gsub("_", " ",x)
+}
+
+
+#bookdown::render_book("index.Rmd", "bookdown::gitbook")
+#bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+#bookdown::render_book("index.Rmd", "bookdown::word_document2")
+```
+
+
+\frontmatter
+\addtocontents{toc}{\protect\hypersetup{hidelinks}}   
+\addtocontents{lof}{\protect\hypersetup{hidelinks}}
+\addtocontents{lot}{\protect\hypersetup{hidelinks}}
+\tableofcontents
+\listoffigures
+\listoftables
+\nopagebreak[4]
+
+# Foreword {-}
+
+
+
+
+# Abbreviations and acronyms {-}
+BD
+
+:   Bulk Density 
+
+CO~2~
+
+:   Carbon dioxide 
+
+CRF
+
+:   Coarse fragments 
+
+DM
+
+:   Dry matter 
+
+DSM
+
+:   Digital soil mapping 
+
+GAUL
+
+:   Global Administrative Unit Layers 
+
+GHG
+
+:   Greenhouse gas 
+
+GSOCmap
+
+:   Global Soil Organic Carbon Map
+
+GSOCseq
+
+:   Global Soil Organic Carbon Sequestration Potential Map
+
+GSP
+
+:   Global Soil Partnership
+
+HWSD
+
+:   Harmonized World Soil Database
+
+ISCN
+
+:   International Soil Carbon Network
+
+INSII
+
+:   International Network of Soil Information Institutions
+
+IPBES
+
+:   Intergovernmental Platform on Biodiversity and Ecosystem Services
+
+IPCC
+
+:   Intergovernmental Panel on Climate Change
+
+IPR
+
+:   Intellectual Property Rights
+
+ITPS
+
+:   Intergovernmental Technical Panel on Soils
+
+LDN
+
+:   Land Degradation Neutrality
+
+NDVI
+
+:   Normalized difference in vegetation index
+
+NPP
+
+:   Net Primary Production
+
+P4WG
+
+:   Pillar 4 Working Group
+
+QA/QC
+
+:   Quality Assurance/Quality Check
+
+RMSE
+
+:   Root mean square error
+
+SDF
+
+:   Soil Data Facility
+
+SDG
+
+:   Sustainable Development Goals 
+
+SISLAC
+
+:   Latin America and the Caribbean's Soil Information System
+
+SOC
+
+:   Soil organic carbon
+
+SOM
+
+:   Soil organic matter
+
+SPADE/M
+
+:   Soil Profile Analytical Database of Europe of Measured Parameters 
+
+SWRS
+
+:   Status of World's Soil Resources 
+
+UNCCD
+
+:   United Nations Convention to Combat Desertification
+
+WFS
+
+:   Web Feature Service 
+
+WoSIS
+
+:   World Soil Information Service 
+
+# Contributors {-}
+
+*Prepared by:*\
+**Global Soil Partnership Secretariat**\
+Ronald Vargas\
+
+
+**Second Intergovernmental Technical Panel on Soils**\
+Luca Montanarella - European Commission, Joint Research Centre
+(*Chair*); Saéb AbdelHaleem Khresat 
+
+**Third Intergovernmental Technical Panel on Soils**\
+Rosa Poch - Spain (*Chair*); Nsalambi V. Nkongolo - Democratic Republic
+of the Congo; 

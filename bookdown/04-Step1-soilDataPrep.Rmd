@@ -1,0 +1,30 @@
+# Step 1: soil data preparation
+
+
+Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \ref{tab:data1}.
+
+
+\begin{table}[htbp]
+    \caption{Format example of a soil dataset}
+    \scalebox{0.685}{
+    \begin{threeparttable}
+        \centering
+            \begin{tabular}{rrrrrrrrrl}
+            \toprule
+            Profile ID & Horizon ID & Lat & Long & Year & Top  & Bottom  & Soil property & Value & Lab method\\
+            \midrule
+            1 & 1\_1 & 12.123456 & 1.123456 & 2018 & 0  & 20 & SOC & 3.4 & W\&B \\
+            1 & 1\_2 & 12.123456 & 1.123456 & 2018 & 20 & 40 & SOC & 2.1 & W\&B \\
+            2 & 2\_1 & 23.123456 & 2.123456 & 2019 & 0  & 30 & SOC & 2.9 & W\&B\\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+        \item \footnotesize Profile ID = unique profile identifier; Horizon ID = unique layer identifier; Lat = latitude in decimal degrees; Long = longitude in decimal degrees; Year = sampling year; Top = upper limit of the layer in cm; Bottom = lower limit of the layer in cm; Soil property = name of the soil property; Value = numerical value of the measure; Lab method = name of the laboratory protocol used for measuring the soil property.
+        \end{tablenotes}
+    \end{threeparttable}
+    \label{tab:data1}
+    }
+\end{table}
+
+Soil data usually require a preprocessing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. 
+Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0-30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function [@Bishop1999; @Malone2009] fitted to each individual soil profile, which requires more than a layer per profile. In the cases of single-layer samples, which is common in sampling for nutrient determination, a pedotransfer function locally calibrated should be applied. Pedotransfer functions will be also required to harmonise the laboratory methods. Experts from GLOSOLAN will provide advice in this regard.

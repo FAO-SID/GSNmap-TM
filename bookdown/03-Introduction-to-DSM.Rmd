@@ -1,0 +1,22 @@
+# Introduction to Digital Soil Mapping
+
+Digital soil mapping (DSM) is a methodological framework to create soil attribute maps on the basis of the quantitative relationships between spatial soil databases and environmental covariates. The quantitative relations can be modelled by different statistical approaches, most of them considered machine learning techniques. Environmental covariates are spatially explicit proxies of soil-forming factors that are employed as predictors of the geographical distribution of soil properties. The methodology has evolved from the theories of soil genesis developed by Vasil Dokuchaev in his work the Russian Chernozems (1883), which later were formalised by Jenny (1941) with the equation of the soil-forming factors. The conceptual equation of soil-forming factors has been updated by @McBratney2003 as follow:
+
+\begin{equation} 
+  S = f\left(s,c,o,r,p,a,n\right)
+  (\#eq:scorpan)
+\end{equation} 
+
+Where $S$ is the soil classes or attributes (to be modelled) as a function of “$s$” as other soil properties, “$c$” as climatic properties, “$o$” as organisms, including land cover and human activity, “$r$” as terrain attributes, “$p$” as parent material, “$a$” as soil age, and “$n$” as the geographic position. 
+
+Digital soil mapping has been used to produce maps of soil nutrients. For instance, @Hengl2017 predicted 15 soil nutrients at a 250 m resolution in Africa, using a random forest model (Wright and Ziegler, 2016), topsoil nutrient observations at point locations and a set of spatially-explicit environmental covariates. In 2021, Hengl et al. applied the same modelling approach to estimate total phosphorus in semi-natural soils at the global scale, as well.
+
+In this technical manual, we present a DSM frameworks to map soil properties, including soil nutrients. One approach for soil observations with latitude and longitude data (point-support) (Figure \ref{fig:workflow1}).
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/workflow lat-long data.pdf}
+  \caption{Digital soil mapping approach for point-support data. Circles are the steps.}
+  \label{fig:workflow1}
+\end{figure}
