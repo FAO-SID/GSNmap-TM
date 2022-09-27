@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.16)  22 AUG 2022 11:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.16)  27 SEP 2022 08:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -968,39 +968,39 @@ LaTeX Font Info:    Trying to load font information for T1+lmss on input line 3
 (c:/texlive/2022/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./DSM_CG.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 7
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
 .
 (c:/texlive/2022/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
 .
 (c:/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-7.
+6.
 (c:/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-7.
+6.
 (c:/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 7.
+(Font)              <10> on input line 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 7.
+(Font)              <7> on input line 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 7.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+(Font)              <5> on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
 (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1042,507 +1042,507 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.407 ...bel{setting-up-the-software-environment}}
-                                                   [1
+l.412 
+       [1
 
 
-]
-Chapter 2.
-[2
-
-]
+] [2]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
-54.
+32.
 (c:/texlive/2022/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-76.
-(c:/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [3]
-<images/2.1_GEE_codeeditor.png, id=440, 1444.64719pt x 707.64375pt>
-File: images/2.1_GEE_codeeditor.png Graphic file (type png)
-<use images/2.1_GEE_codeeditor.png>
-Package pdftex.def Info: images/2.1_GEE_codeeditor.png  used on input line 488.
-
-(pdftex.def)             Requested size: 341.43196pt x 167.2465pt.
-<images/2.2_upload-assets-1.png, id=441, 1269.24188pt x 679.78969pt>
-File: images/2.2_upload-assets-1.png Graphic file (type png)
-<use images/2.2_upload-assets-1.png>
-Package pdftex.def Info: images/2.2_upload-assets-1.png  used on input line 498
-.
-(pdftex.def)             Requested size: 341.42166pt x 182.86107pt.
-<images/2.2_upload-assets-2.png, id=443, 1269.24188pt x 679.78969pt>
-File: images/2.2_upload-assets-2.png Graphic file (type png)
-<use images/2.2_upload-assets-2.png>
-Package pdftex.def Info: images/2.2_upload-assets-2.png  used on input line 502
-.
-(pdftex.def)             Requested size: 341.42166pt x 182.86107pt.
-[4 <./images/2.1_GEE_codeeditor.png>] [5 <./images/2.2_upload-assets-1.PNG> <./
-images/2.2_upload-assets-2.PNG>]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-521.
-(c:/texlive/2022/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6]
-Chapter 3.
-[7
+Chapter 2.
+[4
 
 ]
-<images/workflow lat-long data.pdf, id=476, 806.01125pt x 726.715pt>
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+10.
+(c:/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [5]
+<images/2.1_GEE_codeeditor.png, id=458, 1444.64719pt x 707.64375pt>
+File: images/2.1_GEE_codeeditor.png Graphic file (type png)
+<use images/2.1_GEE_codeeditor.png>
+Package pdftex.def Info: images/2.1_GEE_codeeditor.png  used on input line 522.
+
+(pdftex.def)             Requested size: 341.43196pt x 167.2465pt.
+<images/2.2_upload-assets-1.png, id=459, 1269.24188pt x 679.78969pt>
+File: images/2.2_upload-assets-1.png Graphic file (type png)
+<use images/2.2_upload-assets-1.png>
+Package pdftex.def Info: images/2.2_upload-assets-1.png  used on input line 532
+.
+(pdftex.def)             Requested size: 341.42166pt x 182.86107pt.
+<images/2.2_upload-assets-2.png, id=461, 1269.24188pt x 679.78969pt>
+File: images/2.2_upload-assets-2.png Graphic file (type png)
+<use images/2.2_upload-assets-2.png>
+Package pdftex.def Info: images/2.2_upload-assets-2.png  used on input line 536
+.
+(pdftex.def)             Requested size: 341.42166pt x 182.86107pt.
+[6 <./images/2.1_GEE_codeeditor.png>] [7 <./images/2.2_upload-assets-1.PNG> <./
+images/2.2_upload-assets-2.PNG>]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+555.
+(c:/texlive/2022/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [8]
+Chapter 3.
+[9
+
+]
+<images/workflow lat-long data.pdf, id=496, 806.01125pt x 726.715pt>
 File: images/workflow lat-long data.pdf Graphic file (type pdf)
 <use images/workflow lat-long data.pdf>
 Package pdftex.def Info: images/workflow lat-long data.pdf  used on input line 
-570.
+615.
 (pdftex.def)             Requested size: 310.49362pt x 279.94691pt.
-[8 <./images/workflow lat-long data.pdf>]
+[10] [11 <./images/workflow lat-long data.pdf>]
 Chapter 4.
-[9
+[12
 
-] [10]
+] [13]
 Chapter 5.
 
-Overfull \hbox (10.87727pt too wide) in paragraph at lines 617--617
+Overfull \hbox (10.87727pt too wide) in paragraph at lines 662--662
 []|\T1/lmr/m/n/10 (-20) Resolution| 
  []
 
 
-Overfull \hbox (10.04979pt too wide) in alignment at lines 613--617
+Overfull \hbox (10.04979pt too wide) in alignment at lines 658--662
  [] [] [] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 619--619
+Underfull \hbox (badness 10000) in paragraph at lines 664--664
 []|\T1/lmr/m/n/10 (+20) Temp-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 623--623
+Underfull \hbox (badness 10000) in paragraph at lines 668--668
 []|\T1/lmr/m/n/10 (+20) Precipi-
  []
 
 
-Overfull \hbox (14.31068pt too wide) in paragraph at lines 629--629
+Overfull \hbox (14.31068pt too wide) in paragraph at lines 674--674
 []|\T1/lmr/m/n/10 (-20) Evapotransp-
  []
 
 
-Overfull \hbox (16.4893pt too wide) in paragraph at lines 629--629
+Overfull \hbox (16.4893pt too wide) in paragraph at lines 674--674
 []|\T1/lmr/m/n/10 (-20) pet_penman_mean| 
  []
 
 
-Overfull \hbox (9.95589pt too wide) in paragraph at lines 630--630
+Overfull \hbox (9.95589pt too wide) in paragraph at lines 675--675
 []|\T1/lmr/m/n/10 (-20) pet_penman_min| 
  []
 
 
-Overfull \hbox (17.0613pt too wide) in paragraph at lines 631--631
+Overfull \hbox (17.0613pt too wide) in paragraph at lines 676--676
 []|\T1/lmr/m/n/10 (-20) pet_penman_range| 
  []
 
 
-Overfull \hbox (11.86172pt too wide) in paragraph at lines 632--632
+Overfull \hbox (11.86172pt too wide) in paragraph at lines 677--677
 []|\T1/lmr/m/n/10 (-20) pet_penman_max| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 638--638
+Underfull \hbox (badness 10000) in paragraph at lines 683--683
 []|\T1/lmr/m/n/10 (+20) Growing
  []
 
 
-Overfull \hbox (4.31862pt too wide) in paragraph at lines 640--640
+Overfull \hbox (4.31862pt too wide) in paragraph at lines 685--685
 []|\T1/lmr/m/n/10 (-20) Vegetation
  []
 
 
-Overfull \hbox (16.75075pt too wide) in paragraph at lines 640--640
+Overfull \hbox (16.75075pt too wide) in paragraph at lines 685--685
 []|\T1/lmr/m/n/10 (-20) ndvi_030405_mean| 
  []
 
 
-Underfull \hbox (badness 4981) in paragraph at lines 641--641
+Underfull \hbox (badness 4981) in paragraph at lines 686--686
 []|\T1/lmr/m/n/10 (+20) NDVI (MOD13Q1), mean June-
  []
 
 
-Overfull \hbox (16.75075pt too wide) in paragraph at lines 641--641
+Overfull \hbox (16.75075pt too wide) in paragraph at lines 686--686
 []|\T1/lmr/m/n/10 (-20) ndvi_060708_mean| 
  []
 
 
-Overfull \hbox (16.75075pt too wide) in paragraph at lines 642--642
+Overfull \hbox (16.75075pt too wide) in paragraph at lines 687--687
 []|\T1/lmr/m/n/10 (-20) ndvi_091011_mean| 
  []
 
 
-Overfull \hbox (16.75075pt too wide) in paragraph at lines 643--643
+Overfull \hbox (16.75075pt too wide) in paragraph at lines 688--688
 []|\T1/lmr/m/n/10 (-20) ndvi_120102_mean| 
  []
 
 
-Overfull \hbox (3.1944pt too wide) in paragraph at lines 644--644
+Overfull \hbox (3.1944pt too wide) in paragraph at lines 689--689
 []|\T1/lmr/m/n/10 (-20) ndvi_030405_sd| 
  []
 
 
-Overfull \hbox (3.1944pt too wide) in paragraph at lines 645--645
+Overfull \hbox (3.1944pt too wide) in paragraph at lines 690--690
 []|\T1/lmr/m/n/10 (-20) ndvi_060708_sd| 
  []
 
 
-Overfull \hbox (3.1944pt too wide) in paragraph at lines 646--646
+Overfull \hbox (3.1944pt too wide) in paragraph at lines 691--691
 []|\T1/lmr/m/n/10 (-20) ndvi_091011_sd| 
  []
 
 
-Overfull \hbox (3.1944pt too wide) in paragraph at lines 647--647
+Overfull \hbox (3.1944pt too wide) in paragraph at lines 692--692
 []|\T1/lmr/m/n/10 (-20) ndvi_120102_sd| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 649--649
+Underfull \hbox (badness 2012) in paragraph at lines 694--694
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (15.14445pt too wide) in paragraph at lines 649--649
+Overfull \hbox (15.14445pt too wide) in paragraph at lines 694--694
 []|\T1/lmr/m/n/10 (-20) fpar_030405_mean| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 650--650
+Underfull \hbox (badness 2012) in paragraph at lines 695--695
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (15.14445pt too wide) in paragraph at lines 650--650
+Overfull \hbox (15.14445pt too wide) in paragraph at lines 695--695
 []|\T1/lmr/m/n/10 (-20) fpar_060708_mean| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 651--651
+Underfull \hbox (badness 2012) in paragraph at lines 696--696
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (15.14445pt too wide) in paragraph at lines 651--651
+Overfull \hbox (15.14445pt too wide) in paragraph at lines 696--696
 []|\T1/lmr/m/n/10 (-20) fpar_091011_mean| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 652--652
+Underfull \hbox (badness 2012) in paragraph at lines 697--697
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (15.14445pt too wide) in paragraph at lines 652--652
+Overfull \hbox (15.14445pt too wide) in paragraph at lines 697--697
 []|\T1/lmr/m/n/10 (-20) fpar_120102_mean| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 653--653
+Underfull \hbox (badness 2012) in paragraph at lines 698--698
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (1.5881pt too wide) in paragraph at lines 653--653
+Overfull \hbox (1.5881pt too wide) in paragraph at lines 698--698
 []|\T1/lmr/m/n/10 (-20) fpar_030405_sd| 
  []
 
 
-Underfull \hbox (badness 2012) in paragraph at lines 654--654
+Underfull \hbox (badness 2012) in paragraph at lines 699--699
 []|\T1/lmr/m/n/10 (+20) Fraction of pho-to-syn-thet-i-cally ac-
  []
 
 
-Overfull \hbox (1.5881pt too wide) in paragraph at lines 654--654
+Overfull \hbox (1.5881pt too wide) in paragraph at lines 699--699
 []|\T1/lmr/m/n/10 (-20) fpar_060708_sd| 
  []
 
 
-Underfull \hbox (badness 7907) in paragraph at lines 655--655
+Underfull \hbox (badness 7907) in paragraph at lines 700--700
 \T1/lmr/m/n/10 (+20) ra-di-a-tion (FPAR) (MOD15A2H),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--655
+Underfull \hbox (badness 10000) in paragraph at lines 700--700
 \T1/lmr/m/n/10 (+20) stan-dard de-vi-a-tion September-
  []
 
 
-Overfull \hbox (1.5881pt too wide) in paragraph at lines 655--655
+Overfull \hbox (1.5881pt too wide) in paragraph at lines 700--700
 []|\T1/lmr/m/n/10 (-20) fpar_091011_sd| 
  []
 
 
-Underfull \hbox (badness 7907) in paragraph at lines 656--656
+Underfull \hbox (badness 7907) in paragraph at lines 701--701
 \T1/lmr/m/n/10 (+20) ra-di-a-tion (FPAR) (MOD15A2H),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--656
+Underfull \hbox (badness 10000) in paragraph at lines 701--701
 \T1/lmr/m/n/10 (+20) stan-dard de-vi-a-tion December-
  []
 
 
-Overfull \hbox (1.5881pt too wide) in paragraph at lines 656--656
+Overfull \hbox (1.5881pt too wide) in paragraph at lines 701--701
 []|\T1/lmr/m/n/10 (-20) fpar_120102_sd| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--658
+Underfull \hbox (badness 10000) in paragraph at lines 703--703
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Overfull \hbox (13.81078pt too wide) in paragraph at lines 658--658
+Overfull \hbox (13.81078pt too wide) in paragraph at lines 703--703
 []|\T1/lmr/m/n/10 (-20) lstd_030405_mean| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 659--659
+Underfull \hbox (badness 10000) in paragraph at lines 704--704
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Overfull \hbox (13.81078pt too wide) in paragraph at lines 659--659
+Overfull \hbox (13.81078pt too wide) in paragraph at lines 704--704
 []|\T1/lmr/m/n/10 (-20) lstd_060708_mean| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--660
+Underfull \hbox (badness 10000) in paragraph at lines 705--705
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 660--660
+Underfull \hbox (badness 10000) in paragraph at lines 705--705
 \T1/lmr/m/n/10 (+20) (MOD11A2), mean September-
  []
 
 
-Overfull \hbox (13.81078pt too wide) in paragraph at lines 660--660
+Overfull \hbox (13.81078pt too wide) in paragraph at lines 705--705
 []|\T1/lmr/m/n/10 (-20) lstd_091011_mean| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 661--661
+Underfull \hbox (badness 10000) in paragraph at lines 706--706
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 661--661
+Underfull \hbox (badness 10000) in paragraph at lines 706--706
 \T1/lmr/m/n/10 (+20) (MOD11A2), mean December-
  []
 
 
-Overfull \hbox (13.81078pt too wide) in paragraph at lines 661--661
+Overfull \hbox (13.81078pt too wide) in paragraph at lines 706--706
 []|\T1/lmr/m/n/10 (-20) lstd_120102_mean| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 662--662
+Underfull \hbox (badness 10000) in paragraph at lines 707--707
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 662--662
+Underfull \hbox (badness 10000) in paragraph at lines 707--707
 \T1/lmr/m/n/10 (+20) (MOD11A2), stan-dard de-vi-a-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 663--663
+Underfull \hbox (badness 10000) in paragraph at lines 708--708
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 663--663
+Underfull \hbox (badness 10000) in paragraph at lines 708--708
 \T1/lmr/m/n/10 (+20) (MOD11A2), stan-dard de-vi-a-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 664--664
+Underfull \hbox (badness 10000) in paragraph at lines 709--709
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 664--664
+Underfull \hbox (badness 10000) in paragraph at lines 709--709
 \T1/lmr/m/n/10 (+20) (MOD11A2), stan-dard de-vi-a-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 710--710
 []|\T1/lmr/m/n/10 (+20) Land Sur-face Tem-per-a-ture Day
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 710--710
 \T1/lmr/m/n/10 (+20) (MOD11A2), stan-dard de-vi-a-tion
  []
 
 
-Overfull \hbox (19.25516pt too wide) in paragraph at lines 667--667
+Overfull \hbox (19.25516pt too wide) in paragraph at lines 712--712
 []|\T1/lmr/m/n/10 (-20) ndlst_030405_mean| 
  []
 
 
-Overfull \hbox (19.25516pt too wide) in paragraph at lines 668--668
+Overfull \hbox (19.25516pt too wide) in paragraph at lines 713--713
 []|\T1/lmr/m/n/10 (-20) ndlst_060708_mean| 
  []
 
 
-Overfull \hbox (19.25516pt too wide) in paragraph at lines 669--669
+Overfull \hbox (19.25516pt too wide) in paragraph at lines 714--714
 []|\T1/lmr/m/n/10 (-20) ndlst_091011_mean| 
  []
 
 
-Overfull \hbox (19.25516pt too wide) in paragraph at lines 670--670
+Overfull \hbox (19.25516pt too wide) in paragraph at lines 715--715
 []|\T1/lmr/m/n/10 (-20) ndlst_120102_mean| 
  []
 
 
-Overfull \hbox (5.6988pt too wide) in paragraph at lines 671--671
+Overfull \hbox (5.6988pt too wide) in paragraph at lines 716--716
 []|\T1/lmr/m/n/10 (-20) ndlst_030405_sd| 
  []
 
 
-Overfull \hbox (5.6988pt too wide) in paragraph at lines 672--672
+Overfull \hbox (5.6988pt too wide) in paragraph at lines 717--717
 []|\T1/lmr/m/n/10 (-20) ndlst_060708_sd| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--673
+Underfull \hbox (badness 10000) in paragraph at lines 718--718
 \T1/lmr/m/n/10 (+20) stan-dard de-vi-a-tion September-
  []
 
 
-Overfull \hbox (5.6988pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.6988pt too wide) in paragraph at lines 718--718
 []|\T1/lmr/m/n/10 (-20) ndlst_091011_sd| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 674--674
+Underfull \hbox (badness 10000) in paragraph at lines 719--719
 \T1/lmr/m/n/10 (+20) stan-dard de-vi-a-tion December-
  []
 
 
-Overfull \hbox (5.6988pt too wide) in paragraph at lines 674--674
+Overfull \hbox (5.6988pt too wide) in paragraph at lines 719--719
 []|\T1/lmr/m/n/10 (-20) ndlst_120102_sd| 
  []
 
 
-Overfull \hbox (15.47105pt too wide) in paragraph at lines 676--676
+Overfull \hbox (15.47105pt too wide) in paragraph at lines 721--721
 []|\T1/lmr/m/n/10 (-20) swir_060708_mean| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 678--678
+Underfull \hbox (badness 10000) in paragraph at lines 723--723
 []|\T1/lmr/m/n/10 (+20) Snow
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 678--678
+Underfull \hbox (badness 2005) in paragraph at lines 723--723
 []|\T1/lmr/m/n/10 (+20) MODIS Snow Cover (MOD10A1)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 680--680
+Underfull \hbox (badness 10000) in paragraph at lines 725--725
 []|\T1/lmr/m/n/10 (+20) Land
  []
 
 
-Overfull \hbox (8.47522pt too wide) in paragraph at lines 681--681
+Overfull \hbox (8.47522pt too wide) in paragraph at lines 726--726
 []|\T1/lmr/m/n/10 (-20) shrub_and_scrub| 
  []
 
 
-Overfull \hbox (13.4903pt too wide) in paragraph at lines 682--682
+Overfull \hbox (13.4903pt too wide) in paragraph at lines 727--727
 []|\T1/lmr/m/n/10 (-20) flooded_vegetation| 
  []
 
 
-Overfull \hbox (15.75993pt too wide) in paragraph at lines 687--687
+Overfull \hbox (15.75993pt too wide) in paragraph at lines 732--732
 []|\T1/lmr/m/n/10 (-20) downslopecurvature| 
  []
 
 
-Overfull \hbox (4.06017pt too wide) in paragraph at lines 688--688
+Overfull \hbox (4.06017pt too wide) in paragraph at lines 733--733
 []|\T1/lmr/m/n/10 (-20) upslopecurvature| 
  []
 
 
-Overfull \hbox (10.04979pt too wide) in alignment at lines 617--701
+Overfull \hbox (10.04979pt too wide) in alignment at lines 662--746
  [] [] [] [] 
  []
 
-[11
+[14
 
-] [12] [13] [14] [15] [16] [17]
+] [15] [16] [17] [18] [19] [20]
 Chapter 6.
-<images/cv.pdf, id=564, 722.7pt x 542.025pt>
+<images/cv.pdf, id=588, 722.7pt x 542.025pt>
 File: images/cv.pdf Graphic file (type pdf)
 <use images/cv.pdf>
-Package pdftex.def Info: images/cv.pdf  used on input line 741.
+Package pdftex.def Info: images/cv.pdf  used on input line 786.
 (pdftex.def)             Requested size: 310.5013pt x 232.87598pt.
-[18
-
-] [19 <./images/cv.pdf>] [20]
-Chapter 7.
 [21
 
-] [22]
+] [22 <./images/cv.pdf>] [23]
+Chapter 7.
+[24
+
+] [25]
 Chapter 8.
-[23
+[26
 
 ]
 Chapter 9.
-[24
+[27
 
-] [25
+] [28
 
 ]
-<images/backcover.pdf, id=1503, 500.76888pt x 711.3185pt>
+<images/backcover.pdf, id=1526, 500.76888pt x 711.3185pt>
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf>
-Package pdftex.def Info: images/backcover.pdf  used on input line 831.
+Package pdftex.def Info: images/backcover.pdf  used on input line 876.
 (pdftex.def)             Requested size: 328.06331pt x 465.99843pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf>
-Package pdftex.def Info: images/backcover.pdf  used on input line 831.
+Package pdftex.def Info: images/backcover.pdf  used on input line 876.
 (pdftex.def)             Requested size: 328.06331pt x 465.99843pt.
-<images/backcover.pdf, id=1506, page=1, 500.76888pt x 711.3185pt>
+<images/backcover.pdf, id=1529, page=1, 500.76888pt x 711.3185pt>
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 831.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 876.
 (pdftex.def)             Requested size: 500.76764pt x 711.31676pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 831.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 876.
 (pdftex.def)             Requested size: 500.98923pt x 711.63152pt.
-[26]
+[29]
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 831.
-(pdftex.def)             Requested size: 500.98923pt x 711.63152pt.
-File: images/backcover.pdf Graphic file (type pdf)
-<use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 831.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 876.
 (pdftex.def)             Requested size: 500.98923pt x 711.63152pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 831.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 876.
 (pdftex.def)             Requested size: 500.98923pt x 711.63152pt.
-[27 <./images/backcover.pdf>] (./DSM_CG.aux) ) 
+File: images/backcover.pdf Graphic file (type pdf)
+<use images/backcover.pdf, page 1>
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 876.
+(pdftex.def)             Requested size: 500.98923pt x 711.63152pt.
+[30 <./images/backcover.pdf>] (./DSM_CG.aux) ) 
 Here is how much of TeX's memory you used:
- 21355 strings out of 477678
- 356700 string characters out of 5833467
- 794664 words of memory out of 5000000
- 39388 multiletter control sequences out of 15000+600000
- 545708 words of font info for 160 fonts, out of 8000000 for 9000
+ 21379 strings out of 477678
+ 357153 string characters out of 5833467
+ 794927 words of memory out of 5000000
+ 39396 multiletter control sequences out of 15000+600000
+ 546273 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 110i,17n,133p,1028b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 110i,17n,133p,1037b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts
 /enc/dvips/lm/lm-ec.enc}{c:/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-rm.en
 c}{c:/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2022
@@ -1555,10 +1555,10 @@ lmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texli
 ve/2022/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2022/texmf-di
 st/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/pub
 lic/lm/lmtti10.pfb>
-Output written on DSM_CG.pdf (39 pages, 2410346 bytes).
+Output written on DSM_CG.pdf (42 pages, 2421092 bytes).
 PDF statistics:
- 1716 PDF objects out of 1728 (max. 8388607)
- 1499 compressed objects within 15 object streams
- 122 named destinations out of 1000 (max. 500000)
- 45366 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 1752 PDF objects out of 2073 (max. 8388607)
+ 1530 compressed objects within 16 object streams
+ 131 named destinations out of 1000 (max. 500000)
+ 45390 words of extra memory for PDF output out of 51595 (max. 10000000)
 
