@@ -47,19 +47,22 @@ The primary source for **R** packages is [CRAN’s](https://cran.r-project.org/)
 
 - general info
 
-```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Google Earth Engine code editor."}
+```{r, echo = FALSE, fig.cap = "Google Earth Engine code editor."}
+#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.1_GEE_codeeditor.png")
 ```
 
 
 - upload assets to GEE 
 
-```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Select files and filetype to be uploaded as GEE assets."}
+```{r, echo = FALSE, fig.cap = "Select files and filetype to be uploaded as GEE assets."}
+#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.2_upload-assets-1.png")
 ```
 
 
-```{r, echo = FALSE, fig.width = 7, out.width = "12cm", fig.cap = "Upload interface."}
+```{r, echo = FALSE, fig.cap = "Upload interface."}
+#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.2_upload-assets-2.png")
 ```
 

@@ -4,7 +4,8 @@ author: "GSP Secretariat and ITPS"
 date: ""
 #site: bookdown::bookdown_site
 output: 
-  bookdown::pdf_book:
+  #bookdown::pdf_book:
+  bookdown::gitbook:
     fig_caption: yes
 header-includes:
     - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
