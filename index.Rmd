@@ -2,7 +2,7 @@
 title: "Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)"
 author: "FAO"
 date: ""
-#site: bookdown::bookdown_site
+site: bookdown::bookdown_site
 output: 
   #bookdown::pdf_book:
   bookdown::gitbook:
@@ -70,6 +70,7 @@ underscore_to_space <- function(x,...){
 
 
 #bookdown::render_book("index.Rmd", "bookdown::gitbook")
+#bookdown::clean_book(TRUE)
 #bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 #bookdown::render_book("index.Rmd", "bookdown::word_document2")
 ```

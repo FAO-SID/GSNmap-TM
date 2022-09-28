@@ -13,3 +13,4 @@ bookdown::epub_book: default
 bookdown::gitbook:
   css: style.css
   pandoc_args: [ "--csl", "food-and-agriculture-organization-of-the-united-nations.csl" ]
+  

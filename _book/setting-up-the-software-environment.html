@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Setting-up the software environment | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <meta name="description" content="GSNmap - Technical Manual" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Setting-up the software environment | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="GSNmap - Technical Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Setting-up the software environment | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  
+  <meta name="twitter:description" content="GSNmap - Technical Manual" />
+  
+
+<meta name="author" content="FAO" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="presentation.html"/>
+<link rel="next" href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="chapter" data-level="" data-path="abbreviations-and-acronyms.html"><a href="abbreviations-and-acronyms.html"><i class="fa fa-check"></i>Abbreviations and acronyms</a></li>
+<li class="chapter" data-level="" data-path="contributors.html"><a href="contributors.html"><i class="fa fa-check"></i>Contributors</a></li>
+<li class="chapter" data-level="1" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>1</b> Presentation</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="presentation.html"><a href="presentation.html#background-and-objectives"><i class="fa fa-check"></i><b>1.1</b> Background and objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="presentation.html"><a href="presentation.html#global-soil-partnership"><i class="fa fa-check"></i><b>1.2</b> Global Soil Partnership</a></li>
+<li class="chapter" data-level="1.3" data-path="presentation.html"><a href="presentation.html#country-driven-approach-and-tasks"><i class="fa fa-check"></i><b>1.3</b> Country-driven approach and tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html"><i class="fa fa-check"></i><b>2</b> Setting-up the software environment</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages"><i class="fa fa-check"></i><b>2.1</b> Use of R, RStudio and R Packages</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#obtaining-and-installing-r"><i class="fa fa-check"></i><b>2.1.1</b> Obtaining and installing R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#obtaining-and-installing-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Obtaining and installing RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#getting-started-with-r"><i class="fa fa-check"></i><b>2.1.3</b> Getting started with R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#r-packages"><i class="fa fa-check"></i><b>2.2</b> R packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#finding-r-packages"><i class="fa fa-check"></i><b>2.2.1</b> Finding R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#gee---google-earth-engine"><i class="fa fa-check"></i><b>2.3</b> GEE - google earth engine</a></li>
+<li class="chapter" data-level="2.4" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r"><i class="fa fa-check"></i><b>2.4</b> rgee - Extension to use google earth engine in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html"><a href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html"><i class="fa fa-check"></i><b>3</b> Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes</a></li>
+<li class="chapter" data-level="4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>4</b> Step 1: soil data preparation</a></li>
+<li class="chapter" data-level="5" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html"><i class="fa fa-check"></i><b>5</b> Step 2: environmental covariates</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#environmental-covariates"><i class="fa fa-check"></i><b>5.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="5.2" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#reducing-collinearity-in-environmental-covariates"><i class="fa fa-check"></i><b>5.2</b> Reducing collinearity in environmental covariates</a></li>
+<li class="chapter" data-level="5.3" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#merging-soil-data-and-environmental-covariates"><i class="fa fa-check"></i><b>5.3</b> Merging soil data and environmental covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>6</b> Step 3: Mapping continuous soil properties</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#setting-up-repeated-k-fold-cross-validation"><i class="fa fa-check"></i><b>6.1</b> Setting up repeated k-fold cross validation</a></li>
+<li class="chapter" data-level="6.2" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#model-calibration"><i class="fa fa-check"></i><b>6.2</b> Model calibration</a></li>
+<li class="chapter" data-level="6.3" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#predicting-soil-attributes"><i class="fa fa-check"></i><b>6.3</b> Predicting soil attributes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="step-4-uncertainty-assessment.html"><a href="step-4-uncertainty-assessment.html"><i class="fa fa-check"></i><b>7</b> Step 4: uncertainty assessment</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="step-4-uncertainty-assessment.html"><a href="step-4-uncertainty-assessment.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>8</b> Reporting results</a></li>
+<li class="chapter" data-level="9" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html"><i class="fa fa-check"></i><b>9</b> Compendium of R scripts</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="setting-up-the-software-environment" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Setting-up the software environment<a href="setting-up-the-software-environment.html#setting-up-the-software-environment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>Y. Yigini</em></p>
+<p>This cookbook focuses on SOC modeling using open source digital mapping tools. The instructions in this chapter will guide the user through installing and manually configuring the software to be used for DSM procedures for Microsoft Windows desktop platform. Instructions for other platforms (e.g. Linux Flavours, MacOS) can be found through free online resources.</p>
+<div id="use-of-r-rstudio-and-r-packages" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Use of R, RStudio and R Packages<a href="setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>R</strong> is a language and environment for statistical computing. It provides a wide variety of statistical (e.g. linear modeling, statistical tests, time-series, classification, clustering, etc.) and graphical methods, and is highly extensible.</p>
+<div id="obtaining-and-installing-r" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Obtaining and installing R<a href="setting-up-the-software-environment.html#obtaining-and-installing-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Installation files and instructions can be downloaded from the Comprehensive R Archive Network (CRAN).</p>
+<ol style="list-style-type: decimal">
+<li>Go to the following link <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> to download and install <strong>R</strong>.</li>
+<li>Pick an installation file for your platform.</li>
+</ol>
+</div>
+<div id="obtaining-and-installing-rstudio" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Obtaining and installing RStudio<a href="setting-up-the-software-environment.html#obtaining-and-installing-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Beginners will find it very hard to start using <strong>R</strong> because it has no Graphical User Interface (GUI). There are some GUIs which offer some of the functionality of <strong>R</strong>. <strong>RStudio</strong> makes <strong>R</strong> easier to use. It includes a code editor, debugging and visualization tools. Similar steps need to be followed to install <strong>RStudio</strong>.</p>
+<ol style="list-style-type: decimal">
+<li>Go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a> to download and install <strong>RStudio</strong>’s open source edition.</li>
+<li>On the download page, <em>RStudio Desktop, Open Source License</em> option should be selected.</li>
+<li>Pick an installation file for your platform.</li>
+</ol>
+</div>
+<div id="getting-started-with-r" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Getting started with R<a href="setting-up-the-software-environment.html#getting-started-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>R</strong> manuals: <a href="http://cran.r-project.org/manuals.html" class="uri">http://cran.r-project.org/manuals.html</a></li>
+<li>Contributed documentation: <a href="http://cran.r-project.org/other-docs.html" class="uri">http://cran.r-project.org/other-docs.html</a></li>
+<li>Quick-<strong>R</strong>: <a href="http://www.statmethods.net/index.html" class="uri">http://www.statmethods.net/index.html</a></li>
+<li>Stackoverflow <strong>R</strong> community: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
+</ul>
+</div>
+</div>
+<div id="r-packages" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> R packages<a href="setting-up-the-software-environment.html#r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When you download <strong>R</strong>, you get the basic <strong>R</strong> system which implements the <strong>R</strong> language. <strong>R</strong> becomes more useful with the large collection of packages that extend the basic functionality of it. <strong>R</strong> packages are developed by the <strong>R</strong> community.</p>
+<p>refer to:
+- tidyverse book (R for data science)
+- caret (cookbook)
+- <a href="https://rspatial.org/" class="uri">https://rspatial.org/</a></p>
+<div id="finding-r-packages" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Finding R packages<a href="setting-up-the-software-environment.html#finding-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The primary source for <strong>R</strong> packages is <a href="https://cran.r-project.org/">CRAN’s</a> official website, where currently about 12,000 available packages are listed. For spatial applications, various packages are available. You can obtain information about the available packages directly on CRAN with the <code>available.packages()</code> function. The function returns a matrix of details corresponding to packages currently available at one or more repositories. An easier way to browse the list of packages is using the <a href="https://cran.r-project.org/web/views/"><em>Task Views</em></a> link, which groups together packages related to a given topic.</p>
+</div>
+</div>
+<div id="gee---google-earth-engine" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> GEE - google earth engine<a href="setting-up-the-software-environment.html#gee---google-earth-engine" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>general info</li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="images/2.1_GEE_codeeditor.png" alt="Google Earth Engine code editor." width="960" />
+<p class="caption">
+Figure 2.1: Google Earth Engine code editor.
+</p>
+</div>
+<ul>
+<li>upload assets to GEE</li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="images/2.2_upload-assets-1.PNG" alt="Select files and filetype to be uploaded as GEE assets." width="843" />
+<p class="caption">
+Figure 2.2: Select files and filetype to be uploaded as GEE assets.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="images/2.2_upload-assets-2.PNG" alt="Upload interface." width="843" />
+<p class="caption">
+Figure 2.3: Upload interface.
+</p>
+</div>
+<ul>
+<li>Explain how to import uploaded assets (?) …</li>
+</ul>
+</div>
+<div id="rgee---extension-to-use-google-earth-engine-in-r" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> rgee - Extension to use google earth engine in R<a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The rgee package enables users to interact with the GEE servers using the R language. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setting-up-the-software-environment.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source: https://yabellini.github.io/curso_rgee/index.html</span></span>
+<span id="cb1-2"><a href="setting-up-the-software-environment.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Yanina Bellini Saibene</span></span>
+<span id="cb1-3"><a href="setting-up-the-software-environment.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="setting-up-the-software-environment.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&#39;remotes&#39;)</span></span>
+<span id="cb1-5"><a href="setting-up-the-software-environment.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;r-spatial/rgee&quot;)</span></span></code></pre></div>
+<p>To be able to interact with the GEE via Python, it is necessary to install certain R packages but also the so-called “Miniconda” commmand prompt which acts as Python interpreter mediating between R and GEE. The ‘ee_install()’ function automatically downloads and install all the software that is needed.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setting-up-the-software-environment.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load rgee package and install dependencies</span></span>
+<span id="cb2-2"><a href="setting-up-the-software-environment.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
+<span id="cb2-3"><a href="setting-up-the-software-environment.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ee_install() # installs miniconda</span></span></code></pre></div>
+<p>Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of our GEE account. The ee_Initialize command must be run every time we want to use rgee.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="setting-up-the-software-environment.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize Google Earth Engine! (you need to create a user account)</span></span>
+<span id="cb3-2"><a href="setting-up-the-software-environment.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ee_Initialize()</span></span>
+<span id="cb3-3"><a href="setting-up-the-software-environment.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="setting-up-the-software-environment.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="setting-up-the-software-environment.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful functions</span></span>
+<span id="cb3-6"><a href="setting-up-the-software-environment.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="setting-up-the-software-environment.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_check() # check the dependencies that do not belong to R</span></span>
+<span id="cb3-8"><a href="setting-up-the-software-environment.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_credentials() # to remove the user credentials</span></span>
+<span id="cb3-9"><a href="setting-up-the-software-environment.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_pyenv() # Delete variables of the system</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="presentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
