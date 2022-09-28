@@ -1,6 +1,6 @@
 --- 
-title: "Digital Soil Mapping Technical Manual"
-author: "GSP Secretariat and ITPS"
+title: "Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)"
+author: "FAO"
 date: ""
 #site: bookdown::bookdown_site
 output: 
@@ -40,7 +40,7 @@ link-citations: yes
 classoption: oneside
 papersize: b5
 fontsize: 10pt
-description: "Digital Soil Mapping Technical Manual"
+description: "GSNmap - Technical Manual"
 always_allow_html: yes
 template: null
 ---

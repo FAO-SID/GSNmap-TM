@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual</title>
-  <meta name="description" content="Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual" />
+  <title>Chapter 4 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <meta name="description" content="GSNmap - Technical Manual" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual" />
+  <meta property="og:title" content="Chapter 4 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual" />
+  <meta property="og:description" content="GSNmap - Technical Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual" />
+  <meta name="twitter:title" content="Chapter 4 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   
-  <meta name="twitter:description" content="Chapter 3 Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes | Digital Soil Mapping Technical Manual" />
+  <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
 
-<meta name="author" content="GSP Secretariat and ITPS" />
+<meta name="author" content="FAO" />
 
 
 
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="setting-up-the-software-environment.html"/>
-<link rel="next" href="step-1-soil-data-preparation.html"/>
+<link rel="prev" href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html"/>
+<link rel="next" href="step-2-environmental-covariates.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,7 +208,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Digital Soil Mapping Technical Manual</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</a>
           </h1>
         </div>
 
@@ -216,25 +216,20 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Introduction to Digital Soil Mapping of soil nutrients and associated soil attributes<a href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html#introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Digital soil mapping (DSM) is a methodological framework to create soil attribute maps on the basis of the quantitative relationships between spatial soil databases and environmental covariates. The quantitative relations can be modelled by different statistical approaches, most of them considered machine learning techniques. Environmental covariates are spatially explicit proxies of soil-forming factors that are employed as predictors of the geographical distribution of soil properties. The methodology has evolved from the theories of soil genesis developed by Vasil Dokuchaev in his work the Russian Chernozems (1883), which later were formalised by Jenny (1941) with the equation of the soil-forming factors. The conceptual equation of soil-forming factors has been updated by <span class="citation">McBratney, Santos and Minasny (<a href="#ref-McBratney2003" role="doc-biblioref">2003</a>)</span> as follow:</p>
-<p><span class="math display" id="eq:scorpan">\[\begin{equation}
-  S = f\left(s,c,o,r,p,a,n\right)
-  \tag{3.1}
-\end{equation}\]</span></p>
-<p>Where <span class="math inline">\(S\)</span> is the soil classes or attributes (to be modelled) as a function of “<span class="math inline">\(s\)</span>” as other soil properties, “<span class="math inline">\(c\)</span>” as climatic properties, “<span class="math inline">\(o\)</span>” as organisms, including land cover and human activity, “<span class="math inline">\(r\)</span>” as terrain attributes, “<span class="math inline">\(p\)</span>” as parent material, “<span class="math inline">\(a\)</span>” as soil age, and “<span class="math inline">\(n\)</span>” as the geographic position.</p>
-<p>Digital soil mapping has been used to produce maps of soil nutrients. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa, using a random forest model (Wright and Ziegler, 2016), topsoil nutrient observations at point locations and a set of spatially-explicit environmental covariates. In 2021, Hengl et al. applied the same modelling approach to estimate total phosphorus in semi-natural soils at the global scale, as well.</p>
-<p>In this technical manual, we present a DSM frameworks to map soil properties, including soil nutrients. One approach for soil observations with latitude and longitude data (point-support) (Figure <span class="math inline">\(\ref{fig:workflow1}\)</span>).</p>
+<div id="step-1-soil-data-preparation" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Step 1: soil data preparation<a href="step-1-soil-data-preparation.html#step-1-soil-data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table <span class="math inline">\(\ref{tab:data1}\)</span>.</p>
+<p>Soil data usually require a preprocessing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues.
+Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0-30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function <span class="citation">(<a href="#ref-Bishop1999" role="doc-biblioref">Bishop, McBratney and Laslett, 1999</a>; <a href="#ref-Malone2009" role="doc-biblioref">Malone <em>et al.</em>, 2009</a>)</span> fitted to each individual soil profile, which requires more than a layer per profile. In the cases of single-layer samples, which is common in sampling for nutrient determination, a pedotransfer function locally calibrated should be applied. Pedotransfer functions will be also required to harmonise the laboratory methods. Experts from GLOSOLAN will provide advice in this regard.</p>
 
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-Hengl2017" class="csl-entry">
-<strong>Hengl, T., Leenaars, J.G.B., Shepherd, K.D., Walsh, M.G., Heuvelink, G.B.M., Mamo, T., Tilahun, H., Berkhout, E., Cooper, M., Fegraus, E., Wheeler, I. &amp; Kwabena, N.A.</strong> 2017. Soil nutrient maps of sub-saharan africa: Assessment of soil nutrient content at 250 m spatial resolution using machine learning, 109: 77–102. <a href="https://doi.org/10.1007/s10705-017-9870-x">https://doi.org/10.1007/s10705-017-9870-x</a>
+<div id="ref-Bishop1999" class="csl-entry">
+<strong>Bishop, T.F.A., McBratney, A.B. &amp; Laslett, G.M.</strong> 1999. Modelling soil attribute depth functions with equal-area quadratic smoothing splines, 91: 27–45. <a href="https://doi.org/10.1016/s0016-7061(99)00003-8">https://doi.org/10.1016/s0016-7061(99)00003-8</a>
 </div>
-<div id="ref-McBratney2003" class="csl-entry">
-<strong>McBratney, A.B., Santos, M.L.M. &amp; Minasny, B.</strong> 2003. On digital soil mapping, 117: 3–52. <a href="https://doi.org/10.1016/s0016-7061(03)00223-4">https://doi.org/10.1016/s0016-7061(03)00223-4</a>
+<div id="ref-Malone2009" class="csl-entry">
+<strong>Malone, B.P., McBratney, A.B., Minasny, B. &amp; Laslett, G.M.</strong> 2009. Mapping continuous depth functions of soil carbon storage and available water capacity, 154: 138–152. <a href="https://doi.org/10.1016/j.geoderma.2009.10.007">https://doi.org/10.1016/j.geoderma.2009.10.007</a>
 </div>
 </div>
             </section>
@@ -242,8 +237,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="setting-up-the-software-environment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-1-soil-data-preparation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-2-environmental-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +280,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["DSM_CG.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
