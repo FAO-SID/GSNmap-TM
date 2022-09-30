@@ -1,6 +1,35 @@
 # Soil Nutrients
 
 ##	Definition of soil nutrients
+In theory, soil nutrients are defined as those chemical elements that are *essential* to plant growth (von Liebig, 1841; Arnon and Stout, 1939). First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements. 
+Therefore, stricter criteria such as the one by Arnon and Stout (1939) were defined. They postulated that three criteria need to be met for an *essential mineral nutrients* (Kirkby, 2012):
+1. Nutrient must be required by plants to complete their life cycle;
+2. Nutrient must be irreplaceable; and
+3. Nutrient must be involved in the plant metabolism.
+
+Following this defintion to date the following nutrients would be considered essential for higher plants (Mengel et al., 2001): carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.
+
+Other definitions used biochemical functions for classification purposes (Mengel and Kirkby, 2001). Here, four nutrient groups are distinguished:
+1. major constituents of organic material (C, H, O, N, S);
+2. nutrients that are involved in esterification of alcohol groups (P, B, Si);
+3. nutrients that establish an osmotic potential (ions) (K, Na, Ca, Mg, Mn, Cl); and
+4. nutrients that enable electron transport (ions or chelates) (Fe, Cu, Zn, Mo).
+
+Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients (Mengel & Kirkby, 2012). Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary (Mengel & Kirkby, 2012).
+It is important to point out that the discussion on how to accurately define *essential* nutrients is ongoing as recent contribution to the topic show (Brown et al., 2022). The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition (FAO, 2022) and is shown in Table XX. It is based on the contribution of each element to the average plant content.
+
+
+Table XX: Classification of macro- and micronutrients by FAO (2022).
+
+|Macronutrients | Micronutrients |
+|-------|-----------|
+| N | Fe |
+| P | Mn |
+|K  | Zn|
+|Ca | Cu|
+|Mg | B|
+|S  | Mo|
+|   | Cl|
 
 
 ## Soil properties governing nutrient availability

@@ -6,6 +6,11 @@ presentation
 background-and-objectives
 global-soil-partnership
 country-driven-approach-and-tasks
+how-to-use-this-book
+soil-nutrients
+definition-of-soil-nutrients
+soil-properties-governing-nutrient-availability
+soil-nutrient-mapping
 setting-up-the-software-environment
 use-of-r-rstudio-and-r-packages
 obtaining-and-installing-r
@@ -27,5 +32,6 @@ model-calibration
 predicting-soil-attributes
 step-4-uncertainty-assessment
 introduction
-reporting-results
 compendium-of-r-scripts
+reporting-results
+way-forward

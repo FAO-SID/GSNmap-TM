@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <title>Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="GSNmap - Technical Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta name="twitter:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   
   <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html"/>
-<link rel="next" href="step-2-environmental-covariates.html"/>
+<link rel="prev" href="presentation.html"/>
+<link rel="next" href="setting-up-the-software-environment.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -224,20 +224,69 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="step-1-soil-data-preparation" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Step 1: soil data preparation<a href="step-1-soil-data-preparation.html#step-1-soil-data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table <span class="math inline">\(\ref{tab:data1}\)</span>.</p>
-<p>Soil data usually require a preprocessing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues.
-Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0-30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function <span class="citation">(<a href="#ref-Bishop1999" role="doc-biblioref">Bishop, McBratney and Laslett, 1999</a>; <a href="#ref-Malone2009" role="doc-biblioref">Malone <em>et al.</em>, 2009</a>)</span> fitted to each individual soil profile, which requires more than a layer per profile. In the cases of single-layer samples, which is common in sampling for nutrient determination, a pedotransfer function locally calibrated should be applied. Pedotransfer functions will be also required to harmonise the laboratory methods. Experts from GLOSOLAN will provide advice in this regard.</p>
+<div id="soil-nutrients" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Soil Nutrients<a href="soil-nutrients.html#soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="definition-of-soil-nutrients" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Definition of soil nutrients<a href="soil-nutrients.html#definition-of-soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In theory, soil nutrients are defined as those chemical elements that are <em>essential</em> to plant growth (von Liebig, 1841; Arnon and Stout, 1939). First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements.
+Therefore, stricter criteria such as the one by Arnon and Stout (1939) were defined. They postulated that three criteria need to be met for an <em>essential mineral nutrients</em> (Kirkby, 2012):
+1. Nutrient must be required by plants to complete their life cycle;
+2. Nutrient must be irreplaceable; and
+3. Nutrient must be involved in the plant metabolism.</p>
+<p>Following this defintion to date the following nutrients would be considered essential for higher plants (Mengel et al., 2001): carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.</p>
+<p>Other definitions used biochemical functions for classification purposes (Mengel and Kirkby, 2001). Here, four nutrient groups are distinguished:
+1. major constituents of organic material (C, H, O, N, S);
+2. nutrients that are involved in esterification of alcohol groups (P, B, Si);
+3. nutrients that establish an osmotic potential (ions) (K, Na, Ca, Mg, Mn, Cl); and
+4. nutrients that enable electron transport (ions or chelates) (Fe, Cu, Zn, Mo).</p>
+<p>Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients (Mengel &amp; Kirkby, 2012). Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary (Mengel &amp; Kirkby, 2012).
+It is important to point out that the discussion on how to accurately define <em>essential</em> nutrients is ongoing as recent contribution to the topic show (Brown et al., 2022). The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition (FAO, 2022) and is shown in Table XX. It is based on the contribution of each element to the average plant content.</p>
+<p>Table XX: Classification of macro- and micronutrients by FAO (2022).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Macronutrients</th>
+<th>Micronutrients</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>N</td>
+<td>Fe</td>
+</tr>
+<tr class="even">
+<td>P</td>
+<td>Mn</td>
+</tr>
+<tr class="odd">
+<td>K</td>
+<td>Zn</td>
+</tr>
+<tr class="even">
+<td>Ca</td>
+<td>Cu</td>
+</tr>
+<tr class="odd">
+<td>Mg</td>
+<td>B</td>
+</tr>
+<tr class="even">
+<td>S</td>
+<td>Mo</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Cl</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="soil-properties-governing-nutrient-availability" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Soil properties governing nutrient availability<a href="soil-nutrients.html#soil-properties-governing-nutrient-availability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="soil-nutrient-mapping" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Soil nutrient mapping<a href="soil-nutrients.html#soil-nutrient-mapping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-Bishop1999" class="csl-entry">
-<strong>Bishop, T.F.A., McBratney, A.B. &amp; Laslett, G.M.</strong> 1999. Modelling soil attribute depth functions with equal-area quadratic smoothing splines, 91: 27–45. <a href="https://doi.org/10.1016/s0016-7061(99)00003-8">https://doi.org/10.1016/s0016-7061(99)00003-8</a>
-</div>
-<div id="ref-Malone2009" class="csl-entry">
-<strong>Malone, B.P., McBratney, A.B., Minasny, B. &amp; Laslett, G.M.</strong> 2009. Mapping continuous depth functions of soil carbon storage and available water capacity, 154: 138–152. <a href="https://doi.org/10.1016/j.geoderma.2009.10.007">https://doi.org/10.1016/j.geoderma.2009.10.007</a>
 </div>
 </div>
             </section>
@@ -245,8 +294,8 @@ Once the original dataset is clean and consistent, data harmonisation is needed 
           </div>
         </div>
       </div>
-<a href="introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-2-environmental-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="presentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="setting-up-the-software-environment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
