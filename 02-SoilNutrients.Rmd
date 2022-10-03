@@ -29,11 +29,17 @@ Table XX: Classification of macro- and micronutrients by FAO (2022).
 |Ca | Cu|
 |Mg | B|
 |S  | Mo|
-|   | Cl|
+| -  | Cl|
 
 
 ## Soil properties governing nutrient availability
 
+The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth (Wang et al., 2007). Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
+Most nutrients are taken up in their ionized form (Robertson et al., 1999). Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
+Soil pH, as a measure of exchangeable hydrogen protons (H^+^), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced (Fageria & Zimmermann, 2008).
+The CEC, as a measure of exchangeable cations (e.g K^+^, Mg^2+^, Ca^2+^, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
+SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
+Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.
 
 ## Soil nutrient mapping
 
