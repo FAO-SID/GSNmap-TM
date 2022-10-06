@@ -91,7 +91,7 @@ To generate the GSNmap, the user is going to use an R package to interact with t
 
 The prerequisite to have access to GEE is to create a user account on https://earthengine.google.com/. Once you have a GEE account, it is necessary to install the rgee package on your machine. After installing and loading the package to your session in **R studio**, it is necessary to install the so-called "*Miniconda*" commmand prompt which acts as a Python interpreter mediating between R and GEE. The 'ee_install()' function automatically downloads and install all the software that is needed.
 
-```{r}
+```{r, eval = F}
 
 # install package
 install.packages("rgee")
@@ -105,7 +105,7 @@ ee_install(py_env = "rgee")
 
 Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of the created GEE account. The ee_Initialize command must be run every time rgee is used.
 
-```{r}
+```{r, eval = F}
 # Initialize Google Earth Engine! (you need to create a user account)
 ee_Initialize()
 ```
@@ -119,8 +119,3 @@ In case problems arise during the installation, the following functions may be h
 #ee_clean_credentials() # to remove the user credentials
 #ee_clean_pyenv() # Delete variables of the system
 ```
-
-
-
-
-
