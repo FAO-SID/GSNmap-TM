@@ -40,9 +40,3 @@ Soil pH, as a measure of exchangeable hydrogen protons (H^+^), is a crucial para
 The CEC, as a measure of exchangeable cations (e.g K^+^, Mg^2+^, Ca^2+^, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
 SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
 Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.
-
-## Soil nutrient mapping
-
-
-
-
