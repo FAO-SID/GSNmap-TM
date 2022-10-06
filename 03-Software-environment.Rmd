@@ -48,9 +48,9 @@ Finally, the **R** software offers a broad range of powerful tools for visualisa
 When you download **R**, you get the basic **R** system which implements the **R** language. **R** becomes more useful with the large collection of packages that extend the basic functionality of it. **R** packages are developed by the **R** community.
 
 refer to: 
-  - *tidyverse* book (R for data science)
-  - *caret* (broad range of statistical learning functions)
-  - *R spatial*: https://rspatial.org/ (R packages for spatial data operations)
+* *tidyverse* book (R for data science)
+* *caret* (broad range of statistical learning functions)
+* *R spatial*: https://rspatial.org/ (R packages for spatial data operations)
 
 The primary source for **R** packages is [CRAN’s](https://cran.r-project.org/) official website, where currently about 12,000 available packages are listed. For spatial applications, various packages are available. You can obtain information about the available packages directly on CRAN with the `available.packages()` function. The function returns a matrix of details corresponding to packages currently available at one or more repositories. An easier way to browse the list of packages is using the [*Task Views*](https://cran.r-project.org/web/views/) link, which groups together packages related to a given topic. 
 
@@ -58,61 +58,69 @@ Packages come along with extensive documentation that is very helpful to underst
 
 ## GEE - google earth engine
 
-- general info
+Google earth engine (GEE) provides a large range of remote sensing datasets for users. It allows to use the GEE code editor to run computations using the google servers. The high computational power of these servers enables users with limited computational caapacities to run complex calculations.
+A user account must be created to use the code editor. This step can take some time. Once the account is validated, scripts can be written in the code editor using the Javascript language. An extensive array of instructions and guides are available on the platform. Alternatively, the Python language can be used to interact with the data.
+
+The code editor interface is structured by three panels and a map viewer (see Fig. 2.2). The left panel is structured in "Scripts", "Docs", and "Assets". Under "Scripts" users can organize and save the scripts they wrote for specific purposes. "Docs" provides further information on so-called "server-side" functions that can be used to manipulate the data. Finally, in "Assets" users can upload own spatial data in common formats such as shapefiles (.shp) or raster files (.tif).
+The middle panel contains the scripts that can be run by clicking on the "Run" button.
+The right panel is composed of three functionalities. The "Inspector" provides basic information on a pixel of a layer displayed in the map below. The information consists of longitude, latitude, and - if layers are loaded - values of the pixel. The "Console" is the place where certain commands expressed in the code are shown. The most common expressions shown here are print() commands or figures derived from the loaded data. Finally, the "Tasks" button shows all tasks that were formulated in the code/script and are to be submitted to the server for computation. Once a task is submitted, the user has to click on the "Run" button appearing in the "Tasks" section to submit the task to the server.
+In addition to that, the data catalog can be accessed via the search bar on the top of the page. Here, key information on the available datasets, origin, resolution and related publications can be found. 
+
 
 ```{r, echo = FALSE, fig.cap = "Google Earth Engine code editor."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.1_GEE_codeeditor.png")
 ```
 
-
-- upload assets to GEE 
+The upload of *assets* in particular shapefiles with the area of interest (AOI) is often a key step to extract only the necessary information from a dataset. To upload a dataset, once has to right-click on "Assets" in the right panel and then on the red "New" button in the code editor interface (see Fig. 2.3). After selecting the file format of file, a second window opens.
 
 ```{r, echo = FALSE, fig.cap = "Select files and filetype to be uploaded as GEE assets."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.2_upload-assets-1.png")
 ```
 
+Here the source file needs to be selected from the respective folder and a folder in the GEE environment has to be selected under "Asset ID". After that, the user right-clicks on "Uplaod" in the bottom right of the window (see Fig. 2.4). In the right panel under "Tasks" appears the uploading task that is executed. Once this process is finished, a tick mark appears and after refreshing the "Assets" panel on the left, the user can see the uploaded shapefile.
 
 ```{r, echo = FALSE, fig.cap = "Upload interface."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
-knitr::include_graphics("images/2.2_upload-assets-2.png")
+knitr::include_graphics("images/2.3_upload-assets-2.png")
 ```
-
-- Explain how to import uploaded assets (?) ...
 
 ## rgee - Extension to use google earth engine in R
-The rgee package enables users to interact with the GEE servers using the R language. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.
+To generate the GSNmap, the user is going to use an R package to interact with the GEE environment. The *rgee* package enables users to interact with the GEE servers using the R language [@rgee]. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.
 
-```{r, eval = F}
-
-# Source: https://yabellini.github.io/curso_rgee/index.html
-# Yanina Bellini Saibene
-
-#install.packages('remotes')
-# remotes::install_github("r-spatial/rgee")
-```
-
-To be able to interact with the GEE via Python, it is necessary to install certain R packages but also the so-called "Miniconda" commmand prompt which acts as Python interpreter mediating between R and GEE. The 'ee_install()' function automatically downloads and install all the software that is needed.
+The prerequisite to have access to GEE is to create a user account on https://earthengine.google.com/. Once you have a GEE account, it is necessary to install the rgee package on your machine. After installing and loading the package to your session in **R studio**, it is necessary to install the so-called "*Miniconda*" commmand prompt which acts as a Python interpreter mediating between R and GEE. The 'ee_install()' function automatically downloads and install all the software that is needed.
 
 ```{r}
-# load rgee package and install dependencies
+
+# install package
+install.packages("rgee")
+
+# load rgee package
 library(rgee)
-# ee_install() # installs miniconda
+
+# install miniconda and other dependencies
+ee_install(py_env = "rgee") 
 ```
 
-Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of our GEE account. The ee_Initialize command must be run every time we want to use rgee.
+Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of the created GEE account. The ee_Initialize command must be run every time rgee is used.
 
 ```{r}
 # Initialize Google Earth Engine! (you need to create a user account)
-# ee_Initialize()
+ee_Initialize()
+```
 
+In case problems arise during the installation, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (https://r-spatial.github.io/rgee/articles/rgee01.html) to get more detailed information on the installation procedure and possibilities for problem solving.
 
+```{r, eval = F}
 # Useful functions
 
 #ee_check() # check the dependencies that do not belong to R
 #ee_clean_credentials() # to remove the user credentials
 #ee_clean_pyenv() # Delete variables of the system
-
 ```
+
+
+
+
 
