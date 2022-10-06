@@ -27,7 +27,7 @@ Beginners will find it very hard to start using **R** because it has no Graphica
 
 ```{r, echo = FALSE, fig.cap = "R Studio interface."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
-knitr::include_graphics("images/2_RStudio interface.png")
+knitr::include_graphics("images/2_RStudio-interface.png")
 ```
 
 

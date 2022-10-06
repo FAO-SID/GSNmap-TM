@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -168,7 +168,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1" data-path="soil-nutrients.html"><a href="soil-nutrients.html#definition-of-soil-nutrients"><i class="fa fa-check"></i><b>2.1</b> Definition of soil nutrients</a></li>
 <li class="chapter" data-level="2.2" data-path="soil-nutrients.html"><a href="soil-nutrients.html#soil-properties-governing-nutrient-availability"><i class="fa fa-check"></i><b>2.2</b> Soil properties governing nutrient availability</a></li>
-<li class="chapter" data-level="2.3" data-path="soil-nutrients.html"><a href="soil-nutrients.html#soil-nutrient-mapping"><i class="fa fa-check"></i><b>2.3</b> Soil nutrient mapping</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html"><i class="fa fa-check"></i><b>3</b> Setting-up the software environment</a>
 <ul>
@@ -178,10 +177,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.1.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#obtaining-and-installing-rstudio"><i class="fa fa-check"></i><b>3.1.2</b> Obtaining and installing RStudio</a></li>
 <li class="chapter" data-level="3.1.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.1.3</b> Getting started with R</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#r-packages"><i class="fa fa-check"></i><b>3.2</b> R packages</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#finding-r-packages"><i class="fa fa-check"></i><b>3.2.1</b> Finding R packages</a></li>
-</ul></li>
+<li class="chapter" data-level="3.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#r-packages"><i class="fa fa-check"></i><b>3.2</b> R packages</a></li>
 <li class="chapter" data-level="3.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#gee---google-earth-engine"><i class="fa fa-check"></i><b>3.3</b> GEE - google earth engine</a></li>
 <li class="chapter" data-level="3.4" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r"><i class="fa fa-check"></i><b>3.4</b> rgee - Extension to use google earth engine in R</a></li>
 </ul></li>
@@ -275,7 +271,7 @@ It is important to point out that the discussion on how to accurately define <em
 <td>Mo</td>
 </tr>
 <tr class="odd">
-<td></td>
+<td>-</td>
 <td>Cl</td>
 </tr>
 </tbody>
@@ -283,9 +279,12 @@ It is important to point out that the discussion on how to accurately define <em
 </div>
 <div id="soil-properties-governing-nutrient-availability" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Soil properties governing nutrient availability<a href="soil-nutrients.html#soil-properties-governing-nutrient-availability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="soil-nutrient-mapping" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Soil nutrient mapping<a href="soil-nutrients.html#soil-nutrient-mapping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth (Wang et al., 2007). Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
+Most nutrients are taken up in their ionized form (Robertson et al., 1999). Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
+Soil pH, as a measure of exchangeable hydrogen protons (H<sup>+</sup>), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced (Fageria &amp; Zimmermann, 2008).
+The CEC, as a measure of exchangeable cations (e.g K<sup>+</sup>, Mg<sup>2+</sup>, Ca<sup>2+</sup>, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
+SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
+Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.</p>
 
 </div>
 </div>
@@ -355,7 +354,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
