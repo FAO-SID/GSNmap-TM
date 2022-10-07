@@ -243,14 +243,16 @@ div.csl-indent {
 </div>
 <div id="machine-learning-techniques" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Machine learning techniques<a href="digital-soil-mapping.html#machine-learning-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. Traditionally, multiple linear regression models can be used to quantify the relationships which continues to be the most applied mapping method to map for instance soil organic carbon <span class="citation">(<a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>)</span>. Regression Kriging methods use linear regressions and in addition to that interpolates the residuals of the regression for spatial autocorrelation <span class="citation">(<a href="#ref-yigini2018" role="doc-biblioref">Yigini <em>et al.</em>, 2018</a>)</span>.
+<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. The plethora of methods cannot be listed here as it was summarised in multiple review papers <span class="citation">(<a href="#ref-khaledian2020" role="doc-biblioref">Khaledian and Miller, 2020</a>; <a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>; <a href="#ref-ma2019" role="doc-biblioref">Ma <em>et al.</em>, 2019</a>; <a href="#ref-wadoux2020" role="doc-biblioref">Wadoux, Minasny and McBratney, 2020</a>; <a href="#ref-padarian" role="doc-biblioref"><strong>padarian?</strong></a>)</span>.
+Traditionally, multiple linear regression models can be used to quantify the relationships which continues to be the most applied mapping method to map for instance soil organic carbon <span class="citation">(<a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>)</span>. In addition to that, regression Kriging methods combine linear regressions and an stochastic interpolation of the regression residuals based on their spatial autocorrelation <span class="citation">(<a href="#ref-yigini2018" role="doc-biblioref">Yigini <em>et al.</em>, 2018</a>)</span>.
 However, machine learning algorithms with more flexible assumptions, i.e. non-linear relationships, have become more and more popular as the mapping performance was substantially improved and the versatility of the algorithms can be detect more complex relationships.
 Among the most commonly used non-linear machine learning models is random forest <span class="citation">(<a href="#ref-Breiman2001" role="doc-biblioref">Breiman, 2001</a>)</span>. The random forest algorithm splits a dataset into subsets and uses a random selection of covariates (predictors) to identify homogeneous groups. The procedure of classifying is repeated many times and in the end the prediction is averaged. Finally, quantile regression forests (QRF) derive from random forest models <span class="citation">(<a href="#ref-Meinshausen2006" role="doc-biblioref">Meinshausen, 2006</a>)</span>. The benefit of QRF is the ability to predict not only the mean of the prediction but also to provide more information on the uncertainty and probability distribution.</p>
 </div>
 <div id="mapping-of-soil-nutrients-and-associated-soil-attributes" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Mapping of soil nutrients and associated soil attributes<a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>DSM has been used to produce maps of soil nutrients. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa, using a random forest model (Wright and Ziegler, 2016), topsoil nutrient observations at point locations and a set of spatially-explicit environmental covariates. In 2021, Hengl et al. applied the same modelling approach to estimate total phosphorus in semi-natural soils at the global scale, as well.</p>
-<p>In this technical manual, we present a DSM frameworks to map soil properties, including soil nutrients. One approach for soil observations with latitude and longitude data (point-support) (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
+<p>DSM has been used to produce maps of soil nutrients at regional to continental scales. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa using a random forest model <span class="citation">(<a href="#ref-wright2016" role="doc-biblioref">Wright, Ziegler and König, 2016</a>)</span>. The soil nutrient observations were collected for topsoils at locations that were unevenly distributed over the continent and a set of spatially-explicit environmental covariates including soil properties. In 2021, the map resolution was increased to 30 x 30 m by using additional soil samples <span class="citation">(<a href="#ref-hengl2021" role="doc-biblioref"><strong>hengl2021?</strong></a>)</span>.
+In Europe maps of chemical soil properties, including macronutrients like potassium and phosphorus, were mapped based on a gaussian process regression using the LUCAS soil database <span class="citation">(<a href="#ref-ballabio2019" role="doc-biblioref">Ballabio <em>et al.</em>, 2019</a>)</span>.
+Global efforts to map nutrients in a harmonised way are suffering of constraints due to limited availability of appropriate soil data. The country-driven approach of the GSP has therefore the potential to improve data availability through the country-driven approach as it uses largely unexplored soil data, a harmonised mapping approach combined with national expertise on the regional soil resources. Therefore, in this technical manual, we present a DSM framework to map soil nutrients and associated properties using soil observations with latitude and longitude coordinates (point-support) (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:workflow1"></span>
 <img src="images/workflow%20lat-long%20data.png" alt="Digital soil mapping approach for point-support data. Circles are the steps." width="1673" />
 <p class="caption">
@@ -262,6 +264,9 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body">
+<div id="ref-ballabio2019" class="csl-entry">
+<strong>Ballabio, C., Lugato, E., Fernández-Ugalde, O., Orgiazzi, A., Jones, A., Borrelli, P., Montanarella, L. &amp; Panagos, P.</strong> 2019. Mapping LUCAS topsoil chemical properties at european scale using gaussian process regression. <em>Geoderma</em>, 355: 113912.
+</div>
 <div id="ref-Breiman2001" class="csl-entry">
 <strong>Breiman, L.</strong> 2001. Random forests. <em>Machine Learning</em>, 45(1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>
 </div>
@@ -274,14 +279,26 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
 <div id="ref-Jenny1941" class="csl-entry">
 <strong>Jenny, H.</strong> 1941. A system of quantitative pedology. In <span>“factors of soil formation”</span>. McGraw Hill: New York.
 </div>
+<div id="ref-khaledian2020" class="csl-entry">
+<strong>Khaledian, Y. &amp; Miller, B.A.</strong> 2020. Selecting appropriate machine learning methods for digital soil mapping. <em>Applied Mathematical Modelling</em>, 81: 401–418.
+</div>
 <div id="ref-lamichhane2019" class="csl-entry">
 <strong>Lamichhane, S., Kumar, L. &amp; Wilson, B.</strong> 2019. Digital soil mapping algorithms and covariates for soil organic carbon mapping and their implications: A review. <em>Geoderma</em>, 352: 395–413.
+</div>
+<div id="ref-ma2019" class="csl-entry">
+<strong>Ma, Y., Minasny, B., Malone, B.P. &amp; Mcbratney, A.B.</strong> 2019. Pedology and digital soil mapping (DSM). <em>European Journal of Soil Science</em>, 70(2): 216–235.
 </div>
 <div id="ref-McBratney2003" class="csl-entry">
 <strong>McBratney, A.B., Santos, M.L.M. &amp; Minasny, B.</strong> 2003. On digital soil mapping, 117: 3–52. <a href="https://doi.org/10.1016/s0016-7061(03)00223-4">https://doi.org/10.1016/s0016-7061(03)00223-4</a>
 </div>
 <div id="ref-Meinshausen2006" class="csl-entry">
 <strong>Meinshausen, Ni.</strong> 2006. Quantile regression forests. <em>Journal of Machine Learning Research</em>, 7(6).
+</div>
+<div id="ref-wadoux2020" class="csl-entry">
+<strong>Wadoux, A.M.-C., Minasny, B. &amp; McBratney, A.B.</strong> 2020. Machine learning for digital soil mapping: Applications, challenges and suggested solutions. <em>Earth-Science Reviews</em>, 210: 103359.
+</div>
+<div id="ref-wright2016" class="csl-entry">
+<strong>Wright, M.N., Ziegler, A. &amp; König, I.R.</strong> 2016. Do little interactions get lost in dark random forests? <em>BMC bioinformatics</em>, 17(1): 1–10.
 </div>
 <div id="ref-yigini2018" class="csl-entry">
 <strong>Yigini, Y., Olmedo, G., Reiter, S., Baritz, R., Viatkin, K. &amp; Vargas, R.</strong> 2018. Soil organic carbon mapping: cookbook
