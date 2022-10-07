@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <title>Chapter 4 Digital Soil Mapping | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:title" content="Chapter 4 Digital Soil Mapping | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="GSNmap - Technical Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta name="twitter:title" content="Chapter 4 Digital Soil Mapping | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   
   <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="presentation.html"/>
-<link rel="next" href="setting-up-the-software-environment.html"/>
+<link rel="prev" href="setting-up-the-software-environment.html"/>
+<link rel="next" href="step-1-soil-data-preparation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -228,72 +228,85 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="soil-nutrients" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Soil Nutrients<a href="soil-nutrients.html#soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definition-of-soil-nutrients" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Definition of soil nutrients<a href="soil-nutrients.html#definition-of-soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In theory, soil nutrients are defined as those chemical elements that are <em>essential</em> to plant growth (von Liebig, 1841; Arnon and Stout, 1939). First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements.
-Therefore, stricter criteria such as the one by Arnon and Stout (1939) were defined. They postulated that three criteria need to be met for an <em>essential mineral nutrients</em> (Kirkby, 2012):
-1. Nutrient must be required by plants to complete their life cycle;
-2. Nutrient must be irreplaceable; and
-3. Nutrient must be involved in the plant metabolism.</p>
-<p>Following this defintion to date the following nutrients would be considered essential for higher plants (Mengel et al., 2001): carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.</p>
-<p>Other definitions used biochemical functions for classification purposes (Mengel and Kirkby, 2001). Here, four nutrient groups are distinguished:
-1. major constituents of organic material (C, H, O, N, S);
-2. nutrients that are involved in esterification of alcohol groups (P, B, Si);
-3. nutrients that establish an osmotic potential (ions) (K, Na, Ca, Mg, Mn, Cl); and
-4. nutrients that enable electron transport (ions or chelates) (Fe, Cu, Zn, Mo).</p>
-<p>Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients (Mengel &amp; Kirkby, 2012). Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary (Mengel &amp; Kirkby, 2012).
-It is important to point out that the discussion on how to accurately define <em>essential</em> nutrients is ongoing as recent contribution to the topic show (Brown et al., 2022). The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition (FAO, 2022) and is shown in Table XX. It is based on the contribution of each element to the average plant content.</p>
-<p>Table XX: Classification of macro- and micronutrients by FAO (2022).</p>
-<table>
-<thead>
-<tr class="header">
-<th>Macronutrients</th>
-<th>Micronutrients</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>N</td>
-<td>Fe</td>
-</tr>
-<tr class="even">
-<td>P</td>
-<td>Mn</td>
-</tr>
-<tr class="odd">
-<td>K</td>
-<td>Zn</td>
-</tr>
-<tr class="even">
-<td>Ca</td>
-<td>Cu</td>
-</tr>
-<tr class="odd">
-<td>Mg</td>
-<td>B</td>
-</tr>
-<tr class="even">
-<td>S</td>
-<td>Mo</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>Cl</td>
-</tr>
-</tbody>
-</table>
+<div id="digital-soil-mapping" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Digital Soil Mapping<a href="digital-soil-mapping.html#digital-soil-mapping" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="principles" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Principles<a href="digital-soil-mapping.html#principles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Digital soil mapping (DSM) is a methodological framework to create soil attribute maps on the basis of the quantitative relationships between spatial soil databases and environmental covariates. The quantitative relations can be modelled by different statistical approaches, most of them considered machine learning techniques. Environmental covariates are spatially explicit proxies of soil-forming factors that are employed as predictors of the geographical distribution of soil properties. The methodology has evolved from the theories of soil genesis developed by <span class="citation">Dokuchaev (<a href="#ref-Dokuchaev1883" role="doc-biblioref">1883</a>)</span> in his work the Russian Chernozems, which later were formalised by <span class="citation">Jenny (<a href="#ref-Jenny1941" role="doc-biblioref">1941</a>)</span> with the equation of the soil-forming factors. The conceptual equation of soil-forming factors has been updated by <span class="citation">McBratney, Santos and Minasny (<a href="#ref-McBratney2003" role="doc-biblioref">2003</a>)</span> as follow:</p>
+<p><span class="math display" id="eq:scorpan">\[\begin{equation}
+  S = f\left(s,c,o,r,p,a,n\right)
+  \tag{4.1}
+\end{equation}\]</span></p>
+<p>Where <span class="math inline">\(S\)</span> is the soil classes or attributes (to be modelled) as a function of “<span class="math inline">\(s\)</span>” as other soil properties, “<span class="math inline">\(c\)</span>” as climatic properties, “<span class="math inline">\(o\)</span>” as organisms, including land cover and human activity, “<span class="math inline">\(r\)</span>” as terrain attributes, “<span class="math inline">\(p\)</span>” as parent material, “<span class="math inline">\(a\)</span>” as soil age, and “<span class="math inline">\(n\)</span>” as the geographic position.</p>
 </div>
-<div id="soil-properties-governing-nutrient-availability" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Soil properties governing nutrient availability<a href="soil-nutrients.html#soil-properties-governing-nutrient-availability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth (Wang et al., 2007). Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
-Most nutrients are taken up in their ionized form (Robertson et al., 1999). Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
-Soil pH, as a measure of exchangeable hydrogen protons (H<sup>+</sup>), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced (Fageria &amp; Zimmermann, 2008).
-The CEC, as a measure of exchangeable cations (e.g K<sup>+</sup>, Mg<sup>2+</sup>, Ca<sup>2+</sup>, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
-SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
-Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.</p>
+<div id="environmental-covariates" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Environmental covariates<a href="digital-soil-mapping.html#environmental-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There is an constantly increasing range of global datasets that can be used as environmental covariates. Covariates usually provide information on the soil forming factors. However, they are always only an approximation to the reality in the field. The selection of covariates aims to give the most accurate picture of the reality and thus complement each other. In the case of climatic covariates for instance, useful covariates should not only cover the long-term mean annual temperature or precipitation over an climatic reference period (30 years) but also inform about seasonal patterns or even diurnal variability. Still, when selecting covariates one has to keep in mind that there is a trade-off between accurate representation of reality and overfitting the model used for modelling.</p>
+</div>
+<div id="machine-learning-techniques" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Machine learning techniques<a href="digital-soil-mapping.html#machine-learning-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. The plethora of methods cannot be listed here as it was summarised in multiple review papers <span class="citation">(<a href="#ref-khaledian2020" role="doc-biblioref">Khaledian and Miller, 2020</a>; <a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>; <a href="#ref-ma2019" role="doc-biblioref">Ma <em>et al.</em>, 2019</a>; <a href="#ref-wadoux2020" role="doc-biblioref">Wadoux, Minasny and McBratney, 2020</a>; <a href="#ref-padarian" role="doc-biblioref"><strong>padarian?</strong></a>)</span>.
+Traditionally, multiple linear regression models can be used to quantify the relationships which continues to be the most applied mapping method to map for instance soil organic carbon <span class="citation">(<a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>)</span>. In addition to that, regression Kriging methods combine linear regressions and an stochastic interpolation of the regression residuals based on their spatial autocorrelation <span class="citation">(<a href="#ref-yigini2018" role="doc-biblioref">Yigini <em>et al.</em>, 2018</a>)</span>.
+However, machine learning algorithms with more flexible assumptions, i.e. non-linear relationships, have become more and more popular as the mapping performance was substantially improved and the versatility of the algorithms can be detect more complex relationships.
+Among the most commonly used non-linear machine learning models is random forest <span class="citation">(<a href="#ref-Breiman2001" role="doc-biblioref">Breiman, 2001</a>)</span>. The random forest algorithm splits a dataset into subsets and uses a random selection of covariates (predictors) to identify homogeneous groups. The procedure of classifying is repeated many times and in the end the prediction is averaged. Finally, quantile regression forests (QRF) derive from random forest models <span class="citation">(<a href="#ref-Meinshausen2006" role="doc-biblioref">Meinshausen, 2006</a>)</span>. The benefit of QRF is the ability to predict not only the mean of the prediction but also to provide more information on the uncertainty and probability distribution.</p>
+</div>
+<div id="mapping-of-soil-nutrients-and-associated-soil-attributes" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Mapping of soil nutrients and associated soil attributes<a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>DSM has been used to produce maps of soil nutrients at regional to continental scales. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa using a random forest model <span class="citation">(<a href="#ref-wright2016" role="doc-biblioref">Wright, Ziegler and König, 2016</a>)</span>. The soil nutrient observations were collected for topsoils at locations that were unevenly distributed over the continent and a set of spatially-explicit environmental covariates including soil properties. In 2021, the map resolution was increased to 30 x 30 m by using additional soil samples <span class="citation">(<a href="#ref-hengl2021" role="doc-biblioref">Hengl <em>et al.</em>, 2021</a>)</span>.
+In Europe maps of chemical soil properties, including macronutrients like potassium and phosphorus, were mapped based on a gaussian process regression using the LUCAS soil database <span class="citation">(<a href="#ref-ballabio2019" role="doc-biblioref">Ballabio <em>et al.</em>, 2019</a>)</span>.
+Global efforts to map nutrients in a harmonised way are suffering of constraints due to limited availability of appropriate soil data. The country-driven approach of the GSP has therefore the potential to improve data availability through the country-driven approach as it uses largely unexplored soil data, a harmonised mapping approach combined with national expertise on the regional soil resources. Therefore, in this technical manual, we present a DSM framework to map soil nutrients and associated properties using soil observations with latitude and longitude coordinates (point-support) (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
+<div class="figure"><span style="display:block;" id="fig:workflow1"></span>
+<img src="images/workflow%20lat-long%20data.png" alt="Digital soil mapping approach for point-support data. Circles are the steps." width="1673" />
+<p class="caption">
+Figure 4.1: Digital soil mapping approach for point-support data. Circles are the steps.
+</p>
+</div>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-ballabio2019" class="csl-entry">
+<strong>Ballabio, C., Lugato, E., Fernández-Ugalde, O., Orgiazzi, A., Jones, A., Borrelli, P., Montanarella, L. &amp; Panagos, P.</strong> 2019. Mapping LUCAS topsoil chemical properties at european scale using gaussian process regression. <em>Geoderma</em>, 355: 113912.
+</div>
+<div id="ref-Breiman2001" class="csl-entry">
+<strong>Breiman, L.</strong> 2001. Random forests. <em>Machine Learning</em>, 45(1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>
+</div>
+<div id="ref-Dokuchaev1883" class="csl-entry">
+<strong>Dokuchaev, V.</strong> 1883. <em>The russian chernozem report to the free economic society</em>. Imperial University of St. Petersburg: St. Petersburg)[in Russian].
+</div>
+<div id="ref-Hengl2017" class="csl-entry">
+<strong>Hengl, T., Leenaars, J.G.B., Shepherd, K.D., Walsh, M.G., Heuvelink, G.B.M., Mamo, T., Tilahun, H., Berkhout, E., Cooper, M., Fegraus, E., Wheeler, I. &amp; Kwabena, N.A.</strong> 2017. Soil nutrient maps of sub-saharan africa: Assessment of soil nutrient content at 250 m spatial resolution using machine learning, 109: 77–102. <a href="https://doi.org/10.1007/s10705-017-9870-x">https://doi.org/10.1007/s10705-017-9870-x</a>
+</div>
+<div id="ref-hengl2021" class="csl-entry">
+<strong>Hengl, T., Miller, M.A., Križan, J., Shepherd, K.D., Sila, A., Kilibarda, M., Antonijević, O., Glušica, L., Dobermann, A., Haefele, S.M. &amp; others</strong>. 2021. African soil properties and nutrients mapped at 30 m spatial resolution using two-scale ensemble machine learning. <em>Scientific Reports</em>, 11(1): 1–18.
+</div>
+<div id="ref-Jenny1941" class="csl-entry">
+<strong>Jenny, H.</strong> 1941. A system of quantitative pedology. In <span>“factors of soil formation”</span>. McGraw Hill: New York.
+</div>
+<div id="ref-khaledian2020" class="csl-entry">
+<strong>Khaledian, Y. &amp; Miller, B.A.</strong> 2020. Selecting appropriate machine learning methods for digital soil mapping. <em>Applied Mathematical Modelling</em>, 81: 401–418.
+</div>
+<div id="ref-lamichhane2019" class="csl-entry">
+<strong>Lamichhane, S., Kumar, L. &amp; Wilson, B.</strong> 2019. Digital soil mapping algorithms and covariates for soil organic carbon mapping and their implications: A review. <em>Geoderma</em>, 352: 395–413.
+</div>
+<div id="ref-ma2019" class="csl-entry">
+<strong>Ma, Y., Minasny, B., Malone, B.P. &amp; Mcbratney, A.B.</strong> 2019. Pedology and digital soil mapping (DSM). <em>European Journal of Soil Science</em>, 70(2): 216–235.
+</div>
+<div id="ref-McBratney2003" class="csl-entry">
+<strong>McBratney, A.B., Santos, M.L.M. &amp; Minasny, B.</strong> 2003. On digital soil mapping, 117: 3–52. <a href="https://doi.org/10.1016/s0016-7061(03)00223-4">https://doi.org/10.1016/s0016-7061(03)00223-4</a>
+</div>
+<div id="ref-Meinshausen2006" class="csl-entry">
+<strong>Meinshausen, Ni.</strong> 2006. Quantile regression forests. <em>Journal of Machine Learning Research</em>, 7(6).
+</div>
+<div id="ref-wadoux2020" class="csl-entry">
+<strong>Wadoux, A.M.-C., Minasny, B. &amp; McBratney, A.B.</strong> 2020. Machine learning for digital soil mapping: Applications, challenges and suggested solutions. <em>Earth-Science Reviews</em>, 210: 103359.
+</div>
+<div id="ref-wright2016" class="csl-entry">
+<strong>Wright, M.N., Ziegler, A. &amp; König, I.R.</strong> 2016. Do little interactions get lost in dark random forests? <em>BMC bioinformatics</em>, 17(1): 1–10.
+</div>
+<div id="ref-yigini2018" class="csl-entry">
+<strong>Yigini, Y., Olmedo, G., Reiter, S., Baritz, R., Viatkin, K. &amp; Vargas, R.</strong> 2018. Soil organic carbon mapping: cookbook
 </div>
 </div>
             </section>
@@ -301,8 +314,8 @@ Finally, BD is key to nutrient availability as it governs facilitates or inhibit
           </div>
         </div>
       </div>
-<a href="presentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="setting-up-the-software-environment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="setting-up-the-software-environment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-1-soil-data-preparation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

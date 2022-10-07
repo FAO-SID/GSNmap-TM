@@ -24,8 +24,8 @@ The area of work on Soil Information and Data (SID) of the GSP builds an endurin
 
 The GSNmap initiative will be jointly implemented by the International Network of Soil Information Institutions (INSII) and the GSP Secretariat. The process will be country-driven, involving and supporting all Member States in developing their national GSNmap data products. The GSNmap products will be developed following a two phase approach:
 
-- Phase I: development of soil nutrient and associated soil property maps;
-- Phase II: quantification, analysis, projections of nutrient budgets for agricultural land use systems at national, regional and global scale. 
+* Phase I: development of soil nutrient and associated soil property maps;
+* Phase II: quantification, analysis, projections of nutrient budgets for agricultural land use systems at national, regional and global scale. 
 
 These guidelines only concern GSNmap Phase I, while the guidelines for the GSNmap Phase II will be published in the fourth quarter of 2022.
 Depending on national data availability and technical capacities, ad-hoc solutions will be developed by the GSNmap WG to support countries during the national GSNmap production and/or harmonisation phase. Where possible, GSP Secretariat will use publicly available data to gap-fill the areas which are not covered by the national submissions unless the country requests to be left blank on the GSNmap products.
@@ -34,12 +34,12 @@ Depending on national data availability and technical capacities, ad-hoc solutio
 
 The present document is a technical manual on the phase I of the GSNmap initiative. It provides the scientific background on the importance of soil nutrients and guidance on the digital soil mapping techniques to map nutrients and soil properties that govern nutrient availability. It also comprises a compendium with all necessary scripts to generate national GSNmaps.
 
-- Chapter 1 provides general information about the GSNmap initiative as another activity of the GSP.
-- Chapter 2 focuses on the scientific state-of-the-art in terms of soil nutrients and soil nutrient mapping.
-- Chapter 3 and 4 introduce the software requirements and the concept of digital soil mapping.
-- Chapter 5 to 8 guide the reader through the nutrient mapping exercise of GSNmap Phase I providing step-by-step instructions.
-- Chapter 9 explains how the national GSNmaps are reported to the GSP.
-- Chapter 10 serves as a repository for the complete scripts needed for the GSNmap.
+* Chapter 1 provides general information about the GSNmap initiative as another activity of the GSP.
+* Chapter 2 focuses on the scientific state-of-the-art in terms of soil nutrients and soil nutrient mapping.
+* Chapter 3 and 4 introduce the software requirements and the concept of digital soil mapping.
+* Chapter 5 to 8 guide the reader through the nutrient mapping exercise of GSNmap Phase I providing step-by-step instructions.
+* Chapter 9 explains how the national GSNmaps are reported to the GSP.
+* Chapter 10 serves as a repository for the complete scripts needed for the GSNmap.
 
 The GSNmap Technical Manual is structured as a practical document to be used by national experts in the endeavour to employ digital soil mapping techniques to generate national nutrient maps based on a common methodology. The concept of digital soil mapping presented here can however be also used in mapping exercises that focus on other soil properties and is therefore also relevant to scientists and digital soil mappers. 
 
