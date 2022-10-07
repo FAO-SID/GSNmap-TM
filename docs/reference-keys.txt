@@ -4,6 +4,7 @@ fig:asset
 fig:upload
 eq:scorpan
 fig:workflow1
+tab:data1
 presentation
 background-and-objectives
 global-soil-partnership

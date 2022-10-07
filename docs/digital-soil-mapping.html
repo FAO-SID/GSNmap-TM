@@ -51,6 +51,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -250,7 +252,7 @@ Among the most commonly used non-linear machine learning models is random forest
 </div>
 <div id="mapping-of-soil-nutrients-and-associated-soil-attributes" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Mapping of soil nutrients and associated soil attributes<a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>DSM has been used to produce maps of soil nutrients at regional to continental scales. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa using a random forest model <span class="citation">(<a href="#ref-wright2016" role="doc-biblioref">Wright, Ziegler and König, 2016</a>)</span>. The soil nutrient observations were collected for topsoils at locations that were unevenly distributed over the continent and a set of spatially-explicit environmental covariates including soil properties. In 2021, the map resolution was increased to 30 x 30 m by using additional soil samples <span class="citation">(<a href="#ref-hengl2021" role="doc-biblioref"><strong>hengl2021?</strong></a>)</span>.
+<p>DSM has been used to produce maps of soil nutrients at regional to continental scales. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa using a random forest model <span class="citation">(<a href="#ref-wright2016" role="doc-biblioref">Wright, Ziegler and König, 2016</a>)</span>. The soil nutrient observations were collected for topsoils at locations that were unevenly distributed over the continent and a set of spatially-explicit environmental covariates including soil properties. In 2021, the map resolution was increased to 30 x 30 m by using additional soil samples <span class="citation">(<a href="#ref-hengl2021" role="doc-biblioref">Hengl <em>et al.</em>, 2021</a>)</span>.
 In Europe maps of chemical soil properties, including macronutrients like potassium and phosphorus, were mapped based on a gaussian process regression using the LUCAS soil database <span class="citation">(<a href="#ref-ballabio2019" role="doc-biblioref">Ballabio <em>et al.</em>, 2019</a>)</span>.
 Global efforts to map nutrients in a harmonised way are suffering of constraints due to limited availability of appropriate soil data. The country-driven approach of the GSP has therefore the potential to improve data availability through the country-driven approach as it uses largely unexplored soil data, a harmonised mapping approach combined with national expertise on the regional soil resources. Therefore, in this technical manual, we present a DSM framework to map soil nutrients and associated properties using soil observations with latitude and longitude coordinates (point-support) (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:workflow1"></span>
@@ -275,6 +277,9 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
 </div>
 <div id="ref-Hengl2017" class="csl-entry">
 <strong>Hengl, T., Leenaars, J.G.B., Shepherd, K.D., Walsh, M.G., Heuvelink, G.B.M., Mamo, T., Tilahun, H., Berkhout, E., Cooper, M., Fegraus, E., Wheeler, I. &amp; Kwabena, N.A.</strong> 2017. Soil nutrient maps of sub-saharan africa: Assessment of soil nutrient content at 250 m spatial resolution using machine learning, 109: 77–102. <a href="https://doi.org/10.1007/s10705-017-9870-x">https://doi.org/10.1007/s10705-017-9870-x</a>
+</div>
+<div id="ref-hengl2021" class="csl-entry">
+<strong>Hengl, T., Miller, M.A., Križan, J., Shepherd, K.D., Sila, A., Kilibarda, M., Antonijević, O., Glušica, L., Dobermann, A., Haefele, S.M. &amp; others</strong>. 2021. African soil properties and nutrients mapped at 30 m spatial resolution using two-scale ensemble machine learning. <em>Scientific Reports</em>, 11(1): 1–18.
 </div>
 <div id="ref-Jenny1941" class="csl-entry">
 <strong>Jenny, H.</strong> 1941. A system of quantitative pedology. In <span>“factors of soil formation”</span>. McGraw Hill: New York.
