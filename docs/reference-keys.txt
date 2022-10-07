@@ -1,4 +1,9 @@
+fig:Rstudio
+fig:GEE
+fig:asset
+fig:upload
 eq:scorpan
+fig:workflow1
 presentation
 background-and-objectives
 global-soil-partnership
@@ -15,10 +20,14 @@ getting-started-with-r
 r-packages
 gee---google-earth-engine
 rgee---extension-to-use-google-earth-engine-in-r
-introduction-to-digital-soil-mapping-of-soil-nutrients-and-associated-soil-attributes
+digital-soil-mapping
+principles
+environmental-covariates
+machine-learning-techniques
+mapping-of-soil-nutrients-and-associated-soil-attributes
 step-1-soil-data-preparation
 step-2-environmental-covariates
-environmental-covariates
+environmental-covariates-1
 reducing-collinearity-in-environmental-covariates
 merging-soil-data-and-environmental-covariates
 step-3-mapping-continuous-soil-properties
