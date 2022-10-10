@@ -1,6 +1,7 @@
 # Step 1: soil data preparation
 
-## Format requirements of soil data {data_format}
+## Format requirements of soil data 
+<!-- {data_format} check if this is correct-->
 
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
@@ -23,26 +24,28 @@ footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique 
 
 Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0–30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function [@Bishop1999; @Malone2009] fitted to each individual soil profile, which requires more than a layer per profile. 
 
-In this chapter, step-by-step instructions are given on how to carry out all these steps in **R Studio**. Instructions are given on how to:
+In this chapter, step-by-step instructions are given on how to carry out all these steps in **RStudio**. Instructions are given on how to:
 
+<!-- Maybe numbers istead of bullet points -->
 * generate user-defined variables, 
 * set the working directory and load necessary packages, 
 * import national data to **R Studio**
 * select useful columns
 * perform a quality check of the data
 * estimate bulk density using PTF
-* estimate organic carbon stocks (OCS)
+<!-- * estimate organic carbon stocks (OCS) -->
 * harmonize soil layers (using splines)
 * plot and save the formatted soil data
 
-Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *R Studio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *R Studio*.
+Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *RStudio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
 
 ## Preparatory steps
+<!-- Check if RStudio or R Studio -->
 
-Now, let's open *R Studio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the file path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on 'Session' > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD.
-In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (<-) and name the **R** object on the left side (wd) (see code). Once this is done we use the function 'setwd()' to set the WD to the file path that is specified in the object *wd*.
+Now, let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on 'Session' menu > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD.
+In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (`<-`) and name the **R** object on the left side (wd) (see code). Once this is done we use the function 'setwd()' to set the WD to the file path that is specified in the object *wd*.
 
-Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function 'install.packages("[PACKAGENAME]")'. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as 'devtools' or 'remotes' are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
+Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as 'devtools' or 'remotes' are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
 
 ```{r, eval = F}
 # 0 - User-defined variables ===================================================
@@ -64,8 +67,8 @@ library(ithir) # for horizon harmonization
 
 The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
 
-After reading in the file, the package 'tidyverse' comes into play. By using the select() and unique() functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
-Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the summary() function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (chr) for text, integer (int) for whole numbers, and numeric (num) for numeric variables.
+After reading in the file, the package `tidyverse` comes into play. By using the `select()` and `unique()` functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
+Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables.
 
 
 ```{r, eval = F}
@@ -96,22 +99,25 @@ summary(site)
 summary(hor)
 ```
 
-The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the select() function, it is also possible to rename the variables right away (see code below).
+The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below).
 
 ```{r, eval = F}
 # 3 - select useful columns ====================================================
 ## 3.1 - select columns --------------------------------------------------------
 hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+
+# the variable ph_h2o was renamed as ph
 ```
 
 ## Data quality check
 
 Datasets need to be checked for their quality as especially manually entered data is prone to mistakes such as typos or duplicates. A thorough quality check ensures that:
+
 * all profiles have reasonable coordinates (within the area of interest);
 * there are no duplicated profiles; and
 * the depth logic within a profile is not violated.
 
-To check the first point, the dataframe needs to be converted into a spatial object using the st_as_sf() function of the 'sf' package. It is necessary to indicate the columns that indicate latitude and longitude as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: https://epsg.io/. The mapview() command offers the possibility to visualize the profile locations in an interactive map. Finally, the filter() function can be used to remove rows that contain profiles with wrong locations.
+To check the first point, the dataframe needs to be converted into a spatial object using the `st_as_sf()` function of the `sf` package. It is necessary to indicate the columns that contains latitude and longitude, as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: https://epsg.io/. The `mapview()` command (from `mapview` package) offers the possibility to visualize the profile locations in an interactive map. Finally, the `filter()` function can be used to remove rows that contain profiles with wrong locations.
 
 ```{r, eval = F}
 # 4 - Quality check ============================================================
@@ -127,7 +133,7 @@ site <- filter(site, ProfID != 2823)
 
 ```
 
-To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package 'aqp' (AQP = Algorithms for Quantitative Pedology) [@beaudette2013].
+To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package `aqp` (AQP = Algorithms for Quantitative Pedology) [@beaudette2013].
 With the first lines of code below, the dataset is converted into a soil profile collection and profiles and horizon tables are joined based on the site information.
 Now the profile collection can be visualised for any soil property. In this case, only the first 20 profiles are selected for the cation exchange capacity (CEC).
 Using the checkHzDepthLogic() function, users can assess that all profiles do not have gaps or overlaps of neighbouring horizons. If there are, they can be selected and checked through the Profile ID. In the following step, only profiles with valid horizon logic are selected. Finally, the soil profile collection is re-converted to a dataframe. With this, the quality check is finished.
