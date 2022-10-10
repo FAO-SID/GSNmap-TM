@@ -280,7 +280,7 @@ write_csv(d, "02-Outputs/spline_soil_profile.csv")
 
 ## Download environmental covariates
 
-````{r covs, echo=FALSE, eval=FALSE}
+````{r covs, echo=TRUE, eval=FALSE}
 #Empty environment and cache
 rm(list = ls());
 gc()
