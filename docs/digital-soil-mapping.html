@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Digital Soil Mapping | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Digital Soil Mapping | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -190,7 +190,16 @@ div.csl-indent {
 <li class="chapter" data-level="4.3" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#machine-learning-techniques"><i class="fa fa-check"></i><b>4.3</b> Machine learning techniques</a></li>
 <li class="chapter" data-level="4.4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes"><i class="fa fa-check"></i><b>4.4</b> Mapping of soil nutrients and associated soil attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a></li>
+<li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data-data_format"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data {data_format}</a></li>
+<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.2</b> Preparatory steps</a></li>
+<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.3</b> Data quality check</a></li>
+<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.4</b> Calculation of pedo-transfer functions</a></li>
+<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.5</b> Check for outliers</a></li>
+<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.6</b> Harmonise soil layer depths</a></li>
+<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.7</b> Save the results</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: environmental covariates</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>6.1</b> Environmental covariates</a></li>
@@ -207,7 +216,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.1" data-path="step-4-uncertainty-assessment.html"><a href="step-4-uncertainty-assessment.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html"><i class="fa fa-check"></i><b>9</b> Compendium of R scripts</a></li>
+<li class="chapter" data-level="9" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html"><i class="fa fa-check"></i><b>9</b> Compendium of R scripts</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#data-preparation"><i class="fa fa-check"></i><b>9.1</b> Data preparation</a></li>
+<li class="chapter" data-level="9.2" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#download-environmental-covariates"><i class="fa fa-check"></i><b>9.2</b> Download environmental covariates</a></li>
+<li class="chapter" data-level="9.3" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#annex-a-r-scripts-for-extra-functions"><i class="fa fa-check"></i><b>9.3</b> Annex A: R scripts for extra functions</a></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>10</b> Reporting results</a></li>
 <li class="chapter" data-level="11" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>11</b> Way forward</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -245,7 +259,7 @@ div.csl-indent {
 </div>
 <div id="machine-learning-techniques" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Machine learning techniques<a href="digital-soil-mapping.html#machine-learning-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. The plethora of methods cannot be listed here as it was summarised in multiple review papers <span class="citation">(<a href="#ref-khaledian2020" role="doc-biblioref">Khaledian and Miller, 2020</a>; <a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>; <a href="#ref-ma2019" role="doc-biblioref">Ma <em>et al.</em>, 2019</a>; <a href="#ref-wadoux2020" role="doc-biblioref">Wadoux, Minasny and McBratney, 2020</a>; <a href="#ref-padarian" role="doc-biblioref"><strong>padarian?</strong></a>)</span>.
+<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. The plethora of methods cannot be listed here as it was summarised in multiple review papers <span class="citation">(<a href="#ref-khaledian2020" role="doc-biblioref">Khaledian and Miller, 2020</a>; <a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>; <a href="#ref-ma2019" role="doc-biblioref">Ma <em>et al.</em>, 2019</a>; <a href="#ref-padarian2019" role="doc-biblioref">Padarian, Minasny and McBratney, 2019</a>; <a href="#ref-wadoux2020" role="doc-biblioref">Wadoux, Minasny and McBratney, 2020</a>)</span>.
 Traditionally, multiple linear regression models can be used to quantify the relationships which continues to be the most applied mapping method to map for instance soil organic carbon <span class="citation">(<a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>)</span>. In addition to that, regression Kriging methods combine linear regressions and an stochastic interpolation of the regression residuals based on their spatial autocorrelation <span class="citation">(<a href="#ref-yigini2018" role="doc-biblioref">Yigini <em>et al.</em>, 2018</a>)</span>.
 However, machine learning algorithms with more flexible assumptions, i.e. non-linear relationships, have become more and more popular as the mapping performance was substantially improved and the versatility of the algorithms can be detect more complex relationships.
 Among the most commonly used non-linear machine learning models is random forest <span class="citation">(<a href="#ref-Breiman2001" role="doc-biblioref">Breiman, 2001</a>)</span>. The random forest algorithm splits a dataset into subsets and uses a random selection of covariates (predictors) to identify homogeneous groups. The procedure of classifying is repeated many times and in the end the prediction is averaged. Finally, quantile regression forests (QRF) derive from random forest models <span class="citation">(<a href="#ref-Meinshausen2006" role="doc-biblioref">Meinshausen, 2006</a>)</span>. The benefit of QRF is the ability to predict not only the mean of the prediction but also to provide more information on the uncertainty and probability distribution.</p>
@@ -298,6 +312,9 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
 </div>
 <div id="ref-Meinshausen2006" class="csl-entry">
 <strong>Meinshausen, Ni.</strong> 2006. Quantile regression forests. <em>Journal of Machine Learning Research</em>, 7(6).
+</div>
+<div id="ref-padarian2019" class="csl-entry">
+<strong>Padarian, J., Minasny, B. &amp; McBratney, A.B.</strong> 2019. Using deep learning for digital soil mapping. <em>Soil</em>, 5(1): 79–89.
 </div>
 <div id="ref-wadoux2020" class="csl-entry">
 <strong>Wadoux, A.M.-C., Minasny, B. &amp; McBratney, A.B.</strong> 2020. Machine learning for digital soil mapping: Applications, challenges and suggested solutions. <em>Earth-Science Reviews</em>, 210: 103359.
@@ -375,7 +392,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

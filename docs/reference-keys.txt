@@ -27,6 +27,13 @@ environmental-covariates
 machine-learning-techniques
 mapping-of-soil-nutrients-and-associated-soil-attributes
 step-1-soil-data-preparation
+format-requirements-of-soil-data-data_format
+preparatory-steps
+data-quality-check
+calculation-of-pedo-transfer-functions
+check-for-outliers
+harmonise-soil-layer-depths
+save-the-results
 step-2-environmental-covariates
 environmental-covariates-1
 reducing-collinearity-in-environmental-covariates
@@ -38,5 +45,8 @@ predicting-soil-attributes
 step-4-uncertainty-assessment
 introduction
 compendium-of-r-scripts
+data-preparation
+download-environmental-covariates
+annex-a-r-scripts-for-extra-functions
 reporting-results
 way-forward

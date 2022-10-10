@@ -1,5 +1,7 @@
 # Step 1: soil data preparation
 
+## Format requirements of soil data {data_format}
+
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
 ```{r, data1, echo = FALSE}
@@ -19,9 +21,10 @@ footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique 
 
 ```
 
-Soil data usually require a preprocessing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0-30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function [@Bishop1999; @Malone2009] fitted to each individual soil profile, which requires more than a layer per profile. 
+Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0–30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function [@Bishop1999; @Malone2009] fitted to each individual soil profile, which requires more than a layer per profile. 
 
 In this chapter, step-by-step instructions are given on how to carry out all these steps in **R Studio**. Instructions are given on how to:
+
 * generate user-defined variables, 
 * set the working directory and load necessary packages, 
 * import national data to **R Studio**
@@ -32,8 +35,14 @@ In this chapter, step-by-step instructions are given on how to carry out all the
 * harmonize soil layers (using splines)
 * plot and save the formatted soil data
 
-Thus, the instructions also serve as an introduction to the functioning of **R** and *R Studio**.
+Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *R Studio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *R Studio*.
 
+## Preparatory steps
+
+Now, let's open *R Studio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the file path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on 'Session' > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD.
+In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (<-) and name the **R** object on the left side (wd) (see code). Once this is done we use the function 'setwd()' to set the WD to the file path that is specified in the object *wd*.
+
+Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function 'install.packages("[PACKAGENAME]")'. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as 'devtools' or 'remotes' are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
 
 ```{r, eval = F}
 # 0 - User-defined variables ===================================================
@@ -49,11 +58,309 @@ library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 # install.packages("devtools") 
 # devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
-
+library(ithir) # for horizon harmonization
 
 ```
 
+The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
+
+After reading in the file, the package 'tidyverse' comes into play. By using the select() and unique() functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
+Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the summary() function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (chr) for text, integer (int) for whole numbers, and numeric (num) for numeric variables.
+
+
+```{r, eval = F}
+# 2 - Import national data =====================================================
+# Save your national soil dataset in the data folder /01-Data as a .csv file or 
+# as a .xlsx file
+
+## 2.1 - for .xlsx files -------------------------------------------------------
+# Import horizon data 
+# hor <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
+# # Import site-level data
+# site <- read_excel("01-Data/soil_data.xlsx", sheet = 1)
+
+## 2.2 - for .csv files --------------------------------------------------------
+# Import horizon data 
+hor <- read_csv(file = "01-Data/soil_profile_data.csv")
+site <- select(hor, id_prof, x, y, date) %>% unique()
+hor <- select(hor, id_prof, id_hor, top:cec)
+
+# change names of key columns
+names(site)
+names(site)[1] <- "ProfID"
+names(hor)
+names(hor)[1] <- "ProfID"
+names(hor)[2] <- "HorID"
+# scan the data
+summary(site)
+summary(hor)
+```
+
+The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the select() function, it is also possible to rename the variables right away (see code below).
+
+```{r, eval = F}
+# 3 - select useful columns ====================================================
+## 3.1 - select columns --------------------------------------------------------
+hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+```
+
+## Data quality check
+
+Datasets need to be checked for their quality as especially manually entered data is prone to mistakes such as typos or duplicates. A thorough quality check ensures that:
+* all profiles have reasonable coordinates (within the area of interest);
+* there are no duplicated profiles; and
+* the depth logic within a profile is not violated.
+
+To check the first point, the dataframe needs to be converted into a spatial object using the st_as_sf() function of the 'sf' package. It is necessary to indicate the columns that indicate latitude and longitude as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: https://epsg.io/. The mapview() command offers the possibility to visualize the profile locations in an interactive map. Finally, the filter() function can be used to remove rows that contain profiles with wrong locations.
+
+```{r, eval = F}
+# 4 - Quality check ============================================================
+
+## 4.1 - Check locations -------------------------------------------------------
+# https://epsg.io/6204
+site %>% 
+  st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
+  mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
+
+# profile 2823 is wrongly located, so let's remove it
+site <- filter(site, ProfID != 2823)
+
+```
+
+To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package 'aqp' (AQP = Algorithms for Quantitative Pedology) [@beaudette2013].
+With the first lines of code below, the dataset is converted into a soil profile collection and profiles and horizon tables are joined based on the site information.
+Now the profile collection can be visualised for any soil property. In this case, only the first 20 profiles are selected for the cation exchange capacity (CEC).
+Using the checkHzDepthLogic() function, users can assess that all profiles do not have gaps or overlaps of neighbouring horizons. If there are, they can be selected and checked through the Profile ID. In the following step, only profiles with valid horizon logic are selected. Finally, the soil profile collection is re-converted to a dataframe. With this, the quality check is finished.
+
+
+```{r, eval = F}
+## 4.2 - Convert data into a Soil Profile Collection ---------------------------
+depths(hor) <- ProfID ~ top + bottom
+hor@site$ProfID <- as.numeric(hor@site$ProfID)
+site(hor) <- left_join(site(hor), site)
+profiles <- hor
+
+profiles
+
+## 4.3 - plot first 20 profiles using CEC as color ------------------------------
+plotSPC(x = profiles[1:20], name = "cec", color = "cec",
+        name.style = "center-center")
+
+## 4.4 - check data integrity --------------------------------------------------
+# A valid profile is TRUE if all of the following criteria are false:
+#    + depthLogic : boolean, errors related to depth logic
+#    + sameDepth : boolean, errors related to same top/bottom depths
+#    + missingDepth : boolean, NA in top / bottom depths
+#    + overlapOrGap : boolean, gaps or overlap in adjacent horizons
+aqp::checkHzDepthLogic(profiles)
+
+# visualize some of these profiles by the pid
+subset(profiles, grepl(6566, ProfID, ignore.case = TRUE))
+subset(profiles, grepl(6915, ProfID, ignore.case = TRUE))
+subset(profiles, grepl(7726, ProfID, ignore.case = TRUE))
+
+## 4.5 - keep only valid profiles ----------------------------------------------
+clean_prof <- HzDepthLogicSubset(profiles)
+metadata(clean_prof)$removed.profiles
+# write_rds(clean_prof, "01-Data/soilProfileCollection.rds")
+
+## 4.6 convert soilProfileCollection to a table --------------------------------
+dat <- left_join(clean_prof@site, clean_prof@horizons)
+dat <- select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
+
+```
+
+The soil data table is now revised and a sound and consistent quality is ensured. Thus, the available data can be used in the following to perform calculations in order to account for missing soil properties for instance. In the following example, a set of pedotransfer functions (PTF) will be calculated based on the organic matter (OM) content in order to estimate bulk density (BD) for missing observations. 
+
+## Calculation of pedo-transfer functions
 
 In the cases of single-layer samples, which is common in sampling for nutrient determination, a locally calibrated pedotransfer function (PTF) should be applied. PTF will be also required to harmonise the laboratory methods. Experts from GLOSOLAN will provide advice in this regard.
 
+Therefore, a customised function is introduced to our working environment. Users can write their own functions in **R**. This is often necessary when existing functions need to be customised or very specific calculations need to be performed. Functions greatly increase the efficiency of our code. For further information, it is recommendable to consult online resources on the topic (e.g. https://hbctraining.github.io/Intro-to-R/lessons/03_introR-functions-and-arguments.html).
+
+The function 'estimateBD' below calculates various PTFs that estimate BD. Which equation is used is determined by the user that has to choose one of the methods and also specify the SOC value of the respective horizon. The SOC values is first converted to OM by using the conversion factor of 1.724 and then inserted in the respective PTF. The return() command tells **R** which value to output. 
+
+```{r, eval = F}
+# 5 - Estimate BD using pedotransfer functions =================================
+
+# create the function with all PTF
+estimateBD <- function(SOC=NULL, method=NULL){
+  OM <- SOC * 1.724
+  if(method=="Saini1996"){BD <- 1.62 - 0.06 * OM}
+  if(method=="Drew1973"){BD <- 1 / (0.6268 + 0.0361 * OM)}
+  if(method=="Jeffrey1979"){BD <- 1.482 - 0.6786 * (log(OM))}
+  if(method=="Grigal1989"){BD <- 0.669 + 0.941 * exp(1)^(-0.06 * OM)}
+  if(method=="Adams1973"){BD <- 100 / (OM /0.244 + (100 - OM)/2.65)}
+  if(method=="Honeyset_Ratkowsky1989"){BD <- 1/(0.564 + 0.0556 * OM)}
+  return(BD)
+}
+```
+
+To apply the 'estimateBD' function, first a test dataframe is created that includes the SOC values from the cleaned profile table as well as the respective existing BD measurements. The rows without values in one of the columns are excluded using the na.omit() function since we want to first evaluate the difference between estimated BDs and measured BDs. 
+Now, the test dataframe is complemented by the estimated BDs derived from the PTFs for each method. To add new columns to an existing dataframe one has to write on the left-hand side of the arrow the name of the existing dataframe object (in this case BD_test), the dollar sign ($), and the name of the new column. Here, the names are given according to the used BD PTF.
+
+```{r, eval = F}
+## 5.1 - Select a pedotransfer function ----------------------------------------
+# create a vector of BD values to test the best fitting pedotransfer function
+BD_test <- tibble(SOC = clean_prof@horizons$soc,
+                  BD_test = clean_prof@horizons$bd)
+BD_test <-  na.omit(BD_test)
+
+## 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
+BD_test$Saini <- estimateBD(BD_test$SOC, method="Saini1996")
+BD_test$Drew <- estimateBD(BD_test$SOC, method="Drew1973")
+BD_test$Jeffrey <- estimateBD(BD_test$SOC, method="Jeffrey1979")
+BD_test$Grigal <- estimateBD(BD_test$SOC, method="Grigal1989")
+BD_test$Adams <- estimateBD(BD_test$SOC, method="Adams1973")
+BD_test$Honeyset_Ratkowsky <- estimateBD(BD_test$SOC,
+                                         method="Honeyset_Ratkowsky1989")
+
+```
+
+The calculated BDs can now be compared using the summary() function. However, a faster and more accessible approach is to plot the different bulk densities for comparison. In case you are not familiar with the plot() function and its respective commands, it is recommendable to check one of the many online learning resources such as https://intro2r.com/simple-base-r-plots.html. The plot shows us both measured and estimated BD values as differently coloured lines (see Fig ???). 
+
+```{r, eval = F}
+## 5.3 Compare results ---------------------------------------------------------
+
+# Observed values:
+summary(BD_test$BD_test)
+
+# Predicted values:
+summary(BD_test$Saini)
+summary(BD_test$Drew)
+summary(BD_test$Jeffrey)
+summary(BD_test$Grigal)
+summary(BD_test$Adams)
+summary(BD_test$Honeyset_Ratkowsky)
+
+# Compare data distributions for observed and predicted BLD
+plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,5),
+     lwd=2, main="Bulk Density Pedotransfer Functions")
+lines(density(BD_test$Saini),col="green", lwd=2)
+lines(density(BD_test$Drew),col="red", lwd=2)
+lines(density(BD_test$Jeffrey),col="cyan", lwd=2)
+lines(density(BD_test$Grigal),col="orange", lwd=2)
+lines(density(BD_test$Adams),col="magenta", lwd=2)
+lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
+legend("topleft",
+       legend = c("Original", "Saini", "Drew", "Jeffrey", "Grigal", "Adams",
+                  "Honeyset_Ratkowsky"),
+       fill=c("black", "green", "red", "cyan", "orange","magenta", "blue"))
+
+# Plot the Selected function again
+plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
+     lwd=2, main="Bulk Density Selected Function")
+lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
+legend("topleft",legend = c("Original", "Honeyset_Ratkowsky"),
+       fill=c("black", "blue"))
+
+```
+
+The PTF to be chosen for estimating the BD of the missing horizons should be the closest to the measured BD values. Once, the appropriate PTF was chosen, the 'estimateBD' function is applied in the dataframe 'dat' that was created at the end of the quality check. Here, new bd values are estimated for the rows in which the column 'bd' has missing values. Finally, a plot is generated to visualize the gap-filled bulk density values.
+
+```{r, eval = F}
+## 5.4 Estimate BD for the missing horizons ------------------------------------
+dat$bd[is.na(dat$bd)] <-
+  estimateBD(dat[is.na(dat$bd),]$soc, method="Honeyset_Ratkowsky1989")
+
+# Explore the results
+summary(dat$bd)
+plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
+     lwd=2, main="Bulk Density Gap-Filling")
+lines(density(dat$bd, na.rm = TRUE), col="green", lwd=2)
+legend("topleft",legend = c("Original", "Original+Estimated"),
+       fill=c("black", "green"))
+
+```
+
+## Check for outliers
+
+Unrealistically high or low values can have considerable impact on the statistical analysis and thus it is key to identify and carefully check those values in order to get valid results and eliminate potential bias. Again, the summary() function is apt to show general descriptive statistics such as maxima or minima. Based on this assessment, more detailed views of the suspicious values can be obtained by filtering values above or below a certain threshold as done in the code below for soil organic carbon (SOC) values above 10 percent. If such values don't belong to soil types that would justify such exceptionally high SOC values, e.g. organic soils (Histosols), these rows can be removed based on the profile ID. The same process should be repeated for all soil properties.
+Such evaluation can also be conducted visually for several properties at the same time using the 'tidyverse' and 'ggplot' package that allows to plot boxplots for several soil properties at the same time. To get more information on tidyverse, please follow this link: https://r4ds.had.co.nz/. For a comprehensive overview of the functionalities of ggplot, a more sophisticated way of plotting, this book provides a good overview: http://www.cookbook-r.com/Graphs/.
+
+```{r, eval = F}
+## 5.5 - Explore outliers ------------------------------------------------------
+# Outliers should be carefully explored and compared with literature values.
+# Only if it is clear that outliers represent impossible or highly unlikely 
+# values, they should be removed as errors.
+# 
+# Carbon content higher than 15% is only typical for organic soil (histosols)
+# We will remove all atypically high SOC as outliers
+summary(dat$soc)
+na.omit(dat$ProfID[dat$soc > 10])
+dat <- dat[dat$ProfID != 6915,]
+dat <- dat[dat$ProfID != 7726,]
+
+# Explore bulk density data, identify outliers
+# remove layers with Bulk Density < 1 g/cm^3
+low_bd_profiles <- na.omit(dat$ProfID[dat$bd<1])
+dat <- dat[!(dat$ProfID %in% low_bd_profiles),]
+
+# Explore data, identify outliers
+x <- pivot_longer(dat, cols = ph:cec, values_to = "value",
+                  names_to = "soil_property")
+x <- na.omit(x)
+ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
+  geom_boxplot() + 
+  facet_wrap(~soil_property, scales = "free")
+
+```
+
+## Harmonise soil layer depths
+The last step towards a soil data table that can be used for mapping, is to harmonize the soil depth layers to 0-30 cm (or 30-60, or 60-100 cm respectively). This is necessary since we want to produce maps that cover exactly those depths and do not differ across soil profile locations. Thus, the relevant columns are selected from the dataframe, target soil properties, and upper and lower limit of the harmonised soil layer are specified (in depths).
+
+In the following a new dataframe 'd' is created in which the standard depth layers are stored. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the 'ithir' package. The spline functions are also explained in Section \@ref(data_format).
+
+```{r, eval = F}
+# 6 - Harmonize soil layers ====================================================
+## 6.1 - Set target soil properties and depths ---------------------------------
+names(dat)
+dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, clay, bd, cec)
+
+target <- c("ph", "k", "soc", "clay", "bd", "cec")
+depths <- t(c(0,30))
+
+## 6.2 - Create standard layers ------------------------------------------------
+d <- unique(select(dat, ProfID, x, y))
+
+for (i in seq_along(target)) {
+  vlow <- min(dat[,target[i]][[1]], na.rm = TRUE)
+  vhigh <- max(dat[,target[i]][[1]], na.rm = TRUE)
+  o <- dat[,c("ProfID", "top", "bottom",target[i])] %>% 
+    na.omit() %>%
+    as.data.frame(stringsAsFactors = FALSE)
+  x <- ithir::ea_spline(obj = o, var.name = target[i], d = depths, 
+                        vlow = vlow[[1]], vhigh = vhigh[[1]])$harmonised 
+  x[x==-9999] <- NA
+  x <- x %>% 
+    as_tibble() %>% 
+    select(-`soil depth`)
+  
+  names(x) <- c("ProfID",paste0(target[i],c("_0_30","_30_60","_60_100")))
+  d <- d %>% left_join(x, by = "ProfID" )
+}
+d
+
+```
+
+## Save the results
+Before finalising the soil data preparation, it is recommendable to check again visually if the calculations were conducted correctly. Again, the combination of tidyverse and ggplot functions provides high efficiency and versatility to visualise figures with the desired soil properties. At last, the write_csv() function is used to save the dataframe as a .csv file in the Outputs folder (02-Outputs). With this, the soil data preparation is finalised.
+
+```{r, eval = F}
+# 7 - Plot  and save results ===================================================
+
+x <- pivot_longer(d, cols = ph_0_30:cec_0_30, values_to = "value",
+                  names_sep = "_", 
+                  names_to = c("soil_property", "top", "bottom"))
+x <- mutate(x, depth = paste(top, "-" , bottom))
+x <- na.omit(x)
+ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
+  geom_boxplot() + 
+  facet_wrap(~soil_property, scales = "free")
+
+# remove BD and CF
+# d <- select(d, ProfID:y, soc_0_30:ocs_60_100)
+# save data
+write_csv(d, "02-Outputs/spline_soil_profile.csv")
+```
 
