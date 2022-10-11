@@ -1,20 +1,10 @@
 # Step 3: Mapping continuous soil properties
 
-## Setting up repeated k-fold cross validation
+In this chapter, the cleaned soil data and the previously downloaded covariate layers are used to generate soil property maps using DSM techniques. These consist of merging soil and environmental covariates data, selecting the covariates, calibrating the machine learning model, assessing the uncertainty, predicting the soil properties and finally export the maps.
 
-Cross validation is one of the most used methods in DSM for assessing the overall accuracy of the resulting maps (Step 8, Figure 3). Since this is implemented along with the model calibration step, we explain the process at this stage. 
+## Getting prepared to map
 
-Cross validation consists of randomly splitting the input data into a training set and a testing set. However, a unique testing dataset can bias the overall accuracy. Therefore, k-fold cross validation randomly splits the data into k parts, using 1/k part of it for testing and k-1/k part for training the model. In order to make the final model more robust in terms of parameter estimations, we include repetitions of this process. The final approach is called repeated k-fold cross-validation, where k will be equal to ten in this process. A graphical representation of the 10-fold cross validation is shown in Figure \ref{fig:cv}. Note that green balls represent the samples belonging to the testing set and yellow balls are samples of the training set. Each row is a splitting step of the 10-folds, while each block (repetitions) represent the repetition step.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.9\textwidth]{images/cv.pdf}
-  \caption{Schematic representation of the repeated cross-validation process.}
-  \label{fig:cv}
-\end{figure}
-
-Step 5 in Figure 3 represents the repeated cross-validation, but note that after each single splitting step (the rows in Figure 4) the training data go to model calibration, which will be explained in Step 6 (next Section), and the testing data will be used with the calibrated model to produce the residuals (Step 8, Section 2.2.8). 
-Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods.
+To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
 
 ```{r, eval = F}
 #_______________________________________________________________________________
@@ -31,17 +21,6 @@ Repeated cross validation has been nicely implemented in the caret R package [@K
 rm(list = ls())
 gc()
 
-# Content of this script =======================================================
-# 0 - Set working directory, soil attribute, and packages
-# 1 - Merge soil data with environmental covariates 
-# 2 - Covariate selection
-# 3 - Model calibration
-# 4 - Uncertainty assessment
-# 5 - Prediction
-# 6 - Export final maps
-#_______________________________________________________________________________
-
-
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
@@ -50,7 +29,7 @@ setwd('C:/GIT/Digital-Soil-Mapping')
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
 
-# Terget soil attribute
+# Target soil attribute
 soilatt <- 'k'
 
 # Function for Uncertainty Assessment
@@ -67,7 +46,7 @@ library(doParallel)
 
 ```
 
-
+Since soil data and environmental covariaes are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
 ```{r, eval = F}
 # 1 - Merge soil data with environmental covariates ============================
@@ -88,11 +67,18 @@ dat <- read_csv("01-Data/data_with_coord.csv")
 
 # Convert soil data into a spatial object (check https://epsg.io/6204)
 dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
+```
 
+The shapefile can be reprojected to match the CRS of the covariates using the project function of the terra package. 
+```{r, eval = F}
 # Reproject point coordinates to match coordinate system of covariates
 dat <- terra::project(dat, covs)
 names(dat)
+```
 
+Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the summary() command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the na.omit() function.
+
+```{r, eval = F}
 ## 1.3 - Extract values from covariates to the soil points ---------------------
 pv <- terra::extract(x = covs, y = dat, xy=F)
 dat <- cbind(dat,pv)
@@ -104,6 +90,17 @@ summary(dat)
 d <- select(dat, soilatt, names(covs))
 d <- na.omit(d)
 ```
+
+## Covariate selection and repeated k-fold cross-validation
+
+Cross validation is one of the most used methods in DSM for assessing the overall accuracy of the resulting maps. Since this is implemented along with the model calibration step, we explain the process at this stage. Cross validation consists of randomly splitting the input data into a training set and a testing set. However, a unique testing dataset can bias the overall accuracy. Therefore, k-fold cross validation randomly splits the data into k parts, using 1/k part of it for testing and k-1/k part for training the model. In order to make the final model more robust in terms of parameter estimations, we include repetitions of this process. The final approach is called repeated k-fold cross-validation, where k will be equal to ten in this process (see Figure \@ref(fig:workflow1). A graphical representation of the 10-fold cross validation is shown in Figure \@ref(fig:cv). Note that green balls represent the samples belonging to the testing set and yellow balls are samples of the training set. Each row is a splitting step of the 10-folds, while each block (repetitions) represent the repetition step.
+
+```{r, cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
+knitr::include_graphics("images/cv.png")
+```
+
+The cross-validation is repeated and after every iteration, i.e. each single splitting step (the rows in Figure \@ref(fig:cv)), the training data is used to calibrate the model, which will be explained in the next paragraph. The testing data will be used with the calibrated model to produce the residuals that play a role in assessing the uncertainty at a later stage (see Figure \@ref(fig:workflow1). 
+Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods. Here, we use the rfeControl() function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called "fitControl". Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
 
 
 ```{r, eval = F}
@@ -122,6 +119,12 @@ fitControl <- rfeControl(functions = rfFuncs,
 fm = as.formula(paste(soilatt," ~", paste0(ncovs,
                                              collapse = "+")))
 
+```
+
+The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict.
+The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.
+
+```{r, eval = F}
 # Calibrate the model using multiple cores
 cl <- makeCluster(detectCores()-1)
 registerDoParallel(cl)
@@ -135,7 +138,11 @@ covsel <- rfe(fm,
               verbose = TRUE,
               keep.inbag = T)
 stopCluster(cl)
+```
 
+The selected covariates can be visualised in Trellis displays. Finally, the optimal predictors are stored in a dedicated R object.
+
+```{r, eval = F}
 ## 2.3 - Plot selection of covariates ------------------------------------------
 trellis.par.set(caretTheme())
 plot(covsel, type = c("g", "o"))
@@ -144,6 +151,16 @@ plot(covsel, type = c("g", "o"))
 opt_covs <- predictors(covsel)
 
 ```
+
+## Model calibration
+
+The model calibration step involves the use of a statistical model to find the relations between soil observations and environmental covariates. One of the most widely used models in DSM is random forest [@Breiman2001]. Random forest is considered a machine learning method which belongs to the decision-tree type of model. Random forest creates an ensemble of trees using a random selection of covariate. The prediction of a single tree is made based on the observed samples mean in the leaf. The random forest prediction is made by taking the average of the predictions of the single trees. The size of the number of covariates at each tree (mtry) can be fine-tuned before calibrating the model. 
+Quantile regression forests (QRF, @Meinshausen2006) are a generalisation of the random forest models, capable of not only predicting the conditional mean, but also the conditional probability density function. This feature allows one to estimate the standard deviation of the prediction, as well as the likelihood of the target variable falling below a given threshold. In a context where a minimum level of a soil nutrient concentration may be decisive for improving the crop yield, this feature can play an important role for the GSNmap initiative. 
+Model calibration will be implemented using the caret package [@Kuhn2022]. While we suggest to use QRF, caret provides a large set of models https://topepo.github.io/caret/available- models.html#) that might perform better in specific cases. In this regard, it is up to the user to implement a different model, ensuring  the product specifications (Section Product Specifications).
+
+In the previous step, the number of covariates was reduced based on a 10-fold cross-validation that was repeated three times based on a regression model. To account for the reduced number of covariates, the model formula is updated at first.
+Again, parallel computing is used to speed up the computational process.
+The cross-validation is repeated with the new formula and different numbers of covariates (mtry) at each tree are assessed. After optimising this parameter, a QRF model is calibrated using the caret package.
 
 ```{r, eval = F}
 # 3 - QRF Model calibration ====================================================
@@ -175,8 +192,11 @@ model <- caret::train(fm,
                       importance = TRUE)
 stopCluster(cl)
 gc()
+```
 
+The results have been stored in an R object called model. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted. Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
 
+```{r, eval = F}
 ## 3.4 - Extract predictor importance as relative values (%)
 x <- randomForest::importance(model$finalModel)
 model$importance <- x
@@ -185,6 +205,9 @@ print(model)
 saveRDS(model, file = paste0("02-Outputs/models/model_",soilatt,".rds"))
 ```
 
+## Uncertainty assessment
+Assessing the uncertainty related to a prediction means to compare the difference between observed and predicted values. Hence, it is necessary to extracted observed and predicted values and store them in two separate R objects. Next, both values are combined to a dataframe.
+
 
 ```{r, eval = F}
 # 4 - Uncertainty assessment ===================================================
@@ -192,7 +215,11 @@ saveRDS(model, file = paste0("02-Outputs/models/model_",soilatt,".rds"))
 o <- model$pred$obs
 p <- model$pred$pred
 df <- data.frame(o,p)
+```
 
+This dataframe is used to plot observed values on the x-axis and predicted values on the y-axis as a scatterplot.
+
+```{r, eval = F}
 ## 4.1 - Plot and save scatterplot --------------------------------------------- 
 (g1 <- ggplot(df, aes(x = o, y = p)) + 
   geom_point(alpha = 0.1) + 
@@ -203,10 +230,19 @@ df <- data.frame(o,p)
 ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
        units = "cm", width = 12, height = 12)
 
+```
+
+Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the mean error (ME), root mean-squared error (RMSE), mean absolute error (MAE), the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.
+
+```{r, eval = F}
 ## 4.2 - Print accuracy coeficients --------------------------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
 eval(o,p)
+```
 
+Finally, a variable importance plot is generated to visualise the relative importance of each covariate/predictor.
+
+```{r, eval = F}
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
@@ -216,6 +252,12 @@ g2
 dev.off()
 ```
 
+## Predicting soil attributes
+
+After calibrating the model, caret will select the best set of parameters and will fit the model using the whole dataset. Then, the final model can be used to predict the target soil properties. The process uses the model and the values of the covariates at target locations. This is generally done by using the same input covariates as a multilayer raster format, ensuring that the names of the layers are the same as the covariates in the calibration dataset. In this step we will predict the conditional mean and conditional standard deviation at each raster cell.
+
+First, the raster is split into so-called tiles that divide the whole area of interest in multiple rasters with a coarse resolution. In this case 25 tiles are produced (5 rows x 5 columns). The functions for tiling come from the terra package.
+
 ```{r, eval = F}
 # 5 - Prediction ===============================================================
 # Generation of maps (prediction of soil attributes) 
@@ -224,6 +266,11 @@ r <-covs[[1]]
 t <- rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))
 tile <- makeTiles(r, t,overwrite=TRUE,filename="02-Outputs/tiles/tiles.tif")
 
+```
+
+Next, a for loop is formulated to predict each soil attribute for each tile. The tiling significantly improves the computational speed of the prediction. For each tile the mean and the standard deviation are stored in two separated objects that are then saved as raster files.
+
+```{r, eval = F}
 ## 5.2 - Predict soil attributes per tiles -------------------------------------
 # loop to predict on each tile
 
@@ -238,8 +285,6 @@ for (j in seq_along(tile)) {
                               cpkgs="quantregForest", what=mean)
   pred_sd <- terra::predict(covst, model = model$finalModel, na.rm=TRUE,  
                             cpkgs="quantregForest", what=sd)  
-  
-  
   
   # ###### Raster package solution (in case terra results in many NA pixels)
   # library(raster)
@@ -268,7 +313,11 @@ for (j in seq_along(tile)) {
   
   print(paste("tile",tile[j]))
 }
+```
 
+As a result, 25 tiles for the predicted mean and 25 tiles for the predicted standard deviation were produced using the QRF model. The next step is to merge these tiles to produce a map of the predicted mean and one of the predicted standard deviation. For this, again for loops are employed that read all raster file tiles. These are then put together by the mosaic() function of the terra package. Finally, they are masked to the AOI and then can be visualised in a figure.
+
+```{r, eval = F}
 ## 5.3 - Merge tiles both prediction and st.Dev --------------------------------
 f_mean <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
                      pattern = paste0(soilatt,"_tile_"), full.names = TRUE)
@@ -302,9 +351,11 @@ pred_sd <- mask(pred_sd,AOI)
 plot(pred_mean)
 plot(pred_sd)
 
-
 ```
 
+The final step then consists of applying a cropland mask that is applied to the map and the uncertainty map since the soil data comes only from croplands and thus no assumption can be made to soil property values under different land covers. The maps are then stored as raster files (GeoTiff/.tif) in the Outputs folder. 
+
+(!!! it seems that below the mask is only applied to pred_mean !!!)
 
 ```{r, eval = F}
 # 6 - Export final maps ========================================================
@@ -322,16 +373,3 @@ writeRaster(pred_sd,
             paste0("02-Outputs/maps/",soilatt,"_QRF_SD.tif"),
             overwrite=TRUE)
 ```
-
-
-## Model calibration
-
-The model calibration step involves the use of a statistical model to find the relations between soil observations and environmental covariates. One of the most widely used models in DSM is random forest [@Breiman2001]. Random forest is considered a machine learning method which belongs to the decision-tree type of model. Random forest creates an ensemble of trees using a random selection of covariate. The prediction of a single tree is made based on the observed samples mean in the leaf. The random forest prediction is made by taking the average of the predictions of the single trees. The size of the number of covariates at each tree (mtry) can be fine-tuned before calibrating the model. 
-
-Quantile regression forests (QRF, @Meinshausen2006) are a generalisation of the random forest models, capable of not only predicting the conditional mean, but also the conditional probability density function. This feature allows one to estimate the standard deviation of the prediction, as well as the likelihood of the target variable falling below a given threshold. In a context where a minimum level of a soil nutrient concentration may be decisive for improving the crop yield, this feature can play an important role for the GSNmap initiative. 
-
-Model calibration will be implemented using the caret package [@Kuhn2022]. While we suggest to use QRF, caret provides a large set of models https://topepo.github.io/caret/available- models.html#) that might perform better in specific cases. In this regard, it is up to the user to implement a different model, ensuring  the product specifications (Section Product Specifications).
-
-## Predicting soil attributes
-
-After calibrating the model, caret will select the best set of parameters and will fit the model using the whole dataset. Then, the final model can be used to predict the target soil properties. The process uses the model and the values of the covariates at target locations. This is generally done by using the same input covariates as a multilayer raster format, ensuring that the names of the layers are the same as the covariates in the calibration dataset. In this step we will predict the conditional mean and conditional standard deviation at each raster cell.

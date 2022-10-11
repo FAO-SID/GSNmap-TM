@@ -6,6 +6,7 @@ eq:scorpan
 fig:workflow1
 tab:data1
 tab:covs1
+fig:cv
 presentation
 background-and-objectives
 global-soil-partnership
@@ -38,8 +39,10 @@ save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1
 step-3-mapping-continuous-soil-properties
-setting-up-repeated-k-fold-cross-validation
+getting-prepared-to-map
+covariate-selection-and-repeated-k-fold-cross-validation
 model-calibration
+uncertainty-assessment
 predicting-soil-attributes
 step-4-uncertainty-assessment
 introduction

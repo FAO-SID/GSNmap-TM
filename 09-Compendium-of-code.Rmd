@@ -443,7 +443,7 @@ setwd('C:/GIT/Digital-Soil-Mapping')
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
 
-# Terget soil attribute
+# Target soil attribute
 soilatt <- 'k'
 
 # Function for Uncertainty Assessment
