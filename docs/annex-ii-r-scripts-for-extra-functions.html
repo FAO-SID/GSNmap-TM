@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <title>Annex II: R scripts for extra functions | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:title" content="Annex II: R scripts for extra functions | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="GSNmap - Technical Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Soil Nutrients | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta name="twitter:title" content="Annex II: R scripts for extra functions | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   
   <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="presentation.html"/>
-<link rel="next" href="setting-up-the-software-environment.html"/>
+<link rel="prev" href="annex-i-compendium-of-r-scripts.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,81 +244,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="soil-nutrients" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Soil Nutrients<a href="soil-nutrients.html#soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definition-of-soil-nutrients" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Definition of soil nutrients<a href="soil-nutrients.html#definition-of-soil-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In theory, soil nutrients are defined as those chemical elements that are <em>essential</em> to plant growth (von Liebig, 1841; Arnon and Stout, 1939). First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements.
-Therefore, stricter criteria such as the one by Arnon and Stout (1939) were defined. They postulated that three criteria need to be met for an <em>essential mineral nutrients</em> (Kirkby, 2012):
-1. Nutrient must be required by plants to complete their life cycle;
-2. Nutrient must be irreplaceable; and
-3. Nutrient must be involved in the plant metabolism.</p>
-<p>Following this defintion to date the following nutrients would be considered essential for higher plants (Mengel et al., 2001): carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.</p>
-<p>Other definitions used biochemical functions for classification purposes (Mengel and Kirkby, 2001). Here, four nutrient groups are distinguished:
-1. major constituents of organic material (C, H, O, N, S);
-2. nutrients that are involved in esterification of alcohol groups (P, B, Si);
-3. nutrients that establish an osmotic potential (ions) (K, Na, Ca, Mg, Mn, Cl); and
-4. nutrients that enable electron transport (ions or chelates) (Fe, Cu, Zn, Mo).</p>
-<p>Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients (Mengel &amp; Kirkby, 2012). Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary (Mengel &amp; Kirkby, 2012).
-It is important to point out that the discussion on how to accurately define <em>essential</em> nutrients is ongoing as recent contribution to the topic show (Brown et al., 2022). The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition (FAO, 2022) and is shown in Table XX. It is based on the contribution of each element to the average plant content.</p>
-<p>Table XX: Classification of macro- and micronutrients by FAO (2022).</p>
-<table>
-<thead>
-<tr class="header">
-<th>Macronutrients</th>
-<th>Micronutrients</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>N</td>
-<td>Fe</td>
-</tr>
-<tr class="even">
-<td>P</td>
-<td>Mn</td>
-</tr>
-<tr class="odd">
-<td>K</td>
-<td>Zn</td>
-</tr>
-<tr class="even">
-<td>Ca</td>
-<td>Cu</td>
-</tr>
-<tr class="odd">
-<td>Mg</td>
-<td>B</td>
-</tr>
-<tr class="even">
-<td>S</td>
-<td>Mo</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>Cl</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="soil-properties-governing-nutrient-availability" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Soil properties governing nutrient availability<a href="soil-nutrients.html#soil-properties-governing-nutrient-availability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth (Wang et al., 2007). Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
-Most nutrients are taken up in their ionized form (Robertson et al., 1999). Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
-Soil pH, as a measure of exchangeable hydrogen protons (H<sup>+</sup>), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced (Fageria &amp; Zimmermann, 2008).
-The CEC, as a measure of exchangeable cations (e.g K<sup>+</sup>, Mg<sup>2+</sup>, Ca<sup>2+</sup>, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
-SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
-Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.</p>
+<div id="annex-ii-r-scripts-for-extra-functions" class="section level1 unnumbered hasAnchor">
+<h1>Annex II: R scripts for extra functions<a href="annex-ii-r-scripts-for-extra-functions.html#annex-ii-r-scripts-for-extra-functions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Script to estimate Organic Carbon Stock</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="presentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="setting-up-the-software-environment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="annex-i-compendium-of-r-scripts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,8 +1,8 @@
-# Compendium of R scripts
+# Annex I: Compendium of R scripts {-}
 
 This chapter contains the complete list of R scripts to run the process of mapping soil nutrient and associated soil properties.
 
-## Data preparation
+## Script 1: Data preparation {-}
 
 ```{r data_preparation, eval=FALSE}
 #
@@ -278,7 +278,7 @@ write_csv(d, "02-Outputs/spline_soil_profile.csv")
 ```
 
 
-## Download environmental covariates
+## Script 2: Download environmental covariates {-}
 
 ````{r covs, echo=TRUE, eval=FALSE}
 #Empty environment and cache
@@ -407,7 +407,7 @@ for (i in unique(assetname$ID)){
 ```
 
 
-## Modelling, validation and prediction using soil data with coordinates
+## Script 3: Modelling, validation and prediction using soil data with coordinates {-}
 
 ```{r modelling validation and prediction, echo=TRUE, eval=FALSE}
 #_______________________________________________________________________________
@@ -699,7 +699,7 @@ writeRaster(pred_sd,
 ```
 
 
-## Annex A: R scripts for extra functions
+# Annex II: R scripts for extra functions {-}
 
 Script to estimate Organic Carbon Stock
 ```{r Annex A, echo=FALSE, eval=FALSE}

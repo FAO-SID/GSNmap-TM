@@ -38,6 +38,7 @@ harmonise-soil-layer-depths
 save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1
+download-covariates-with-rgee
 step-3-mapping-continuous-soil-properties
 getting-prepared-to-map
 covariate-selection-and-repeated-k-fold-cross-validation
@@ -46,10 +47,5 @@ uncertainty-assessment
 predicting-soil-attributes
 step-4-uncertainty-assessment
 introduction
-compendium-of-r-scripts
-data-preparation
-download-environmental-covariates
-modelling-validation-and-prediction-using-soil-data-with-coordinates
-annex-a-r-scripts-for-extra-functions
 reporting-results
 way-forward

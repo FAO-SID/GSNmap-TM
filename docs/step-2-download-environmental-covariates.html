@@ -203,6 +203,7 @@ div.csl-indent {
 <li class="chapter" data-level="6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: download environmental covariates</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>6.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="6.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-rgee"><i class="fa fa-check"></i><b>6.2</b> Download covariates with rgee</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>7</b> Step 3: Mapping continuous soil properties</a>
 <ul>
@@ -216,15 +217,15 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.1" data-path="step-4-uncertainty-assessment.html"><a href="step-4-uncertainty-assessment.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html"><i class="fa fa-check"></i><b>9</b> Compendium of R scripts</a>
+<li class="chapter" data-level="9" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>9</b> Reporting results</a></li>
+<li class="chapter" data-level="10" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>10</b> Way forward</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html"><i class="fa fa-check"></i>Annex I: Compendium of R scripts</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#data-preparation"><i class="fa fa-check"></i><b>9.1</b> Data preparation</a></li>
-<li class="chapter" data-level="9.2" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#download-environmental-covariates"><i class="fa fa-check"></i><b>9.2</b> Download environmental covariates</a></li>
-<li class="chapter" data-level="9.3" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i><b>9.3</b> Modelling, validation and prediction using soil data with coordinates</a></li>
-<li class="chapter" data-level="9.4" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#annex-a-r-scripts-for-extra-functions"><i class="fa fa-check"></i><b>9.4</b> Annex A: R scripts for extra functions</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-1-data-preparation"><i class="fa fa-check"></i>Script 1: Data preparation</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-download-environmental-covariates"><i class="fa fa-check"></i>Script 2: Download environmental covariates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 3: Modelling, validation and prediction using soil data with coordinates</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>10</b> Reporting results</a></li>
-<li class="chapter" data-level="11" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>11</b> Way forward</a></li>
+<li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -1126,6 +1127,9 @@ vbf
 </tr>
 </tbody>
 </table>
+</div>
+<div id="download-covariates-with-rgee" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Download covariates with rgee<a href="step-2-download-environmental-covariates.html#download-covariates-with-rgee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the following, the steps to access and download the environmental covariates are described. The GSP has optimised the download of environmental covariates by minimising the efforts needed to clip and download the layers from Google Earth Engine (GEE). Here is where the <em>rgee</em> package comes into play, too. The objectives of this chapter are to explain how to set our working environment in <em>RStudio</em> and connect to GEE, how to import a shapefile of the area of interest (AOI), and how to clip and download the covariate layers for our respective AOI.</p>
 <p>If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our <strong>R</strong> session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the “Digital-Soil-Mapping-GSP-FAO” based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="step-2-download-environmental-covariates.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache</span></span>
