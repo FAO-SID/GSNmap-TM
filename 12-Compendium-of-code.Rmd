@@ -702,7 +702,7 @@ writeRaster(pred_sd,
 # Annex II: R scripts for extra functions {-}
 
 Script to estimate Organic Carbon Stock
-```{r Annex A, echo=FALSE, eval=FALSE}
+```{r Annex A, echo=TRUE, eval=FALSE}
 # Estimate Organic Carbon Stock (ocs) ======================================
 # SOC must be in g/kg (% * 10)
 # BLD in kg/m3
