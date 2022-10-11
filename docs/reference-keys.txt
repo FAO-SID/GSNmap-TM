@@ -37,8 +37,6 @@ harmonise-soil-layer-depths
 save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1
-reducing-collinearity-in-environmental-covariates
-merging-soil-data-and-environmental-covariates
 step-3-mapping-continuous-soil-properties
 setting-up-repeated-k-fold-cross-validation
 model-calibration
