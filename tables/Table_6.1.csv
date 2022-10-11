@@ -1,0 +1,74 @@
+Description,Code,Resolution (m)
+Mean air temperature (annual),bio1,1000
+Mean daily temperature of warmest month,bio5,1000
+Mean daily temperature of coldest month,bio6,1000
+Mean annual precipitation,bio12,1000
+Mean precipitation of wettest month,bio13,1000
+Mean precipitation of driest month,bio14,1000
+Mean monthly precipitation of wettest quarter,bio16,1000
+Mean monthly precipitation of driest quarter,bio17,1000
+Mean monthly PET,pet_penman_mean,1000
+Minimum monthly PET,pet_penman_min,1000
+Range monthly PET,pet_penman_range,1000
+Maximum monthly PET,pet_penman_max,1000
+Minimum monthly wind speed,sfcWind_min,1000
+Maximum monthly wind speed,sfcWind_max,1000
+Range monthly wind speed,sfcWind_range,1000
+Number of days with mean daily air,ngd10,1000
+temperature above 10 degrees Celsius,,
+Mean March-May from 2000-2022,ndvi_030405_mean,250
+Mean June-August from 2000-2022,ndvi_060708_mean,250
+Mean September-November from 2000-2022,ndvi_091011_mean,250
+Mean December-February from 2000-2022,ndvi_120102_mean,250
+Standard deviation March-May (2000-2022),ndvi_030405_sd,250
+Standard deviation June-August (2000-2022),ndvi_060708_sd,250
+Standard deviation Sept.-Nov. (2000-2022),ndvi_091011_sd,250
+Standard deviation Dec.-Feb. (2000-2022),ndvi_120102_sd,250
+Mean March-May from 2000-2022,fpar_030405_mean,500
+Mean June-August from 2000-2022,fpar_060708_mean,500
+Mean September-November from 2000-2022,fpar_091011_mean,500
+Mean December-February from 2000-2022,fpar_120102_mean,500
+Standard deviation March-May (2000-2022),fpar_030405_sd,500
+Standard deviation June-August (2000-2022),fpar_060708_sd,500
+Standard deviation Sept.-Nov. (2000-2022),fpar_091011_sd,500
+Standard deviation Dec.-Feb. (2000-2022),fpar_120102_sd,500
+Mean March-May from 2000-2022,lstd_030405_mean,1000
+Mean June-August from 2000-2022,lstd_060708_mean,1000
+Mean September-November from 2000-2022,lstd_091011_mean,1000
+Mean December-February from 2000-2022,lstd_120102_mean,1000
+Standard deviation March-May (2000-2022),lstd_030405_sd,1000
+Standard deviation June-August (2000-2022),lstd_060708_sd,1000
+Standard deviation Sept.-Nov. (2000-2022),lstd_091011_sd,1000
+Standard deviation Dec.-Feb. (2000-2022),lstd_120102_sd,1000
+Mean March-May from 2000-2022,ndlstd_030405_mean,1000
+Mean June-August from 2000-2022,ndlstd_060708_mean,1000
+Mean September-November from 2000-2022,ndlstd_091011_mean,1000
+Mean December-February from 2000-2022,ndlstd_120102_mean,1000
+Standard deviation March-May (2000-2022),ndlstd_030405_sd,1000
+Standard deviation June-August (2000-2022),ndlstd_060708_sd,1000
+Standard deviation Sept.-Nov. (2000-2022),ndlstd_091011_sd,1000
+Standard deviation Dec.-Feb. (2000-2022),ndlstd_120102_sd,1000
+Mean June-August from 2000-2022,swir_060708_mean,5--
+Mean snow cover,mean_snow_cover,500
+Mean estimated probability of complete coverage by trees,trees,250
+Mean estimated probability of complete coverage ,shrub_and_scrub,250
+by shrub and scrub,,
+Mean estimated probability of complete coverage,flooded_vegetation,250
+by flooded vegetation,,
+Mean estimated probability of complete coverage,grass,250
+by grasses,,
+Mean estimated probability of complete coverage,crop,250
+by bare,,
+Profile curvature,curvature,250
+Downslope curvature,downslopecurvature,250
+Upslope curvature,upslopecurvature,250
+Deviation from mean value,dvm,250
+deviation from mean value,dvm2,250
+Elevation,elevation,250
+Melton ruggedness number,mrn,250
+Negative openness,neg-openness,250
+Positive openness,pos-openness,250
+Slope,slope,250
+Topographic position index,tpi,250
+Terrain wetness index,twi,250
+Multiresolution of valley bottom flatness,vbf,250

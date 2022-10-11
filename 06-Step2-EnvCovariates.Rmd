@@ -1,101 +1,150 @@
-# Step 2: environmental covariates
+# Step 2: download environmental covariates
 
 
 ## Environmental covariates
 
-The SCORPAN equation (Eq. \ref{eq:scorpan}) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. Table 2 shows a summary of the environmental covariates that can be implemented under the DSM framework. 
+The SCORPAN equation (Eq. \@ref(eq:scorpan)) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table \@ref(tab:covs) lists all the environmental covariates that can be implemented under the present DSM framework.
+
+```{r, covs, echo = F}
+
+#options(knitr.table.format = "HTML")
+library(kableExtra)
+library(dplyr)
+dt <- read.csv("tables/Table_6.1.csv", sep = ",")
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'List of environmental covariates.', format = 'html') %>%
+kable_styling(bootstrap_options = "striped", full_width = F) %>%
+  kableExtra::pack_rows(group_label = "Temperature", start_row = 1, end_row = 3, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::pack_rows(group_label = "Precipitation", start_row = 4, end_row = 8, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Potential evapotranspiration (PET)", start_row = 9, end_row = 12, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Wind", start_row = 13, end_row = 15, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Growing season", start_row = 16, end_row = 17, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Vegetation indices (NDVI (MOD13Q1))", start_row = 18, end_row = 25, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Fraction of photosynthetically active radiation (FPAR) (MOD15A2H)", start_row = 26, end_row = 33, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Land surface temperature day (LSTD) (MOD11A2)", start_row = 34, end_row = 41, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Normalised difference between LST day and LST night (MOD11A2)", start_row = 42, end_row = 49, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Short-wave Infrared (SWIR) black-sky albedo for shortwave broadband (MCD43A3)", start_row = 50, end_row = 50, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "MODIS snow cover (MOD10A1)", start_row = 51, end_row = 51, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Land cover dynamic world 10m near real-time land use/land cover (LULC) dataset", start_row = 52, end_row = 60, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
+  kableExtra::group_rows(group_label = "Terrain", start_row = 61, end_row = 73, label_row_css = "background-color: #666; color: #fff;", bold = T)
+
+```
+
+In the following, the steps to access and download the environmental covariates are described. The GSP has optimised the download of environmental covariates by minimising the efforts needed to clip and download the layers from Google Earth Engine (GEE). Here is where the *rgee* package comes into play, too. The objectives of this chapter are to explain how to set our working environment in *RStudio* and connect to GEE, how to import a shapefile of the area of interest (AOI), and how to clip and download the covariate layers for our respective AOI.
+
+If not done already, it is necessary to set the working directory as well as the output folder where the clipped covariate layers are going to be saved. T
+and load the packages that are specified below. 
+
+```{r, eval = F}
+#Empty environment and cache
+rm(list = ls());
+gc()
+
+# 0 - User-defined variables ===================================================
+# Working directory
+#wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
+wd <- 'C:/GIT/Digital-Soil-Mapping'
+
+# Output covariate folder
+#output_dir <-''
+output_dir <-'01-Data/covs/'
+
+# Area of interest: either own shapefile or 3-digit ISO code to extract from 
+# UN 2020 boundaries
+AOI <- '01-Data/AOI_Arg.shp'
+# AOI <- 'MKD'
+# Resolution and projection
+res = 250
+crs = "EPSG:4326"
+#_______________________________________________________________________________
+
+#  1 - Set working directory and load necessary packages ======================= 
+# Set working directory
+setwd(wd)
+#load libraries
+library(raster)
+library(terra)
+library(sf)
+library(rgee)
 
 
-\begin{longtable}{p{0.12\textwidth}  p{0.47\textwidth} p{0.20\textwidth} p{0.10\textwidth}}
+# 2 - Import shapefile =========================================================
+AOI <- read_sf(AOI)
+# convert AOI to a box polygon
+AOI <- st_as_sfc(st_bbox(AOI))
+AOI <- st_as_sf(AOI)
 
-		\caption{Environmental covariates}\\ 
-		\hline
-		Factor & Description & Code & Resolution \endfirsthead 
-		\hline
-		Temp-erature & Mean air temperature (annual) & bio1 & 1000 \\
-		& Mean daily temperature of warmest month & bio5 & 1000 \\
-		& Mean daily temperature of coldest month & bio6 & 1000 \\ 
-		\hline
-		Precipi-tation & Total precipitation (annual) & bio12 & 1000 \\
-		& Mean precipitation of wettest month & bio13 & 1000 \\
-		& Mean precipitation of driest month & bio14 & 1000 \\
-		& Mean monthly precipitation of wettest quarter & bio16 & 1000 \\
-		& Mean monthly precipitation of driest quarter & bio17 & 1000 \\ 
-		\hline
-		Evapotransp-iration & Mean monthly PET & pet\_penman\_mean & 1000 \\
-		& Minimum monthly PET & pet\_penman\_min & 1000 \\
-		& Range monthly PET & pet\_penman\_range & 1000 \\
-		& Maximum monthly PET & pet\_penman\_max & 1000 \\ 
-		\hline
-		Wind & Minimum monthly wind speed & sfcWind\_min & 1000 \\
-		& Maximum monthly wind speed & sfcWind\_max & 1000 \\
-		& Range monthly wind speed & sfcWind\_range & 1000 \\ 
-		\hline
-		Growing season & Number of days with mean daily air temperature  10 °C & ngd10 & 1000 \\ 
-		\hline
-		Vegetation Indices & NDVI (MOD13Q1), mean March-May from 2000-2022 & ndvi\_030405\_mean & 250 \\
-		& NDVI (MOD13Q1), mean June-August from 2000-2022 & ndvi\_060708\_mean & 250 \\
-		& NDVI (MOD13Q1), mean September-November from 2000-2022 & ndvi\_091011\_mean & 250 \\
-		& NDVI (MOD13Q1), mean December-February from 2000-2022 & ndvi\_120102\_mean & 250 \\
-		& NDVI (MOD13Q1), standard deviation March-May from 2000-2022 & ndvi\_030405\_sd & 250 \\
-		& NDVI (MOD13Q1), standard deviation June-August from 2000-2022 & ndvi\_060708\_sd & 250 \\
-		& NDVI (MOD13Q1), standard deviation September-November from 2000-2022 & ndvi\_091011\_sd & 250 \\
-		& NDVI (MOD13Q1), standard deviation December-February from 2000-2022 & ndvi\_120102\_sd & 250 \\ 
-		\hline
-		FPAR & Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), mean March-May from 2000-2022 & fpar\_030405\_mean & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), mean June-August from 2000-2022 & fpar\_060708\_mean & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), mean September-November from 2000-2022 & fpar\_091011\_mean & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), mean December-February from 2000-2022 & fpar\_120102\_mean & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), standard deviation March-May from 2000-2022 & fpar\_030405\_sd & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), standard deviation June-August from 2000-2022 & fpar\_060708\_sd & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), standard deviation September-November from 2000-2022 & fpar\_091011\_sd & 500 \\
-		& Fraction of photosynthetically active radiation (FPAR) (MOD15A2H), standard deviation December-February from 2000-2022 & fpar\_120102\_sd & 500 \\ 
-		\hline
-		LST & Land Surface Temperature Day (MOD11A2), mean March-May from 2000-2022 & lstd\_030405\_mean & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), mean June-August from 2000-2022 & lstd\_060708\_mean & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), mean September-November from 2000-2022 & lstd\_091011\_mean & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), mean December-February from 2000-2022 & lstd\_120102\_mean & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), standard deviation March-May from 2000-2022 & lstd\_030405\_sd & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), standard deviation June-August from 2000-2022 & lstd\_060708\_sd & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), standard deviation September-November from 2000-2022 & lstd\_091011\_sd & 1000 \\
-		& Land Surface Temperature Day (MOD11A2), standard deviation December-February from 2000-2022 & lstd\_120102\_sd & 1000 \\ 
-		\hline
-		NDLST & Normalised Difference between LST Day and LST Night (MOD11A2), mean March-May from 2000-2022 & ndlst\_030405\_mean & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), mean June-August from 2000-2022 & ndlst\_060708\_mean & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), mean September-November from 2000-2022 & ndlst\_091011\_mean & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), mean December-February from 2000-2022 & ndlst\_120102\_mean & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), standard deviation March-May from 2000-2022 & ndlst\_030405\_sd & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), standard deviation June-August from 2000-2022 & ndlst\_060708\_sd & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), standard deviation September-November from 2000-2022 & ndlst\_091011\_sd & 1000 \\
-		& Normalised Difference between LST Day and LST Night (MOD11A2), standard deviation December-February from 2000-2022 & ndlst\_120102\_sd & 1000 \\ 
-		\hline
-		SWIR & Black-sky albedo for shortwave broadband (MCD43A3), mean June-August from 2000-2022 & swir\_060708\_mean & 500 \\ 
-		\hline
-		Snow cover & MODIS Snow Cover (MOD10A1) mean & snow\_cover & 500 \\ 
-		\hline
-		Land cover & Dynamic World 10m near-real-time (NRT) Land Use/Land Cover (LULC) dataset. Mean estimated probability of complete coverage by trees & trees & 250 \\
-		& Dynamic World 10m near-real-time (NRT) Land Use/Land Cover (LULC) dataset. Mean estimated probability ofcomplete coverage by shrub and scrub & shrub\_and\_scrub & 250 \\
-		& Dynamic World 10m near-real-time (NRT) Land Use/Land Cover (LULC) dataset. Mean estimated probability of complete coverage by flooded vegetation & flooded\_vegetation & 250 \\
-		& Dynamic World 10m near-real-time (NRT) Land Use/Land Cover (LULC) dataset. Mean estimated probability of complete coverage by grass & grass & 250 \\
-		& Dynamic World 10m near-real-time (NRT) Land Use/Land Cover (LULC) dataset. Mean estimated probability of complete coverage by bare & crop & 250 \\ 
-		\hline
-		Terrain & Profile curvature & curvature & 250 \\
-		& Downslope curvature & downslopecurvature & 250 \\
-		& Uplslope curvature & upslopecurvature & 250 \\
-		& Deviation from Mean Value & dvm & 250 \\
-		& Deviation from Mean Value & dvm2 & 250 \\
-		& Elevation & elevation & 250 \\
-		& Melton Ruggedness Number & mrn & 250 \\
-		& Negative openness & neg-openness & 250 \\
-		& Possitive openness & por-openness & 250 \\
-		& Slope & slope & 250 \\
-		& Topographic position index & tpi & 250 \\
-		& Terrain wetness index & twi & 250 \\
-		& Multirresolution of valley bottom flatness & vbf & 250 \\
-		\hline
-\label{tab:covs}
-\end{longtable}
 
+# 3 - Overview of covariates ===================================================
+# CLIMATIC VARIABLES from CHELSA
+# VEGETATION INDICES, FPAR and LAND SURFACE TEMPERATURE from MODIS
+# LAND COVER LAYERS from Dynamic World 10m near-real-time (NRT) 
+# TERRAINE attributes from OpenLandMap
+
+# for more information about the single covariates: open covariates.xslx in the 
+# training material folder
+
+# 4 - Initialize GEE ===========================================================
+ee_Initialize()
+
+# 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
+## 5.1 Convert shp to gee geometry ---------------------------------------------
+#region <- sf_as_ee(AOI)
+#region = region$geometry()
+
+## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
+region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
+  ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
+region = region$geometry()
+# AOI_shp <-ee_as_sf(region)
+# AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
+# write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
+# aoi <- vect(AOI_shp)
+
+# 6 - Clip and download covariates ========================================
+# Obtain list of climatic variables
+assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/CHELSA"),
+                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/MODIS"),
+                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER"),
+                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP"))
+
+
+
+assetname$num <- 1:nrow(assetname)
+
+# Loop over the names of assets to clip and dowload the covariates
+for (i in unique(assetname$ID)){
+  
+  #Extract filename 
+  filename <- sub('.*\\/', '', i)
+  
+  #Clip image to the extent of the AOI
+  image <- ee$Image(i) %>%
+    ee$Image$clip(region)%>%
+    ee$Image$toFloat()
+  
+  # Resample to target resolution
+  image = image$resample('bilinear')$reproject(
+    crs= crs,
+    scale= res)
+  
+  
+  #Export clipped covariate as raster
+  raster <- ee_as_raster(
+    image = image,
+    scale= res,
+    region = region,
+    via = "drive",
+    maxPixels = 1e+12
+  )
+  
+  plot(raster)
+  
+  num <- assetname[assetname$ID == i, 'num']
+  
+  writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
+  print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
+}
+```
 
 
 Apart from the environmental covariates mentioned in Table \ref{tab:covs}, other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table \ref{tab:covs}. 

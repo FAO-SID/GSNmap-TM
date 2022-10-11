@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Step 1: soil data preparation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="digital-soil-mapping.html"/>
-<link rel="next" href="step-2-environmental-covariates.html"/>
+<link rel="next" href="step-2-download-environmental-covariates.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -192,7 +192,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data-data_format"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data {data_format}</a></li>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data</a></li>
 <li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.2</b> Preparatory steps</a></li>
 <li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.3</b> Data quality check</a></li>
 <li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.4</b> Calculation of pedo-transfer functions</a></li>
@@ -200,11 +200,11 @@ div.csl-indent {
 <li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.6</b> Harmonise soil layer depths</a></li>
 <li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.7</b> Save the results</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: environmental covariates</a>
+<li class="chapter" data-level="6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: download environmental covariates</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>6.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="6.2" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#reducing-collinearity-in-environmental-covariates"><i class="fa fa-check"></i><b>6.2</b> Reducing collinearity in environmental covariates</a></li>
-<li class="chapter" data-level="6.3" data-path="step-2-environmental-covariates.html"><a href="step-2-environmental-covariates.html#merging-soil-data-and-environmental-covariates"><i class="fa fa-check"></i><b>6.3</b> Merging soil data and environmental covariates</a></li>
+<li class="chapter" data-level="6.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>6.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="6.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#reducing-collinearity-in-environmental-covariates"><i class="fa fa-check"></i><b>6.2</b> Reducing collinearity in environmental covariates</a></li>
+<li class="chapter" data-level="6.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#merging-soil-data-and-environmental-covariates"><i class="fa fa-check"></i><b>6.3</b> Merging soil data and environmental covariates</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>7</b> Step 3: Mapping continuous soil properties</a>
 <ul>
@@ -220,7 +220,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#data-preparation"><i class="fa fa-check"></i><b>9.1</b> Data preparation</a></li>
 <li class="chapter" data-level="9.2" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#download-environmental-covariates"><i class="fa fa-check"></i><b>9.2</b> Download environmental covariates</a></li>
-<li class="chapter" data-level="9.3" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#annex-a-r-scripts-for-extra-functions"><i class="fa fa-check"></i><b>9.3</b> Annex A: R scripts for extra functions</a></li>
+<li class="chapter" data-level="9.3" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i><b>9.3</b> Modelling, validation and prediction using soil data with coordinates</a></li>
+<li class="chapter" data-level="9.4" data-path="compendium-of-r-scripts.html"><a href="compendium-of-r-scripts.html#annex-a-r-scripts-for-extra-functions"><i class="fa fa-check"></i><b>9.4</b> Annex A: R scripts for extra functions</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>10</b> Reporting results</a></li>
 <li class="chapter" data-level="11" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>11</b> Way forward</a></li>
@@ -244,8 +245,8 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="step-1-soil-data-preparation" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Step 1: soil data preparation<a href="step-1-soil-data-preparation.html#step-1-soil-data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="format-requirements-of-soil-data-data_format" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Format requirements of soil data {data_format}<a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data-data_format" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="format-requirements-of-soil-data" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Format requirements of soil data<a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table <a href="step-1-soil-data-preparation.html#tab:data1">5.1</a>.</p>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <caption>
@@ -397,25 +398,27 @@ W&amp;B
 </tfoot>
 </table>
 <p>Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0–30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function <span class="citation">(<a href="#ref-Bishop1999" role="doc-biblioref">Bishop, McBratney and Laslett, 1999</a>; <a href="#ref-Malone2009" role="doc-biblioref">Malone <em>et al.</em>, 2009</a>)</span> fitted to each individual soil profile, which requires more than a layer per profile.</p>
-<p>In this chapter, step-by-step instructions are given on how to carry out all these steps in <strong>R Studio</strong>. Instructions are given on how to:</p>
+<p>In this chapter, step-by-step instructions are given on how to carry out all these steps in <strong>RStudio</strong>. Instructions are given on how to:</p>
+<!-- Maybe numbers istead of bullet points -->
 <ul>
 <li>generate user-defined variables,</li>
 <li>set the working directory and load necessary packages,</li>
 <li>import national data to <strong>R Studio</strong></li>
 <li>select useful columns</li>
 <li>perform a quality check of the data</li>
-<li>estimate bulk density using PTF</li>
-<li>estimate organic carbon stocks (OCS)</li>
+<li>estimate bulk density using PTF
+<!-- * estimate organic carbon stocks (OCS) --></li>
 <li>harmonize soil layers (using splines)</li>
 <li>plot and save the formatted soil data</li>
 </ul>
-<p>Thus, the instructions also serve as a very basic introduction to the functioning of <strong>R</strong> and <em>R Studio</em>. Still, in case for further information there is a vast amount of websites that offer help and or information on <strong>R</strong> and <em>R Studio</em>.</p>
+<p>Thus, the instructions also serve as a very basic introduction to the functioning of <strong>R</strong> and <em>RStudio</em>. Still, in case for further information there is a vast amount of websites that offer help and or information on <strong>R</strong> and <em>RStudio</em>.</p>
 </div>
 <div id="preparatory-steps" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Preparatory steps<a href="step-1-soil-data-preparation.html#preparatory-steps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, let’s open <em>R Studio</em>. Whenever starting to work on a project or task, it is necessary to set the <em>working directory</em> (WD). The WD is the file path that is used by <strong>R</strong> to save the output, for instance a plot or a table that was generated while working in <strong>R</strong>. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on ‘Session’ &gt; ‘Set working directory …’ and select either ‘To Source File Location’ (then the WD corresponds to the file path where the Script is saved to) or ‘Choose Directory…’. Then, the user can browse to the folder that should be the WD.
-In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an <strong>R</strong> object. This is done by defining a character value (in this case the file path) on the right side of the arrow (&lt;-) and name the <strong>R</strong> object on the left side (wd) (see code). Once this is done we use the function ‘setwd()’ to set the WD to the file path that is specified in the object <em>wd</em>.</p>
-<p>Before working on specific tasks in <strong>R</strong>, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function ‘install.packages(“[PACKAGENAME]”)’. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as ‘devtools’ or ‘remotes’ are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.</p>
+<!-- Check if RStudio or R Studio -->
+<p>Now, let’s open <em>RStudio</em>. Whenever starting to work on a project or task, it is necessary to set the <em>working directory</em> (WD). The WD is the folder path that is used by <strong>R</strong> to save the output, for instance a plot or a table that was generated while working in <strong>R</strong>. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on ‘Session’ menu &gt; ‘Set working directory …’ and select either ‘To Source File Location’ (then the WD corresponds to the file path where the Script is saved to) or ‘Choose Directory…’. Then, the user can browse to the folder that should be the WD.
+In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an <strong>R</strong> object. This is done by defining a character value (in this case the file path) on the right side of the arrow (<code>&lt;-</code>) and name the <strong>R</strong> object on the left side (wd) (see code). Once this is done we use the function ‘setwd()’ to set the WD to the file path that is specified in the object <em>wd</em>.</p>
+<p>Before working on specific tasks in <strong>R</strong>, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function <em>install.packages()</em>. For instance, to install the <em>terra</em> package, one has to write <em>install.packages(“terra”)</em>. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as ‘devtools’ or ‘remotes’ are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="step-1-soil-data-preparation.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - User-defined variables ===================================================</span></span>
 <span id="cb4-2"><a href="step-1-soil-data-preparation.html#cb4-2" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&#39;C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping&#39;</span></span>
 <span id="cb4-3"><a href="step-1-soil-data-preparation.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- &quot;C:/GIT/Digital-Soil-Mapping&quot;</span></span>
@@ -431,8 +434,8 @@ In this manual we propose an alternative way that allows for more customization 
 <span id="cb4-13"><a href="step-1-soil-data-preparation.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_bitbucket(&quot;brendo1001/ithir/pkg&quot;) #install ithir package</span></span>
 <span id="cb4-14"><a href="step-1-soil-data-preparation.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ithir) <span class="co"># for horizon harmonization</span></span></code></pre></div>
 <p>The next step is to load the national soil data into <em>R Studio</em>. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in <strong>R</strong> datasets also need to be assigned to a user-defined variable in order to be saved in the “global environment”.</p>
-<p>After reading in the file, the package ‘tidyverse’ comes into play. By using the select() and unique() functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
-Finally, every time new datasets are loaded into <strong>R</strong>, it is recommendable to check the data. Using the summary() function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are ‘character’ (chr) for text, integer (int) for whole numbers, and numeric (num) for numeric variables.</p>
+<p>After reading in the file, the package <em>tidyverse</em> comes into play. By using the <em>select()</em> and <em>unique()</em> functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
+Finally, every time new datasets are loaded into <strong>R</strong>, it is recommendable to check the data. Using the <em>summary()</em> function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are ‘character’ (<em>chr</em>) for text, integer (<em>int</em>) for whole numbers, and numeric (<em>num</em>) for numeric variables.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="step-1-soil-data-preparation.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Import national data =====================================================</span></span>
 <span id="cb5-2"><a href="step-1-soil-data-preparation.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save your national soil dataset in the data folder /01-Data as a .csv file or </span></span>
 <span id="cb5-3"><a href="step-1-soil-data-preparation.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># as a .xlsx file</span></span>
@@ -458,18 +461,22 @@ Finally, every time new datasets are loaded into <strong>R</strong>, it is recom
 <span id="cb5-23"><a href="step-1-soil-data-preparation.html#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># scan the data</span></span>
 <span id="cb5-24"><a href="step-1-soil-data-preparation.html#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(site)</span>
 <span id="cb5-25"><a href="step-1-soil-data-preparation.html#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(hor)</span></code></pre></div>
-<p>The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the select() function, it is also possible to rename the variables right away (see code below).</p>
+<p>The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the <em>select()</em> function, it is also possible to rename the variables right away (see code below).</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="step-1-soil-data-preparation.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - select useful columns ====================================================</span></span>
 <span id="cb6-2"><a href="step-1-soil-data-preparation.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.1 - select columns --------------------------------------------------------</span></span>
-<span id="cb6-3"><a href="step-1-soil-data-preparation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>hor <span class="ot">&lt;-</span> <span class="fu">select</span>(hor, ProfID, HorID, top, bottom, <span class="at">ph=</span>ph_h2o, k, soc, clay, bd, cec)</span></code></pre></div>
+<span id="cb6-3"><a href="step-1-soil-data-preparation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>hor <span class="ot">&lt;-</span> <span class="fu">select</span>(hor, ProfID, HorID, top, bottom, <span class="at">ph=</span>ph_h2o, k, soc, clay, bd, cec)</span>
+<span id="cb6-4"><a href="step-1-soil-data-preparation.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="step-1-soil-data-preparation.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the variable ph_h2o was renamed as ph</span></span></code></pre></div>
 </div>
 <div id="data-quality-check" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Data quality check<a href="step-1-soil-data-preparation.html#data-quality-check" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Datasets need to be checked for their quality as especially manually entered data is prone to mistakes such as typos or duplicates. A thorough quality check ensures that:
-* all profiles have reasonable coordinates (within the area of interest);
-* there are no duplicated profiles; and
-* the depth logic within a profile is not violated.</p>
-<p>To check the first point, the dataframe needs to be converted into a spatial object using the st_as_sf() function of the ‘sf’ package. It is necessary to indicate the columns that indicate latitude and longitude as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: <a href="https://epsg.io/" class="uri">https://epsg.io/</a>. The mapview() command offers the possibility to visualize the profile locations in an interactive map. Finally, the filter() function can be used to remove rows that contain profiles with wrong locations.</p>
+<p>Datasets need to be checked for their quality as especially manually entered data is prone to mistakes such as typos or duplicates. A thorough quality check ensures that:</p>
+<ul>
+<li>all profiles have reasonable coordinates (within the area of interest);</li>
+<li>there are no duplicated profiles; and</li>
+<li>the depth logic within a profile is not violated.</li>
+</ul>
+<p>To check the first point, the dataframe needs to be converted into a spatial object using the <em>st_as_sf()</em> function of the <em>sf</em> package. It is necessary to indicate the columns that contains latitude and longitude, as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: <a href="https://epsg.io/" class="uri">https://epsg.io/</a>. The <em>mapview()</em> command (from <em>mapview</em> package) offers the possibility to visualize the profile locations in an interactive map. Finally, the <em>filter()</em> function can be used to remove rows that contain profiles with wrong locations.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="step-1-soil-data-preparation.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Quality check ============================================================</span></span>
 <span id="cb7-2"><a href="step-1-soil-data-preparation.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="step-1-soil-data-preparation.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.1 - Check locations -------------------------------------------------------</span></span>
@@ -480,7 +487,7 @@ Finally, every time new datasets are loaded into <strong>R</strong>, it is recom
 <span id="cb7-8"><a href="step-1-soil-data-preparation.html#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="step-1-soil-data-preparation.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># profile 2823 is wrongly located, so let&#39;s remove it</span></span>
 <span id="cb7-10"><a href="step-1-soil-data-preparation.html#cb7-10" aria-hidden="true" tabindex="-1"></a>site <span class="ot">&lt;-</span> <span class="fu">filter</span>(site, ProfID <span class="sc">!=</span> <span class="dv">2823</span>)</span></code></pre></div>
-<p>To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package ‘aqp’ (AQP = Algorithms for Quantitative Pedology) <span class="citation">(<a href="#ref-beaudette2013" role="doc-biblioref">Beaudette, Roudier and O’Geen, 2013</a>)</span>.
+<p>To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package <em>aqp</em> (AQP = Algorithms for Quantitative Pedology) <span class="citation">(<a href="#ref-beaudette2013" role="doc-biblioref">Beaudette, Roudier and O’Geen, 2013</a>)</span>.
 With the first lines of code below, the dataset is converted into a soil profile collection and profiles and horizon tables are joined based on the site information.
 Now the profile collection can be visualised for any soil property. In this case, only the first 20 profiles are selected for the cation exchange capacity (CEC).
 Using the checkHzDepthLogic() function, users can assess that all profiles do not have gaps or overlaps of neighbouring horizons. If there are, they can be selected and checked through the Profile ID. In the following step, only profiles with valid horizon logic are selected. Finally, the soil profile collection is re-converted to a dataframe. With this, the quality check is finished.</p>
@@ -632,7 +639,7 @@ Such evaluation can also be conducted visually for several properties at the sam
 <div id="harmonise-soil-layer-depths" class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> Harmonise soil layer depths<a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The last step towards a soil data table that can be used for mapping, is to harmonize the soil depth layers to 0-30 cm (or 30-60, or 60-100 cm respectively). This is necessary since we want to produce maps that cover exactly those depths and do not differ across soil profile locations. Thus, the relevant columns are selected from the dataframe, target soil properties, and upper and lower limit of the harmonised soil layer are specified (in depths).</p>
-<p>In the following a new dataframe ‘d’ is created in which the standard depth layers are stored. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the ‘ithir’ package. The spline functions are also explained in Section @ref(data_format).</p>
+<p>In the following a new dataframe ‘d’ is created in which the standard depth layers are stored. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the ‘ithir’ package. The spline functions are also explained in <a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data">Format requirements of soil data</a>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="step-1-soil-data-preparation.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 - Harmonize soil layers ====================================================</span></span>
 <span id="cb14-2"><a href="step-1-soil-data-preparation.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 6.1 - Set target soil properties and depths ---------------------------------</span></span>
 <span id="cb14-3"><a href="step-1-soil-data-preparation.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span>
@@ -701,7 +708,7 @@ Such evaluation can also be conducted visually for several properties at the sam
         </div>
       </div>
 <a href="digital-soil-mapping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-2-environmental-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="step-2-download-environmental-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -761,7 +768,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
