@@ -38,13 +38,65 @@ In this chapter, step-by-step instructions are given on how to carry out all the
 
 Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *RStudio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
 
+## Study area and soil data
+
+The study area is located in the southeast of the Pampas Region, in Argentina, from the foothills of the Ventania and Tandilia hill systems, until the southern coasts of the Buenos Aires Province. 
+To illustrate the process of this Technical Manual, we use three datasets from this region:
+
+* Gereferenced topsoil data
+* Non-georreferenced topsoil data
+* Soil profile data
+
+### Georeferenced topsoil data
+These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) and is shown in the following map as points. 
+
+```{r exploratory data 1, eval=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(mapview)
+mapviewOptions(fgb = FALSE)
+data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+s <- st_as_sf(data, coords = c("x", "y"), crs = 4326)
+mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
+```
+
+### Non-georeferenced topsoil data 
+
+The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by the same team to map the status of soil nutrients in the Argentinian Pampas [@sainz2011]. Each sample is linked to an administrative unit of the Buenos Aires Province. The following map shows the districts with the sample size (n).
+
+```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(mapview)
+mapviewOptions(fgb = FALSE)
+data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
+data
+district <- st_read("Digital-Soil-Mapping/01-Data/district.shp")
+mapview(district, zcol = "n", lwd = 0)
+```
+
+### Soil profile data
+
+The third dataset belongs to the Soil Information System of Argentina ([SISINTA](http://sisinta.inta.gob.ar/), @Olmedo2017) which contains soil profiles collected from the sixties to recently years for soil survey purposes.
+
+```{r exploratory data 3, eval=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(mapview)
+mapviewOptions(fgb = FALSE)
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
+s <- data %>% filter(top==0)
+s <- st_as_sf(s, coords = c("x", "y"), crs = 4326)
+mapview(s, zcol = "k", cex = 2.5, lwd = 0)
+```
+
+
 ## Preparatory steps
-<!-- Check if RStudio or R Studio -->
 
 Now, let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on 'Session' menu > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD.
 In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (`<-`) and name the **R** object on the left side (wd) (see code). Once this is done we use the function 'setwd()' to set the WD to the file path that is specified in the object `wd`.
 
-Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")` . This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or 'remotes' are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
+Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or `remotes` are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
 
 ```{r, eval = F}
 # 0 - User-defined variables ===================================================
@@ -58,19 +110,20 @@ library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
+
 # install.packages("devtools") 
 # devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(ithir) # for horizon harmonization
 
 ```
 
-The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
+The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). In both cases, each row represent a sample (or horizon) and each column represent a variable. Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
 
 After reading in the file, the package `tidyverse` comes into play. By using the `select()` and `unique()` functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
-Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables.
+Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables. 
 
 
-```{r, eval = F}
+```{r, eval = T}
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
 # as a .xlsx file
@@ -83,7 +136,7 @@ Finally, every time new datasets are loaded into **R**, it is recommendable to c
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
-hor <- read_csv(file = "01-Data/soil_profile_data.csv")
+hor <- read_csv(file = "Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
 site <- select(hor, id_prof, x, y, date) %>% unique()
 hor <- select(hor, id_prof, id_hor, top:cec)
 
@@ -100,7 +153,7 @@ summary(hor)
 
 The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below).
 
-```{r, eval = F}
+```{r select, eval = T}
 # 3 - select useful columns ====================================================
 ## 3.1 - select columns --------------------------------------------------------
 hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
@@ -118,16 +171,16 @@ Datasets need to be checked for their quality as especially manually entered dat
 
 To check the first point, the dataframe needs to be converted into a spatial object using the `st_as_sf()` function of the `sf` package. It is necessary to indicate the columns that contains latitude and longitude, as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: https://epsg.io/. The `mapview()` command (from `mapview` package) offers the possibility to visualize the profile locations in an interactive map. Finally, the `filter()` function can be used to remove rows that contain profiles with wrong locations.
 
-```{r, eval = F}
+```{r aqp, echo=FALSE, message=FALSE}
 # 4 - Quality check ============================================================
 
 ## 4.1 - Check locations -------------------------------------------------------
-# https://epsg.io/6204
+# https://epsg.io/4326
 site %>% 
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
   mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 
-# profile 2823 is wrongly located, so let's remove it
+# Let's assume that profile 2823 is wrongly located, so we remove it
 site <- filter(site, ProfID != 2823)
 
 ```
@@ -138,8 +191,9 @@ Now the profile collection can be visualised for any soil property. In this case
 Using the `checkHzDepthLogic()` function, users can assess that all profiles do not have gaps or overlaps of neighbouring horizons. If there are, they can be selected and checked through the Profile ID. In the following step, only profiles with valid horizon logic are selected. Finally, the soil profile collection is re-converted to a dataframe. With this, the quality check is finished.
 
 
-```{r, eval = F}
+```{r, eval = T}
 ## 4.2 - Convert data into a Soil Profile Collection ---------------------------
+library(aqp)
 depths(hor) <- ProfID ~ top + bottom
 hor@site$ProfID <- as.numeric(hor@site$ProfID)
 site(hor) <- left_join(site(hor), site)
@@ -148,7 +202,7 @@ profiles <- hor
 profiles
 
 ## 4.3 - plot first 20 profiles using CEC as color ------------------------------
-plotSPC(x = profiles[1:20], name = "cec", color = "cec",
+plotSPC(x = profiles[1:10], name = "cec", color = "cec",
         name.style = "center-center")
 
 ## 4.4 - check data integrity --------------------------------------------------
