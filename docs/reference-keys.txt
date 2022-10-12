@@ -7,6 +7,12 @@ fig:workflow1
 tab:data1
 tab:covs1
 fig:cv
+eq:me
+eq:mae
+eq:rmse
+eq:mec
+eq:r2
+eq:r
 presentation
 background-and-objectives
 global-soil-partnership
@@ -45,7 +51,5 @@ covariate-selection-and-repeated-k-fold-cross-validation
 model-calibration
 uncertainty-assessment
 predicting-soil-attributes
-step-4-uncertainty-assessment
-introduction
 reporting-results
 way-forward
