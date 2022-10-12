@@ -26,7 +26,7 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-setwd('C:/GIT/Digital-Soil-Mapping')
+setwd('C:/GIT/GSNmap-TM/Digital-Soil-Mapping')
 
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
@@ -58,13 +58,13 @@ val_data <- read_csv("01-Data/data_with_coord.csv") %>%
 
 ## 1.1 - Load covariates -------------------------------------------------------
 # Single-band files
-# f <- list.files("01-Data/covs/", ".tif$", full.names = TRUE) 
-# covs <- rast("01-Data/covs/covs.tif")
-# f <- f[f !="01-Data/covs/covs.tif"]
-# covs <- rast(f)
+f <- list.files("01-Data/covs/", ".tif$", full.names = TRUE)
+f <- f[f !="01-Data/covs/covs.tif"]
+covs <- rast(f)
 
 # Multi-band file
-covs <- rast("01-Data/covs/covs.tif")
+# covs <- rast("01-Data/covs/covs.tif")
+
 # extract names of covariates
 ncovs <- names(covs)
 ncovs <- str_replace(ncovs, "-", "_")
@@ -330,6 +330,3 @@ writeRaster(pred_mean,
 writeRaster(pred_sd, 
             paste0("02-Outputs/maps/",soilatt,"_no_coord_SD.tif"),
             overwrite=TRUE)
-
-
-

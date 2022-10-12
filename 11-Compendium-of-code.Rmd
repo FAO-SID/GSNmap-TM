@@ -34,7 +34,7 @@ gc()
 
 # 0 - User-defined variables ===================================================
 #wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
-wd <- "C:/GIT/Digital-Soil-Mapping"
+wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
@@ -302,7 +302,7 @@ gc()
 # 0 - User-defined variables ===================================================
 # Working directory
 #wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
-wd <- 'C:/GIT/Digital-Soil-Mapping'
+wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
 
 # Output covariate folder
 #output_dir <-''
@@ -348,13 +348,13 @@ ee_Initialize()
 
 # 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
 ## 5.1 Convert shp to gee geometry ---------------------------------------------
-#region <- sf_as_ee(AOI)
-#region = region$geometry()
+region <- sf_as_ee(AOI)
+region = region$geometry()
 
 ## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
-region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
-  ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
-region = region$geometry()
+# region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
+#   ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
+# region = region$geometry()
 # AOI_shp <-ee_as_sf(region)
 # AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
 # write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
@@ -369,7 +369,7 @@ assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mappi
 
 
 
-assetname$num <- 1:nrow(assetname)
+assetname$num <- rownames(assetname)
 
 # Loop over the names of assets to clip and dowload the covariates
 for (i in unique(assetname$ID)){
@@ -438,12 +438,12 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-setwd('C:/GIT/Digital-Soil-Mapping')
+setwd('C:/GIT/GSNmap-TM/Digital-Soil-Mapping')
 
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
 
-# Target soil attribute
+# Terget soil attribute
 soilatt <- 'k'
 
 # Function for Uncertainty Assessment
@@ -462,15 +462,15 @@ library(doParallel)
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
-# files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-# covs <- rast(files)
-# ncovs <- str_remove(files, "01-Data/covs/")
-# ncovs <- str_remove(ncovs, ".tif")
-# ncovs <- str_replace(ncovs, "-", "_")
-# names(covs) <- ncovs 
+files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
+covs <- rast(files)
+ncovs <- str_remove(files, "01-Data/covs/")
+ncovs <- str_remove(ncovs, ".tif")
+ncovs <- str_replace(ncovs, "-", "_")
+names(covs) <- ncovs
 
-covs <- rast("01-Data/covs/covs.tif")
-ncovs <- names(covs)
+# covs <- rast("01-Data/covs/covs.tif")
+# ncovs <- names(covs)
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
 dat <- read_csv("01-Data/data_with_coord.csv")
@@ -490,7 +490,7 @@ dat <- as.data.frame(dat)
 summary(dat)
 
 ## 1.4 - Target soil attribute + covariates ------------------------------------
-d <- select(dat, soilatt, names(covs))
+d <- dplyr::select(dat, soilatt, names(covs))
 d <- na.omit(d)
 
 # 2 - Covariate selection with RFE =============================================
@@ -521,6 +521,7 @@ covsel <- rfe(fm,
               verbose = TRUE,
               keep.inbag = T)
 stopCluster(cl)
+saveRDS(covsel, "02-Outputs/models/covsel.rda")
 
 ## 2.3 - Plot selection of covariates ------------------------------------------
 trellis.par.set(caretTheme())
@@ -580,20 +581,20 @@ df <- data.frame(o,p)
   ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
   labs(title = soilatt) + 
   xlab("Observed") + ylab("Predicted"))
-ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
-       units = "cm", width = 12, height = 12)
+# ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
+#        units = "cm", width = 12, height = 12)
 
 ## 4.2 - Print accuracy coeficients --------------------------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
-eval(o,p)
+eval(p,o)
 
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
-png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
-    width = 15, height = 15, units = "cm", res = 600)
-g2
-dev.off()
+# png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
+#     width = 15, height = 15, units = "cm", res = 600)
+# g2
+# dev.off()
 
 # 5 - Prediction ===============================================================
 # Generation of maps (prediction of soil attributes) 
@@ -685,8 +686,11 @@ plot(pred_sd)
 ## 6.1 - Mask croplands --------------------------------------------------------
 msk <- rast("01-Data/mask_arg.tif")
 plot(msk)
-pred <- mask(pred_mean, msk)
-plot(pred)
+pred_mean <- mask(pred_mean, msk)
+plot(pred_mean)
+pred_sd <- mask(pred_sd, msk)
+plot(pred_sd)
+plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
 writeRaster(pred_mean, 
@@ -729,7 +733,7 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-setwd('C:/GIT/Digital-Soil-Mapping')
+setwd('C:/GIT/GSNmap-TM/Digital-Soil-Mapping')
 
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
@@ -761,13 +765,13 @@ val_data <- read_csv("01-Data/data_with_coord.csv") %>%
 
 ## 1.1 - Load covariates -------------------------------------------------------
 # Single-band files
-# f <- list.files("01-Data/covs/", ".tif$", full.names = TRUE) 
-# covs <- rast("01-Data/covs/covs.tif")
-# f <- f[f !="01-Data/covs/covs.tif"]
-# covs <- rast(f)
+f <- list.files("01-Data/covs/", ".tif$", full.names = TRUE)
+f <- f[f !="01-Data/covs/covs.tif"]
+covs <- rast(f)
 
 # Multi-band file
-covs <- rast("01-Data/covs/covs.tif")
+# covs <- rast("01-Data/covs/covs.tif")
+
 # extract names of covariates
 ncovs <- names(covs)
 ncovs <- str_replace(ncovs, "-", "_")

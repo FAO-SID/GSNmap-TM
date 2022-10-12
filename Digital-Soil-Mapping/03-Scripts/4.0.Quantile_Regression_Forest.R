@@ -78,7 +78,7 @@ dat <- as.data.frame(dat)
 summary(dat)
 
 ## 1.4 - Target soil attribute + covariates ------------------------------------
-d <- select(dat, soilatt, names(covs))
+d <- dplyr::select(dat, soilatt, names(covs))
 d <- na.omit(d)
 
 # 2 - Covariate selection with RFE =============================================
@@ -109,6 +109,7 @@ covsel <- rfe(fm,
               verbose = TRUE,
               keep.inbag = T)
 stopCluster(cl)
+saveRDS(covsel, "02-Outputs/models/covsel.rda")
 
 ## 2.3 - Plot selection of covariates ------------------------------------------
 trellis.par.set(caretTheme())
@@ -168,20 +169,20 @@ df <- data.frame(o,p)
   ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
   labs(title = soilatt) + 
   xlab("Observed") + ylab("Predicted"))
-ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
-       units = "cm", width = 12, height = 12)
+# ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
+#        units = "cm", width = 12, height = 12)
 
 ## 4.2 - Print accuracy coeficients --------------------------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
-eval(o,p)
+eval(p,o)
 
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
-png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
-    width = 15, height = 15, units = "cm", res = 600)
-g2
-dev.off()
+# png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
+#     width = 15, height = 15, units = "cm", res = 600)
+# g2
+# dev.off()
 
 # 5 - Prediction ===============================================================
 # Generation of maps (prediction of soil attributes) 
@@ -273,8 +274,11 @@ plot(pred_sd)
 ## 6.1 - Mask croplands --------------------------------------------------------
 msk <- rast("01-Data/mask_arg.tif")
 plot(msk)
-pred <- mask(pred_mean, msk)
-plot(pred)
+pred_mean <- mask(pred_mean, msk)
+plot(pred_mean)
+pred_sd <- mask(pred_sd, msk)
+plot(pred_sd)
+plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
 writeRaster(pred_mean, 

@@ -19,7 +19,7 @@ gc()
 # 0 - User-defined variables ===================================================
 # Working directory
 #wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
-wd <- 'C:/GIT/Digital-Soil-Mapping'
+wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
 
 # Output covariate folder
 #output_dir <-''
@@ -65,13 +65,13 @@ ee_Initialize()
 
 # 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
 ## 5.1 Convert shp to gee geometry ---------------------------------------------
-#region <- sf_as_ee(AOI)
-#region = region$geometry()
+region <- sf_as_ee(AOI)
+region = region$geometry()
 
 ## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
-region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
-  ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
-region = region$geometry()
+# region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
+#   ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
+# region = region$geometry()
 # AOI_shp <-ee_as_sf(region)
 # AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
 # write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
@@ -86,7 +86,7 @@ assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mappi
 
 
 
-assetname$num <- 1:nrow(assetname)
+assetname$num <- rownames(assetname)
 
 # Loop over the names of assets to clip and dowload the covariates
 for (i in unique(assetname$ID)){
