@@ -10,9 +10,9 @@ fig:cv
 eq:me
 eq:mae
 eq:rmse
-eq:mec
 eq:r2
 eq:r
+eq:mec
 presentation
 background-and-objectives
 global-soil-partnership
