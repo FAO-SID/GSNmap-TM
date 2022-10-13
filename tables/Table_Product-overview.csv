@@ -1,0 +1,21 @@
+Product,Filename
+Total Nitrogen map,ISO_GSNmap_Ntot_Map030.tiff
+Available Phosphorus map,ISO_GSNmap_Pav_Map030.tiff
+Total Potassium map,ISO_GSNmap_Ktot_Map030.tiff
+Cation exchange capacity map,ISO_GSNmap_CEC_Map030.tiff
+Soil pH map,ISO_GSNmap_pH_Map030.tiff
+Soil clay map,ISO_GSNmap_Clay_Map030.tiff
+Soil silt map,ISO_GSNmap_Silt_Map030.tiff
+Soil sand map,ISO_GSNmap_Sand_Map030.tiff
+Soil organic carbon map,ISO_GSNmap_SOC_Map030.tiff
+Soil bulk density map,ISO_GSNmap_BD_Map030.tiff
+Total Nitrogen uncertainty map,ISO_GSNmap_Ntot_UncertaintyMap030.tiff
+Available Phosphorus uncertainty map,ISO_GSNmap_Pav_UncertaintyMap030.tiff
+Total Potassium uncertainty map,ISO_GSNmap_Ktot_UncertaintyMap030.tiff
+Cation exchange capacity uncertainty map,ISO_GSNmap_CEC_UncertaintyMap030.tiff
+Soil pH uncertainty map,ISO_GSNmap_pH_UncertaintyMap030.tiff
+Soil clay uncertainty map,ISO_GSNmap_Clay_UncertaintyMap030.tiff
+Soil silt uncertainty map,ISO_GSNmap_Silt_UncertaintyMap030.tiff
+Soil sand uncertainty map,ISO_GSNmap_Sand_UncertaintyMap030.tiff
+Soil organic carbon uncertainty map,ISO_GSNmap_SOC_UncertaintyMap030.tiff
+Soil bulk density uncertainty map,ISO_GSNmap_BD_UncertaintyMap030.tiff

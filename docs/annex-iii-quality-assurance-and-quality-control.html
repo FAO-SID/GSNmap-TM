@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Annex III: Quality assurance and quality control | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <meta name="description" content="GSNmap - Technical Manual" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Annex III: Quality assurance and quality control | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="GSNmap - Technical Manual" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Annex III: Quality assurance and quality control | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  
+  <meta name="twitter:description" content="GSNmap - Technical Manual" />
+  
+
+<meta name="author" content="FAO" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="annex-ii-r-scripts-for-extra-functions.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="chapter" data-level="" data-path="abbreviations-and-acronyms.html"><a href="abbreviations-and-acronyms.html"><i class="fa fa-check"></i>Abbreviations and acronyms</a></li>
+<li class="chapter" data-level="" data-path="contributors.html"><a href="contributors.html"><i class="fa fa-check"></i>Contributors</a></li>
+<li class="chapter" data-level="1" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>1</b> Presentation</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="presentation.html"><a href="presentation.html#background-and-objectives"><i class="fa fa-check"></i><b>1.1</b> Background and objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="presentation.html"><a href="presentation.html#global-soil-partnership"><i class="fa fa-check"></i><b>1.2</b> Global Soil Partnership</a></li>
+<li class="chapter" data-level="1.3" data-path="presentation.html"><a href="presentation.html#country-driven-approach-and-tasks"><i class="fa fa-check"></i><b>1.3</b> Country-driven approach and tasks</a></li>
+<li class="chapter" data-level="1.4" data-path="presentation.html"><a href="presentation.html#how-to-use-this-book"><i class="fa fa-check"></i><b>1.4</b> How to use this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="soil-nutrients.html"><a href="soil-nutrients.html"><i class="fa fa-check"></i><b>2</b> Soil Nutrients</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="soil-nutrients.html"><a href="soil-nutrients.html#definition-of-soil-nutrients"><i class="fa fa-check"></i><b>2.1</b> Definition of soil nutrients</a></li>
+<li class="chapter" data-level="2.2" data-path="soil-nutrients.html"><a href="soil-nutrients.html#soil-properties-governing-nutrient-availability"><i class="fa fa-check"></i><b>2.2</b> Soil properties governing nutrient availability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html"><i class="fa fa-check"></i><b>3</b> Setting-up the software environment</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages"><i class="fa fa-check"></i><b>3.1</b> Use of R, RStudio and R Packages</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#obtaining-and-installing-r"><i class="fa fa-check"></i><b>3.1.1</b> Obtaining and installing R</a></li>
+<li class="chapter" data-level="3.1.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#obtaining-and-installing-rstudio"><i class="fa fa-check"></i><b>3.1.2</b> Obtaining and installing RStudio</a></li>
+<li class="chapter" data-level="3.1.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.1.3</b> Getting started with R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#r-packages"><i class="fa fa-check"></i><b>3.2</b> R packages</a></li>
+<li class="chapter" data-level="3.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#gee---google-earth-engine"><i class="fa fa-check"></i><b>3.3</b> GEE - google earth engine</a></li>
+<li class="chapter" data-level="3.4" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r"><i class="fa fa-check"></i><b>3.4</b> rgee - Extension to use google earth engine in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html"><i class="fa fa-check"></i><b>4</b> Digital Soil Mapping</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#principles"><i class="fa fa-check"></i><b>4.1</b> Principles</a></li>
+<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#environmental-covariates"><i class="fa fa-check"></i><b>4.2</b> Environmental covariates</a></li>
+<li class="chapter" data-level="4.3" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#machine-learning-techniques"><i class="fa fa-check"></i><b>4.3</b> Machine learning techniques</a></li>
+<li class="chapter" data-level="4.4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes"><i class="fa fa-check"></i><b>4.4</b> Mapping of soil nutrients and associated soil attributes</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data</a></li>
+<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#non-georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.2</b> Non-georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#soil-profile-data"><i class="fa fa-check"></i><b>5.2.3</b> Soil profile data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.3</b> Preparatory steps</a></li>
+<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.4</b> Data quality check</a></li>
+<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.5</b> Calculation of pedo-transfer functions</a></li>
+<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.6</b> Check for outliers</a></li>
+<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.7</b> Harmonise soil layer depths</a></li>
+<li class="chapter" data-level="5.8" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.8</b> Save the results</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: download environmental covariates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>6.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="6.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-rgee"><i class="fa fa-check"></i><b>6.2</b> Download covariates with rgee</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>7</b> Step 3: Mapping continuous soil properties</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#getting-prepared-to-map"><i class="fa fa-check"></i><b>7.1</b> Getting prepared to map</a></li>
+<li class="chapter" data-level="7.2" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#covariate-selection-and-repeated-k-fold-cross-validation"><i class="fa fa-check"></i><b>7.2</b> Covariate selection and repeated k-fold cross-validation</a></li>
+<li class="chapter" data-level="7.3" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#model-calibration"><i class="fa fa-check"></i><b>7.3</b> Model calibration</a></li>
+<li class="chapter" data-level="7.4" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#uncertainty-assessment"><i class="fa fa-check"></i><b>7.4</b> Uncertainty assessment</a></li>
+<li class="chapter" data-level="7.5" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#predicting-soil-attributes"><i class="fa fa-check"></i><b>7.5</b> Predicting soil attributes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>8</b> Reporting results</a></li>
+<li class="chapter" data-level="9" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>9</b> Way forward</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html"><i class="fa fa-check"></i>Annex I: Compendium of R scripts</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-1-data-preparation"><i class="fa fa-check"></i>Script 1: Data preparation</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-download-environmental-covariates"><i class="fa fa-check"></i>Script 2: Download environmental covariates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 3: Modelling, validation and prediction using soil data with coordinates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-without-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data without coordinates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html"><i class="fa fa-check"></i>Annex III: Quality assurance and quality control</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="annex-iii-quality-assurance-and-quality-control" class="section level1 unnumbered hasAnchor">
+<h1>Annex III: Quality assurance and quality control<a href="annex-iii-quality-assurance-and-quality-control.html#annex-iii-quality-assurance-and-quality-control" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 11 GSNmap first phase products.</p>
+<p>The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.</p>
+<p>Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure @ref(#fig:qa_qc)).</p>
+<div class="figure">
+<img src="images/QA_QC.png" alt="Quality assurance and quality control." width="232" />
+<p class="caption">
+(#fig:qa_qc)Quality assurance and quality control.
+</p>
+</div>
+<p>Each step in the following protocol should be considered in order to detect and eliminate errors, address data inaccuracies and assess the output completeness.</p>
+<div id="step-1-completeness-of-layers" class="section level2 unnumbered hasAnchor">
+<h2>Step 1: Completeness of layers<a href="annex-iii-quality-assurance-and-quality-control.html#step-1-completeness-of-layers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following Table <span class="math inline">\(\ref{tab:products}\)</span> gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.</p>
+<p>All 29 products must be georeferenced TIF (.tif) files.</p>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:products">Table 9.1: </span>Data product overview.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Product
+</th>
+<th style="text-align:left;">
+Filename
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="3">
+<td colspan="2" style="border-bottom: 0;">
+<strong>Major nutrients (3 files)</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Total Nitrogen map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Ntot_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Available Phosphorus map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Pav_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Total Potassium map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Ktot_Map030.tiff
+</td>
+</tr>
+<tr grouplength="7">
+<td colspan="2" style="border-bottom: 0;">
+<strong>Associated soil properties (7 files)</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Cation exchange capacity map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_CEC_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil pH map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_pH_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil clay map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Clay_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil silt map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Silt_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil sand map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Sand_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil organic carbon map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_SOC_Map030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil bulk density map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_BD_Map030.tiff
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="2" style="border-bottom: 0;">
+<strong>Uncertainty maps (10 files)</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Total Nitrogen uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Ntot_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Available Phosphorus uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Pav_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Total Potassium uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Ktot_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Cation exchange capacity uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_CEC_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil pH uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_pH_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil clay uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Clay_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil silt uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Silt_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil sand uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_Sand_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil organic carbon uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_SOC_UncertaintyMap030.tiff
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soil bulk density uncertainty map
+</td>
+<td style="text-align:left;">
+ISO_GSNmap_BD_UncertaintyMap030.tiff
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="step-2-check-the-projection-and-resolution-of-all-data-products" class="section level2 unnumbered hasAnchor">
+<h2>Step 2: Check the projection and resolution of all data products<a href="annex-iii-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to ~0.00833 degrees ; 1 km x 1km at the equator.</p>
+</div>
+<div id="step-3-check-the-extent" class="section level2 unnumbered hasAnchor">
+<h2>Step 3: Check the extent<a href="annex-iii-quality-assurance-and-quality-control.html#step-3-check-the-extent" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Visualize the 20 products in QGIS or any preferred GIS platform. Load a land-use layer to visually assess that the simulations were done exclusively on croplands.</p>
+</div>
+<div id="step-4-check-the-units-ranges-and-outliers" class="section level2 unnumbered hasAnchor">
+<h2>Step 4: Check the units, ranges, and outliers<a href="annex-iii-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the following section expected value ranges for each product category are presented. It is important to note that the provided ranges represent a gross approximation of what can be normally expected when running the proposed methodology. Results that fall outside these ranges and that did not occur due to common issues presented in the section 15.2 need to be carefully evaluated based on local expertise and available literature.</p>
+<p>The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties in the Information tab (Figure 16.2).</p>
+<div class="figure"><span style="display:block;" id="fig:qgis"></span>
+<img src="images/QA_QC.png" alt="Quality assurance and quality control." width="232" />
+<p class="caption">
+Figure 9.1: Quality assurance and quality control.
+</p>
+</div>
+<div id="major-nutrients" class="section level3 unnumbered hasAnchor">
+<h3>Major nutrients<a href="annex-iii-quality-assurance-and-quality-control.html#major-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Total N
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Total P
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Total K
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+</ul>
+</div>
+<div id="associated-soil-properties" class="section level3 unnumbered hasAnchor">
+<h3>Associated soil properties<a href="annex-iii-quality-assurance-and-quality-control.html#associated-soil-properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Cation exchange capacity
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil pH
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil clay
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil silt
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil sand
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil organic carbon
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Soil bulk density
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+<li>Uncertainties
+<ul>
+<li>Unit:</li>
+<li>Range:</li>
+<li>Outliers:</li>
+</ul></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="annex-ii-r-scripts-for-extra-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

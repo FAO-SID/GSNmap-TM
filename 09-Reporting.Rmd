@@ -1,1 +1,16 @@
 # Reporting results
+
+The GSNmap consists of a set of mandatory and optional maps that are to be generated as raster files (GeoTiff) at a resolution of 250 x 250 m.
+
+Mandatory data products are:
+
+* total N
+* available P
+* available K
+* CEC
+* soil pH
+* clay, silt, and sand
+* soil organic carbon concentration
+* bulk density
+
+Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally layers on micronutrients, such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.

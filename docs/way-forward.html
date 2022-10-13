@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Way forward | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Way forward | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,22 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -193,12 +209,18 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data</a></li>
-<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.2</b> Preparatory steps</a></li>
-<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.3</b> Data quality check</a></li>
-<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.4</b> Calculation of pedo-transfer functions</a></li>
-<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.5</b> Check for outliers</a></li>
-<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.6</b> Harmonise soil layer depths</a></li>
-<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.7</b> Save the results</a></li>
+<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#non-georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.2</b> Non-georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#soil-profile-data"><i class="fa fa-check"></i><b>5.2.3</b> Soil profile data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.3</b> Preparatory steps</a></li>
+<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.4</b> Data quality check</a></li>
+<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.5</b> Calculation of pedo-transfer functions</a></li>
+<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.6</b> Check for outliers</a></li>
+<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.7</b> Harmonise soil layer depths</a></li>
+<li class="chapter" data-level="5.8" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.8</b> Save the results</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: download environmental covariates</a>
 <ul>
@@ -223,6 +245,17 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-without-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data without coordinates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html"><i class="fa fa-check"></i>Annex III: Quality assurance and quality control</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -243,6 +276,8 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="way-forward" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Way forward<a href="way-forward.html#way-forward" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This technical manual provided step-by-step guidance on how to generate nutrient maps by means of quantile regression forest models within a digital soil mapping framework. The array of maps produced belongs to the first implementation phase of the GSNmap initiative and provides urgently needed data on nutrient stocks and soil properties that govern nutrient availability. Policymakers will be able to use this data to derive conclusions on where to concentrate efforts to improve soil and land management to strengthen agrifood systems.
+The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group. The technical documentation towards implementing the second phase will be made available in mid 2023.</p>
 
 </div>
             </section>
@@ -311,7 +346,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
