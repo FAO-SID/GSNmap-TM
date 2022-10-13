@@ -13,6 +13,8 @@ eq:rmse
 eq:r2
 eq:r
 eq:mec
+tab:products
+fig:qgis
 presentation
 background-and-objectives
 global-soil-partnership
