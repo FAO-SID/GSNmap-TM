@@ -14,3 +14,19 @@ Mandatory data products are:
 * bulk density
 
 Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally layers on micronutrients, such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.
+
+We provide a Rmd file were the user needs to set the `soilatt` variable and the path to the data used as input.
+
+Then, run the following code:
+
+```{r rmd, eval=FALSE}
+# 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd
+# 2 - adjust the content
+# 3 - Run the following code
+path = 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd'
+output_format = 'pdf_document'
+output_file = paste0("Report_", soilatt,".pdf")
+
+rmarkdown::render(path, output_format, output_file)
+```
+
