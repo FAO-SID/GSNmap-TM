@@ -70,32 +70,24 @@ knitr::include_graphics("images/QA_QC.png")
   * Range:
   * Outliers:
 * Soil pH
-  * Unit:
-  * Range:
-  * Outliers:
-* Soil clay
-  * Unit:
-  * Range:
-  * Outliers:
-* Soil silt
-  * Unit:
-  * Range:
-  * Outliers:
-* Soil sand
-  * Unit:
-  * Range:
-  * Outliers:
+  * Unit: N/A
+  * Range: 3-11
+  * Outliers: minima and maxima above or below the range should be checked carefully
+* Soil clay, silt, and sand
+  * Unit: %
+  * Range: 0-100
+  * Outliers: minima and maxima above or below the range are impossible, values close to 0 or 100 should be checked carefully
 * Soil organic carbon
-  * Unit:
-  * Range:
-  * Outliers:
+  * Unit: %
+  * Range: 0-15
+  * Outliers: Values above 15 Percent should be checked carefully.
 * Soil bulk density
-  * Unit:
-  * Range:
-  * Outliers:
+  * Unit: g/cm^3^
+  * Range: 1.0 - 1.8
+  * Outliers: minima and maxima above or below the range should be checked carefully 
 * Uncertainties
-  * Unit:
-  * Range:
-  * Outliers:
+  * Unit: respective property unit
+  * Range: flexible
+  * Outliers: 
   
   
