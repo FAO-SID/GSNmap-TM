@@ -1,0 +1,11 @@
+# Annex III: Quality check {-}
+
+## Completeness of layers {-}
+
+
+## Projection, resolution, etc. {-}
+
+
+## Extent/Cropland mask {-}
+
+## units, ranges {-}

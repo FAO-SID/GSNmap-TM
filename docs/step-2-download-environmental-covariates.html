@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Step 2: download environmental covariates | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Step 2: download environmental covariates | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,22 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -193,12 +209,18 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data</a></li>
-<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.2</b> Preparatory steps</a></li>
-<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.3</b> Data quality check</a></li>
-<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.4</b> Calculation of pedo-transfer functions</a></li>
-<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.5</b> Check for outliers</a></li>
-<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.6</b> Harmonise soil layer depths</a></li>
-<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.7</b> Save the results</a></li>
+<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#non-georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.2</b> Non-georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#soil-profile-data"><i class="fa fa-check"></i><b>5.2.3</b> Soil profile data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preparatory-steps"><i class="fa fa-check"></i><b>5.3</b> Preparatory steps</a></li>
+<li class="chapter" data-level="5.4" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#data-quality-check"><i class="fa fa-check"></i><b>5.4</b> Data quality check</a></li>
+<li class="chapter" data-level="5.5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#calculation-of-pedo-transfer-functions"><i class="fa fa-check"></i><b>5.5</b> Calculation of pedo-transfer functions</a></li>
+<li class="chapter" data-level="5.6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#check-for-outliers"><i class="fa fa-check"></i><b>5.6</b> Check for outliers</a></li>
+<li class="chapter" data-level="5.7" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#harmonise-soil-layer-depths"><i class="fa fa-check"></i><b>5.7</b> Harmonise soil layer depths</a></li>
+<li class="chapter" data-level="5.8" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#save-the-results"><i class="fa fa-check"></i><b>5.8</b> Save the results</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>6</b> Step 2: download environmental covariates</a>
 <ul>
@@ -223,6 +245,13 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-without-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data without coordinates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-check.html"><a href="annex-iii-quality-check.html"><i class="fa fa-check"></i>Annex III: Quality check</a>
+<ul>
+<li class="chapter" data-level="" data-path="annex-iii-quality-check.html"><a href="annex-iii-quality-check.html#completeness-of-layers"><i class="fa fa-check"></i>Completeness of layers</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-check.html"><a href="annex-iii-quality-check.html#projection-resolution-etc."><i class="fa fa-check"></i>Projection, resolution, etc.</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-check.html"><a href="annex-iii-quality-check.html#extentcropland-mask"><i class="fa fa-check"></i>Extent/Cropland mask</a></li>
+<li class="chapter" data-level="" data-path="annex-iii-quality-check.html"><a href="annex-iii-quality-check.html#units-ranges"><i class="fa fa-check"></i>units, ranges</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -1129,43 +1158,43 @@ vbf
 <h2><span class="header-section-number">6.2</span> Download covariates with rgee<a href="step-2-download-environmental-covariates.html#download-covariates-with-rgee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the following, the steps to access and download the environmental covariates are described. The GSP has optimised the download of environmental covariates by minimising the efforts needed to clip and download the layers from Google Earth Engine (GEE). Here is where the <em>rgee</em> package comes into play, too. The objectives of this chapter are to explain how to set our working environment in <em>RStudio</em> and connect to GEE, how to import a shapefile of the area of interest (AOI), and how to clip and download the covariate layers for our respective AOI.</p>
 <p>If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our <strong>R</strong> session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the “Digital-Soil-Mapping-GSP-FAO” based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="step-2-download-environmental-covariates.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache</span></span>
-<span id="cb16-2"><a href="step-2-download-environmental-covariates.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>());</span>
-<span id="cb16-3"><a href="step-2-download-environmental-covariates.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
-<span id="cb16-4"><a href="step-2-download-environmental-covariates.html#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="step-2-download-environmental-covariates.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - User-defined variables ===================================================</span></span>
-<span id="cb16-6"><a href="step-2-download-environmental-covariates.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
-<span id="cb16-7"><a href="step-2-download-environmental-covariates.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- &#39;C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping&#39;</span></span>
-<span id="cb16-8"><a href="step-2-download-environmental-covariates.html#cb16-8" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&#39;C:/GIT/Digital-Soil-Mapping&#39;</span></span>
-<span id="cb16-9"><a href="step-2-download-environmental-covariates.html#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="step-2-download-environmental-covariates.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Output covariate folder</span></span>
-<span id="cb16-11"><a href="step-2-download-environmental-covariates.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#output_dir &lt;-&#39;&#39;</span></span>
-<span id="cb16-12"><a href="step-2-download-environmental-covariates.html#cb16-12" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span><span class="st">&#39;01-Data/covs/&#39;</span></span>
-<span id="cb16-13"><a href="step-2-download-environmental-covariates.html#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="step-2-download-environmental-covariates.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Area of interest: either own shapefile or 3-digit ISO code to extract from </span></span>
-<span id="cb16-15"><a href="step-2-download-environmental-covariates.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># UN 2020 boundaries</span></span>
-<span id="cb16-16"><a href="step-2-download-environmental-covariates.html#cb16-16" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="st">&#39;01-Data/AOI_Arg.shp&#39;</span></span>
-<span id="cb16-17"><a href="step-2-download-environmental-covariates.html#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI &lt;- &#39;MKD&#39;</span></span>
-<span id="cb16-18"><a href="step-2-download-environmental-covariates.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolution and projection</span></span>
-<span id="cb16-19"><a href="step-2-download-environmental-covariates.html#cb16-19" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> <span class="dv">250</span></span>
-<span id="cb16-20"><a href="step-2-download-environmental-covariates.html#cb16-20" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
-<span id="cb16-21"><a href="step-2-download-environmental-covariates.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="step-2-download-environmental-covariates.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache</span></span>
+<span id="cb50-2"><a href="step-2-download-environmental-covariates.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>());</span>
+<span id="cb50-3"><a href="step-2-download-environmental-covariates.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
+<span id="cb50-4"><a href="step-2-download-environmental-covariates.html#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="step-2-download-environmental-covariates.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - User-defined variables ===================================================</span></span>
+<span id="cb50-6"><a href="step-2-download-environmental-covariates.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
+<span id="cb50-7"><a href="step-2-download-environmental-covariates.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- &#39;C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping&#39;</span></span>
+<span id="cb50-8"><a href="step-2-download-environmental-covariates.html#cb50-8" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&#39;C:/GIT/Digital-Soil-Mapping&#39;</span></span>
+<span id="cb50-9"><a href="step-2-download-environmental-covariates.html#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="step-2-download-environmental-covariates.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Output covariate folder</span></span>
+<span id="cb50-11"><a href="step-2-download-environmental-covariates.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="co">#output_dir &lt;-&#39;&#39;</span></span>
+<span id="cb50-12"><a href="step-2-download-environmental-covariates.html#cb50-12" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span><span class="st">&#39;01-Data/covs/&#39;</span></span>
+<span id="cb50-13"><a href="step-2-download-environmental-covariates.html#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="step-2-download-environmental-covariates.html#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Area of interest: either own shapefile or 3-digit ISO code to extract from </span></span>
+<span id="cb50-15"><a href="step-2-download-environmental-covariates.html#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="co"># UN 2020 boundaries</span></span>
+<span id="cb50-16"><a href="step-2-download-environmental-covariates.html#cb50-16" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="st">&#39;01-Data/AOI_Arg.shp&#39;</span></span>
+<span id="cb50-17"><a href="step-2-download-environmental-covariates.html#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI &lt;- &#39;MKD&#39;</span></span>
+<span id="cb50-18"><a href="step-2-download-environmental-covariates.html#cb50-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolution and projection</span></span>
+<span id="cb50-19"><a href="step-2-download-environmental-covariates.html#cb50-19" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> <span class="dv">250</span></span>
+<span id="cb50-20"><a href="step-2-download-environmental-covariates.html#cb50-20" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">=</span> <span class="st">&quot;EPSG:4326&quot;</span></span>
+<span id="cb50-21"><a href="step-2-download-environmental-covariates.html#cb50-21" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span></code></pre></div>
 <p>Next, the working directory is set and the required packages for the download of the covariates are called with the library() command. In case users are using their own shapefiles, the read_sf() function is applied to load it into R and then convert it to a box polygon in order to be used with GEE.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="step-2-download-environmental-covariates.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  1 - Set working directory and load necessary packages ======================= </span></span>
-<span id="cb17-2"><a href="step-2-download-environmental-covariates.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
-<span id="cb17-3"><a href="step-2-download-environmental-covariates.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
-<span id="cb17-4"><a href="step-2-download-environmental-covariates.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#load libraries</span></span>
-<span id="cb17-5"><a href="step-2-download-environmental-covariates.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb17-6"><a href="step-2-download-environmental-covariates.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb17-7"><a href="step-2-download-environmental-covariates.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb17-8"><a href="step-2-download-environmental-covariates.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
-<span id="cb17-9"><a href="step-2-download-environmental-covariates.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="step-2-download-environmental-covariates.html#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="step-2-download-environmental-covariates.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Import shapefile =========================================================</span></span>
-<span id="cb17-12"><a href="step-2-download-environmental-covariates.html#cb17-12" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(AOI)</span>
-<span id="cb17-13"><a href="step-2-download-environmental-covariates.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># convert AOI to a box polygon</span></span>
-<span id="cb17-14"><a href="step-2-download-environmental-covariates.html#cb17-14" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(AOI))</span>
-<span id="cb17-15"><a href="step-2-download-environmental-covariates.html#cb17-15" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(AOI)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="step-2-download-environmental-covariates.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  1 - Set working directory and load necessary packages ======================= </span></span>
+<span id="cb51-2"><a href="step-2-download-environmental-covariates.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb51-3"><a href="step-2-download-environmental-covariates.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
+<span id="cb51-4"><a href="step-2-download-environmental-covariates.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co">#load libraries</span></span>
+<span id="cb51-5"><a href="step-2-download-environmental-covariates.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb51-6"><a href="step-2-download-environmental-covariates.html#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb51-7"><a href="step-2-download-environmental-covariates.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb51-8"><a href="step-2-download-environmental-covariates.html#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
+<span id="cb51-9"><a href="step-2-download-environmental-covariates.html#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="step-2-download-environmental-covariates.html#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-11"><a href="step-2-download-environmental-covariates.html#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Import shapefile =========================================================</span></span>
+<span id="cb51-12"><a href="step-2-download-environmental-covariates.html#cb51-12" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(AOI)</span>
+<span id="cb51-13"><a href="step-2-download-environmental-covariates.html#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="co"># convert AOI to a box polygon</span></span>
+<span id="cb51-14"><a href="step-2-download-environmental-covariates.html#cb51-14" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(AOI))</span>
+<span id="cb51-15"><a href="step-2-download-environmental-covariates.html#cb51-15" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(AOI)</span></code></pre></div>
 <p>The next step consists in initialising our GEE account using the rgee package in <strong>R</strong>. However, before starting it is necessary to give a brief overview of the covariates that were listed in Table <a href="step-2-download-environmental-covariates.html#tab:covs1">6.1</a> and where they can be found in the GEE environment. The GSP has created an repository of covariates that can be added to your GEE environment in the browser. For that users have to right-click on “Assets” in the left panel of the GEE code editor and select “Add a project”. Then the window shown in Fig. @ref(fig:assets_GSP) appears and one has to enter the project ID which is “digital-soil-mapping-gsp-fao” and click on select.</p>
 <div class="figure">
 <img src="images/6.1_GSP_Covariate_repository.PNG" alt="Add GSP covariate repository to your assets in GEE." width="297" />
@@ -1174,80 +1203,80 @@ vbf
 </p>
 </div>
 <p>Now that the covariates were added to our GEE assets, we can initialise GEE via rgee in our <em>RStudio</em>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="step-2-download-environmental-covariates.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Overview of covariates ===================================================</span></span>
-<span id="cb18-2"><a href="step-2-download-environmental-covariates.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CLIMATIC VARIABLES from CHELSA</span></span>
-<span id="cb18-3"><a href="step-2-download-environmental-covariates.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># VEGETATION INDICES, FPAR and LAND SURFACE TEMPERATURE from MODIS</span></span>
-<span id="cb18-4"><a href="step-2-download-environmental-covariates.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LAND COVER LAYERS from Dynamic World 10m near-real-time (NRT) </span></span>
-<span id="cb18-5"><a href="step-2-download-environmental-covariates.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># TERRAINE attributes from OpenLandMap</span></span>
-<span id="cb18-6"><a href="step-2-download-environmental-covariates.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="step-2-download-environmental-covariates.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for more information about the single covariates: open covariates.xslx in the </span></span>
-<span id="cb18-8"><a href="step-2-download-environmental-covariates.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># training material folder</span></span>
-<span id="cb18-9"><a href="step-2-download-environmental-covariates.html#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="step-2-download-environmental-covariates.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Initialize GEE ===========================================================</span></span>
-<span id="cb18-11"><a href="step-2-download-environmental-covariates.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="step-2-download-environmental-covariates.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Overview of covariates ===================================================</span></span>
+<span id="cb52-2"><a href="step-2-download-environmental-covariates.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CLIMATIC VARIABLES from CHELSA</span></span>
+<span id="cb52-3"><a href="step-2-download-environmental-covariates.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># VEGETATION INDICES, FPAR and LAND SURFACE TEMPERATURE from MODIS</span></span>
+<span id="cb52-4"><a href="step-2-download-environmental-covariates.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LAND COVER LAYERS from Dynamic World 10m near-real-time (NRT) </span></span>
+<span id="cb52-5"><a href="step-2-download-environmental-covariates.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># TERRAINE attributes from OpenLandMap</span></span>
+<span id="cb52-6"><a href="step-2-download-environmental-covariates.html#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="step-2-download-environmental-covariates.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for more information about the single covariates: open covariates.xslx in the </span></span>
+<span id="cb52-8"><a href="step-2-download-environmental-covariates.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># training material folder</span></span>
+<span id="cb52-9"><a href="step-2-download-environmental-covariates.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="step-2-download-environmental-covariates.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Initialize GEE ===========================================================</span></span>
+<span id="cb52-11"><a href="step-2-download-environmental-covariates.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>()</span></code></pre></div>
 <p>In the case that users do not have their own shapefile but need to clip it from the UN map, the following lines of code. The structure of the commands that are used in the rgee package, are related to the way in which the JavaScript programming language is used in the GEE Code Editor (<a href="https://developers.google.com/earth-engine/guides/getstarted" class="uri">https://developers.google.com/earth-engine/guides/getstarted</a>). However, the periods (.) that combine different commands in JavaScript are replaced by the dollar sign ($) in rgee.
 This is illustrated in the lines of code below. A user-defined variable “region” is created that calls an Earth Engine (EE) object. This is signalled by the letters ee + $. The type of EE object is a so-called feature collection which corresponds to the shapefile format (.shp or GeoJSON, …). Finally, the path where the feature collection is located on the Google server is specified. By using the “pipe” ( %&gt;% ) symbol from tidyverse, we specify that only the section of the feature collection that equals to the ISO code of our AOI is selected and assigned to the region variable in <strong>R</strong>. Once this is specified, we set “region” as a geometry object that can be used to clip the covariates later in the next steps.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="step-2-download-environmental-covariates.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Upload shapefile to GEE OR use uploaded UN borders =======================</span></span>
-<span id="cb19-2"><a href="step-2-download-environmental-covariates.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 5.1 Convert shp to gee geometry ---------------------------------------------</span></span>
-<span id="cb19-3"><a href="step-2-download-environmental-covariates.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#region &lt;- sf_as_ee(AOI)</span></span>
-<span id="cb19-4"><a href="step-2-download-environmental-covariates.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#region = region$geometry()</span></span>
-<span id="cb19-5"><a href="step-2-download-environmental-covariates.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="step-2-download-environmental-covariates.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 5.2 Extract from UN 2020 map using ISO code ---------------------------------</span></span>
-<span id="cb19-7"><a href="step-2-download-environmental-covariates.html#cb19-7" aria-hidden="true" tabindex="-1"></a>region <span class="ot">&lt;-</span> ee<span class="sc">$</span><span class="fu">FeatureCollection</span>(<span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href="step-2-download-environmental-covariates.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  ee<span class="sc">$</span>FeatureCollection<span class="sc">$</span><span class="fu">filterMetadata</span>(<span class="st">&#39;ISO3CD&#39;</span>, <span class="st">&#39;equals&#39;</span>, AOI)</span>
-<span id="cb19-9"><a href="step-2-download-environmental-covariates.html#cb19-9" aria-hidden="true" tabindex="-1"></a>region <span class="ot">=</span> region<span class="sc">$</span><span class="fu">geometry</span>()</span>
-<span id="cb19-10"><a href="step-2-download-environmental-covariates.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI_shp &lt;-ee_as_sf(region)</span></span>
-<span id="cb19-11"><a href="step-2-download-environmental-covariates.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI_shp &lt;- st_collection_extract(AOI_shp, &quot;POLYGON&quot;)</span></span>
-<span id="cb19-12"><a href="step-2-download-environmental-covariates.html#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># write_sf(AOI_shp, paste0(&#39;01-Data/&#39;,AOI,&#39;.shp&#39;))</span></span>
-<span id="cb19-13"><a href="step-2-download-environmental-covariates.html#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># aoi &lt;- vect(AOI_shp)</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="step-2-download-environmental-covariates.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Upload shapefile to GEE OR use uploaded UN borders =======================</span></span>
+<span id="cb53-2"><a href="step-2-download-environmental-covariates.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 5.1 Convert shp to gee geometry ---------------------------------------------</span></span>
+<span id="cb53-3"><a href="step-2-download-environmental-covariates.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#region &lt;- sf_as_ee(AOI)</span></span>
+<span id="cb53-4"><a href="step-2-download-environmental-covariates.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#region = region$geometry()</span></span>
+<span id="cb53-5"><a href="step-2-download-environmental-covariates.html#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="step-2-download-environmental-covariates.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 5.2 Extract from UN 2020 map using ISO code ---------------------------------</span></span>
+<span id="cb53-7"><a href="step-2-download-environmental-covariates.html#cb53-7" aria-hidden="true" tabindex="-1"></a>region <span class="ot">&lt;-</span> ee<span class="sc">$</span><span class="fu">FeatureCollection</span>(<span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb53-8"><a href="step-2-download-environmental-covariates.html#cb53-8" aria-hidden="true" tabindex="-1"></a>  ee<span class="sc">$</span>FeatureCollection<span class="sc">$</span><span class="fu">filterMetadata</span>(<span class="st">&#39;ISO3CD&#39;</span>, <span class="st">&#39;equals&#39;</span>, AOI)</span>
+<span id="cb53-9"><a href="step-2-download-environmental-covariates.html#cb53-9" aria-hidden="true" tabindex="-1"></a>region <span class="ot">=</span> region<span class="sc">$</span><span class="fu">geometry</span>()</span>
+<span id="cb53-10"><a href="step-2-download-environmental-covariates.html#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI_shp &lt;-ee_as_sf(region)</span></span>
+<span id="cb53-11"><a href="step-2-download-environmental-covariates.html#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co"># AOI_shp &lt;- st_collection_extract(AOI_shp, &quot;POLYGON&quot;)</span></span>
+<span id="cb53-12"><a href="step-2-download-environmental-covariates.html#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># write_sf(AOI_shp, paste0(&#39;01-Data/&#39;,AOI,&#39;.shp&#39;))</span></span>
+<span id="cb53-13"><a href="step-2-download-environmental-covariates.html#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="co"># aoi &lt;- vect(AOI_shp)</span></span></code></pre></div>
 <p>After defining and loading the AOI from GEE into our <strong>R</strong> environment, it is necessary to create a vector that contains all file paths to the covariates. As can be seen below, these are differentiated by the covariate origin. CHELSA contains the climate-related covariate layers, i.e. temperature, precipitation, potential evapotranspiration, etc., MODIS contains for instance the land surface temperature and snow cover covariates, LANDCOVER has the layers of different vegetation types, and OPENLANDMAP contains all terrain covariates derived from digital elevation models (DEM).</p>
 <p>One central option in R to execute repetitive tasks with one command is a <em>for loop</em>. It follows a specific syntax that is explained in multiple online resources such as in <a href="https://www.r-bloggers.com/2015/12/how-to-write-the-first-for-loop-in-r/" class="uri">https://www.r-bloggers.com/2015/12/how-to-write-the-first-for-loop-in-r/</a>. In this instance, the <em>for loop</em> iterates through the file paths assigned previously to the object “assetname” to clip them to the extent of the AOI, resample the resolution to 250 x 250 m, and exports them as raster files to a google drive folder.
 The assets are all in raster format (.tif/GeoTiff). Raster files are denominated as “Image” or “ImageCollection” (for timeseries data) in GEE. Thus, the “ee$Image” command is used to load the respective asset from the file path i (that changes after each iteration of the loop). The loaded raster is clipped to the extent of the “region” that we defined previously. The resampling to our target resolution is carried out with the bilinear method. The EE object is then exported from GEE to a Google drive folder. It may be necessary to increase the number of maximum pixels depending on the size of the AOI. Finally, the raster file is also saved in the output folder on the local drive specified at the beginning of this script.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="step-2-download-environmental-covariates.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 - Clip and download covariates ========================================</span></span>
-<span id="cb20-2"><a href="step-2-download-environmental-covariates.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain list of climatic variables</span></span>
-<span id="cb20-3"><a href="step-2-download-environmental-covariates.html#cb20-3" aria-hidden="true" tabindex="-1"></a>assetname<span class="ot">&lt;-</span>  <span class="fu">rbind</span>(<span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA&quot;</span>),</span>
-<span id="cb20-4"><a href="step-2-download-environmental-covariates.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS&quot;</span>),</span>
-<span id="cb20-5"><a href="step-2-download-environmental-covariates.html#cb20-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER&quot;</span>),</span>
-<span id="cb20-6"><a href="step-2-download-environmental-covariates.html#cb20-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP&quot;</span>))</span>
-<span id="cb20-7"><a href="step-2-download-environmental-covariates.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="step-2-download-environmental-covariates.html#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="step-2-download-environmental-covariates.html#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="step-2-download-environmental-covariates.html#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="step-2-download-environmental-covariates.html#cb20-11" aria-hidden="true" tabindex="-1"></a>assetname<span class="sc">$</span>num <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(assetname)</span>
-<span id="cb20-12"><a href="step-2-download-environmental-covariates.html#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="step-2-download-environmental-covariates.html#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over the names of assets to clip and dowload the covariates</span></span>
-<span id="cb20-14"><a href="step-2-download-environmental-covariates.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(assetname<span class="sc">$</span>ID)){</span>
-<span id="cb20-15"><a href="step-2-download-environmental-covariates.html#cb20-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-16"><a href="step-2-download-environmental-covariates.html#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Extract filename </span></span>
-<span id="cb20-17"><a href="step-2-download-environmental-covariates.html#cb20-17" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;.*</span><span class="sc">\\</span><span class="st">/&#39;</span>, <span class="st">&#39;&#39;</span>, i)</span>
-<span id="cb20-18"><a href="step-2-download-environmental-covariates.html#cb20-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-19"><a href="step-2-download-environmental-covariates.html#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Clip image to the extent of the AOI</span></span>
-<span id="cb20-20"><a href="step-2-download-environmental-covariates.html#cb20-20" aria-hidden="true" tabindex="-1"></a>  image <span class="ot">&lt;-</span> ee<span class="sc">$</span><span class="fu">Image</span>(i) <span class="sc">%&gt;%</span></span>
-<span id="cb20-21"><a href="step-2-download-environmental-covariates.html#cb20-21" aria-hidden="true" tabindex="-1"></a>    ee<span class="sc">$</span>Image<span class="sc">$</span><span class="fu">clip</span>(region)<span class="sc">%&gt;%</span></span>
-<span id="cb20-22"><a href="step-2-download-environmental-covariates.html#cb20-22" aria-hidden="true" tabindex="-1"></a>    ee<span class="sc">$</span>Image<span class="sc">$</span><span class="fu">toFloat</span>()</span>
-<span id="cb20-23"><a href="step-2-download-environmental-covariates.html#cb20-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-24"><a href="step-2-download-environmental-covariates.html#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Resample to target resolution</span></span>
-<span id="cb20-25"><a href="step-2-download-environmental-covariates.html#cb20-25" aria-hidden="true" tabindex="-1"></a>  image <span class="ot">=</span> image<span class="sc">$</span><span class="fu">resample</span>(<span class="st">&#39;bilinear&#39;</span>)<span class="sc">$</span><span class="fu">reproject</span>(</span>
-<span id="cb20-26"><a href="step-2-download-environmental-covariates.html#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">crs=</span> crs,</span>
-<span id="cb20-27"><a href="step-2-download-environmental-covariates.html#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale=</span> res)</span>
-<span id="cb20-28"><a href="step-2-download-environmental-covariates.html#cb20-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-29"><a href="step-2-download-environmental-covariates.html#cb20-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-30"><a href="step-2-download-environmental-covariates.html#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Export clipped covariate as raster</span></span>
-<span id="cb20-31"><a href="step-2-download-environmental-covariates.html#cb20-31" aria-hidden="true" tabindex="-1"></a>  raster <span class="ot">&lt;-</span> <span class="fu">ee_as_raster</span>(</span>
-<span id="cb20-32"><a href="step-2-download-environmental-covariates.html#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">image =</span> image,</span>
-<span id="cb20-33"><a href="step-2-download-environmental-covariates.html#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale=</span> res,</span>
-<span id="cb20-34"><a href="step-2-download-environmental-covariates.html#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">region =</span> region,</span>
-<span id="cb20-35"><a href="step-2-download-environmental-covariates.html#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">via =</span> <span class="st">&quot;drive&quot;</span>,</span>
-<span id="cb20-36"><a href="step-2-download-environmental-covariates.html#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">maxPixels =</span> <span class="fl">1e+12</span></span>
-<span id="cb20-37"><a href="step-2-download-environmental-covariates.html#cb20-37" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-38"><a href="step-2-download-environmental-covariates.html#cb20-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-39"><a href="step-2-download-environmental-covariates.html#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(raster)</span>
-<span id="cb20-40"><a href="step-2-download-environmental-covariates.html#cb20-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-41"><a href="step-2-download-environmental-covariates.html#cb20-41" aria-hidden="true" tabindex="-1"></a>  num <span class="ot">&lt;-</span> assetname[assetname<span class="sc">$</span>ID <span class="sc">==</span> i, <span class="st">&#39;num&#39;</span>]</span>
-<span id="cb20-42"><a href="step-2-download-environmental-covariates.html#cb20-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-43"><a href="step-2-download-environmental-covariates.html#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeRaster</span>(raster, <span class="fu">paste0</span>(output_dir,filename, <span class="st">&#39;.tif&#39;</span>), <span class="at">overwrite=</span>T)</span>
-<span id="cb20-44"><a href="step-2-download-environmental-covariates.html#cb20-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(filename, <span class="st">&#39;exported successfully - Covariate&#39;</span>,num, <span class="st">&#39;out of 68&#39;</span>))</span>
-<span id="cb20-45"><a href="step-2-download-environmental-covariates.html#cb20-45" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="step-2-download-environmental-covariates.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 - Clip and download covariates ========================================</span></span>
+<span id="cb54-2"><a href="step-2-download-environmental-covariates.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain list of climatic variables</span></span>
+<span id="cb54-3"><a href="step-2-download-environmental-covariates.html#cb54-3" aria-hidden="true" tabindex="-1"></a>assetname<span class="ot">&lt;-</span>  <span class="fu">rbind</span>(<span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA&quot;</span>),</span>
+<span id="cb54-4"><a href="step-2-download-environmental-covariates.html#cb54-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS&quot;</span>),</span>
+<span id="cb54-5"><a href="step-2-download-environmental-covariates.html#cb54-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER&quot;</span>),</span>
+<span id="cb54-6"><a href="step-2-download-environmental-covariates.html#cb54-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ee_manage_assetlist</span>(<span class="at">path_asset =</span> <span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP&quot;</span>))</span>
+<span id="cb54-7"><a href="step-2-download-environmental-covariates.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="step-2-download-environmental-covariates.html#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="step-2-download-environmental-covariates.html#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="step-2-download-environmental-covariates.html#cb54-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="step-2-download-environmental-covariates.html#cb54-11" aria-hidden="true" tabindex="-1"></a>assetname<span class="sc">$</span>num <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(assetname)</span>
+<span id="cb54-12"><a href="step-2-download-environmental-covariates.html#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="step-2-download-environmental-covariates.html#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over the names of assets to clip and dowload the covariates</span></span>
+<span id="cb54-14"><a href="step-2-download-environmental-covariates.html#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(assetname<span class="sc">$</span>ID)){</span>
+<span id="cb54-15"><a href="step-2-download-environmental-covariates.html#cb54-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-16"><a href="step-2-download-environmental-covariates.html#cb54-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Extract filename </span></span>
+<span id="cb54-17"><a href="step-2-download-environmental-covariates.html#cb54-17" aria-hidden="true" tabindex="-1"></a>  filename <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;.*</span><span class="sc">\\</span><span class="st">/&#39;</span>, <span class="st">&#39;&#39;</span>, i)</span>
+<span id="cb54-18"><a href="step-2-download-environmental-covariates.html#cb54-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-19"><a href="step-2-download-environmental-covariates.html#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Clip image to the extent of the AOI</span></span>
+<span id="cb54-20"><a href="step-2-download-environmental-covariates.html#cb54-20" aria-hidden="true" tabindex="-1"></a>  image <span class="ot">&lt;-</span> ee<span class="sc">$</span><span class="fu">Image</span>(i) <span class="sc">%&gt;%</span></span>
+<span id="cb54-21"><a href="step-2-download-environmental-covariates.html#cb54-21" aria-hidden="true" tabindex="-1"></a>    ee<span class="sc">$</span>Image<span class="sc">$</span><span class="fu">clip</span>(region)<span class="sc">%&gt;%</span></span>
+<span id="cb54-22"><a href="step-2-download-environmental-covariates.html#cb54-22" aria-hidden="true" tabindex="-1"></a>    ee<span class="sc">$</span>Image<span class="sc">$</span><span class="fu">toFloat</span>()</span>
+<span id="cb54-23"><a href="step-2-download-environmental-covariates.html#cb54-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-24"><a href="step-2-download-environmental-covariates.html#cb54-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Resample to target resolution</span></span>
+<span id="cb54-25"><a href="step-2-download-environmental-covariates.html#cb54-25" aria-hidden="true" tabindex="-1"></a>  image <span class="ot">=</span> image<span class="sc">$</span><span class="fu">resample</span>(<span class="st">&#39;bilinear&#39;</span>)<span class="sc">$</span><span class="fu">reproject</span>(</span>
+<span id="cb54-26"><a href="step-2-download-environmental-covariates.html#cb54-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">crs=</span> crs,</span>
+<span id="cb54-27"><a href="step-2-download-environmental-covariates.html#cb54-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale=</span> res)</span>
+<span id="cb54-28"><a href="step-2-download-environmental-covariates.html#cb54-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-29"><a href="step-2-download-environmental-covariates.html#cb54-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-30"><a href="step-2-download-environmental-covariates.html#cb54-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Export clipped covariate as raster</span></span>
+<span id="cb54-31"><a href="step-2-download-environmental-covariates.html#cb54-31" aria-hidden="true" tabindex="-1"></a>  raster <span class="ot">&lt;-</span> <span class="fu">ee_as_raster</span>(</span>
+<span id="cb54-32"><a href="step-2-download-environmental-covariates.html#cb54-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">image =</span> image,</span>
+<span id="cb54-33"><a href="step-2-download-environmental-covariates.html#cb54-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale=</span> res,</span>
+<span id="cb54-34"><a href="step-2-download-environmental-covariates.html#cb54-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">region =</span> region,</span>
+<span id="cb54-35"><a href="step-2-download-environmental-covariates.html#cb54-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">via =</span> <span class="st">&quot;drive&quot;</span>,</span>
+<span id="cb54-36"><a href="step-2-download-environmental-covariates.html#cb54-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">maxPixels =</span> <span class="fl">1e+12</span></span>
+<span id="cb54-37"><a href="step-2-download-environmental-covariates.html#cb54-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb54-38"><a href="step-2-download-environmental-covariates.html#cb54-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-39"><a href="step-2-download-environmental-covariates.html#cb54-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(raster)</span>
+<span id="cb54-40"><a href="step-2-download-environmental-covariates.html#cb54-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-41"><a href="step-2-download-environmental-covariates.html#cb54-41" aria-hidden="true" tabindex="-1"></a>  num <span class="ot">&lt;-</span> assetname[assetname<span class="sc">$</span>ID <span class="sc">==</span> i, <span class="st">&#39;num&#39;</span>]</span>
+<span id="cb54-42"><a href="step-2-download-environmental-covariates.html#cb54-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-43"><a href="step-2-download-environmental-covariates.html#cb54-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeRaster</span>(raster, <span class="fu">paste0</span>(output_dir,filename, <span class="st">&#39;.tif&#39;</span>), <span class="at">overwrite=</span>T)</span>
+<span id="cb54-44"><a href="step-2-download-environmental-covariates.html#cb54-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(filename, <span class="st">&#39;exported successfully - Covariate&#39;</span>,num, <span class="st">&#39;out of 68&#39;</span>))</span>
+<span id="cb54-45"><a href="step-2-download-environmental-covariates.html#cb54-45" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 
 </div>
 </div>
@@ -1317,7 +1346,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

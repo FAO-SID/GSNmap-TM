@@ -4,10 +4,10 @@
 
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
-```{r, data1, echo = FALSE}
+```{r, data1, echo = FALSE, message=F, warning=F}
 options(knitr.table.format = "HTML")
-library(kableExtra)
 library(dplyr)
+library(kableExtra)
 dt <- read.csv("tables/Table_5.1.csv", sep = ",")
 kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Example format of a database.', format = 'html') %>%
 kable_classic(full_width = F) %>%
