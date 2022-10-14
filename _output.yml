@@ -1,4 +1,5 @@
 bookdown::pdf_book:
+  citation_package: none  
   css: style.css
   pandoc_args: [ "--csl", "food-and-agriculture-organization-of-the-united-nations.csl" ]
   includes:
@@ -11,6 +12,7 @@ bookdown::pdf_book:
   toc_bib: yes
 bookdown::epub_book: default
 bookdown::gitbook:
+  citation_package: none
   css: style.css
   pandoc_args: [ "--csl", "food-and-agriculture-organization-of-the-united-nations.csl" ]
   

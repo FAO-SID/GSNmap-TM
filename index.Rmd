@@ -85,115 +85,62 @@ underscore_to_space <- function(x,...){
 \listoftables
 \nopagebreak[4]
 
-# Foreword {-}
-
-
-
-
 # Abbreviations and acronyms {-}
 BD
 
-:   Bulk Density 
+:   Bulk density
 
-CO~2~
+CEC
 
-:   Carbon dioxide 
+:   Cation exchange capacity
 
-CRF
+CRAN
 
-:   Coarse fragments 
-
-DM
-
-:   Dry matter 
+:   Comprehensive R archive network
 
 DSM
 
 :   Digital soil mapping 
 
-GAUL
+GEE
 
-:   Global Administrative Unit Layers 
-
-GHG
-
-:   Greenhouse gas 
-
-GSOCmap
-
-:   Global Soil Organic Carbon Map
-
-GSOCseq
-
-:   Global Soil Organic Carbon Sequestration Potential Map
+:   Google Earth Engine
 
 GSP
 
 :   Global Soil Partnership
 
-HWSD
-
-:   Harmonized World Soil Database
-
-ISCN
-
-:   International Soil Carbon Network
-
 INSII
 
 :   International Network of Soil Information Institutions
-
-IPBES
-
-:   Intergovernmental Platform on Biodiversity and Ecosystem Services
-
-IPCC
-
-:   Intergovernmental Panel on Climate Change
-
-IPR
-
-:   Intellectual Property Rights
 
 ITPS
 
 :   Intergovernmental Technical Panel on Soils
 
-LDN
+ME
 
-:   Land Degradation Neutrality
+:   Mean error
+
+MAE
+
+:   Mean absolute error
+
+MEC
+
+:   Modelling efficiency coefficient
 
 NDVI
 
 :   Normalized difference in vegetation index
 
-NPP
-
-:   Net Primary Production
-
-P4WG
-
-:   Pillar 4 Working Group
-
 QA/QC
 
-:   Quality Assurance/Quality Check
+:   Quality assurance/quality check
 
 RMSE
 
-:   Root mean square error
-
-SDF
-
-:   Soil Data Facility
-
-SDG
-
-:   Sustainable Development Goals 
-
-SISLAC
-
-:   Latin America and the Caribbean's Soil Information System
+:   Root mean squared error
 
 SOC
 
@@ -203,36 +150,17 @@ SOM
 
 :   Soil organic matter
 
-SPADE/M
-
-:   Soil Profile Analytical Database of Europe of Measured Parameters 
-
-SWRS
-
-:   Status of World's Soil Resources 
-
-UNCCD
-
-:   United Nations Convention to Combat Desertification
-
-WFS
-
-:   Web Feature Service 
-
-WoSIS
-
-:   World Soil Information Service 
-
-# Contributors {-}
+# Editors {-}
 
 *Prepared by:*\
 **Global Soil Partnership Secretariat**\
 Ronald Vargas\
 
+# Contributors and reviewers {-}
 
-**Second Intergovernmental Technical Panel on Soils**\
-Luca Montanarella - European Commission, Joint Research Centre
-(*Chair*); Saéb AbdelHaleem Khresat 
+**International Network of Soil Information Institutions**\
+
+**GSNmap working group**
 
 **Third Intergovernmental Technical Panel on Soils**\
 Rosa Poch - Spain (*Chair*); Nsalambi V. Nkongolo - Democratic Republic
