@@ -289,7 +289,7 @@ Additionally, it is necessary to calculate standard metrics of error estimation.
 ```{r, eval = F}
 ## 4.2 - Print accuracy coeficients --------------------------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
-eval(o,p)
+eval(p,o)
 ```
 
 Finally, a variable importance plot is generated to visualise the relative importance of each covariate/predictor.
