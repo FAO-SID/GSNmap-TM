@@ -292,14 +292,14 @@ div.csl-indent {
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally layers on micronutrients, such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="reporting-results.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb68-2"><a href="reporting-results.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb68-3"><a href="reporting-results.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb68-4"><a href="reporting-results.html#cb68-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb68-5"><a href="reporting-results.html#cb68-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb68-6"><a href="reporting-results.html#cb68-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb68-7"><a href="reporting-results.html#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-8"><a href="reporting-results.html#cb68-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="reporting-results.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb86-2"><a href="reporting-results.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb86-3"><a href="reporting-results.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb86-4"><a href="reporting-results.html#cb86-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb86-5"><a href="reporting-results.html#cb86-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb86-6"><a href="reporting-results.html#cb86-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb86-7"><a href="reporting-results.html#cb86-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-8"><a href="reporting-results.html#cb86-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 
 </div>
             </section>

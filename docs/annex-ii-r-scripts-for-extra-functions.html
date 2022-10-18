@@ -278,21 +278,21 @@ div.csl-indent {
 <div id="annex-ii-r-scripts-for-extra-functions" class="section level1 unnumbered hasAnchor">
 <h1>Annex II: R scripts for extra functions<a href="annex-ii-r-scripts-for-extra-functions.html#annex-ii-r-scripts-for-extra-functions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Script to estimate Organic Carbon Stock</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate Organic Carbon Stock (ocs) ======================================</span></span>
-<span id="cb73-2"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SOC must be in g/kg (% * 10)</span></span>
-<span id="cb73-3"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BLD in kg/m3</span></span>
-<span id="cb73-4"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co"># CRF in percentage</span></span>
-<span id="cb73-5"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;02-Outputs/spline_soil_profile.csv&quot;</span>)</span>
-<span id="cb73-6"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - 30 cm</span></span>
-<span id="cb73-7"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-7" aria-hidden="true" tabindex="-1"></a>ORCDRC <span class="ot">&lt;-</span> d<span class="sc">$</span>soc_0_30<span class="sc">*</span><span class="dv">10</span></span>
-<span id="cb73-8"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-8" aria-hidden="true" tabindex="-1"></a>HSIZE <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb73-9"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-9" aria-hidden="true" tabindex="-1"></a>BLD <span class="ot">&lt;-</span> d<span class="sc">$</span>bd_0_30<span class="sc">*</span><span class="dv">1000</span></span>
-<span id="cb73-10"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-10" aria-hidden="true" tabindex="-1"></a>CRFVOL <span class="ot">&lt;-</span> d<span class="sc">$</span>crf_0_30</span>
-<span id="cb73-11"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-12"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-12" aria-hidden="true" tabindex="-1"></a>OCSKG_0_30 <span class="ot">&lt;-</span> ORCDRC<span class="sc">/</span><span class="dv">1000</span> <span class="sc">*</span> HSIZE<span class="sc">/</span><span class="dv">100</span> <span class="sc">*</span> BLD <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">-</span> CRFVOL)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb73-13"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-14"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Organic Carbon Stock from kg/m3 to t/ha</span></span>
-<span id="cb73-15"><a href="annex-ii-r-scripts-for-extra-functions.html#cb73-15" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ocs_0_30 <span class="ot">&lt;-</span> OCSKG_0_30<span class="sc">*</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate Organic Carbon Stock (ocs) ======================================</span></span>
+<span id="cb91-2"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SOC must be in g/kg (% * 10)</span></span>
+<span id="cb91-3"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BLD in kg/m3</span></span>
+<span id="cb91-4"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># CRF in percentage</span></span>
+<span id="cb91-5"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;02-Outputs/spline_soil_profile.csv&quot;</span>)</span>
+<span id="cb91-6"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - 30 cm</span></span>
+<span id="cb91-7"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-7" aria-hidden="true" tabindex="-1"></a>ORCDRC <span class="ot">&lt;-</span> d<span class="sc">$</span>soc_0_30<span class="sc">*</span><span class="dv">10</span></span>
+<span id="cb91-8"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-8" aria-hidden="true" tabindex="-1"></a>HSIZE <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb91-9"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-9" aria-hidden="true" tabindex="-1"></a>BLD <span class="ot">&lt;-</span> d<span class="sc">$</span>bd_0_30<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb91-10"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-10" aria-hidden="true" tabindex="-1"></a>CRFVOL <span class="ot">&lt;-</span> d<span class="sc">$</span>crf_0_30</span>
+<span id="cb91-11"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-12"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-12" aria-hidden="true" tabindex="-1"></a>OCSKG_0_30 <span class="ot">&lt;-</span> ORCDRC<span class="sc">/</span><span class="dv">1000</span> <span class="sc">*</span> HSIZE<span class="sc">/</span><span class="dv">100</span> <span class="sc">*</span> BLD <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">-</span> CRFVOL)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb91-13"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-14"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Organic Carbon Stock from kg/m3 to t/ha</span></span>
+<span id="cb91-15"><a href="annex-ii-r-scripts-for-extra-functions.html#cb91-15" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ocs_0_30 <span class="ot">&lt;-</span> OCSKG_0_30<span class="sc">*</span><span class="dv">10</span></span></code></pre></div>
 
 </div>
             </section>

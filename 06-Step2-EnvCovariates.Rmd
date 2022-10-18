@@ -4,7 +4,7 @@
 
 The SCORPAN equation (Eq. \@ref(eq:scorpan)) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table \@ref(tab:covs1) lists all the environmental covariates that can be implemented under the present DSM framework. Apart from the environmental covariates mentioned in Table \@ref(tab:covs1), other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table \@ref(tab:covs1). Thus, the selection of suitable covariate layers needs to be assessed with common sense and applying expert knowledge. 
 
-```{r, covs1, echo = F}
+```{r covs1, echo = F}
 
 options(knitr.table.format = "HTML")
 library(kableExtra)
@@ -82,7 +82,7 @@ AOI <- st_as_sf(AOI)
 
 The next step consists in initialising our GEE account using the rgee package in **R**. However, before starting it is necessary to give a brief overview of the covariates that were listed in Table \@ref(tab:covs1) and where they can be found in the GEE environment. The GSP has created an repository of covariates that can be added to your GEE environment in the browser. For that users have to right-click on "Assets" in the left panel of the GEE code editor and select "Add a project". Then the window shown in Fig. \@ref(fig:assets_GSP) appears and one has to enter the project ID which is "digital-soil-mapping-gsp-fao" and click on select. 
 
-```{r, assets_GSP, echo = FALSE, fig.cap = "Add GSP covariate repository to your assets in GEE."}
+```{r assets_GSP, echo = FALSE, fig.cap = "Add GSP covariate repository to your assets in GEE."}
 knitr::include_graphics("images/6.1_GSP_Covariate_repository.png")
 ```
 

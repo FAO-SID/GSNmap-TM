@@ -95,7 +95,7 @@ d <- na.omit(d)
 
 Cross validation is one of the most used methods in DSM for assessing the overall accuracy of the resulting maps. Since this is implemented along with the model calibration step, we explain the process at this stage. Cross validation consists of randomly splitting the input data into a training set and a testing set. However, a unique testing dataset can bias the overall accuracy. Therefore, k-fold cross validation randomly splits the data into k parts, using 1/k part of it for testing and k-1/k part for training the model. In order to make the final model more robust in terms of parameter estimations, we include repetitions of this process. The final approach is called repeated k-fold cross-validation, where k will be equal to ten in this process (see Figure \@ref(fig:workflow1). A graphical representation of the 10-fold cross validation is shown in Figure \@ref(fig:cv). Note that green balls represent the samples belonging to the testing set and yellow balls are samples of the training set. Each row is a splitting step of the 10-folds, while each block (repetitions) represent the repetition step.
 
-```{r, cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
+```{r cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
 knitr::include_graphics("images/cv.png")
 ```
 

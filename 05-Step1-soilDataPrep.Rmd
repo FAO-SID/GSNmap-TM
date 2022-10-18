@@ -64,14 +64,14 @@ mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 
 The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by the same team to map the status of soil nutrients in the Argentinian Pampas [@sainz2011]. Each sample is linked to an administrative unit of the Buenos Aires Province. The following map shows the districts with the sample size (n).
 
-```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE}
+```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE, hide = T}
 library(tidyverse)
 library(sf)
 library(mapview)
 mapviewOptions(fgb = FALSE)
 data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
 data
-district <- st_read("Digital-Soil-Mapping/01-Data/district.shp")
+district <- st_read("Digital-Soil-Mapping/01-Data/district.shp", quiet = T)
 mapview(district, zcol = "n", lwd = 0)
 ```
 
@@ -123,7 +123,7 @@ After reading in the file, the package `tidyverse` comes into play. By using the
 Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables. 
 
 
-```{r, eval = T}
+```{r, eval = T, message=F, warning=F}
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
 # as a .xlsx file
@@ -211,8 +211,11 @@ plotSPC(x = profiles[1:10], name = "cec", color = "cec",
 #    + sameDepth : boolean, errors related to same top/bottom depths
 #    + missingDepth : boolean, NA in top / bottom depths
 #    + overlapOrGap : boolean, gaps or overlap in adjacent horizons
-aqp::checkHzDepthLogic(profiles)
+profile_check <- aqp::checkHzDepthLogic(profiles)
+head(profile_check)
+```
 
+```{r, eval = T}
 # visualize some of these profiles by the pid
 subset(profiles, grepl(6566, ProfID, ignore.case = TRUE))
 subset(profiles, grepl(6915, ProfID, ignore.case = TRUE))
@@ -229,6 +232,8 @@ dat <- select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
 
 ```
 
+
+
 The soil data table is now revised and a sound and consistent quality is ensured. Thus, the available data can be used in the following to perform calculations in order to account for missing soil properties for instance. In the following example, a set of pedotransfer functions (PTF) will be calculated based on the organic matter (OM) content in order to estimate bulk density (BD) for missing observations. 
 
 ## Calculation of pedo-transfer functions
@@ -239,7 +244,7 @@ Therefore, a customised function is introduced to our working environment. Users
 
 The function 'estimateBD' below calculates various PTFs that estimate BD. Which equation is used is determined by the user that has to choose one of the methods and also specify the SOC value of the respective horizon. The SOC values is first converted to OM by using the conversion factor of 1.724 and then inserted in the respective PTF. The return() command tells **R** which value to output. 
 
-```{r, eval = F}
+```{r, eval = T, message = F}
 # 5 - Estimate BD using pedotransfer functions =================================
 
 # create the function with all PTF
@@ -258,7 +263,7 @@ estimateBD <- function(SOC=NULL, method=NULL){
 To apply the 'estimateBD' function, first a test dataframe is created that includes the SOC values from the cleaned profile table as well as the respective existing BD measurements. The rows without values in one of the columns are excluded using the na.omit() function since we want to first evaluate the difference between estimated BDs and measured BDs. 
 Now, the test dataframe is complemented by the estimated BDs derived from the PTFs for each method. To add new columns to an existing dataframe one has to write on the left-hand side of the arrow the name of the existing dataframe object (in this case BD_test), the dollar sign ($), and the name of the new column. Here, the names are given according to the used BD PTF.
 
-```{r, eval = F}
+```{r, eval = T, message = F}
 ## 5.1 - Select a pedotransfer function ----------------------------------------
 # create a vector of BD values to test the best fitting pedotransfer function
 BD_test <- tibble(SOC = clean_prof@horizons$soc,
@@ -278,7 +283,7 @@ BD_test$Honeyset_Ratkowsky <- estimateBD(BD_test$SOC,
 
 The calculated BDs can now be compared using the summary() function. However, a faster and more accessible approach is to plot the different bulk densities for comparison. In case you are not familiar with the plot() function and its respective commands, it is recommendable to check one of the many online learning resources such as https://intro2r.com/simple-base-r-plots.html. The plot shows us both measured and estimated BD values as differently coloured lines (see Fig ???). 
 
-```{r, eval = F}
+```{r, eval = T}
 ## 5.3 Compare results ---------------------------------------------------------
 
 # Observed values:
@@ -317,7 +322,7 @@ legend("topleft",legend = c("Original", "Honeyset_Ratkowsky"),
 
 The PTF to be chosen for estimating the BD of the missing horizons should be the closest to the measured BD values. Once, the appropriate PTF was chosen, the 'estimateBD' function is applied in the dataframe 'dat' that was created at the end of the quality check. Here, new bd values are estimated for the rows in which the column 'bd' has missing values. Finally, a plot is generated to visualize the gap-filled bulk density values.
 
-```{r, eval = F}
+```{r, eval = T}
 ## 5.4 Estimate BD for the missing horizons ------------------------------------
 dat$bd[is.na(dat$bd)] <-
   estimateBD(dat[is.na(dat$bd),]$soc, method="Honeyset_Ratkowsky1989")
@@ -337,7 +342,7 @@ legend("topleft",legend = c("Original", "Original+Estimated"),
 Unrealistically high or low values can have considerable impact on the statistical analysis and thus it is key to identify and carefully check those values in order to get valid results and eliminate potential bias. Again, the summary() function is apt to show general descriptive statistics such as maxima or minima. Based on this assessment, more detailed views of the suspicious values can be obtained by filtering values above or below a certain threshold as done in the code below for soil organic carbon (SOC) values above 10 percent. If such values don't belong to soil types that would justify such exceptionally high SOC values, e.g. organic soils (Histosols), these rows can be removed based on the profile ID. The same process should be repeated for all soil properties.
 Such evaluation can also be conducted visually for several properties at the same time using the 'tidyverse' and 'ggplot' package that allows to plot boxplots for several soil properties at the same time. To get more information on tidyverse, please follow this link: https://r4ds.had.co.nz/. For a comprehensive overview of the functionalities of ggplot, a more sophisticated way of plotting, this book provides a good overview: http://www.cookbook-r.com/Graphs/.
 
-```{r, eval = F}
+```{r, eval = T}
 ## 5.5 - Explore outliers ------------------------------------------------------
 # Outliers should be carefully explored and compared with literature values.
 # Only if it is clear that outliers represent impossible or highly unlikely 
@@ -346,7 +351,8 @@ Such evaluation can also be conducted visually for several properties at the sam
 # Carbon content higher than 15% is only typical for organic soil (histosols)
 # We will remove all atypically high SOC as outliers
 summary(dat$soc)
-na.omit(dat$ProfID[dat$soc > 10])
+outliers <- na.omit(dat$ProfID[dat$soc > 10])
+head(outliers)
 dat <- dat[dat$ProfID != 6915,]
 dat <- dat[dat$ProfID != 7726,]
 
