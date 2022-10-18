@@ -12,7 +12,7 @@ dt <- read.csv("tables/Table_5.1.csv", sep = ",")
 kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Example format of a database.', format = 'html') %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique layer identifier, Lat = latitude in decimal degrees, Long = longitude in decimal degrees, Year = sampling year, Top = upper limit of the layer in cm, Bottom = lower limit of the layer in cm, Soil property = name of the soil property, Value = numerical value of the measure, Lab method = name of the laboratory protocol used for measuring the soil property.")
+footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique layer identifier, Lat = latitude in decimal degrees, Long = longitude in decimal degrees, Year = sampling year, Top = upper limit of the layer in cm, Bottom = lower limit of the layer in cm, cec = Cation Exchange Capacity (cmol_c/kg), ph = pH in water, clay = Clay (g/100g soil), silt = Silt (g/100g soil), sand = Sand ((g/100g soil), soc = Soil Organic Carbon (g/100g soil), bd = Bulk Density (g/cm3).")
   #add_header_above(c("Approach for developing national information on soil erosion" = 2), bold = T) %>% 
   #kableExtra::group_rows(group_label = "Approach for developing national information on soil erosion", start_row = 1, end_row = 3) %>%
   #kableExtra::group_rows(group_label = "Input data preparation (see Table 3.1)", start_row = 4, end_row = 10) %>% 
@@ -41,14 +41,15 @@ Thus, the instructions also serve as a very basic introduction to the functionin
 ## Study area and soil data
 
 The study area is located in the southeast of the Pampas Region, in Argentina, from the foothills of the Ventania and Tandilia hill systems, until the southern coasts of the Buenos Aires Province. 
-To illustrate the process of this Technical Manual, we use three datasets from this region:
+To illustrate the different processes of this Technical Manual, we use three datasets from this region:
 
 * Gereferenced topsoil data
 * Non-georreferenced topsoil data
 * Soil profile data
 
 ### Georeferenced topsoil data
-These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) and is shown in the following map as points. 
+
+These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) and is shown in the following map as points. This dataset will be used as it is in [Section 7: Step 3](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html#step-3-mapping-continuous-soil-properties) for mapping K. 
 
 ```{r exploratory data 1, eval=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
