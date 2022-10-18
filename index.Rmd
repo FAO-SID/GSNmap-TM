@@ -6,7 +6,9 @@ site: bookdown::bookdown_site
 output: 
   #bookdown::pdf_book:
   bookdown::gitbook:
-    fig_caption: yes
+    config:
+      fig_caption: yes
+      download: ["pdf", "epub", "mobi"]
 header-includes:
     - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
     - \usepackage{titling}
