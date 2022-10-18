@@ -4,7 +4,7 @@
 
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
-```{r, data1, echo = FALSE, message=F, warning=F}
+```{r data1, echo = FALSE, message=F, warning=F}
 options(knitr.table.format = "HTML")
 library(dplyr)
 library(kableExtra)
@@ -25,7 +25,7 @@ Soil data usually require a pre-processing step to solve common issues such as, 
 
 In this chapter, step-by-step instructions are given on how to carry out all these steps in **RStudio**. Instructions are given on how to:
 
-<!-- Maybe numbers istead of bullet points -->
+<!-- Maybe numbers instead of bullet points -->
 * generate user-defined variables, 
 * set the working directory and load necessary packages, 
 * import national data to **R Studio**

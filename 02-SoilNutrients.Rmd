@@ -1,42 +1,40 @@
 # Soil Nutrients
 
 ##	Definition of soil nutrients
-In theory, soil nutrients are defined as those chemical elements that are *essential* to plant growth (von Liebig, 1841; Arnon and Stout, 1939). First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements. 
-Therefore, stricter criteria such as the one by Arnon and Stout (1939) were defined. They postulated that three criteria need to be met for an *essential mineral nutrients* (Kirkby, 2012):
+In theory, soil nutrients are defined as those chemical elements that are *essential* to plant growth [@vonLiebig1841; @arnon1939]. First, von Liebig (1841) declared nitrogen (N), sulphur (S), phosphorus (P), potassium (K), calcium (Ca), magnesium (Mg), silicon (Si), sodium (Na) and iron (Fe) as being essential. However, these findings lacked experimental research and were based on merely observational studies. Furthermore, if plant uptake is the only criteria for essentiality, the definition disregards the fact that plants also take up innecessary or even toxic elements. 
+Therefore, stricter criteria such as the one by @arnon1939 were defined. They postulated that three criteria need to be met for an *essential mineral nutrients* [@mengel2012]:
 1. Nutrient must be required by plants to complete their life cycle;
 2. Nutrient must be irreplaceable; and
 3. Nutrient must be involved in the plant metabolism.
 
-Following this defintion to date the following nutrients would be considered essential for higher plants (Mengel et al., 2001): carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.
+Following this defintion to date the following nutrients would be considered essential for higher plants [@mengel2001]: carbon (C), hydrogen (H), oxygen (O), N, P, S, cobalt (Co), K, Ca, Mg, Fe, manganese (Mn), copper (Cu), Si, zinc (Zn), molybdenum (Mo), boron (B), chlorine (Cl), nickel (Ni), Na. However, Co, Si, Ni, and Na are not considered essential for all plants.
 
-Other definitions used biochemical functions for classification purposes (Mengel and Kirkby, 2001). Here, four nutrient groups are distinguished:
+Other definitions used biochemical functions for classification purposes [@mengel2001]. Here, four nutrient groups are distinguished:
 1. major constituents of organic material (C, H, O, N, S);
 2. nutrients that are involved in esterification of alcohol groups (P, B, Si);
 3. nutrients that establish an osmotic potential (ions) (K, Na, Ca, Mg, Mn, Cl); and
 4. nutrients that enable electron transport (ions or chelates) (Fe, Cu, Zn, Mo).
 
-Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients (Mengel & Kirkby, 2012). Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary (Mengel & Kirkby, 2012).
-It is important to point out that the discussion on how to accurately define *essential* nutrients is ongoing as recent contribution to the topic show (Brown et al., 2022). The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition (FAO, 2022) and is shown in Table XX. It is based on the contribution of each element to the average plant content.
+Still, the most common classification of soil nutrients is based on the absolute quantities of an element that a plant takes up resulting in macro- and micronutrients [@mengel2012]. Despite being widely used, the definition has several shortcomings as also toxic elements can be taken up in greater quantities (e.g. Al). Furthermore, the threshold definition between macro- and micronutrients is somewhat arbitrary [@mengel2012].
+It is important to point out that the discussion on how to accurately define *essential* nutrients is ongoing as recent contribution to the topic show [@brown2022]. The generation of the GSNmaps is oriented by the recently published report on the state of the art of soils for nutrition [@symposium2022] and is shown in Table \@ref(tab:nutrients). It is based on the contribution of each element to the average plant content.
 
 
-Table XX: Classification of macro- and micronutrients by FAO (2022).
 
-|Macronutrients | Micronutrients |
-|-------|-----------|
-| N | Fe |
-| P | Mn |
-|K  | Zn|
-|Ca | Cu|
-|Mg | B|
-|S  | Mo|
-| -  | Cl|
+```{r nutrients, echo = FALSE, message=F, warning=F}
+options(knitr.table.format = "HTML")
+library(dplyr)
+library(kableExtra)
+dt <- read.csv("tables/Table_2.1.csv", sep = ";")
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Classification of major and micronutrients by FAO (2022).', format = 'html') %>%
+kable_classic(full_width = F)
+```
 
 
 ## Soil properties governing nutrient availability
 
-The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth (Wang et al., 2007). Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
-Most nutrients are taken up in their ionized form (Robertson et al., 1999). Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
-Soil pH, as a measure of exchangeable hydrogen protons (H^+^), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced (Fageria & Zimmermann, 2008).
-The CEC, as a measure of exchangeable cations (e.g K^+^, Mg^2+^, Ca^2+^, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils (Robertson et al., 1999). The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
+The uptake of nutrients by plants is regulated in parts by the organism itself as for instance shoot growth is coupled with root growth [@wang2007]. Still, soil properties mediate nutrient mobility and conditions at the plant-soil interface. The most important soil properties that determine nutrient availability are physicochemical properties such as soil pH, cation exchange capacity (CEC), soil texture, soil organic matter (SOM) content, and bulk density (BD).
+Most nutrients are taken up in their ionized form [@robertson1999]. Therefore, the chemical characterization of the soil solution is key to understand nutrient dynamics and uptake.
+Soil pH, as a measure of exchangeable hydrogen protons (H^+^), is a crucial parameter to determine the acidity of the soil solution that can inhibit or mediate nutrient uptake. For instance, very low pH values of around 4 decreased the uptake of (basic) cations such as Ca or Mg by paddy rice, wheat, corn, common bean and cowpea whereas lower pH values favoured the uptake of Zn, Fe, and Mn. At higher pH values the uptake of cations was enhanced [@fageria2014].
+The CEC, as a measure of exchangeable cations (e.g K^+^, Mg^2+^, Ca^2+^, etc.) available in the soil solution and attached to soil particles is a complementary parameter of nutrient availability in soils [@robertson1999]. The CEC informs on the capacity of soils to retain positively charged nutrients (basic cations) and thus gives information on how strong a soil can buffer subsequent acidification. This retention and buffer capacity is strongly linked to soil texture. High clay contents usually lead to higher CEC and thus higher cation retention. Conversely, sandy textured soils strongly rely on soil organic matter (SOM) content that has high CEC to retain cations.
 SOM content further augments aeration of soils due to its low density and provides high specific surface area to retain nutrients.
 Finally, BD is key to nutrient availability as it governs facilitates or inhibits root growth and thus nutrient uptake by plants. Due to its impact on soil porosity, BD also governs microbial activity (through aeration) and water infiltration that defines nutrient mobility.
