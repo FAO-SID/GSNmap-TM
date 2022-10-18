@@ -1,3 +1,4 @@
+tab:nutrients
 fig:Rstudio
 fig:GEE
 fig:asset
@@ -60,4 +61,3 @@ uncertainty-assessment
 predicting-soil-attributes
 reporting-results
 way-forward
-annex-ii-mapping-without-point-coordinates
