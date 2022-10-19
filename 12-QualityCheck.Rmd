@@ -1,4 +1,4 @@
-# Annex III: Quality assurance and quality control {-}
+# Annex IV: Quality assurance and quality control {-}
 The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 11 GSNmap first phase products.
 
 The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.
