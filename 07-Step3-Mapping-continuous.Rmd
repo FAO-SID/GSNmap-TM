@@ -6,7 +6,7 @@ In this chapter, the cleaned soil data and the previously downloaded covariate l
 
 To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
 
-```{r, eval = F}
+```{r, eval = T, message = F, warning = F}
 #_______________________________________________________________________________
 #
 # Quantile Regression Forest
@@ -19,21 +19,20 @@ To begin, we open *RStudio* and empty our global environment. Then, we set the w
 
 #Empty environment and cache 
 rm(list = ls())
-gc()
 
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-setwd('C:/GIT/Digital-Soil-Mapping')
+#setwd('Digital-Soil-Mapping/')
 
 # Load Area of interest (shp)
-AOI <- '01-Data/AOI_Arg.shp'
+AOI <- 'Digital-Soil-Mapping/01-Data/AOI_Arg.shp'
 
 # Target soil attribute
 soilatt <- 'k'
 
 # Function for Uncertainty Assessment
-load(file = "03-Scripts/eval.RData")
+load(file = "Digital-Soil-Mapping/03-Scripts/eval.RData")
 
 #load packages
 library(tidyverse)
@@ -48,29 +47,29 @@ library(doParallel)
 
 Since soil data and environmental covariaes are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
-```{r, eval = F}
+```{r, eval = T, message = F, warning = F}
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
-# files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-# covs <- rast(files)
-# ncovs <- str_remove(files, "01-Data/covs/")
-# ncovs <- str_remove(ncovs, ".tif")
-# ncovs <- str_replace(ncovs, "-", "_")
-# names(covs) <- ncovs 
+files <- list.files(path= 'Digital-Soil-Mapping/01-Data/covs/', pattern = '.tif$', full.names = T)
+covs <- rast(files)
+ncovs <- str_remove(files, "Digital-Soil-Mapping/01-Data/covs/")
+ncovs <- str_remove(ncovs, ".tif")
+ncovs <- str_replace(ncovs, "-", "_")
+names(covs) <- ncovs
 
-covs <- rast("01-Data/covs/covs.tif")
-ncovs <- names(covs)
+# covs <- rast("01-Data/covs/covs.tif")
+# ncovs <- names(covs)
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
-dat <- read_csv("01-Data/data_with_coord.csv")
+dat <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
 
 # Convert soil data into a spatial object (check https://epsg.io/6204)
 dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
 ```
 
 The shapefile can be reprojected to match the CRS of the covariates using the project function of the terra package. 
-```{r, eval = F}
+```{r, eval = T}
 # Reproject point coordinates to match coordinate system of covariates
 dat <- terra::project(dat, covs)
 names(dat)
@@ -78,7 +77,7 @@ names(dat)
 
 Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the summary() command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the na.omit() function.
 
-```{r, eval = F}
+```{r, eval = T}
 ## 1.3 - Extract values from covariates to the soil points ---------------------
 pv <- terra::extract(x = covs, y = dat, xy=F)
 dat <- cbind(dat,pv)
@@ -103,7 +102,7 @@ The cross-validation is repeated and after every iteration, i.e. each single spl
 Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods. Here, we use the rfeControl() function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called "fitControl". Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
 
 
-```{r, eval = F}
+```{r, eval = T}
 # 2 - Covariate selection with RFE =============================================
 ## 2.1 - Setting parameters ----------------------------------------------------
 # Repeatedcv = 3-times repeated 10-fold cross-validation
@@ -124,7 +123,7 @@ fm = as.formula(paste(soilatt," ~", paste0(ncovs,
 The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict.
 The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.
 
-```{r, eval = F}
+```{r, eval = T}
 # Calibrate the model using multiple cores
 cl <- makeCluster(detectCores()-1)
 registerDoParallel(cl)
@@ -142,7 +141,7 @@ stopCluster(cl)
 
 The selected covariates can be visualised in Trellis displays. Finally, the optimal predictors are stored in a dedicated R object.
 
-```{r, eval = F}
+```{r, eval = T}
 ## 2.3 - Plot selection of covariates ------------------------------------------
 trellis.par.set(caretTheme())
 plot(covsel, type = c("g", "o"))
@@ -151,6 +150,7 @@ plot(covsel, type = c("g", "o"))
 opt_covs <- predictors(covsel)
 
 ```
+
 
 ## Model calibration
 
@@ -202,7 +202,12 @@ x <- randomForest::importance(model$finalModel)
 model$importance <- x
 ## 3.5 - Print and save model --------------------------------------------------
 print(model)
-saveRDS(model, file = paste0("02-Outputs/models/model_",soilatt,".rds"))
+saveRDS(model, file = paste0("Digital-Soil-Mapping/02-Outputs/models/model_",soilatt,".rds"))
+```
+
+```{r, echo = F, eval = T}
+model <- readRDS(file = paste0("Digital-Soil-Mapping/02-Outputs/models/model_",soilatt,".rds"))
+print(model)
 ```
 
 ## Uncertainty assessment
@@ -261,7 +266,7 @@ The R^2^, RMSE, and the MEC are susceptible to bias through large error values. 
 Now, back to the mapping exercise: In practical terms, before calculating any of these indices, it is necessary to first extract observed and predicted values and then store them in two separate R objects. Next, both values are combined to a dataframe.
 
 
-```{r, eval = F}
+```{r, eval = T, message = F, warning = F}
 # 4 - Uncertainty assessment ===================================================
 # extract observed and predicted values
 o <- model$pred$obs
@@ -271,7 +276,7 @@ df <- data.frame(o,p)
 
 While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterplot of the observed vs predicted values maintaining the same range and scale for the X and Y axes. The dataframe is used for this purpose to plot observed values on the x-axis and predicted values on the y-axis.
 
-```{r, eval = F}
+```{r, eval = T, message = F}
 ## 4.1 - Plot and save scatterplot --------------------------------------------- 
 (g1 <- ggplot(df, aes(x = o, y = p)) + 
   geom_point(alpha = 0.1) + 
@@ -279,14 +284,14 @@ While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterp
   ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
   labs(title = soilatt) + 
   xlab("Observed") + ylab("Predicted"))
-ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
+ggsave(g1, filename = paste0("Digital-Soil-Mapping/02-Outputs/residuals_",soilatt,".png"), scale = 1, 
        units = "cm", width = 12, height = 12)
 
 ```
 
 Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the ME, RMSE, MAE, the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.
 
-```{r, eval = F}
+```{r, eval = T}
 ## 4.2 - Print accuracy coeficients --------------------------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
 eval(p,o)
@@ -294,11 +299,11 @@ eval(p,o)
 
 Finally, a variable importance plot is generated to visualise the relative importance of each covariate/predictor.
 
-```{r, eval = F}
+```{r, eval = T, message = F}
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
-png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
+png(filename = paste0("Digital-Soil-Mapping/02-Outputs/importance_",soilatt,".png"), 
     width = 15, height = 15, units = "cm", res = 600)
 g2
 dev.off()
@@ -426,4 +431,11 @@ writeRaster(pred_mean,
 writeRaster(pred_sd, 
             paste0("02-Outputs/maps/",soilatt,"_QRF_SD.tif"),
             overwrite=TRUE)
+```
+
+```{r, eval = T, echo = F, message = F}
+pred_mean <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF.tif")
+plot(pred_mean, main = "Mean")
+pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF_SD.tif")
+plot(pred_sd, main = "Standard deviation")
 ```
