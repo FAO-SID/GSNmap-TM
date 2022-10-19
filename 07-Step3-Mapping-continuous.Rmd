@@ -299,15 +299,21 @@ eval(p,o)
 
 Finally, a variable importance plot is generated to visualise the relative importance of each covariate/predictor.
 
-```{r, eval = T, message = F}
+```{r, eval = F, message = F}
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
 png(filename = paste0("Digital-Soil-Mapping/02-Outputs/importance_",soilatt,".png"), 
-    width = 15, height = 15, units = "cm", res = 600)
+   width = 15, height = 15, units = "cm", res = 600)
 g2
 dev.off()
 ```
+
+```{r, eval = T, echo = F, message=F}
+(g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
+g2
+```
+
 
 Finally, note that accuracy assessment has been discussed in @Wadoux2021, since the spatial distribution of soil samples might constrain the validity of the accuracy statistics. This is especially true in cases where the spatial distribution of observations is clustered. The authors recommended creating a kriging map of residuals before using them for assessing the map quality.
 
