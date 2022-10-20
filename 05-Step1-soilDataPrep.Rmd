@@ -72,7 +72,15 @@ To illustrate the different processes of this Technical Manual, we use three dat
 
 ### Georeferenced topsoil data
 
-These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) (Table \@ref(tab:exploratory1) and is shown in the following map as points. This dataset is used in [Chapter 7](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html#step-3-mapping-continuous-soil-properties) for mapping K. 
+These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) (Table \@ref(tab:table2)) and is shown in the following map as points. This dataset is used in [Chapter 7](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html#step-3-mapping-continuous-soil-properties) for mapping K. 
+
+```{r table2, echo=FALSE, message=FALSE, warning=FALSE}
+data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+kable_classic(full_width = T) %>%
+  #kable_styling(latex_options = 'striped', font_size = 10) %>%
+footnote(general = "Only the ten first rows are shown.")
+```
 
 ```{r exploratory1, eval=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -81,17 +89,13 @@ library(mapview)
 
 mapviewOptions(fgb = FALSE)
 data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
-kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
-kable_classic(full_width = F) %>%
-  #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Only the ten first rows are shown.")
 s <- st_as_sf(data, coords = c("x", "y"), crs = 4326)
 mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 ```
 
 ### Non-georeferenced topsoil data 
 
-The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province. This dataset is used to illustrate a case study where 
+The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province. This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-ii-mapping-without-point-coordinates.html)
 The following map shows the districts with the sample size (n).
 
 ```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE, hide = T}
