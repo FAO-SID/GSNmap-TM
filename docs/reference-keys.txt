@@ -7,7 +7,8 @@ fig:upload
 eq:scorpan
 fig:workflow1
 tab:data1
-tab:exploratory1
+tab:table2
+tab:table3
 tab:covs1
 fig:cv
 eq:me
