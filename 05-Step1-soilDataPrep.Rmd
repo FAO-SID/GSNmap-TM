@@ -79,7 +79,7 @@ data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
 kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Only the ten first rows are shown.")
+footnote(general = "Only the ten first rows are shown.", general_title = "")
 ```
 
 ```{r exploratory1, eval=TRUE, message=FALSE, warning=FALSE}
@@ -103,7 +103,7 @@ data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
 kable(booktabs = T, data[c(1:5,4001:4005),], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Only ten rows are shown.")
+footnote(general = "Only ten rows are shown.", general_title = "")
 ```
 
 The following map shows the districts with colours according to the sample size (n).
@@ -120,7 +120,15 @@ mapview(district, zcol = "n", lwd = 0)
 
 ### Soil profile data
 
-The third dataset belongs to the Soil Information System of Argentina ([SISINTA](http://sisinta.inta.gob.ar/), @Olmedo2017) which contains soil profiles collected from the sixties to recently years for soil survey purposes.
+Finally, the third dataset belongs to the Soil Information System of Argentina ([SISINTA](http://sisinta.inta.gob.ar/), @Olmedo2017) which contains soil profiles collected from the sixties to recently years for soil survey purposes. The data can be fetched using the package [SISINTAR](https://github.com/INTA-Suelos/SISINTAR#readme). Table \@ref(tab:table4) shows a subset of the data, and the map presents the distribution of soil profiles for the study area. This dataset is used in this chapter to illustrate the preprocessing steps required for data that come from soil profiles.
+
+```{r table4, echo=FALSE, message=FALSE, warning=FALSE}
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
+kable(booktabs = T, data[c(1:10),1:10], col.names = gsub("[.]", " ", names(data)[1:10]), caption = 'Soil profile dataset.', format = 'html', digits = c(0,0,6,6,0,0,0,1,1,2)) %>%
+kable_classic(full_width = F) %>%
+  #kable_styling(latex_options = 'striped', font_size = 10) %>%
+footnote(general = "Only ten rows are shown.", general_title = "")
+```
 
 ```{r exploratory data 3, eval=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
