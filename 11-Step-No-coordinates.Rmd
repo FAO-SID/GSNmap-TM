@@ -1,4 +1,4 @@
-# Annex III: Mapping without point coordinates
+# Annex III: Mapping without point coordinates {-}
 
 This chapter provides step-by-step instructions in case the soil measurements do not have point coordinates but come with information on the sampling region, i.e. location within an administrative unit. In this approach, soil samples are randomly distributed across the respective area (see Figure \@ref(fig:workflow2)).
 

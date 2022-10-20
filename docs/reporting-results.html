@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Reporting results | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Reporting results | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -248,16 +248,16 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-without-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data without coordinates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
-<li class="chapter" data-level="" data-path="annex-ii-mapping-without-point-coordinates.html"><a href="annex-ii-mapping-without-point-coordinates.html"><i class="fa fa-check"></i>Annex II: Mapping without point coordinates</a></li>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html"><i class="fa fa-check"></i>Annex III: Quality assurance and quality control</a>
+<li class="chapter" data-level="" data-path="annex-iii-mapping-without-point-coordinates.html"><a href="annex-iii-mapping-without-point-coordinates.html"><i class="fa fa-check"></i>Annex III: Mapping without point coordinates</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html"><i class="fa fa-check"></i>Annex IV: Quality assurance and quality control</a>
 <ul>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
 <ul>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
-<li class="chapter" data-level="" data-path="annex-iii-quality-assurance-and-quality-control.html"><a href="annex-iii-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -295,14 +295,14 @@ div.csl-indent {
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally layers on micronutrients, such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="reporting-results.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb94-2"><a href="reporting-results.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb94-3"><a href="reporting-results.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb94-4"><a href="reporting-results.html#cb94-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb94-5"><a href="reporting-results.html#cb94-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb94-6"><a href="reporting-results.html#cb94-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb94-7"><a href="reporting-results.html#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-8"><a href="reporting-results.html#cb94-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="reporting-results.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb99-2"><a href="reporting-results.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb99-3"><a href="reporting-results.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb99-4"><a href="reporting-results.html#cb99-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb99-5"><a href="reporting-results.html#cb99-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb99-6"><a href="reporting-results.html#cb99-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb99-7"><a href="reporting-results.html#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="reporting-results.html#cb99-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 
 </div>
             </section>
@@ -372,7 +372,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
