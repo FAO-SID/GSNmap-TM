@@ -4,7 +4,8 @@ author: "FAO"
 date: ""
 site: bookdown::bookdown_site
 output: 
-  #bookdown::pdf_book:
+  bookdown::pdf_book:
+    keep_tex: true
   bookdown::gitbook:
     config:
       fig_caption: yes
@@ -48,9 +49,10 @@ template: null
 ---
 
 
-```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE, tidy = T}
+```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE}
 options(knitr.table.format = "latex")
 options(width = 60)
+options(scipen=999)
 
 library(kableExtra)
 # Cache results
@@ -71,6 +73,7 @@ underscore_to_space <- function(x,...){
 }
 
 
+#bookdown::render_book("index.Rmd", c("bookdown::gitbook","bookdown::pdf_book"))
 #bookdown::render_book("index.Rmd", "bookdown::gitbook")
 #bookdown::clean_book(TRUE)
 #bookdown::render_book("index.Rmd", "bookdown::pdf_book")

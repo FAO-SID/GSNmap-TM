@@ -208,10 +208,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements of soil data</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#pre-processing-of-soil-data"><i class="fa fa-check"></i><b>5.1.1</b> Pre-processing of soil data</a></li>
-</ul></li>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-and-pre-processing-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements and pre-processing of soil data</a></li>
 <li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
@@ -486,7 +483,7 @@ The model calibration is done using a recursive feature elimination (RFE) algori
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="step-3-mapping-continuous-soil-properties.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.3 - Plot selection of covariates ------------------------------------------</span></span>
 <span id="cb79-2"><a href="step-3-mapping-continuous-soil-properties.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trellis.par.set</span>(<span class="fu">caretTheme</span>())</span>
 <span id="cb79-3"><a href="step-3-mapping-continuous-soil-properties.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(covsel, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;o&quot;</span>))</span></code></pre></div>
-<p><img src="DSM_CG_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="DSM_CG_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="step-3-mapping-continuous-soil-properties.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract selection of covariates and subset covs</span></span>
 <span id="cb80-2"><a href="step-3-mapping-continuous-soil-properties.html#cb80-2" aria-hidden="true" tabindex="-1"></a>opt_covs <span class="ot">&lt;-</span> <span class="fu">predictors</span>(covsel)</span></code></pre></div>
 </div>
@@ -605,7 +602,7 @@ The residuals produced by caret consist of tabular data with observed and predic
 <span id="cb85-5"><a href="step-3-mapping-continuous-soil-properties.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fu">min</span>(o), <span class="fu">max</span>(o))) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">aspect.ratio=</span><span class="dv">1</span>)<span class="sc">+</span> </span>
 <span id="cb85-6"><a href="step-3-mapping-continuous-soil-properties.html#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> soilatt) <span class="sc">+</span> </span>
 <span id="cb85-7"><a href="step-3-mapping-continuous-soil-properties.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Observed&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Predicted&quot;</span>))</span></code></pre></div>
-<p><img src="DSM_CG_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="DSM_CG_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="step-3-mapping-continuous-soil-properties.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(g1, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">&quot;Digital-Soil-Mapping/02-Outputs/residuals_&quot;</span>,soilatt,<span class="st">&quot;.png&quot;</span>), <span class="at">scale =</span> <span class="dv">1</span>, </span>
 <span id="cb86-2"><a href="step-3-mapping-continuous-soil-properties.html#cb86-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">12</span>)</span></code></pre></div>
 <p>Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the ME, RMSE, MAE, the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.</p>
@@ -620,7 +617,7 @@ The residuals produced by caret consist of tabular data with observed and predic
 <span id="cb88-5"><a href="step-3-mapping-continuous-soil-properties.html#cb88-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>, <span class="at">res =</span> <span class="dv">600</span>)</span>
 <span id="cb88-6"><a href="step-3-mapping-continuous-soil-properties.html#cb88-6" aria-hidden="true" tabindex="-1"></a>g2</span>
 <span id="cb88-7"><a href="step-3-mapping-continuous-soil-properties.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
-<p><img src="DSM_CG_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="DSM_CG_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <pre><code>##                               %IncMSE
 ## bio1                        6.3207830
 ## bio16                       5.7377668
@@ -771,7 +768,7 @@ The residuals produced by caret consist of tabular data with observed and predic
 <span id="cb93-12"><a href="step-3-mapping-continuous-soil-properties.html#cb93-12" aria-hidden="true" tabindex="-1"></a><span class="fu">writeRaster</span>(pred_sd, </span>
 <span id="cb93-13"><a href="step-3-mapping-continuous-soil-properties.html#cb93-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">paste0</span>(<span class="st">&quot;02-Outputs/maps/&quot;</span>,soilatt,<span class="st">&quot;_QRF_SD.tif&quot;</span>),</span>
 <span id="cb93-14"><a href="step-3-mapping-continuous-soil-properties.html#cb93-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">overwrite=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="DSM_CG_files/figure-html/unnamed-chunk-40-1.png" width="672" /><img src="DSM_CG_files/figure-html/unnamed-chunk-40-2.png" width="672" /></p>
+<p><img src="DSM_CG_files/figure-html/unnamed-chunk-41-1.png" width="672" /><img src="DSM_CG_files/figure-html/unnamed-chunk-41-2.png" width="672" /></p>
 
 </div>
 </div>

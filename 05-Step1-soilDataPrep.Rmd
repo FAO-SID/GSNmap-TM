@@ -1,6 +1,6 @@
 # Step 1: soil data preparation
 
-## Format requirements of soil data
+## Format requirements and pre-processing of soil data
 
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
@@ -35,16 +35,32 @@ In this chapter, step-by-step instructions are given on how to carry out all the
 
 Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *RStudio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
 
-### Pre-processing of soil data
-Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Here, common issues and examples are given on how to carry out some basic data handling steps in *RStudio*.
+Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Here, common issues and examples are given on how to carry out some basic data handling steps in *RStudio*. Next to in-built base R functions, the tidyverse package(s) offer a great help for data handling in **R**.
 
-```{r}
+```{r, echo = F, eval = T, message = F, warning = F}
+library(tidyverse)
+
+
+# load in data
+data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+
+
+```
+
+```{r, echo = T, eval = F}
+
+# Select columns
+coord <- data %>% select(ID, x, y, om, ph)
+
+# Filter
+
 # remove NAs
+
 
 # remove duplicates
 
 
-# select and filter
+
 
 
 # rename
@@ -53,6 +69,8 @@ Soil data usually require a pre-processing step to solve common issues such as, 
 
 
 ```
+
+
 
 
 

@@ -83,7 +83,7 @@ AOI <- st_as_sf(AOI)
 The next step consists in initialising our GEE account using the rgee package in **R**. However, before starting it is necessary to give a brief overview of the covariates that were listed in Table \@ref(tab:covs1) and where they can be found in the GEE environment. The GSP has created an repository of covariates that can be added to your GEE environment in the browser. For that users have to right-click on "Assets" in the left panel of the GEE code editor and select "Add a project". Then the window shown in Fig. \@ref(fig:assets_GSP) appears and one has to enter the project ID which is "digital-soil-mapping-gsp-fao" and click on select. 
 
 ```{r assets_GSP, echo = FALSE, fig.cap = "Add GSP covariate repository to your assets in GEE."}
-knitr::include_graphics("images/6.1_GSP_Covariate_repository.png")
+knitr::include_graphics("images/6.1_GSP_Covariate_repository.PNG")
 ```
 
 Now that the covariates were added to our GEE assets, we can initialise GEE via rgee in our *RStudio*.

@@ -47,6 +47,7 @@ The chapters are structured as following:
 * Annex I serves as a repository for the complete scripts needed for the GSNmap.
 * Annex II provides alternative step-by-step instructions for the special case of soil data without point coordinates.
 
-The GSNmap Technical Manual is structured as a practical document to be used by national experts in the endeavour to employ digital soil mapping techniques to generate national nutrient maps based on a common methodology. The concept of digital soil mapping presented here can however be also used in mapping exercises that focus on other soil properties and is therefore also relevant to scientists and digital soil mappers. 
+The GSNmap Technical Manual is structured as a practical document to be used by national experts in the endeavour to employ digital soil mapping techniques to generate national nutrient maps based on a common methodology. The concept of digital soil mapping presented here can however be also used in mapping exercises that focus on other soil properties and is therefore also relevant to scientists and digital soil mappers. The training material and the folders of the technical manual can be downloaded as .zip file here: https://github.com/FAO-GSP/GSNmap-TM/archive/refs/heads/main.zip. Alternatively, the GitHub repository can be cloned to your local device by using the following link: https://github.com/FAO-GSP/GSNmap-TM.git.
+
 
 

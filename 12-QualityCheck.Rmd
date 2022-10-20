@@ -3,9 +3,9 @@ The following protocol was devised to provide National Experts with a step-by-st
 
 The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.
 
-Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure \@ref(#fig:qa_qc)).
+Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure \@ref(fig:qa_qc)).
 
-```{r, qa_qc, echo = FALSE, fig.cap = "Quality assurance and quality control."}
+```{r qa_qc, echo = FALSE, fig.cap = "Quality assurance and quality control."}
 knitr::include_graphics("images/QA_QC.png")
 ```
 
@@ -13,11 +13,11 @@ Each step in the following protocol should be considered in order to detect and 
 
 ## Step 1: Completeness of layers {-}
 
-The following Table \ref{tab:products} gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.
+The following Table \ref(tab:products) gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.
 
 All 29 products must be georeferenced TIF (.tif) files.
 
-```{r, products, echo = FALSE, message=F, warning=F}
+```{r products, echo = FALSE, message=F, warning=F}
 options(knitr.table.format = "HTML")
 library(dplyr)
 library(kableExtra)
@@ -42,7 +42,7 @@ In the following section expected value ranges for each product category are pre
 
 The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties in the Information tab (Figure 16.2).
 
-```{r, qgis, echo = FALSE, fig.cap = "Quality assurance and quality control."}
+```{r qgis, echo = FALSE, fig.cap = "Quality assurance and quality control."}
 knitr::include_graphics("images/QA_QC.png")
 
 ```
