@@ -48,7 +48,7 @@ template: null
 ---
 
 
-```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE}
+```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE, tidy = T}
 options(knitr.table.format = "latex")
 options(width = 60)
 
