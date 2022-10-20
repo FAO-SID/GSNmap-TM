@@ -1,3 +1,4 @@
+fig:steps
 tab:nutrients
 fig:Rstudio
 fig:GEE
@@ -6,6 +7,7 @@ fig:upload
 eq:scorpan
 fig:workflow1
 tab:data1
+tab:exploratory1
 tab:covs1
 fig:cv
 eq:me
