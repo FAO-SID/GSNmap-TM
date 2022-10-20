@@ -77,7 +77,7 @@ These data were collected in 2011 by the National Institute of Agriculture Techn
 ```{r table2, echo=FALSE, message=FALSE, warning=FALSE}
 data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
 kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
-kable_classic(full_width = T) %>%
+kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Only the ten first rows are shown.")
 ```
@@ -95,8 +95,18 @@ mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 
 ### Non-georeferenced topsoil data 
 
-The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province. This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-ii-mapping-without-point-coordinates.html)
-The following map shows the districts with the sample size (n).
+The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province (Table \@ref(tab:table3)). This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-ii-mapping-without-point-coordinates.html)
+
+
+```{r table3, echo=FALSE, message=FALSE, warning=FALSE}
+data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
+kable(booktabs = T, data[c(1:5,4001:4005),], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+kable_classic(full_width = F) %>%
+  #kable_styling(latex_options = 'striped', font_size = 10) %>%
+footnote(general = "Only ten rows are shown.")
+```
+
+The following map shows the districts with colours according to the sample size (n).
 
 ```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE, hide = T}
 library(tidyverse)
@@ -104,7 +114,6 @@ library(sf)
 library(mapview)
 mapviewOptions(fgb = FALSE)
 data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
-data
 district <- st_read("Digital-Soil-Mapping/01-Data/district.shp", quiet = T)
 mapview(district, zcol = "n", lwd = 0)
 ```
