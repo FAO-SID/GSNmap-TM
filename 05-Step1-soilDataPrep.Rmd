@@ -95,7 +95,7 @@ mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 
 ### Non-georeferenced topsoil data 
 
-The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province (Table \@ref(tab:table3)). This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-ii-mapping-without-point-coordinates.html)
+The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province (Table \@ref(tab:table3)). This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-iii-mapping-without-point-coordinates.html)
 
 
 ```{r table3, echo=FALSE, message=FALSE, warning=FALSE}
