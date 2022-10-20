@@ -310,7 +310,7 @@ dev.off()
 ```
 
 ```{r, eval = T, echo = F, message=F}
-(g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
+g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1)
 g2
 ```
 

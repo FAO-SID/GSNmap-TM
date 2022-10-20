@@ -40,6 +40,7 @@ machine-learning-techniques
 mapping-of-soil-nutrients-and-associated-soil-attributes
 step-1-soil-data-preparation
 format-requirements-of-soil-data
+pre-processing-of-soil-data
 study-area-and-soil-data
 georeferenced-topsoil-data
 non-georeferenced-topsoil-data
