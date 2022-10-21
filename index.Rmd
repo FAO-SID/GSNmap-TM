@@ -1,7 +1,7 @@
 --- 
 title:  |
-  ![](images/frontcover.jpg)  
-  "Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)"
+  <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
+  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
 author: "FAO"
 date: ""
 site: bookdown::bookdown_site
@@ -90,6 +90,10 @@ underscore_to_space <- function(x,...){
 \listoffigures
 \listoftables
 \nopagebreak[4]
+
+```{r, echo = F, eval = T, fig.cap = ""}
+knitr::include_graphics("images/frontcover.jpg")
+```
 
 # Abbreviations and acronyms {-}
 BD

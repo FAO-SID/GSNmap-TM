@@ -1,4 +1,77 @@
 # Step 1: soil data preparation
+This chapter builds on the previous one as it requires basic understanding of the data handling using **R**. From this point onwards, the steps base on each other and are needed to complete the mapping process. The instructions covered in this chapter provides step-by-step instructions on the following items:
+
+1. Perform a quality check of the data
+2. Estimate bulk density using PTF
+<!-- * estimate organic carbon stocks (OCS) -->
+3. Harmonize soil layers (using splines)
+4. Plot and save the formatted soil data
+
+## Load national data
+As specified in the previous Chapter in regards to [pre-processing](preproc), the first steps again are used to set the working directory and load the necessary R packages. Note that there are many ways to install packages besides the most common way using the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or `remotes` are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
+
+```{r, eval = F}
+# 0 - User-defined variables ===================================================
+wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
+#wd <- "C:/GIT/Digital-Soil-Mapping"
+
+# 1 - Set working directory and load necessary packages ========================
+setwd(wd) # change the path accordingly
+
+library(tidyverse) # for data management and reshaping
+library(readxl) # for importing excel files
+library(mapview) # for seeing the profiles in a map
+library(sf) # to manage spatial data (shp vectors) 
+
+# install.packages("devtools") 
+# devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
+library(ithir) # for horizon harmonization
+
+```
+
+The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). In both cases, each row represent a sample (or horizon) and each column represent a variable. Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
+
+After reading in the file, the package `tidyverse` comes into play. By using the `select()` and `unique()` functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
+Finally, every time new datasets are loaded into **R**, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables. 
+
+
+```{r, eval = T, message=F, warning=F}
+# 2 - Import national data =====================================================
+# Save your national soil dataset in the data folder /01-Data as a .csv file or 
+# as a .xlsx file
+
+## 2.1 - for .xlsx files -------------------------------------------------------
+# Import horizon data 
+# hor <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
+# # Import site-level data
+# site <- read_excel("01-Data/soil_data.xlsx", sheet = 1)
+
+## 2.2 - for .csv files --------------------------------------------------------
+# Import horizon data 
+hor <- read_csv(file = "Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
+site <- select(hor, id_prof, x, y, date) %>% unique()
+hor <- select(hor, id_prof, id_hor, top:cec)
+
+# change names of key columns
+names(site)
+names(site)[1] <- "ProfID"
+names(hor)
+names(hor)[1] <- "ProfID"
+names(hor)[2] <- "HorID"
+# scan the data
+summary(site)
+summary(hor)
+```
+
+The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below).
+
+```{r select, eval = T}
+# 3 - select useful columns ====================================================
+## 3.1 - select columns --------------------------------------------------------
+hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+
+# the variable ph_h2o was renamed as ph
+```
 
 
 ## Data quality check
