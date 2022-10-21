@@ -2,8 +2,9 @@
 title:  |
   <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
   Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
-author: "FAO"
-date: ""
+subtitle: "*version 0.1*"
+author: "FAO - Global Soil Partnership"
+date: "21-Oct-2022"
 site: bookdown::bookdown_site
 output: 
   bookdown::pdf_book:
@@ -163,16 +164,20 @@ SOM
 # Editors {-}
 
 *Prepared by:*\
-**Global Soil Partnership Secretariat**\
-Ronald Vargas\
-
-# Contributors and reviewers {-}
 
 - *Moritz Mainka* (FAO-GSP) prepared the first draft, wrote the main text and compiled the R scripts\
 - *Marcos E. Angelini* (FAO-GSP) developed the mapping methodology, wrote the R scripts, and contributed to the main text\
 - *Isabel Luotto* (FAO-GSP) wrote the R scripts, reviewed and contributed to the main text, R scripts and methodology\
+- *Yusuf Yigini* (FAO-GSP) reviewed the bookdown and contributed to the main text\
 - *Yuxin Tong* (FAO-GSP) wrote Chapter 2 Soil Nutrients\
-- *Yusuf Yigini* (FAO-GSP) reviwed the bookdown and contributed to the main text\
+
+
+
+
+**Global Soil Partnership Secretariat**\
+Ronald Vargas\
+
+# Contributors and reviewers {-}
 
 
 **International Network of Soil Information Institutions**\

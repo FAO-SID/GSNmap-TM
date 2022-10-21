@@ -20,9 +20,11 @@ To illustrate the different processes of this Technical Manual, we use three dat
 
 ### Georeferenced topsoil data
 
-These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) (Table \@ref(tab:table2)) and is shown in the following map as points. This dataset is used in [Chapter 7](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html#step-3-mapping-continuous-soil-properties) for mapping K. 
+These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) (Table \@ref(tab:table2)) and is shown in the following map as points. This dataset is used in [Chapter 8](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html) for mapping K. 
 
 ```{r table2, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
 data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
 kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%

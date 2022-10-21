@@ -19,9 +19,9 @@ eq:rmse
 eq:r2
 eq:r
 eq:mec
+fig:workflow2
 tab:products
 fig:qgis
-fig:workflow2
 presentation
 background-and-objectives
 global-soil-partnership
@@ -70,4 +70,8 @@ model-calibration
 uncertainty-assessment
 predicting-soil-attributes
 reporting-results
+data-submission-form
 way-forward
+frequent-asked-questions-and-troubleshooting-answers
+issues-in-the-gsnmap-technical-manual
+get-help
