@@ -13,9 +13,9 @@ Mandatory data products are:
 * soil organic carbon concentration
 * bulk density
 
-Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally layers on micronutrients, such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.
+Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.
 
-We provide a Rmd file were the user needs to set the `soilatt` variable and the path to the data used as input.
+We provide a .Rmd file were the user needs to set the `soilatt` variable and the path to the data used as input.
 
 Then, run the following code:
 
@@ -30,3 +30,4 @@ output_file = paste0("Report_", soilatt,".pdf")
 rmarkdown::render(path, output_format, output_file)
 ```
 
+The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Presentation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Presentation | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -181,6 +181,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.2" data-path="presentation.html"><a href="presentation.html#global-soil-partnership"><i class="fa fa-check"></i><b>1.2</b> Global Soil Partnership</a></li>
 <li class="chapter" data-level="1.3" data-path="presentation.html"><a href="presentation.html#country-driven-approach-and-tasks"><i class="fa fa-check"></i><b>1.3</b> Country-driven approach and tasks</a></li>
 <li class="chapter" data-level="1.4" data-path="presentation.html"><a href="presentation.html#how-to-use-this-book"><i class="fa fa-check"></i><b>1.4</b> How to use this book</a></li>
+<li class="chapter" data-level="1.5" data-path="presentation.html"><a href="presentation.html#training-material"><i class="fa fa-check"></i><b>1.5</b> Training material</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="soil-nutrients.html"><a href="soil-nutrients.html"><i class="fa fa-check"></i><b>2</b> Soil Nutrients</a>
 <ul>
@@ -208,8 +209,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-and-pre-processing-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements and pre-processing of soil data</a></li>
-<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preproc"><i class="fa fa-check"></i><b>5.1</b> Format requirements and pre-processing of soil data</a></li>
+<li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.2</b> Study area and training material</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
 <li class="chapter" data-level="5.2.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#non-georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.2</b> Non-georeferenced topsoil data</a></li>
@@ -321,6 +322,10 @@ Figure 1.1: Overview of the steps to follow for the GSNmap generation.
 <li>Annex II provides alternative step-by-step instructions for the special case of soil data without point coordinates.</li>
 </ul>
 <p>The GSNmap Technical Manual is structured as a practical document to be used by national experts in the endeavour to employ digital soil mapping techniques to generate national nutrient maps based on a common methodology. The concept of digital soil mapping presented here can however be also used in mapping exercises that focus on other soil properties and is therefore also relevant to scientists and digital soil mappers. The training material and the folders of the technical manual can be downloaded as .zip file here: <a href="https://github.com/FAO-GSP/GSNmap-TM/archive/refs/heads/main.zip" class="uri">https://github.com/FAO-GSP/GSNmap-TM/archive/refs/heads/main.zip</a>. Alternatively, the GitHub repository can be cloned to your local device by using the following link: <a href="https://github.com/FAO-GSP/GSNmap-TM.git" class="uri">https://github.com/FAO-GSP/GSNmap-TM.git</a>.</p>
+</div>
+<div id="training-material" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Training material<a href="presentation.html#training-material" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The train material of this book is located in the <a href="https://github.com/FAO-GSP/GSNmap-TM">GSNmap-TM GitHub repository</a>. To download the input files and <strong>R</strong> scripts, clone the repository or click on <a href="https://github.com/FAO-GSP/GSNmap-TM/archive/refs/heads/main.zip">this link</a>, save the ZIP file and extract its content in a folder, preferable close to the root of your system, such as <code>"C:/GIT/"</code>.</p>
 
 </div>
 </div>
@@ -393,7 +398,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["DSM_CG.pdf", "DSM_CG.epub", "DSM_CG.mobi"],
+"download": ["DSM_CG.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
@@ -412,7 +417,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

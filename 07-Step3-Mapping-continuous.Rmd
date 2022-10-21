@@ -418,17 +418,19 @@ plot(pred_sd)
 
 ```
 
-The final step then consists of applying a cropland mask that is applied to the map and the uncertainty map since the soil data comes only from croplands and thus no assumption can be made to soil property values under different land covers. The maps are then stored as raster files (GeoTiff/.tif) in the Outputs folder. 
+The final step then consists of applying a cropland mask that is applied to the map and the uncertainty map since the soil data comes only from croplands and thus no assumption can be made to soil property values under different land covers. Additionally, a map is calculated to visualise the coefficient of variation (in Percent). The maps are then stored as raster files (GeoTiff/.tif) in the Outputs folder. 
 
-(!!! it seems that below the mask is only applied to pred_mean !!!)
 
 ```{r, eval = F}
 # 6 - Export final maps ========================================================
 ## 6.1 - Mask croplands --------------------------------------------------------
 msk <- rast("01-Data/mask_arg.tif")
 plot(msk)
-pred <- mask(pred_mean, msk)
-plot(pred)
+pred_mean <- mask(pred_mean, msk)
+plot(pred_mean)
+pred_sd <- mask(pred_sd, msk)
+plot(pred_sd)
+plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
 writeRaster(pred_mean, 
@@ -444,4 +446,5 @@ pred_mean <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF.tif")
 plot(pred_mean, main = "Mean")
 pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF_SD.tif")
 plot(pred_sd, main = "Standard deviation")
+plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 ```

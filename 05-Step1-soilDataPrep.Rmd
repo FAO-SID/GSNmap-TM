@@ -1,6 +1,6 @@
 # Step 1: soil data preparation
 
-## Format requirements and pre-processing of soil data
+## Format requirements and pre-processing of soil data {#preproc}
 
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
@@ -35,49 +35,112 @@ In this chapter, step-by-step instructions are given on how to carry out all the
 
 Thus, the instructions also serve as a very basic introduction to the functioning of **R** and *RStudio*. Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
 
-Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Here, common issues and examples are given on how to carry out some basic data handling steps in *RStudio*. Next to in-built base R functions, the tidyverse package(s) offer a great help for data handling in **R**.
+Soil data usually require a pre-processing step to solve common issues such as, arranging the data format, fixing soil horizon depth consistency, detecting unusual soil property measurements, among others issues. Here, common issues and examples are given on how to carry out some basic data handling steps in *RStudio*. 
 
-```{r, echo = F, eval = T, message = F, warning = F}
+So, let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. 
+One option is to right click on 'Session' menu > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD. 
+
+In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Since the file paths differ depending on where you stored the file on your computer, it is crucial to identify the correct file path. This can be done by accessing the *file explorer*. There you can browse to your training material folder and then right-click on the bar highlighted in red in the Figure \@ref(fig:explorer).
+
+```{r explorer, echo = FALSE, fig.cap = "Get file path from file explorer."}
+knitr::include_graphics("images/file-explorer.png")
+
+```
+
+The file path will appear with the following format: `C:\Users\GSNmap-TM\Digital-Soil-Mapping`. In order to enable **R** to read this as file path, it is necessary to replace the `\` by `/`. The resulting file path should look similar to this one: `C:/Users/GSNmap-TM/Digital-Soil-Mapping`. Once this is done, we can assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (`<-`) and name the **R** object on the left side (wd) (see code). Once this is done we use the function `setwd()` to set the WD to the file path that is specified in the object `wd`.
+
+```{r, echo = T, eval = F}
+# 0 - User-defined variables ===================================================
+wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
+#wd <- "C:/GIT/Digital-Soil-Mapping"
+
+# 1 - Set working directory and load necessary packages ========================
+setwd(wd) # change the path accordingly
+```
+
+Next to in-built base R functions, there is a vast amount of so-called packages that extend the functionalities of **R** and allow the use of **R** for a broad range of purposes. For data handling and management, the `tidyverse` package and its dependencies offer a great help. To load packages into the *RStudio* session, the `library` function is used. However, if the package is not installed, it is necessary to use the `install.packages` function first.
+
+```{r, echo = T, eval = T}
+
+#install.packages(tidyverse)
 library(tidyverse)
-
+library(readxl)
 
 # load in data
 data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
-
+head(data)
 
 ```
 
-```{r, echo = T, eval = F}
+The loaded dataset may comprise columns that are not of interest for the specific task you are working on. Therefore, it is recommendable to select the columns that are relevant to keep your working environment in *RStudio* clean. In the following example we specify the dataframe we want to select columns from and then link the dataset to the `select` function of the tidyverse to select only the coordinates and the ID column. Then, we store the selected columns in a new object called locations.
 
+```{r, echo = T, eval = T}
 # Select columns
-coord <- data %>% select(ID, x, y, om, ph)
+locations <- data %>% select(LabID, x, y)
+head(locations)
+```
 
+Another important operation is to filter by certain row values. For that, we can use the `filter` function of the tidyverse. Here, we want to filter to have only samples that are located below -38 degrees latitude (y). To do this, we can follow the same syntax as in the example above
+
+```{r, echo = T, eval = T}
 # Filter
+south_locations <- data %>% filter(y <= -38)
+head(south_locations)
+```
 
-# remove NAs
+One key operation is to rename column names. This is highly recommended before you start running the scripts explained in the following chapters. **R** is case-sensitive. This means that it matters whether you write `ph`, `PH`, or `pH`. Therefore, it is of utmost importance to be consistent and aware of any typos. To rename columns, it may be of interest to know how the columns are named. This can be checked by the `names()` function.
+Let's say we want to rename the "LabID" column and the "p_bray" column to "ID" and "p" in the south_locations dataframe with base R. The way to do this, is to assign the names of the columns of the dataframe to a vector (here called `names`) and select the name of a specific column in the vector by using squared brackets `[]` and a number that indicates the position of the column in the vector. Then, you can replace it with another name.
+Alternatively, one can follow the already known syntax of the tidyverse. Here, we rename three columns of the locations dataset using the `rename` function. Note that the new name is specified on the left side of the equal sign and the name to be replaced on the right side. 
 
+```{r, echo = T, eval = T}
+#check names
+names(south_locations)
+names <- names(south_locations)
+# renaming - base R option
+names[1] <- "ID"
+names[6] <- "p"
+names(south_locations)
 
-# remove duplicates
-
-
-
-
-
-# rename
-
-# change class of columns / check for class
+# renaming - tidyverse option
+names(locations)
+locations1 <- locations %>% rename(
+  ID = LabID,
+  long = x,
+  lat = y
+)
+names(locations1)
 
 
 ```
 
+Another important operation when working with soil data is to remove NA values. NA values are empty cells that for instance do not contain coordinates. In the following case, we are going to check whether the locations dataset has NA values in the x column. To this end, we can use the `is.na` function. This function returns logical (TRUE or FALSE) values. Based on these values, any NA observations that have NA values in the x column can be removed from the dataset. For that we use again squared brackets `[]` and the logical operator `!` that equals `is not` to select all observations of locations that don't have NA values in the x column.
 
+```{r, echo = T, eval = T}
+# identify NAs
+is.na(locations$x)
 
+locations <- locations[!is.na(locations$x),]
+head(locations)
+```
 
+Finally, another common source of error arises from wrongly classified columns. For instance, if the column containing the pH measurements is not numeric but is classified as character (means text). To check which classes were assigned to each column after reading in the data, it is recommendable to use `str()` and `summary()` to get an overview of the dataset.
+In case the variables are not assigned to the correct class one can use the `as.numeric` or `as.character` functions to convert the respective column. However, in the present case all variables are assigned correctly. If it is not the case with your soil data, there might be issues with some observations, e.g. text values in certain observations.
 
+```{r, echo = T, eval = T}
+# check for class
+str(data)
+summary(data)
+# change class of columns
 
-Once the original dataset is clean and consistent, data harmonisation is needed to produce synthetic horizons (such as 0–30 cm layer), as well as to make compatible measurements from different lab methods. Horizon harmonisation will be done with the mass preserving spline function [@Bishop1999; @Malone2009] fitted to each individual soil profile, which requires more than a layer per profile. 
+# to numeric
+#data$ph <- as.numeric(data$ph)
 
+# to character
+#data$LabID <- as.character(data$LabID)
 
+```
+For further guidance and more in-depth techniques to administer and handle soil data in **R**, it is recommended to check the GitHub repository on soil database management of the GSP: [FAO-GSP Soil DB](https://github.com/FAO-GSP/SoilDB). There, not only training data but also extensive example codes are available.
+For now, we continue working with the example dataset and assume that the dataset you are using complies with the format specified at the beginning.
 
 ## Study area and training material
 
@@ -160,11 +223,8 @@ mapview(s, zcol = "k", cex = 2.5, lwd = 0)
 ```
 
 ## Preparatory steps
-
-Now, let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. One option is to right click on 'Session' menu > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD.
-In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Therefore, we assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (`<-`) and name the **R** object on the left side (wd) (see code). Once this is done we use the function 'setwd()' to set the WD to the file path that is specified in the object `wd`.
-
-Before working on specific tasks in **R**, it is necessary to load the packages that contain the functions that are going to be used. Before one can load packages, they need to be installed. There are many ways to do this, yet the most common way is to call the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or `remotes` are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
+As specified above in the Section on [pre-processing](preproc) in the following lines of code, the working directory is set and the necessary R packages are loaded.
+Note that there are many ways to install packages besides the most common way using the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or `remotes` are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
 
 ```{r, eval = F}
 # 0 - User-defined variables ===================================================

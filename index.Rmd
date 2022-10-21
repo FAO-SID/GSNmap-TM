@@ -5,11 +5,11 @@ date: ""
 site: bookdown::bookdown_site
 output: 
   bookdown::pdf_book:
-    keep_tex: true
+    keep_tex: yes
   bookdown::gitbook:
     config:
       fig_caption: yes
-      download: ["pdf", "epub", "mobi"]
+      download: ["pdf"]
 header-includes:
     - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
     - \usepackage{titling}
@@ -73,7 +73,6 @@ underscore_to_space <- function(x,...){
 }
 
 
-#bookdown::render_book("index.Rmd", c("bookdown::gitbook","bookdown::pdf_book"))
 #bookdown::render_book("index.Rmd", "bookdown::gitbook")
 #bookdown::clean_book(TRUE)
 #bookdown::render_book("index.Rmd", "bookdown::pdf_book")
