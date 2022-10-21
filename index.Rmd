@@ -163,9 +163,16 @@ Ronald Vargas\
 
 # Contributors and reviewers {-}
 
+- *Moritz Mainka* (FAO-GSP) prepared the first draft, wrote the main text and compiled the R scripts\
+- *Marcos E. Angelini* (FAO-GSP) developed the mapping methodology, wrote the R scripts, and contributed to the main text\
+- *Isabel Luotto* (FAO-GSP) wrote the R scripts, reviewed and contributed to the main text, R scripts and methodology\
+- *Yuxin Tong* (FAO-GSP) wrote Chapter 2 Soil Nutrients\
+- *Yusuf Yigini* (FAO-GSP) reviwed the bookdown and contributed to the main text\
+
+
 **International Network of Soil Information Institutions**\
 
 **GSNmap working group**
 
 **Fourth Intergovernmental Technical Panel on Soils**\
-Mr Guillermo A. Studdert (Argentina); Mr Braj Singh (Australia); Mr Igue Attanda Mouinou (Benin); Ms Lúcia Helena Cunha dos Anjos (Brazil); Mr Georges Martial Ndzana (Cameroon); *Vicechair* Mr David Lobb (Canada); Mr Jin Ke (China); Mr Mohamed Abdel Wareth Mahmoud (Egypt); Mr Sheleme Beyene Jiru (Ethiopia); Mr Ravendra Naidu (Fiji); Ms Taina Pennanen (Finland); Ms Claire Chenu (France); Mr Ranjan Bhattacharyya (India); Mr Saeed Saadat (Iran); Ms Adele Muscolo (Italy); Ms Jeyanny Vijayanathan (Malaysia); Mr Jorge Dionisio Etchevers Barra (Mexico); Mr Matshwene Edwin Moshia (South Africa); *Chair* Ms Rosa Maria Poch (Spain); Mr Harsha Kumara Kadupitiya (Sri Lanka); Mr Ghiath Ahmad Alloush (Syria);Ms Nyambilila Abdallah Amuri (Tanzania); Ms Nopmanee Suvannang (Thailand); Mr Gaius Eudoxie (Trinidad and Tobago); Mr Pete Smith (United Kingdom); Mr Michael Castellano (United States of America); Ms Deyanira Lobo (Venezuela)\
+<!-- Mr Guillermo A. Studdert (Argentina); Mr Braj Singh (Australia); Mr Igue Attanda Mouinou (Benin); Ms Lúcia Helena Cunha dos Anjos (Brazil); Mr Georges Martial Ndzana (Cameroon); *Vicechair* Mr David Lobb (Canada); Mr Jin Ke (China); Mr Mohamed Abdel Wareth Mahmoud (Egypt); Mr Sheleme Beyene Jiru (Ethiopia); Mr Ravendra Naidu (Fiji); Ms Taina Pennanen (Finland); Ms Claire Chenu (France); Mr Ranjan Bhattacharyya (India); Mr Saeed Saadat (Iran); Ms Adele Muscolo (Italy); Ms Jeyanny Vijayanathan (Malaysia); Mr Jorge Dionisio Etchevers Barra (Mexico); Mr Matshwene Edwin Moshia (South Africa); *Chair* Ms Rosa Maria Poch (Spain); Mr Harsha Kumara Kadupitiya (Sri Lanka); Mr Ghiath Ahmad Alloush (Syria);Ms Nyambilila Abdallah Amuri (Tanzania); Ms Nopmanee Suvannang (Thailand); Mr Gaius Eudoxie (Trinidad and Tobago); Mr Pete Smith (United Kingdom); Mr Michael Castellano (United States of America); Ms Deyanira Lobo (Venezuela)\ -->

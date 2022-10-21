@@ -79,7 +79,7 @@ Once the original dataset is clean and consistent, data harmonisation is needed 
 
 
 
-## Study area and soil data
+## Study area and training material
 
 The study area is located in the southeast of the Pampas Region, in Argentina, from the foothills of the Ventania and Tandilia hill systems, until the southern coasts of the Buenos Aires Province. 
 To illustrate the different processes of this Technical Manual, we use three datasets from this region:
@@ -158,7 +158,6 @@ s <- data %>% filter(top==0)
 s <- st_as_sf(s, coords = c("x", "y"), crs = 4326)
 mapview(s, zcol = "k", cex = 2.5, lwd = 0)
 ```
-
 
 ## Preparatory steps
 
