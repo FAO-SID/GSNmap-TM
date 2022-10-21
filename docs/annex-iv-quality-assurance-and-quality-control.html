@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Annex IV: Quality assurance and quality control | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Annex IV: Quality assurance and quality control | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -208,7 +208,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>5</b> Step 1: soil data preparation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#format-requirements-and-pre-processing-of-soil-data"><i class="fa fa-check"></i><b>5.1</b> Format requirements and pre-processing of soil data</a></li>
+<li class="chapter" data-level="5.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#preproc"><i class="fa fa-check"></i><b>5.1</b> Format requirements and pre-processing of soil data</a></li>
 <li class="chapter" data-level="5.2" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#study-area-and-soil-data"><i class="fa fa-check"></i><b>5.2</b> Study area and soil data</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.2.1</b> Georeferenced topsoil data</a></li>
@@ -279,7 +279,7 @@ div.csl-indent {
 <h1>Annex IV: Quality assurance and quality control<a href="annex-iv-quality-assurance-and-quality-control.html#annex-iv-quality-assurance-and-quality-control" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 11 GSNmap first phase products.</p>
 <p>The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.</p>
-<p>Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure @ref(#fig:qa_qc)).</p>
+<p>Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure @ref(fig:qa_qc)).</p>
 <div class="figure">
 <img src="images/QA_QC.png" alt="Quality assurance and quality control." width="232" />
 <p class="caption">
@@ -289,7 +289,7 @@ div.csl-indent {
 <p>Each step in the following protocol should be considered in order to detect and eliminate errors, address data inaccuracies and assess the output completeness.</p>
 <div id="step-1-completeness-of-layers" class="section level2 unnumbered hasAnchor">
 <h2>Step 1: Completeness of layers<a href="annex-iv-quality-assurance-and-quality-control.html#step-1-completeness-of-layers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The following Table <span class="math inline">\(\ref{tab:products}\)</span> gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.</p>
+<p>The following Table (tab:products) gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.</p>
 <p>All 29 products must be georeferenced TIF (.tif) files.</p>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -617,7 +617,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["DSM_CG.pdf", "DSM_CG.epub", "DSM_CG.mobi"],
+"download": ["DSM_CG.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
@@ -636,7 +636,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
