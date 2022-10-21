@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Reporting results | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
+  <title>Chapter 9 Reporting results |  “Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)”</title>
   <meta name="description" content="GSNmap - Technical Manual" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Reporting results | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta property="og:title" content="Chapter 9 Reporting results |  “Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)”" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="GSNmap - Technical Manual" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Reporting results | Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
+  <meta name="twitter:title" content="Chapter 9 Reporting results |  “Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)”" />
   
   <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
@@ -271,7 +271,8 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="images/frontcover.jpg" /><br />
+“Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)”</p></a>
           </h1>
         </div>
 
@@ -296,14 +297,14 @@ div.csl-indent {
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a .Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="reporting-results.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb115-2"><a href="reporting-results.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb115-3"><a href="reporting-results.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb115-4"><a href="reporting-results.html#cb115-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb115-5"><a href="reporting-results.html#cb115-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb115-6"><a href="reporting-results.html#cb115-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb115-7"><a href="reporting-results.html#cb115-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-8"><a href="reporting-results.html#cb115-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="reporting-results.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb121-2"><a href="reporting-results.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb121-3"><a href="reporting-results.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb121-4"><a href="reporting-results.html#cb121-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb121-5"><a href="reporting-results.html#cb121-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb121-6"><a href="reporting-results.html#cb121-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb121-7"><a href="reporting-results.html#cb121-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-8"><a href="reporting-results.html#cb121-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 <p>The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.</p>
 
 </div>
