@@ -19,9 +19,9 @@ eq:rmse
 eq:r2
 eq:r
 eq:mec
-fig:workflow2
 tab:products
 fig:qgis
+fig:workflow2
 presentation
 background-and-objectives
 global-soil-partnership
@@ -44,13 +44,14 @@ principles
 environmental-covariates
 machine-learning-techniques
 mapping-of-soil-nutrients-and-associated-soil-attributes
-step-1-soil-data-preparation
+preprocessing
 preproc
 study-area-and-training-material
 georeferenced-topsoil-data
 non-georeferenced-topsoil-data
 soil-profile-data
 preparatory-steps
+step-1-soil-data-preparation
 data-quality-check
 calculation-of-pedo-transfer-functions
 check-for-outliers
