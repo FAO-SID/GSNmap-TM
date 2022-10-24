@@ -87,14 +87,24 @@ underscore_to_space <- function(x,...){
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}   
 \addtocontents{lof}{\protect\hypersetup{hidelinks}}
 \addtocontents{lot}{\protect\hypersetup{hidelinks}}
+\addtocontents{lot}{\protect\hypersetup{hidelinks}}
+\addtocontents{lot}{\protect\hypersetup{hidelinks}}
 \tableofcontents
 \listoffigures
 \listoftables
-\nopagebreak[4]
+\nopagebreak[5]
 
 ```{r, echo = F, eval = T, fig.cap = ""}
 knitr::include_graphics("images/frontcover.jpg")
 ```
+
+# Licence {-}
+
+The GSNmap Technical Manual is made available under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 IGO licence
+
+
+[CC BY-NC-SA 3.0 IGO](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/legalcode).
+
 
 # Abbreviations and acronyms {-}
 BD
@@ -165,11 +175,11 @@ SOM
 
 *Prepared by:*\
 
-- *Moritz Mainka* (FAO-GSP) prepared the first draft, wrote the main text and compiled the R scripts\
-- *Marcos E. Angelini* (FAO-GSP) developed the mapping methodology, wrote the R scripts, and contributed to the main text\
-- *Isabel Luotto* (FAO-GSP) wrote the R scripts, reviewed and contributed to the main text, R scripts and methodology\
-- *Yusuf Yigini* (FAO-GSP) reviewed the bookdown and contributed to the main text\
-- *Yuxin Tong* (FAO-GSP) wrote Chapter 2 Soil Nutrients\
+- *Moritz Mainka* 
+- *Marcos E. Angelini*  
+- *Isabel Luotto*
+- *Yusuf Yigini* 
+- *Yuxin Tong* 
 
 
 
