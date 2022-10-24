@@ -26,6 +26,6 @@ In Europe maps of chemical soil properties, including macronutrients like potass
 Global efforts to map nutrients in a harmonised way are suffering of constraints due to limited availability of appropriate soil data. The country-driven approach of the GSP has therefore the potential to improve data availability through the country-driven approach as it uses largely unexplored soil data, a harmonised mapping approach combined with national expertise on the regional soil resources. Therefore, in this technical manual, we present a DSM framework to map soil nutrients and associated properties using soil observations with latitude and longitude coordinates (point-support) (Figure \@ref(fig:workflow1)).
 
 ```{r workflow1, echo = FALSE, fig.cap = "Digital soil mapping approach for point-support data. Circles are the steps."}
-knitr::include_graphics("images/workflow_county_data.png")
+knitr::include_graphics("images/workflow_lat_long_data.png")
 ```
 
