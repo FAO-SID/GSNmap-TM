@@ -299,211 +299,175 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <div id="getting-prepared-to-map" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Getting prepared to map<a href="step-3-mapping-continuous-soil-properties.html#getting-prepared-to-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To begin, we open <em>RStudio</em> and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as ‘k’ in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="step-3-mapping-continuous-soil-properties.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
-<span id="cb96-2"><a href="step-3-mapping-continuous-soil-properties.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb96-3"><a href="step-3-mapping-continuous-soil-properties.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantile Regression Forest</span></span>
-<span id="cb96-4"><a href="step-3-mapping-continuous-soil-properties.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Property Mapping</span></span>
-<span id="cb96-5"><a href="step-3-mapping-continuous-soil-properties.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb96-6"><a href="step-3-mapping-continuous-soil-properties.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSP-Secretariat</span></span>
-<span id="cb96-7"><a href="step-3-mapping-continuous-soil-properties.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact: Isabel.Luotto@fao.org</span></span>
-<span id="cb96-8"><a href="step-3-mapping-continuous-soil-properties.html#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          Marcos.Angelini@fao.org</span></span>
-<span id="cb96-9"><a href="step-3-mapping-continuous-soil-properties.html#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
-<span id="cb96-10"><a href="step-3-mapping-continuous-soil-properties.html#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-11"><a href="step-3-mapping-continuous-soil-properties.html#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache </span></span>
-<span id="cb96-12"><a href="step-3-mapping-continuous-soil-properties.html#cb96-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb96-13"><a href="step-3-mapping-continuous-soil-properties.html#cb96-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-14"><a href="step-3-mapping-continuous-soil-properties.html#cb96-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory, soil attribute, and packages ======================</span></span>
-<span id="cb96-15"><a href="step-3-mapping-continuous-soil-properties.html#cb96-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-16"><a href="step-3-mapping-continuous-soil-properties.html#cb96-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
-<span id="cb96-17"><a href="step-3-mapping-continuous-soil-properties.html#cb96-17" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(&#39;Digital-Soil-Mapping/&#39;)</span></span>
-<span id="cb96-18"><a href="step-3-mapping-continuous-soil-properties.html#cb96-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-19"><a href="step-3-mapping-continuous-soil-properties.html#cb96-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Area of interest (shp)</span></span>
-<span id="cb96-20"><a href="step-3-mapping-continuous-soil-properties.html#cb96-20" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="st">&#39;Digital-Soil-Mapping/01-Data/AOI_Arg.shp&#39;</span></span>
-<span id="cb96-21"><a href="step-3-mapping-continuous-soil-properties.html#cb96-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-22"><a href="step-3-mapping-continuous-soil-properties.html#cb96-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Target soil attribute</span></span>
-<span id="cb96-23"><a href="step-3-mapping-continuous-soil-properties.html#cb96-23" aria-hidden="true" tabindex="-1"></a>soilatt <span class="ot">&lt;-</span> <span class="st">&#39;k&#39;</span></span>
-<span id="cb96-24"><a href="step-3-mapping-continuous-soil-properties.html#cb96-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-25"><a href="step-3-mapping-continuous-soil-properties.html#cb96-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for Uncertainty Assessment</span></span>
-<span id="cb96-26"><a href="step-3-mapping-continuous-soil-properties.html#cb96-26" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;Digital-Soil-Mapping/03-Scripts/eval.RData&quot;</span>)</span>
-<span id="cb96-27"><a href="step-3-mapping-continuous-soil-properties.html#cb96-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-28"><a href="step-3-mapping-continuous-soil-properties.html#cb96-28" aria-hidden="true" tabindex="-1"></a><span class="co">#load packages</span></span>
-<span id="cb96-29"><a href="step-3-mapping-continuous-soil-properties.html#cb96-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb96-30"><a href="step-3-mapping-continuous-soil-properties.html#cb96-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb96-31"><a href="step-3-mapping-continuous-soil-properties.html#cb96-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb96-32"><a href="step-3-mapping-continuous-soil-properties.html#cb96-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantregForest)</span>
-<span id="cb96-33"><a href="step-3-mapping-continuous-soil-properties.html#cb96-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb96-34"><a href="step-3-mapping-continuous-soil-properties.html#cb96-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb96-35"><a href="step-3-mapping-continuous-soil-properties.html#cb96-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="step-3-mapping-continuous-soil-properties.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb95-2"><a href="step-3-mapping-continuous-soil-properties.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb95-3"><a href="step-3-mapping-continuous-soil-properties.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantile Regression Forest</span></span>
+<span id="cb95-4"><a href="step-3-mapping-continuous-soil-properties.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Property Mapping</span></span>
+<span id="cb95-5"><a href="step-3-mapping-continuous-soil-properties.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb95-6"><a href="step-3-mapping-continuous-soil-properties.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSP-Secretariat</span></span>
+<span id="cb95-7"><a href="step-3-mapping-continuous-soil-properties.html#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact: Isabel.Luotto@fao.org</span></span>
+<span id="cb95-8"><a href="step-3-mapping-continuous-soil-properties.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          Marcos.Angelini@fao.org</span></span>
+<span id="cb95-9"><a href="step-3-mapping-continuous-soil-properties.html#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb95-10"><a href="step-3-mapping-continuous-soil-properties.html#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="step-3-mapping-continuous-soil-properties.html#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache </span></span>
+<span id="cb95-12"><a href="step-3-mapping-continuous-soil-properties.html#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb95-13"><a href="step-3-mapping-continuous-soil-properties.html#cb95-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-14"><a href="step-3-mapping-continuous-soil-properties.html#cb95-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory, soil attribute, and packages ======================</span></span>
+<span id="cb95-15"><a href="step-3-mapping-continuous-soil-properties.html#cb95-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-16"><a href="step-3-mapping-continuous-soil-properties.html#cb95-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
+<span id="cb95-17"><a href="step-3-mapping-continuous-soil-properties.html#cb95-17" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(&#39;Digital-Soil-Mapping/&#39;)</span></span>
+<span id="cb95-18"><a href="step-3-mapping-continuous-soil-properties.html#cb95-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-19"><a href="step-3-mapping-continuous-soil-properties.html#cb95-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Area of interest (shp)</span></span>
+<span id="cb95-20"><a href="step-3-mapping-continuous-soil-properties.html#cb95-20" aria-hidden="true" tabindex="-1"></a>AOI <span class="ot">&lt;-</span> <span class="st">&#39;Digital-Soil-Mapping/01-Data/AOI_Arg.shp&#39;</span></span>
+<span id="cb95-21"><a href="step-3-mapping-continuous-soil-properties.html#cb95-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-22"><a href="step-3-mapping-continuous-soil-properties.html#cb95-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Target soil attribute</span></span>
+<span id="cb95-23"><a href="step-3-mapping-continuous-soil-properties.html#cb95-23" aria-hidden="true" tabindex="-1"></a>soilatt <span class="ot">&lt;-</span> <span class="st">&#39;k&#39;</span></span>
+<span id="cb95-24"><a href="step-3-mapping-continuous-soil-properties.html#cb95-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-25"><a href="step-3-mapping-continuous-soil-properties.html#cb95-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for Uncertainty Assessment</span></span>
+<span id="cb95-26"><a href="step-3-mapping-continuous-soil-properties.html#cb95-26" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;Digital-Soil-Mapping/03-Scripts/eval.RData&quot;</span>)</span>
+<span id="cb95-27"><a href="step-3-mapping-continuous-soil-properties.html#cb95-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-28"><a href="step-3-mapping-continuous-soil-properties.html#cb95-28" aria-hidden="true" tabindex="-1"></a><span class="co">#load packages</span></span>
+<span id="cb95-29"><a href="step-3-mapping-continuous-soil-properties.html#cb95-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb95-30"><a href="step-3-mapping-continuous-soil-properties.html#cb95-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb95-31"><a href="step-3-mapping-continuous-soil-properties.html#cb95-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb95-32"><a href="step-3-mapping-continuous-soil-properties.html#cb95-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantregForest)</span>
+<span id="cb95-33"><a href="step-3-mapping-continuous-soil-properties.html#cb95-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb95-34"><a href="step-3-mapping-continuous-soil-properties.html#cb95-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb95-35"><a href="step-3-mapping-continuous-soil-properties.html#cb95-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code></pre></div>
 <p>Since soil data and environmental covariaes are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into <strong>R</strong> from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="step-3-mapping-continuous-soil-properties.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Merge soil data with environmental covariates ============================</span></span>
-<span id="cb97-2"><a href="step-3-mapping-continuous-soil-properties.html#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-3"><a href="step-3-mapping-continuous-soil-properties.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.1 - Load covariates -------------------------------------------------------</span></span>
-<span id="cb97-4"><a href="step-3-mapping-continuous-soil-properties.html#cb97-4" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path=</span> <span class="st">&#39;Digital-Soil-Mapping/01-Data/covs/&#39;</span>, <span class="at">pattern =</span> <span class="st">&#39;.tif$&#39;</span>, <span class="at">full.names =</span> T)</span>
-<span id="cb97-5"><a href="step-3-mapping-continuous-soil-properties.html#cb97-5" aria-hidden="true" tabindex="-1"></a>covs <span class="ot">&lt;-</span> <span class="fu">rast</span>(files)</span>
-<span id="cb97-6"><a href="step-3-mapping-continuous-soil-properties.html#cb97-6" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(files, <span class="st">&quot;Digital-Soil-Mapping/01-Data/covs/&quot;</span>)</span>
-<span id="cb97-7"><a href="step-3-mapping-continuous-soil-properties.html#cb97-7" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(ncovs, <span class="st">&quot;.tif&quot;</span>)</span>
-<span id="cb97-8"><a href="step-3-mapping-continuous-soil-properties.html#cb97-8" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(ncovs, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb97-9"><a href="step-3-mapping-continuous-soil-properties.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(covs) <span class="ot">&lt;-</span> ncovs</span>
-<span id="cb97-10"><a href="step-3-mapping-continuous-soil-properties.html#cb97-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-11"><a href="step-3-mapping-continuous-soil-properties.html#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="co"># covs &lt;- rast(&quot;01-Data/covs/covs.tif&quot;)</span></span>
-<span id="cb97-12"><a href="step-3-mapping-continuous-soil-properties.html#cb97-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ncovs &lt;- names(covs)</span></span>
-<span id="cb97-13"><a href="step-3-mapping-continuous-soil-properties.html#cb97-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-14"><a href="step-3-mapping-continuous-soil-properties.html#cb97-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.2 - Load the soil data (Script 2) -----------------------------------------</span></span>
-<span id="cb97-15"><a href="step-3-mapping-continuous-soil-properties.html#cb97-15" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Digital-Soil-Mapping/01-Data/data_with_coord.csv&quot;</span>)</span>
-<span id="cb97-16"><a href="step-3-mapping-continuous-soil-properties.html#cb97-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-17"><a href="step-3-mapping-continuous-soil-properties.html#cb97-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert soil data into a spatial object (check https://epsg.io/6204)</span></span>
-<span id="cb97-18"><a href="step-3-mapping-continuous-soil-properties.html#cb97-18" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">vect</span>(dat, <span class="at">geom=</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="at">crs =</span> <span class="fu">crs</span>(covs))</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="step-3-mapping-continuous-soil-properties.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Merge soil data with environmental covariates ============================</span></span>
+<span id="cb96-2"><a href="step-3-mapping-continuous-soil-properties.html#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="step-3-mapping-continuous-soil-properties.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.1 - Load covariates -------------------------------------------------------</span></span>
+<span id="cb96-4"><a href="step-3-mapping-continuous-soil-properties.html#cb96-4" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path=</span> <span class="st">&#39;Digital-Soil-Mapping/01-Data/covs/&#39;</span>, <span class="at">pattern =</span> <span class="st">&#39;.tif$&#39;</span>, <span class="at">full.names =</span> T)</span>
+<span id="cb96-5"><a href="step-3-mapping-continuous-soil-properties.html#cb96-5" aria-hidden="true" tabindex="-1"></a>covs <span class="ot">&lt;-</span> <span class="fu">rast</span>(files)</span>
+<span id="cb96-6"><a href="step-3-mapping-continuous-soil-properties.html#cb96-6" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(files, <span class="st">&quot;Digital-Soil-Mapping/01-Data/covs/&quot;</span>)</span>
+<span id="cb96-7"><a href="step-3-mapping-continuous-soil-properties.html#cb96-7" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(ncovs, <span class="st">&quot;.tif&quot;</span>)</span>
+<span id="cb96-8"><a href="step-3-mapping-continuous-soil-properties.html#cb96-8" aria-hidden="true" tabindex="-1"></a>ncovs <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(ncovs, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb96-9"><a href="step-3-mapping-continuous-soil-properties.html#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(covs) <span class="ot">&lt;-</span> ncovs</span>
+<span id="cb96-10"><a href="step-3-mapping-continuous-soil-properties.html#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-11"><a href="step-3-mapping-continuous-soil-properties.html#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="co"># covs &lt;- rast(&quot;01-Data/covs/covs.tif&quot;)</span></span>
+<span id="cb96-12"><a href="step-3-mapping-continuous-soil-properties.html#cb96-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ncovs &lt;- names(covs)</span></span>
+<span id="cb96-13"><a href="step-3-mapping-continuous-soil-properties.html#cb96-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-14"><a href="step-3-mapping-continuous-soil-properties.html#cb96-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.2 - Load the soil data (Script 2) -----------------------------------------</span></span>
+<span id="cb96-15"><a href="step-3-mapping-continuous-soil-properties.html#cb96-15" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Digital-Soil-Mapping/01-Data/data_with_coord.csv&quot;</span>)</span>
+<span id="cb96-16"><a href="step-3-mapping-continuous-soil-properties.html#cb96-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-17"><a href="step-3-mapping-continuous-soil-properties.html#cb96-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert soil data into a spatial object (check https://epsg.io/6204)</span></span>
+<span id="cb96-18"><a href="step-3-mapping-continuous-soil-properties.html#cb96-18" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">vect</span>(dat, <span class="at">geom=</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="at">crs =</span> <span class="fu">crs</span>(covs))</span></code></pre></div>
 <p>The shapefile can be reprojected to match the CRS of the covariates using the project function of the terra package.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="step-3-mapping-continuous-soil-properties.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproject point coordinates to match coordinate system of covariates</span></span>
-<span id="cb98-2"><a href="step-3-mapping-continuous-soil-properties.html#cb98-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(dat, covs)</span>
-<span id="cb98-3"><a href="step-3-mapping-continuous-soil-properties.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="step-3-mapping-continuous-soil-properties.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproject point coordinates to match coordinate system of covariates</span></span>
+<span id="cb97-2"><a href="step-3-mapping-continuous-soil-properties.html#cb97-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(dat, covs)</span>
+<span id="cb97-3"><a href="step-3-mapping-continuous-soil-properties.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span></code></pre></div>
 <pre><code>## [1] &quot;LabID&quot;  &quot;om&quot;     &quot;ph&quot;     &quot;p_bray&quot; &quot;k&quot;</code></pre>
 <p>Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the summary() command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the na.omit() function.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="step-3-mapping-continuous-soil-properties.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.3 - Extract values from covariates to the soil points ---------------------</span></span>
-<span id="cb100-2"><a href="step-3-mapping-continuous-soil-properties.html#cb100-2" aria-hidden="true" tabindex="-1"></a>pv <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(<span class="at">x =</span> covs, <span class="at">y =</span> dat, <span class="at">xy=</span>F)</span>
-<span id="cb100-3"><a href="step-3-mapping-continuous-soil-properties.html#cb100-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dat,pv)</span>
-<span id="cb100-4"><a href="step-3-mapping-continuous-soil-properties.html#cb100-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
-<span id="cb100-5"><a href="step-3-mapping-continuous-soil-properties.html#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-6"><a href="step-3-mapping-continuous-soil-properties.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span></code></pre></div>
-<pre><code>##     LabID                 om              ph            p_bray             k         
-##  Length:119         Min.   :1.447   Min.   :5.540   Min.   : 4.160   Min.   : 216.9  
-##  Class :character   1st Qu.:3.524   1st Qu.:6.035   1st Qu.: 9.798   1st Qu.: 523.9  
-##  Mode  :character   Median :4.328   Median :6.270   Median :13.545   Median : 652.3  
-##                     Mean   :4.217   Mean   :6.306   Mean   :15.117   Mean   : 656.8  
-##                     3rd Qu.:4.914   3rd Qu.:6.515   3rd Qu.:17.723   3rd Qu.: 765.8  
-##                     Max.   :6.261   Max.   :8.200   Max.   :54.561   Max.   :1103.0  
-##                                                                                      
-##        ID             bio1           bio12          bio13          bio14     
-##  Min.   :  1.0   Min.   :44405   Min.   :6933   Min.   :2013   Min.   :1152  
-##  1st Qu.: 30.5   1st Qu.:44759   1st Qu.:8442   1st Qu.:2262   1st Qu.:1633  
-##  Median : 60.0   Median :45034   Median :8736   Median :2333   Median :1826  
-##  Mean   : 60.0   Mean   :45036   Mean   :8710   Mean   :2373   Mean   :1847  
-##  3rd Qu.: 89.5   3rd Qu.:45257   3rd Qu.:8983   3rd Qu.:2463   3rd Qu.:2072  
-##  Max.   :119.0   Max.   :45958   Max.   :9749   Max.   :2904   Max.   :2634  
-##                                                                              
-##      bio16          bio17           bio5            bio6           crops      
-##  Min.   :2306   Min.   :1244   Min.   :41928   Min.   :44340   Min.   : 9.00  
-##  1st Qu.:2692   1st Qu.:1568   1st Qu.:45240   1st Qu.:44931   1st Qu.:38.50  
-##  Median :2835   Median :1742   Median :45799   Median :45437   Median :46.00  
-##  Mean   :2868   Mean   :1773   Mean   :45716   Mean   :45498   Mean   :42.93  
-##  3rd Qu.:3011   3rd Qu.:1957   3rd Qu.:46447   3rd Qu.:45691   3rd Qu.:51.00  
-##  Max.   :3480   Max.   :2528   Max.   :47644   Max.   :47939   Max.   :62.00  
-##                                                                               
-##  dtm_curvature_250m dtm_downslopecurvature_250m  dtm_dvm_250m     dtm_dvm2_250m    
-##  Min.   :-13.1433   Min.   :-13.5754            Min.   :-89.806   Min.   :-89.221  
-##  1st Qu.: -1.0882   1st Qu.: -1.3200            1st Qu.:-20.461   1st Qu.:-18.593  
-##  Median : -0.9197   Median : -1.0000            Median :  7.328   Median :  6.035  
-##  Mean   : -1.1741   Mean   : -1.2107            Mean   :  8.514   Mean   :  7.941  
-##  3rd Qu.: -0.4017   3rd Qu.: -0.3355            3rd Qu.: 25.068   3rd Qu.: 20.216  
-##  Max.   :  0.6796   Max.   :  2.3846            Max.   :199.570   Max.   :269.711  
-##                                                                                    
-##  dtm_elevation_250m  dtm_mrn_250m    dtm_neg_openness_250m dtm_pos_openness_250m
-##  Min.   : 15.00     Min.   :0.0000   Min.   :155.4         Min.   :155.0        
-##  1st Qu.: 76.35     1st Qu.:0.0000   1st Qu.:157.0         1st Qu.:157.0        
-##  Median :135.08     Median :0.1366   Median :157.0         Median :157.0        
-##  Mean   :131.67     Mean   :0.8167   Mean   :156.9         Mean   :156.9        
-##  3rd Qu.:187.17     3rd Qu.:0.9419   3rd Qu.:157.0         3rd Qu.:157.0        
-##  Max.   :284.86     Max.   :8.3336   Max.   :157.0         Max.   :157.0        
-##                                                                                 
-##  dtm_slope_250m    dtm_tpi_250m       dtm_twi_500m   dtm_upslopecurvature_250m
-##  Min.   :0.0000   Min.   :-3.56796   Min.   :100.2   Min.   :-5.3686          
-##  1st Qu.:0.0000   1st Qu.: 0.00000   1st Qu.:111.3   1st Qu.: 0.1398          
-##  Median :0.0000   Median : 0.00000   Median :116.0   Median : 0.9123          
-##  Mean   :0.4932   Mean   : 0.01338   Mean   :114.9   Mean   : 1.0011          
-##  3rd Qu.:0.9890   3rd Qu.: 0.00000   3rd Qu.:118.4   3rd Qu.: 1.7750          
-##  Max.   :3.1449   Max.   : 3.16732   Max.   :122.5   Max.   : 7.9242          
-##                                                                               
-##   dtm_vbf_250m    flooded_vegetation fpar_030405_500m_mean fpar_030405_500m_sd
-##  Min.   : 27.47   Min.   :3.000      Min.   :26.19         Min.   : 8.125     
-##  1st Qu.:369.30   1st Qu.:3.000      1st Qu.:40.56         1st Qu.:13.094     
-##  Median :461.43   Median :3.000      Median :47.25         Median :15.844     
-##  Mean   :463.81   Mean   :3.286      Mean   :46.32         Mean   :15.549     
-##  3rd Qu.:608.62   3rd Qu.:3.000      3rd Qu.:52.23         3rd Qu.:17.875     
-##  Max.   :843.12   Max.   :9.000      Max.   :62.44         Max.   :20.500     
-##                                      NA&#39;s   :1             NA&#39;s   :1          
-##  fpar_060708_500m_mean fpar_060708_500m_sd fpar_091011_500m_mean fpar_091011_500m_sd
-##  Min.   :18.19         Min.   : 8.000      Min.   :40.50         Min.   : 8.50      
-##  1st Qu.:25.97         1st Qu.: 9.953      1st Qu.:50.33         1st Qu.:13.14      
-##  Median :32.62         Median :11.875      Median :52.44         Median :14.88      
-##  Mean   :32.61         Mean   :11.912      Mean   :52.75         Mean   :14.79      
-##  3rd Qu.:38.33         3rd Qu.:13.188      3rd Qu.:55.33         3rd Qu.:16.97      
-##  Max.   :52.19         Max.   :18.688      Max.   :63.19         Max.   :20.56      
-##  NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1          
-##  fpar_120102_500m_mean fpar_120102_500m_sd     grass       lstd_030405_mean
-##  Min.   :28.75         Min.   : 7.25       Min.   : 6.00   Min.   :14550   
-##  1st Qu.:43.53         1st Qu.:12.50       1st Qu.:13.00   1st Qu.:14642   
-##  Median :47.19         Median :14.28       Median :15.00   Median :14653   
-##  Mean   :47.10         Mean   :13.97       Mean   :17.71   Mean   :14655   
-##  3rd Qu.:53.11         3rd Qu.:15.44       3rd Qu.:19.00   3rd Qu.:14671   
-##  Max.   :60.75         Max.   :18.56       Max.   :50.00   Max.   :14710   
-##  NA&#39;s   :1             NA&#39;s   :1                                           
-##  lstd_030405_sd  lstd_060708_mean lstd_060708_sd  lstd_091011_mean lstd_091011_sd 
-##  Min.   :223.4   Min.   :14177    Min.   :131.1   Min.   :14729    Min.   :213.7  
-##  1st Qu.:250.9   1st Qu.:14214    1st Qu.:151.2   1st Qu.:14842    1st Qu.:240.2  
-##  Median :273.8   Median :14227    Median :159.0   Median :14861    Median :248.4  
-##  Mean   :273.6   Mean   :14228    Mean   :158.6   Mean   :14863    Mean   :250.1  
-##  3rd Qu.:292.1   3rd Qu.:14243    3rd Qu.:165.6   3rd Qu.:14887    3rd Qu.:259.5  
-##  Max.   :339.0   Max.   :14278    Max.   :181.7   Max.   :14935    Max.   :353.7  
-##                                                                                   
-##  lstd_120102_mean lstd_120102_sd  ndlst_030405_mean ndlst_030405_sd ndlst_060708_mean
-##  Min.   :15111    Min.   :135.6   Min.   :1839      Min.   :427.4   Min.   :1540     
-##  1st Qu.:15194    1st Qu.:177.9   1st Qu.:2004      1st Qu.:491.6   1st Qu.:1673     
-##  Median :15256    Median :190.4   Median :2063      Median :531.8   Median :1757     
-##  Mean   :15248    Mean   :188.8   Mean   :2066      Mean   :533.8   Mean   :1785     
-##  3rd Qu.:15289    3rd Qu.:198.6   3rd Qu.:2130      3rd Qu.:568.6   3rd Qu.:1881     
-##  Max.   :15418    Max.   :240.2   Max.   :2371      Max.   :663.2   Max.   :2284     
-##                                                                                      
-##  ndlst_060708_sd ndlst_091011_mean ndlst_091011_sd ndlst_120102_mean ndlst_120102_sd
-##  Min.   :468.7   Min.   :2423      Min.   :489.2   Min.   :2629      Min.   :464.0  
-##  1st Qu.:556.9   1st Qu.:2865      1st Qu.:591.2   1st Qu.:2902      1st Qu.:610.8  
-##  Median :589.2   Median :2929      Median :630.7   Median :3030      Median :633.0  
-##  Mean   :592.1   Mean   :2935      Mean   :629.8   Mean   :3035      Mean   :634.2  
-##  3rd Qu.:629.9   3rd Qu.:3013      3rd Qu.:657.7   3rd Qu.:3133      3rd Qu.:658.0  
-##  Max.   :716.7   Max.   :3191      Max.   :797.4   Max.   :3463      Max.   :787.3  
-##                                                                                     
-##  ndvi_030405_250m_mean ndvi_030405_250m_sd ndvi_060708_250m_mean ndvi_060708_250m_sd
-##  Min.   :3369          Min.   : 692        Min.   :3147          Min.   : 557.0     
-##  1st Qu.:4659          1st Qu.:1171        1st Qu.:3786          1st Qu.: 937.5     
-##  Median :5097          Median :1384        Median :4182          Median :1095.0     
-##  Mean   :5054          Mean   :1399        Mean   :4238          Mean   :1126.9     
-##  3rd Qu.:5489          3rd Qu.:1668        3rd Qu.:4604          3rd Qu.:1282.5     
-##  Max.   :6506          Max.   :2081        Max.   :5613          Max.   :1768.0     
-##                                                                                     
-##  ndvi_091011_250m_mean ndvi_091011_250m_sd ndvi_120102_250m_mean ndvi_120102_250m_sd
-##  Min.   :4607          Min.   : 574        Min.   :3537          Min.   : 778       
-##  1st Qu.:5342          1st Qu.:1244        1st Qu.:4852          1st Qu.:1278       
-##  Median :5624          Median :1696        Median :5255          Median :1583       
-##  Mean   :5611          Mean   :1669        Mean   :5239          Mean   :1544       
-##  3rd Qu.:5864          3rd Qu.:2104        3rd Qu.:5802          3rd Qu.:1820       
-##  Max.   :6669          Max.   :2602        Max.   :6823          Max.   :2175       
-##                                                                                     
-##      ngd10       pet_penman_max  pet_penman_mean pet_penman_min pet_penman_range
-##  Min.   :42549   Min.   :18539   Min.   :17555   Min.   :7255   Min.   :17637   
-##  1st Qu.:44130   1st Qu.:19701   1st Qu.:18503   1st Qu.:7930   1st Qu.:19615   
-##  Median :45011   Median :20420   Median :18931   Median :8478   Median :20317   
-##  Mean   :45444   Mean   :20459   Mean   :19002   Mean   :8439   Mean   :20347   
-##  3rd Qu.:46400   3rd Qu.:21025   3rd Qu.:19578   3rd Qu.:8879   3rd Qu.:21266   
-##  Max.   :50621   Max.   :22640   Max.   :20793   Max.   :9682   Max.   :22388   
-##                                                                                 
-##   sfcWind_max    sfcWind_mean  sfcWind_range    shrub_and_scrub    snow_cover    
-##  Min.   :4725   Min.   :4902   Min.   : 767.6   Min.   : 4.000   Min.   :0.0000  
-##  1st Qu.:5410   1st Qu.:5662   1st Qu.:1164.9   1st Qu.: 6.000   1st Qu.:0.6562  
-##  Median :5737   Median :6006   Median :1257.8   Median : 7.000   Median :1.2500  
-##  Mean   :5696   Mean   :5931   Mean   :1267.4   Mean   : 7.378   Mean   :1.7206  
-##  3rd Qu.:5976   3rd Qu.:6206   3rd Qu.:1382.6   3rd Qu.: 8.000   3rd Qu.:2.4688  
-##  Max.   :6569   Max.   :6829   Max.   :2018.2   Max.   :15.000   Max.   :6.1875  
-##                                                                                  
-##  swir_060708_500m_mean     trees       
-##  Min.   :121.4         Min.   : 4.000  
-##  1st Qu.:146.1         1st Qu.: 5.000  
-##  Median :150.1         Median : 6.000  
-##  Mean   :151.3         Mean   : 6.697  
-##  3rd Qu.:156.2         3rd Qu.: 7.500  
-##  Max.   :178.7         Max.   :32.000  
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="step-3-mapping-continuous-soil-properties.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.3 - Extract values from covariates to the soil points ---------------------</span></span>
+<span id="cb99-2"><a href="step-3-mapping-continuous-soil-properties.html#cb99-2" aria-hidden="true" tabindex="-1"></a>pv <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(<span class="at">x =</span> covs, <span class="at">y =</span> dat, <span class="at">xy=</span>F)</span>
+<span id="cb99-3"><a href="step-3-mapping-continuous-soil-properties.html#cb99-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dat,pv)</span>
+<span id="cb99-4"><a href="step-3-mapping-continuous-soil-properties.html#cb99-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
+<span id="cb99-5"><a href="step-3-mapping-continuous-soil-properties.html#cb99-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-6"><a href="step-3-mapping-continuous-soil-properties.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span></code></pre></div>
+<pre><code>##     LabID                 om              ph            p_bray             k                ID             bio1      
+##  Length:119         Min.   :1.447   Min.   :5.540   Min.   : 4.160   Min.   : 216.9   Min.   :  1.0   Min.   :44405  
+##  Class :character   1st Qu.:3.524   1st Qu.:6.035   1st Qu.: 9.798   1st Qu.: 523.9   1st Qu.: 30.5   1st Qu.:44759  
+##  Mode  :character   Median :4.328   Median :6.270   Median :13.545   Median : 652.3   Median : 60.0   Median :45034  
+##                     Mean   :4.217   Mean   :6.306   Mean   :15.117   Mean   : 656.8   Mean   : 60.0   Mean   :45036  
+##                     3rd Qu.:4.914   3rd Qu.:6.515   3rd Qu.:17.723   3rd Qu.: 765.8   3rd Qu.: 89.5   3rd Qu.:45257  
+##                     Max.   :6.261   Max.   :8.200   Max.   :54.561   Max.   :1103.0   Max.   :119.0   Max.   :45958  
+##                                                                                                                      
+##      bio12          bio13          bio14          bio16          bio17           bio5            bio6      
+##  Min.   :6933   Min.   :2013   Min.   :1152   Min.   :2306   Min.   :1244   Min.   :41928   Min.   :44340  
+##  1st Qu.:8442   1st Qu.:2262   1st Qu.:1633   1st Qu.:2692   1st Qu.:1568   1st Qu.:45240   1st Qu.:44931  
+##  Median :8736   Median :2333   Median :1826   Median :2835   Median :1742   Median :45799   Median :45437  
+##  Mean   :8710   Mean   :2373   Mean   :1847   Mean   :2868   Mean   :1773   Mean   :45716   Mean   :45498  
+##  3rd Qu.:8983   3rd Qu.:2463   3rd Qu.:2072   3rd Qu.:3011   3rd Qu.:1957   3rd Qu.:46447   3rd Qu.:45691  
+##  Max.   :9749   Max.   :2904   Max.   :2634   Max.   :3480   Max.   :2528   Max.   :47644   Max.   :47939  
+##                                                                                                            
+##      crops       dtm_curvature_250m dtm_downslopecurvature_250m  dtm_dvm_250m     dtm_dvm2_250m     dtm_elevation_250m
+##  Min.   : 9.00   Min.   :-13.1433   Min.   :-13.5754            Min.   :-89.806   Min.   :-89.221   Min.   : 15.00    
+##  1st Qu.:38.50   1st Qu.: -1.0882   1st Qu.: -1.3200            1st Qu.:-20.461   1st Qu.:-18.593   1st Qu.: 76.35    
+##  Median :46.00   Median : -0.9197   Median : -1.0000            Median :  7.328   Median :  6.035   Median :135.08    
+##  Mean   :42.93   Mean   : -1.1741   Mean   : -1.2107            Mean   :  8.514   Mean   :  7.941   Mean   :131.67    
+##  3rd Qu.:51.00   3rd Qu.: -0.4017   3rd Qu.: -0.3355            3rd Qu.: 25.068   3rd Qu.: 20.216   3rd Qu.:187.17    
+##  Max.   :62.00   Max.   :  0.6796   Max.   :  2.3846            Max.   :199.570   Max.   :269.711   Max.   :284.86    
+##                                                                                                                       
+##   dtm_mrn_250m    dtm_neg_openness_250m dtm_pos_openness_250m dtm_slope_250m    dtm_tpi_250m       dtm_twi_500m  
+##  Min.   :0.0000   Min.   :155.4         Min.   :155.0         Min.   :0.0000   Min.   :-3.56796   Min.   :100.2  
+##  1st Qu.:0.0000   1st Qu.:157.0         1st Qu.:157.0         1st Qu.:0.0000   1st Qu.: 0.00000   1st Qu.:111.3  
+##  Median :0.1366   Median :157.0         Median :157.0         Median :0.0000   Median : 0.00000   Median :116.0  
+##  Mean   :0.8167   Mean   :156.9         Mean   :156.9         Mean   :0.4932   Mean   : 0.01338   Mean   :114.9  
+##  3rd Qu.:0.9419   3rd Qu.:157.0         3rd Qu.:157.0         3rd Qu.:0.9890   3rd Qu.: 0.00000   3rd Qu.:118.4  
+##  Max.   :8.3336   Max.   :157.0         Max.   :157.0         Max.   :3.1449   Max.   : 3.16732   Max.   :122.5  
+##                                                                                                                  
+##  dtm_upslopecurvature_250m  dtm_vbf_250m    flooded_vegetation fpar_030405_500m_mean fpar_030405_500m_sd
+##  Min.   :-5.3686           Min.   : 27.47   Min.   :3.000      Min.   :26.19         Min.   : 8.125     
+##  1st Qu.: 0.1398           1st Qu.:369.30   1st Qu.:3.000      1st Qu.:40.56         1st Qu.:13.094     
+##  Median : 0.9123           Median :461.43   Median :3.000      Median :47.25         Median :15.844     
+##  Mean   : 1.0011           Mean   :463.81   Mean   :3.286      Mean   :46.32         Mean   :15.549     
+##  3rd Qu.: 1.7750           3rd Qu.:608.62   3rd Qu.:3.000      3rd Qu.:52.23         3rd Qu.:17.875     
+##  Max.   : 7.9242           Max.   :843.12   Max.   :9.000      Max.   :62.44         Max.   :20.500     
+##                                                                NA&#39;s   :1             NA&#39;s   :1          
+##  fpar_060708_500m_mean fpar_060708_500m_sd fpar_091011_500m_mean fpar_091011_500m_sd fpar_120102_500m_mean
+##  Min.   :18.19         Min.   : 8.000      Min.   :40.50         Min.   : 8.50       Min.   :28.75        
+##  1st Qu.:25.97         1st Qu.: 9.953      1st Qu.:50.33         1st Qu.:13.14       1st Qu.:43.53        
+##  Median :32.62         Median :11.875      Median :52.44         Median :14.88       Median :47.19        
+##  Mean   :32.61         Mean   :11.912      Mean   :52.75         Mean   :14.79       Mean   :47.10        
+##  3rd Qu.:38.33         3rd Qu.:13.188      3rd Qu.:55.33         3rd Qu.:16.97       3rd Qu.:53.11        
+##  Max.   :52.19         Max.   :18.688      Max.   :63.19         Max.   :20.56       Max.   :60.75        
+##  NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1            
+##  fpar_120102_500m_sd     grass       lstd_030405_mean lstd_030405_sd  lstd_060708_mean lstd_060708_sd  lstd_091011_mean
+##  Min.   : 7.25       Min.   : 6.00   Min.   :14550    Min.   :223.4   Min.   :14177    Min.   :131.1   Min.   :14729   
+##  1st Qu.:12.50       1st Qu.:13.00   1st Qu.:14642    1st Qu.:250.9   1st Qu.:14214    1st Qu.:151.2   1st Qu.:14842   
+##  Median :14.28       Median :15.00   Median :14653    Median :273.8   Median :14227    Median :159.0   Median :14861   
+##  Mean   :13.97       Mean   :17.71   Mean   :14655    Mean   :273.6   Mean   :14228    Mean   :158.6   Mean   :14863   
+##  3rd Qu.:15.44       3rd Qu.:19.00   3rd Qu.:14671    3rd Qu.:292.1   3rd Qu.:14243    3rd Qu.:165.6   3rd Qu.:14887   
+##  Max.   :18.56       Max.   :50.00   Max.   :14710    Max.   :339.0   Max.   :14278    Max.   :181.7   Max.   :14935   
+##  NA&#39;s   :1                                                                                                             
+##  lstd_091011_sd  lstd_120102_mean lstd_120102_sd  ndlst_030405_mean ndlst_030405_sd ndlst_060708_mean ndlst_060708_sd
+##  Min.   :213.7   Min.   :15111    Min.   :135.6   Min.   :1839      Min.   :427.4   Min.   :1540      Min.   :468.7  
+##  1st Qu.:240.2   1st Qu.:15194    1st Qu.:177.9   1st Qu.:2004      1st Qu.:491.6   1st Qu.:1673      1st Qu.:556.9  
+##  Median :248.4   Median :15256    Median :190.4   Median :2063      Median :531.8   Median :1757      Median :589.2  
+##  Mean   :250.1   Mean   :15248    Mean   :188.8   Mean   :2066      Mean   :533.8   Mean   :1785      Mean   :592.1  
+##  3rd Qu.:259.5   3rd Qu.:15289    3rd Qu.:198.6   3rd Qu.:2130      3rd Qu.:568.6   3rd Qu.:1881      3rd Qu.:629.9  
+##  Max.   :353.7   Max.   :15418    Max.   :240.2   Max.   :2371      Max.   :663.2   Max.   :2284      Max.   :716.7  
+##                                                                                                                      
+##  ndlst_091011_mean ndlst_091011_sd ndlst_120102_mean ndlst_120102_sd ndvi_030405_250m_mean ndvi_030405_250m_sd
+##  Min.   :2423      Min.   :489.2   Min.   :2629      Min.   :464.0   Min.   :3369          Min.   : 692       
+##  1st Qu.:2865      1st Qu.:591.2   1st Qu.:2902      1st Qu.:610.8   1st Qu.:4659          1st Qu.:1171       
+##  Median :2929      Median :630.7   Median :3030      Median :633.0   Median :5097          Median :1384       
+##  Mean   :2935      Mean   :629.8   Mean   :3035      Mean   :634.2   Mean   :5054          Mean   :1399       
+##  3rd Qu.:3013      3rd Qu.:657.7   3rd Qu.:3133      3rd Qu.:658.0   3rd Qu.:5489          3rd Qu.:1668       
+##  Max.   :3191      Max.   :797.4   Max.   :3463      Max.   :787.3   Max.   :6506          Max.   :2081       
+##                                                                                                               
+##  ndvi_060708_250m_mean ndvi_060708_250m_sd ndvi_091011_250m_mean ndvi_091011_250m_sd ndvi_120102_250m_mean
+##  Min.   :3147          Min.   : 557.0      Min.   :4607          Min.   : 574        Min.   :3537         
+##  1st Qu.:3786          1st Qu.: 937.5      1st Qu.:5342          1st Qu.:1244        1st Qu.:4852         
+##  Median :4182          Median :1095.0      Median :5624          Median :1696        Median :5255         
+##  Mean   :4238          Mean   :1126.9      Mean   :5611          Mean   :1669        Mean   :5239         
+##  3rd Qu.:4604          3rd Qu.:1282.5      3rd Qu.:5864          3rd Qu.:2104        3rd Qu.:5802         
+##  Max.   :5613          Max.   :1768.0      Max.   :6669          Max.   :2602        Max.   :6823         
+##                                                                                                           
+##  ndvi_120102_250m_sd     ngd10       pet_penman_max  pet_penman_mean pet_penman_min pet_penman_range  sfcWind_max  
+##  Min.   : 778        Min.   :42549   Min.   :18539   Min.   :17555   Min.   :7255   Min.   :17637    Min.   :4725  
+##  1st Qu.:1278        1st Qu.:44130   1st Qu.:19701   1st Qu.:18503   1st Qu.:7930   1st Qu.:19615    1st Qu.:5410  
+##  Median :1583        Median :45011   Median :20420   Median :18931   Median :8478   Median :20317    Median :5737  
+##  Mean   :1544        Mean   :45444   Mean   :20459   Mean   :19002   Mean   :8439   Mean   :20347    Mean   :5696  
+##  3rd Qu.:1820        3rd Qu.:46400   3rd Qu.:21025   3rd Qu.:19578   3rd Qu.:8879   3rd Qu.:21266    3rd Qu.:5976  
+##  Max.   :2175        Max.   :50621   Max.   :22640   Max.   :20793   Max.   :9682   Max.   :22388    Max.   :6569  
+##                                                                                                                    
+##   sfcWind_mean  sfcWind_range    shrub_and_scrub    snow_cover     swir_060708_500m_mean     trees       
+##  Min.   :4902   Min.   : 767.6   Min.   : 4.000   Min.   :0.0000   Min.   :121.4         Min.   : 4.000  
+##  1st Qu.:5662   1st Qu.:1164.9   1st Qu.: 6.000   1st Qu.:0.6562   1st Qu.:146.1         1st Qu.: 5.000  
+##  Median :6006   Median :1257.8   Median : 7.000   Median :1.2500   Median :150.1         Median : 6.000  
+##  Mean   :5931   Mean   :1267.4   Mean   : 7.378   Mean   :1.7206   Mean   :151.3         Mean   : 6.697  
+##  3rd Qu.:6206   3rd Qu.:1382.6   3rd Qu.: 8.000   3rd Qu.:2.4688   3rd Qu.:156.2         3rd Qu.: 7.500  
+##  Max.   :6829   Max.   :2018.2   Max.   :15.000   Max.   :6.1875   Max.   :178.7         Max.   :32.000  
 ## </code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="step-3-mapping-continuous-soil-properties.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.4 - Target soil attribute + covariates ------------------------------------</span></span>
-<span id="cb102-2"><a href="step-3-mapping-continuous-soil-properties.html#cb102-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">select</span>(dat, soilatt, <span class="fu">names</span>(covs))</span>
-<span id="cb102-3"><a href="step-3-mapping-continuous-soil-properties.html#cb102-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(d)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="step-3-mapping-continuous-soil-properties.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.4 - Target soil attribute + covariates ------------------------------------</span></span>
+<span id="cb101-2"><a href="step-3-mapping-continuous-soil-properties.html#cb101-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">select</span>(dat, soilatt, <span class="fu">names</span>(covs))</span></code></pre></div>
+<pre><code>## Note: Using an external vector in selections is ambiguous.
+## ℹ Use `all_of(soilatt)` instead of `soilatt` to silence this message.
+## ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.
+## This message is displayed once per session.</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="step-3-mapping-continuous-soil-properties.html#cb103-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(d)</span></code></pre></div>
 </div>
 <div id="covariate-selection-and-repeated-k-fold-cross-validation" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Covariate selection and repeated k-fold cross-validation<a href="step-3-mapping-continuous-soil-properties.html#covariate-selection-and-repeated-k-fold-cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -516,42 +480,42 @@ Figure 8.1: Schematic representation of the repeated cross-validation process.
 </div>
 <p>The cross-validation is repeated and after every iteration, i.e. each single splitting step (the rows in Figure <a href="step-3-mapping-continuous-soil-properties.html#fig:cv">8.1</a>), the training data is used to calibrate the model, which will be explained in the next paragraph. The testing data will be used with the calibrated model to produce the residuals that play a role in assessing the uncertainty at a later stage (see Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>.
 Repeated cross validation has been nicely implemented in the caret R package <span class="citation">(<a href="#ref-Kuhn2022" role="doc-biblioref">Kuhn, 2022</a>)</span>, along with several calibration methods. Here, we use the rfeControl() function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called “fitControl”. Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="step-3-mapping-continuous-soil-properties.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Covariate selection with RFE =============================================</span></span>
-<span id="cb103-2"><a href="step-3-mapping-continuous-soil-properties.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.1 - Setting parameters ----------------------------------------------------</span></span>
-<span id="cb103-3"><a href="step-3-mapping-continuous-soil-properties.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeatedcv = 3-times repeated 10-fold cross-validation</span></span>
-<span id="cb103-4"><a href="step-3-mapping-continuous-soil-properties.html#cb103-4" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">rfeControl</span>(<span class="at">functions =</span> rfFuncs,</span>
-<span id="cb103-5"><a href="step-3-mapping-continuous-soil-properties.html#cb103-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb103-6"><a href="step-3-mapping-continuous-soil-properties.html#cb103-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">number =</span> <span class="dv">10</span>,         <span class="do">## 10 -fold CV</span></span>
-<span id="cb103-7"><a href="step-3-mapping-continuous-soil-properties.html#cb103-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">repeats =</span> <span class="dv">3</span>,        <span class="do">## repeated 3 times</span></span>
-<span id="cb103-8"><a href="step-3-mapping-continuous-soil-properties.html#cb103-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb103-9"><a href="step-3-mapping-continuous-soil-properties.html#cb103-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">saveDetails =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb103-10"><a href="step-3-mapping-continuous-soil-properties.html#cb103-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">returnResamp =</span> <span class="st">&quot;all&quot;</span>)</span>
-<span id="cb103-11"><a href="step-3-mapping-continuous-soil-properties.html#cb103-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-12"><a href="step-3-mapping-continuous-soil-properties.html#cb103-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the regression function</span></span>
-<span id="cb103-13"><a href="step-3-mapping-continuous-soil-properties.html#cb103-13" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(soilatt,<span class="st">&quot; ~&quot;</span>, <span class="fu">paste0</span>(ncovs,</span>
-<span id="cb103-14"><a href="step-3-mapping-continuous-soil-properties.html#cb103-14" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">collapse =</span> <span class="st">&quot;+&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="step-3-mapping-continuous-soil-properties.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Covariate selection with RFE =============================================</span></span>
+<span id="cb104-2"><a href="step-3-mapping-continuous-soil-properties.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.1 - Setting parameters ----------------------------------------------------</span></span>
+<span id="cb104-3"><a href="step-3-mapping-continuous-soil-properties.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeatedcv = 3-times repeated 10-fold cross-validation</span></span>
+<span id="cb104-4"><a href="step-3-mapping-continuous-soil-properties.html#cb104-4" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">rfeControl</span>(<span class="at">functions =</span> rfFuncs,</span>
+<span id="cb104-5"><a href="step-3-mapping-continuous-soil-properties.html#cb104-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb104-6"><a href="step-3-mapping-continuous-soil-properties.html#cb104-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">number =</span> <span class="dv">10</span>,         <span class="do">## 10 -fold CV</span></span>
+<span id="cb104-7"><a href="step-3-mapping-continuous-soil-properties.html#cb104-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">repeats =</span> <span class="dv">3</span>,        <span class="do">## repeated 3 times</span></span>
+<span id="cb104-8"><a href="step-3-mapping-continuous-soil-properties.html#cb104-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb104-9"><a href="step-3-mapping-continuous-soil-properties.html#cb104-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">saveDetails =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb104-10"><a href="step-3-mapping-continuous-soil-properties.html#cb104-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">returnResamp =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb104-11"><a href="step-3-mapping-continuous-soil-properties.html#cb104-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-12"><a href="step-3-mapping-continuous-soil-properties.html#cb104-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the regression function</span></span>
+<span id="cb104-13"><a href="step-3-mapping-continuous-soil-properties.html#cb104-13" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">=</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(soilatt,<span class="st">&quot; ~&quot;</span>, <span class="fu">paste0</span>(ncovs,</span>
+<span id="cb104-14"><a href="step-3-mapping-continuous-soil-properties.html#cb104-14" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">collapse =</span> <span class="st">&quot;+&quot;</span>)))</span></code></pre></div>
 <p>The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model’s capacity to predict.
 The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="step-3-mapping-continuous-soil-properties.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calibrate the model using multiple cores</span></span>
-<span id="cb104-2"><a href="step-3-mapping-continuous-soil-properties.html#cb104-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="fu">detectCores</span>()<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb104-3"><a href="step-3-mapping-continuous-soil-properties.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
-<span id="cb104-4"><a href="step-3-mapping-continuous-soil-properties.html#cb104-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-5"><a href="step-3-mapping-continuous-soil-properties.html#cb104-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-6"><a href="step-3-mapping-continuous-soil-properties.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.2 - Calibrate a RFE model to select covariates ----------------------------</span></span>
-<span id="cb104-7"><a href="step-3-mapping-continuous-soil-properties.html#cb104-7" aria-hidden="true" tabindex="-1"></a>covsel <span class="ot">&lt;-</span> <span class="fu">rfe</span>(fm,</span>
-<span id="cb104-8"><a href="step-3-mapping-continuous-soil-properties.html#cb104-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> d,  </span>
-<span id="cb104-9"><a href="step-3-mapping-continuous-soil-properties.html#cb104-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">sizes =</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">10</span>, <span class="at">to=</span><span class="fu">length</span>(ncovs)<span class="sc">-</span><span class="dv">1</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
-<span id="cb104-10"><a href="step-3-mapping-continuous-soil-properties.html#cb104-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">rfeControl =</span> fitControl,</span>
-<span id="cb104-11"><a href="step-3-mapping-continuous-soil-properties.html#cb104-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb104-12"><a href="step-3-mapping-continuous-soil-properties.html#cb104-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep.inbag =</span> T)</span>
-<span id="cb104-13"><a href="step-3-mapping-continuous-soil-properties.html#cb104-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="step-3-mapping-continuous-soil-properties.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calibrate the model using multiple cores</span></span>
+<span id="cb105-2"><a href="step-3-mapping-continuous-soil-properties.html#cb105-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="fu">detectCores</span>()<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb105-3"><a href="step-3-mapping-continuous-soil-properties.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
+<span id="cb105-4"><a href="step-3-mapping-continuous-soil-properties.html#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="step-3-mapping-continuous-soil-properties.html#cb105-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-6"><a href="step-3-mapping-continuous-soil-properties.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.2 - Calibrate a RFE model to select covariates ----------------------------</span></span>
+<span id="cb105-7"><a href="step-3-mapping-continuous-soil-properties.html#cb105-7" aria-hidden="true" tabindex="-1"></a>covsel <span class="ot">&lt;-</span> <span class="fu">rfe</span>(fm,</span>
+<span id="cb105-8"><a href="step-3-mapping-continuous-soil-properties.html#cb105-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> d,  </span>
+<span id="cb105-9"><a href="step-3-mapping-continuous-soil-properties.html#cb105-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">sizes =</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">10</span>, <span class="at">to=</span><span class="fu">length</span>(ncovs)<span class="sc">-</span><span class="dv">1</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
+<span id="cb105-10"><a href="step-3-mapping-continuous-soil-properties.html#cb105-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">rfeControl =</span> fitControl,</span>
+<span id="cb105-11"><a href="step-3-mapping-continuous-soil-properties.html#cb105-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb105-12"><a href="step-3-mapping-continuous-soil-properties.html#cb105-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep.inbag =</span> T)</span>
+<span id="cb105-13"><a href="step-3-mapping-continuous-soil-properties.html#cb105-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
 <p>The selected covariates can be visualised in Trellis displays. Finally, the optimal predictors are stored in a dedicated R object.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="step-3-mapping-continuous-soil-properties.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.3 - Plot selection of covariates ------------------------------------------</span></span>
-<span id="cb105-2"><a href="step-3-mapping-continuous-soil-properties.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trellis.par.set</span>(<span class="fu">caretTheme</span>())</span>
-<span id="cb105-3"><a href="step-3-mapping-continuous-soil-properties.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(covsel, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;o&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="step-3-mapping-continuous-soil-properties.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2.3 - Plot selection of covariates ------------------------------------------</span></span>
+<span id="cb106-2"><a href="step-3-mapping-continuous-soil-properties.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trellis.par.set</span>(<span class="fu">caretTheme</span>())</span>
+<span id="cb106-3"><a href="step-3-mapping-continuous-soil-properties.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(covsel, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;o&quot;</span>))</span></code></pre></div>
 <p><img src="DSM_CG_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="step-3-mapping-continuous-soil-properties.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract selection of covariates and subset covs</span></span>
-<span id="cb106-2"><a href="step-3-mapping-continuous-soil-properties.html#cb106-2" aria-hidden="true" tabindex="-1"></a>opt_covs <span class="ot">&lt;-</span> <span class="fu">predictors</span>(covsel)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="step-3-mapping-continuous-soil-properties.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract selection of covariates and subset covs</span></span>
+<span id="cb107-2"><a href="step-3-mapping-continuous-soil-properties.html#cb107-2" aria-hidden="true" tabindex="-1"></a>opt_covs <span class="ot">&lt;-</span> <span class="fu">predictors</span>(covsel)</span></code></pre></div>
 </div>
 <div id="model-calibration" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Model calibration<a href="step-3-mapping-continuous-soil-properties.html#model-calibration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -561,42 +525,42 @@ Model calibration will be implemented using the caret package <span class="citat
 <p>In the previous step, the number of covariates was reduced based on a 10-fold cross-validation that was repeated three times based on a regression model. To account for the reduced number of covariates, the model formula is updated at first.
 Again, parallel computing is used to speed up the computational process.
 The cross-validation is repeated with the new formula and different numbers of covariates (mtry) at each tree are assessed. After optimising this parameter, a QRF model is calibrated using the caret package.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="step-3-mapping-continuous-soil-properties.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - QRF Model calibration ====================================================</span></span>
-<span id="cb107-2"><a href="step-3-mapping-continuous-soil-properties.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.1 - Update formula with the selected covariates ---------------------------</span></span>
-<span id="cb107-3"><a href="step-3-mapping-continuous-soil-properties.html#cb107-3" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(soilatt,<span class="st">&quot; ~&quot;</span>, <span class="fu">paste0</span>(opt_covs, <span class="at">collapse =</span> <span class="st">&quot;+&quot;</span>)))</span>
-<span id="cb107-4"><a href="step-3-mapping-continuous-soil-properties.html#cb107-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-5"><a href="step-3-mapping-continuous-soil-properties.html#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="co"># parallel processing</span></span>
-<span id="cb107-6"><a href="step-3-mapping-continuous-soil-properties.html#cb107-6" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="fu">detectCores</span>()<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb107-7"><a href="step-3-mapping-continuous-soil-properties.html#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
-<span id="cb107-8"><a href="step-3-mapping-continuous-soil-properties.html#cb107-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-9"><a href="step-3-mapping-continuous-soil-properties.html#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.2 - Set training parameters -----------------------------------------------</span></span>
-<span id="cb107-10"><a href="step-3-mapping-continuous-soil-properties.html#cb107-10" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
-<span id="cb107-11"><a href="step-3-mapping-continuous-soil-properties.html#cb107-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,         <span class="do">## 10 -fold CV</span></span>
-<span id="cb107-12"><a href="step-3-mapping-continuous-soil-properties.html#cb107-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">3</span>,        <span class="do">## repeated 3 times</span></span>
-<span id="cb107-13"><a href="step-3-mapping-continuous-soil-properties.html#cb107-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb107-14"><a href="step-3-mapping-continuous-soil-properties.html#cb107-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-15"><a href="step-3-mapping-continuous-soil-properties.html#cb107-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tune mtry hyperparameters</span></span>
-<span id="cb107-16"><a href="step-3-mapping-continuous-soil-properties.html#cb107-16" aria-hidden="true" tabindex="-1"></a>mtry <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">length</span>(opt_covs)<span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb107-17"><a href="step-3-mapping-continuous-soil-properties.html#cb107-17" aria-hidden="true" tabindex="-1"></a>tuneGrid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(<span class="at">mtry =</span> <span class="fu">c</span>(mtry<span class="dv">-5</span>, mtry, mtry<span class="sc">+</span><span class="dv">5</span>))</span>
-<span id="cb107-18"><a href="step-3-mapping-continuous-soil-properties.html#cb107-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-19"><a href="step-3-mapping-continuous-soil-properties.html#cb107-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.3 - Calibrate the QRF model -----------------------------------------------</span></span>
-<span id="cb107-20"><a href="step-3-mapping-continuous-soil-properties.html#cb107-20" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(fm,</span>
-<span id="cb107-21"><a href="step-3-mapping-continuous-soil-properties.html#cb107-21" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> d,</span>
-<span id="cb107-22"><a href="step-3-mapping-continuous-soil-properties.html#cb107-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">&quot;qrf&quot;</span>,</span>
-<span id="cb107-23"><a href="step-3-mapping-continuous-soil-properties.html#cb107-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">trControl =</span> fitControl,</span>
-<span id="cb107-24"><a href="step-3-mapping-continuous-soil-properties.html#cb107-24" aria-hidden="true" tabindex="-1"></a>                      <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb107-25"><a href="step-3-mapping-continuous-soil-properties.html#cb107-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid =</span> tuneGrid,</span>
-<span id="cb107-26"><a href="step-3-mapping-continuous-soil-properties.html#cb107-26" aria-hidden="true" tabindex="-1"></a>                      <span class="at">keep.inbag =</span> T,</span>
-<span id="cb107-27"><a href="step-3-mapping-continuous-soil-properties.html#cb107-27" aria-hidden="true" tabindex="-1"></a>                      <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb107-28"><a href="step-3-mapping-continuous-soil-properties.html#cb107-28" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb107-29"><a href="step-3-mapping-continuous-soil-properties.html#cb107-29" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="step-3-mapping-continuous-soil-properties.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - QRF Model calibration ====================================================</span></span>
+<span id="cb108-2"><a href="step-3-mapping-continuous-soil-properties.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.1 - Update formula with the selected covariates ---------------------------</span></span>
+<span id="cb108-3"><a href="step-3-mapping-continuous-soil-properties.html#cb108-3" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(soilatt,<span class="st">&quot; ~&quot;</span>, <span class="fu">paste0</span>(opt_covs, <span class="at">collapse =</span> <span class="st">&quot;+&quot;</span>)))</span>
+<span id="cb108-4"><a href="step-3-mapping-continuous-soil-properties.html#cb108-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-5"><a href="step-3-mapping-continuous-soil-properties.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="co"># parallel processing</span></span>
+<span id="cb108-6"><a href="step-3-mapping-continuous-soil-properties.html#cb108-6" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="fu">detectCores</span>()<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb108-7"><a href="step-3-mapping-continuous-soil-properties.html#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
+<span id="cb108-8"><a href="step-3-mapping-continuous-soil-properties.html#cb108-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-9"><a href="step-3-mapping-continuous-soil-properties.html#cb108-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.2 - Set training parameters -----------------------------------------------</span></span>
+<span id="cb108-10"><a href="step-3-mapping-continuous-soil-properties.html#cb108-10" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb108-11"><a href="step-3-mapping-continuous-soil-properties.html#cb108-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">10</span>,         <span class="do">## 10 -fold CV</span></span>
+<span id="cb108-12"><a href="step-3-mapping-continuous-soil-properties.html#cb108-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">3</span>,        <span class="do">## repeated 3 times</span></span>
+<span id="cb108-13"><a href="step-3-mapping-continuous-soil-properties.html#cb108-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">savePredictions =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb108-14"><a href="step-3-mapping-continuous-soil-properties.html#cb108-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-15"><a href="step-3-mapping-continuous-soil-properties.html#cb108-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tune mtry hyperparameters</span></span>
+<span id="cb108-16"><a href="step-3-mapping-continuous-soil-properties.html#cb108-16" aria-hidden="true" tabindex="-1"></a>mtry <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">length</span>(opt_covs)<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb108-17"><a href="step-3-mapping-continuous-soil-properties.html#cb108-17" aria-hidden="true" tabindex="-1"></a>tuneGrid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(<span class="at">mtry =</span> <span class="fu">c</span>(mtry<span class="dv">-5</span>, mtry, mtry<span class="sc">+</span><span class="dv">5</span>))</span>
+<span id="cb108-18"><a href="step-3-mapping-continuous-soil-properties.html#cb108-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-19"><a href="step-3-mapping-continuous-soil-properties.html#cb108-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.3 - Calibrate the QRF model -----------------------------------------------</span></span>
+<span id="cb108-20"><a href="step-3-mapping-continuous-soil-properties.html#cb108-20" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(fm,</span>
+<span id="cb108-21"><a href="step-3-mapping-continuous-soil-properties.html#cb108-21" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> d,</span>
+<span id="cb108-22"><a href="step-3-mapping-continuous-soil-properties.html#cb108-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">&quot;qrf&quot;</span>,</span>
+<span id="cb108-23"><a href="step-3-mapping-continuous-soil-properties.html#cb108-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">trControl =</span> fitControl,</span>
+<span id="cb108-24"><a href="step-3-mapping-continuous-soil-properties.html#cb108-24" aria-hidden="true" tabindex="-1"></a>                      <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb108-25"><a href="step-3-mapping-continuous-soil-properties.html#cb108-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid =</span> tuneGrid,</span>
+<span id="cb108-26"><a href="step-3-mapping-continuous-soil-properties.html#cb108-26" aria-hidden="true" tabindex="-1"></a>                      <span class="at">keep.inbag =</span> T,</span>
+<span id="cb108-27"><a href="step-3-mapping-continuous-soil-properties.html#cb108-27" aria-hidden="true" tabindex="-1"></a>                      <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb108-28"><a href="step-3-mapping-continuous-soil-properties.html#cb108-28" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb108-29"><a href="step-3-mapping-continuous-soil-properties.html#cb108-29" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <p>The results have been stored in an R object called model. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted. Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="step-3-mapping-continuous-soil-properties.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.4 - Extract predictor importance as relative values (%)</span></span>
-<span id="cb108-2"><a href="step-3-mapping-continuous-soil-properties.html#cb108-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> randomForest<span class="sc">::</span><span class="fu">importance</span>(model<span class="sc">$</span>finalModel)</span>
-<span id="cb108-3"><a href="step-3-mapping-continuous-soil-properties.html#cb108-3" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>importance <span class="ot">&lt;-</span> x</span>
-<span id="cb108-4"><a href="step-3-mapping-continuous-soil-properties.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.5 - Print and save model --------------------------------------------------</span></span>
-<span id="cb108-5"><a href="step-3-mapping-continuous-soil-properties.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span>
-<span id="cb108-6"><a href="step-3-mapping-continuous-soil-properties.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(model, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;Digital-Soil-Mapping/02-Outputs/models/model_&quot;</span>,soilatt,<span class="st">&quot;.rds&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="step-3-mapping-continuous-soil-properties.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.4 - Extract predictor importance as relative values (%)</span></span>
+<span id="cb109-2"><a href="step-3-mapping-continuous-soil-properties.html#cb109-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> randomForest<span class="sc">::</span><span class="fu">importance</span>(model<span class="sc">$</span>finalModel)</span>
+<span id="cb109-3"><a href="step-3-mapping-continuous-soil-properties.html#cb109-3" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>importance <span class="ot">&lt;-</span> x</span>
+<span id="cb109-4"><a href="step-3-mapping-continuous-soil-properties.html#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.5 - Print and save model --------------------------------------------------</span></span>
+<span id="cb109-5"><a href="step-3-mapping-continuous-soil-properties.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span>
+<span id="cb109-6"><a href="step-3-mapping-continuous-soil-properties.html#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(model, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;Digital-Soil-Mapping/02-Outputs/models/model_&quot;</span>,soilatt,<span class="st">&quot;.rds&quot;</span>))</span></code></pre></div>
 <pre><code>## Quantile Random Forest 
 ## 
 ## 118 samples
@@ -655,28 +619,26 @@ The residuals produced by caret consist of tabular data with observed and predic
 \end{equation}\]</span></p>
 <p>The R<sup>2</sup>, RMSE, and the MEC are susceptible to bias through large error values. Thus, caution needs to be taken when interpreting the indices presented here for accuracy assessment.</p>
 <p>Now, back to the mapping exercise: In practical terms, before calculating any of these indices, it is necessary to first extract observed and predicted values and then store them in two separate R objects. Next, both values are combined to a dataframe.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="step-3-mapping-continuous-soil-properties.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Uncertainty assessment ===================================================</span></span>
-<span id="cb110-2"><a href="step-3-mapping-continuous-soil-properties.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="co"># extract observed and predicted values</span></span>
-<span id="cb110-3"><a href="step-3-mapping-continuous-soil-properties.html#cb110-3" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> model<span class="sc">$</span>pred<span class="sc">$</span>obs</span>
-<span id="cb110-4"><a href="step-3-mapping-continuous-soil-properties.html#cb110-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> model<span class="sc">$</span>pred<span class="sc">$</span>pred</span>
-<span id="cb110-5"><a href="step-3-mapping-continuous-soil-properties.html#cb110-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(o,p)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="step-3-mapping-continuous-soil-properties.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Uncertainty assessment ===================================================</span></span>
+<span id="cb111-2"><a href="step-3-mapping-continuous-soil-properties.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># extract observed and predicted values</span></span>
+<span id="cb111-3"><a href="step-3-mapping-continuous-soil-properties.html#cb111-3" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> model<span class="sc">$</span>pred<span class="sc">$</span>obs</span>
+<span id="cb111-4"><a href="step-3-mapping-continuous-soil-properties.html#cb111-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> model<span class="sc">$</span>pred<span class="sc">$</span>pred</span>
+<span id="cb111-5"><a href="step-3-mapping-continuous-soil-properties.html#cb111-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(o,p)</span></code></pre></div>
 <p>While solar diagrams <span class="citation">(<a href="#ref-Wadoux2022" role="doc-biblioref">Wadoux, Walvoort and Brus, 2022</a>)</span> are desired, we propose to produce a scatterplot of the observed vs predicted values maintaining the same range and scale for the X and Y axes. The dataframe is used for this purpose to plot observed values on the x-axis and predicted values on the y-axis.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="step-3-mapping-continuous-soil-properties.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.1 - Plot and save scatterplot --------------------------------------------- </span></span>
-<span id="cb111-2"><a href="step-3-mapping-continuous-soil-properties.html#cb111-2" aria-hidden="true" tabindex="-1"></a>(g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> o, <span class="at">y =</span> p)) <span class="sc">+</span> </span>
-<span id="cb111-3"><a href="step-3-mapping-continuous-soil-properties.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
-<span id="cb111-4"><a href="step-3-mapping-continuous-soil-properties.html#cb111-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
-<span id="cb111-5"><a href="step-3-mapping-continuous-soil-properties.html#cb111-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fu">min</span>(o), <span class="fu">max</span>(o))) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">aspect.ratio=</span><span class="dv">1</span>)<span class="sc">+</span> </span>
-<span id="cb111-6"><a href="step-3-mapping-continuous-soil-properties.html#cb111-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> soilatt) <span class="sc">+</span> </span>
-<span id="cb111-7"><a href="step-3-mapping-continuous-soil-properties.html#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Observed&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Predicted&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="step-3-mapping-continuous-soil-properties.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.1 - Plot and save scatterplot --------------------------------------------- </span></span>
+<span id="cb112-2"><a href="step-3-mapping-continuous-soil-properties.html#cb112-2" aria-hidden="true" tabindex="-1"></a>(g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> o, <span class="at">y =</span> p)) <span class="sc">+</span> </span>
+<span id="cb112-3"><a href="step-3-mapping-continuous-soil-properties.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb112-4"><a href="step-3-mapping-continuous-soil-properties.html#cb112-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb112-5"><a href="step-3-mapping-continuous-soil-properties.html#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fu">min</span>(o), <span class="fu">max</span>(o))) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">aspect.ratio=</span><span class="dv">1</span>)<span class="sc">+</span> </span>
+<span id="cb112-6"><a href="step-3-mapping-continuous-soil-properties.html#cb112-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> soilatt) <span class="sc">+</span> </span>
+<span id="cb112-7"><a href="step-3-mapping-continuous-soil-properties.html#cb112-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Observed&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Predicted&quot;</span>))</span></code></pre></div>
 <p><img src="DSM_CG_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="step-3-mapping-continuous-soil-properties.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(g1, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">&quot;Digital-Soil-Mapping/02-Outputs/residuals_&quot;</span>,soilatt,<span class="st">&quot;.png&quot;</span>), <span class="at">scale =</span> <span class="dv">1</span>, </span>
-<span id="cb112-2"><a href="step-3-mapping-continuous-soil-properties.html#cb112-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="step-3-mapping-continuous-soil-properties.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(g1, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">&quot;Digital-Soil-Mapping/02-Outputs/residuals_&quot;</span>,soilatt,<span class="st">&quot;.png&quot;</span>), <span class="at">scale =</span> <span class="dv">1</span>, </span>
+<span id="cb113-2"><a href="step-3-mapping-continuous-soil-properties.html#cb113-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">height =</span> <span class="dv">12</span>)</span></code></pre></div>
 <p>Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the ME, RMSE, MAE, the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="step-3-mapping-continuous-soil-properties.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.2 - Print accuracy coeficients --------------------------------------------</span></span>
-<span id="cb113-2"><a href="step-3-mapping-continuous-soil-properties.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/AlexandreWadoux/MapQualityEvaluation</span></span>
-<span id="cb113-3"><a href="step-3-mapping-continuous-soil-properties.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(p,o)</span></code></pre></div>
-<pre><code>##      ME    MAE   RMSE    r   r2  MEC rhoC   Cb
-## 1 11.82 134.46 168.91 0.38 0.15 0.14 0.25 0.66</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="step-3-mapping-continuous-soil-properties.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.2 - Print accuracy coeficients --------------------------------------------</span></span>
+<span id="cb114-2"><a href="step-3-mapping-continuous-soil-properties.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/AlexandreWadoux/MapQualityEvaluation</span></span>
+<span id="cb114-3"><a href="step-3-mapping-continuous-soil-properties.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(p,o)</span></code></pre></div>
 <p>Finally, a variable importance plot is generated to visualise the relative importance of each covariate/predictor.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="step-3-mapping-continuous-soil-properties.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.3 - Plot Covariate importance ---------------------------------------------</span></span>
 <span id="cb115-2"><a href="step-3-mapping-continuous-soil-properties.html#cb115-2" aria-hidden="true" tabindex="-1"></a>(g2 <span class="ot">&lt;-</span> <span class="fu">varImpPlot</span>(model<span class="sc">$</span>finalModel, <span class="at">main =</span> soilatt, <span class="at">type =</span> <span class="dv">1</span>))</span>
