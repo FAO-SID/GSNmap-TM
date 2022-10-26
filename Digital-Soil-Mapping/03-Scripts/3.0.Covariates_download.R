@@ -40,6 +40,7 @@ setwd(wd)
 #load libraries
 library(raster)
 library(terra)
+library(tidyverse)
 library(sf)
 library(rgee)
 
@@ -78,15 +79,17 @@ region = region$geometry()
 # aoi <- vect(AOI_shp)
 
 # 6 - Clip and download covariates ========================================
-# Obtain list of climatic variables
-assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/CHELSA"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/MODIS"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP"))
-
-
-
+assetname <- read_csv("01-Data/covs_rgee.csv")
 assetname$num <- rownames(assetname)
+
+for (i in unique(assetname$ID)){
+  #Extract filename 
+  filename <- sub('.*\\/', '', i)
+  
+  #Clip image to the extent of the AOI
+  image <- ee$Image(i)
+  print(i)
+  }
 
 # Loop over the names of assets to clip and dowload the covariates
 for (i in unique(assetname$ID)){

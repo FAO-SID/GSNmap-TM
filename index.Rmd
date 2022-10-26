@@ -2,9 +2,9 @@
 title:  |
   <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
   Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
-subtitle: "*version 0.1*"
-author: "FAO - Global Soil Partnership"
-date: "21-Oct-2022"
+subtitle: "version 0.2"
+author: "Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y."
+date: "26-Oct-2022"
 site: bookdown::bookdown_site
 output: 
   bookdown::pdf_book:
@@ -105,6 +105,9 @@ The GSNmap Technical Manual is made available under the Creative Commons Attribu
 
 [CC BY-NC-SA 3.0 IGO](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/legalcode).
 
+<!-- *Recommended citation:* -->
+<!-- Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y., 2022. Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap). Food & Agriculture Org. -->
+
 
 # Abbreviations and acronyms {-}
 BD
@@ -171,15 +174,15 @@ SOM
 
 :   Soil organic matter
 
-# Editors {-}
+# Publisher {-}
 
-*Prepared by:*\
-
-- *Moritz Mainka* 
-- *Marcos E. Angelini*  
-- *Isabel Luotto*
-- *Yusuf Yigini* 
-- *Yuxin Tong* 
+<!-- *Prepared by:*\ -->
+FAO\
+<!-- - *Moritz Mainka*  -->
+<!-- - *Marcos E. Angelini*   -->
+<!-- - *Isabel Luotto* -->
+<!-- - *Yusuf Yigini*  -->
+<!-- - *Yuxin Tong*  -->
 
 
 

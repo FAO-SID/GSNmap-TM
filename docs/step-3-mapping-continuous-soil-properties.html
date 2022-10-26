@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="GSNmap - Technical Manual" />
   
 
-<meta name="author" content="FAO - Global Soil Partnership" />
+<meta name="author" content="Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y." />
 
 
 
@@ -174,7 +174,7 @@ div.csl-indent {
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Licence</a></li>
 <li class="chapter" data-level="" data-path="abbreviations-and-acronyms.html"><a href="abbreviations-and-acronyms.html"><i class="fa fa-check"></i>Abbreviations and acronyms</a></li>
-<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Editors</a></li>
+<li class="chapter" data-level="" data-path="publisher.html"><a href="publisher.html"><i class="fa fa-check"></i>Publisher</a></li>
 <li class="chapter" data-level="" data-path="contributors-and-reviewers.html"><a href="contributors-and-reviewers.html"><i class="fa fa-check"></i>Contributors and reviewers</a></li>
 <li class="chapter" data-level="1" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>1</b> Presentation</a>
 <ul>
@@ -366,118 +366,102 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <span id="cb95-4"><a href="step-3-mapping-continuous-soil-properties.html#cb95-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
 <span id="cb95-5"><a href="step-3-mapping-continuous-soil-properties.html#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb95-6"><a href="step-3-mapping-continuous-soil-properties.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span></code></pre></div>
-<pre><code>##     LabID                 om              ph            p_bray             k         
-##  Length:119         Min.   :1.447   Min.   :5.540   Min.   : 4.160   Min.   : 216.9  
-##  Class :character   1st Qu.:3.524   1st Qu.:6.035   1st Qu.: 9.798   1st Qu.: 523.9  
-##  Mode  :character   Median :4.328   Median :6.270   Median :13.545   Median : 652.3  
-##                     Mean   :4.217   Mean   :6.306   Mean   :15.117   Mean   : 656.8  
-##                     3rd Qu.:4.914   3rd Qu.:6.515   3rd Qu.:17.723   3rd Qu.: 765.8  
-##                     Max.   :6.261   Max.   :8.200   Max.   :54.561   Max.   :1103.0  
-##                                                                                      
-##        ID             bio1           bio12          bio13          bio14          bio16     
-##  Min.   :  1.0   Min.   :44405   Min.   :6933   Min.   :2013   Min.   :1152   Min.   :2306  
-##  1st Qu.: 30.5   1st Qu.:44759   1st Qu.:8442   1st Qu.:2262   1st Qu.:1633   1st Qu.:2692  
-##  Median : 60.0   Median :45034   Median :8736   Median :2333   Median :1826   Median :2835  
-##  Mean   : 60.0   Mean   :45036   Mean   :8710   Mean   :2373   Mean   :1847   Mean   :2868  
-##  3rd Qu.: 89.5   3rd Qu.:45257   3rd Qu.:8983   3rd Qu.:2463   3rd Qu.:2072   3rd Qu.:3011  
-##  Max.   :119.0   Max.   :45958   Max.   :9749   Max.   :2904   Max.   :2634   Max.   :3480  
-##                                                                                             
-##      bio17           bio5            bio6           crops       dtm_curvature_250m
-##  Min.   :1244   Min.   :41928   Min.   :44340   Min.   : 9.00   Min.   :-13.1433  
-##  1st Qu.:1568   1st Qu.:45240   1st Qu.:44931   1st Qu.:38.50   1st Qu.: -1.0882  
-##  Median :1742   Median :45799   Median :45437   Median :46.00   Median : -0.9197  
-##  Mean   :1773   Mean   :45716   Mean   :45498   Mean   :42.93   Mean   : -1.1741  
-##  3rd Qu.:1957   3rd Qu.:46447   3rd Qu.:45691   3rd Qu.:51.00   3rd Qu.: -0.4017  
-##  Max.   :2528   Max.   :47644   Max.   :47939   Max.   :62.00   Max.   :  0.6796  
-##                                                                                   
-##  dtm_downslopecurvature_250m  dtm_dvm_250m     dtm_dvm2_250m     dtm_elevation_250m
-##  Min.   :-13.5754            Min.   :-89.806   Min.   :-89.221   Min.   : 15.00    
-##  1st Qu.: -1.3200            1st Qu.:-20.461   1st Qu.:-18.593   1st Qu.: 76.35    
-##  Median : -1.0000            Median :  7.328   Median :  6.035   Median :135.08    
-##  Mean   : -1.2107            Mean   :  8.514   Mean   :  7.941   Mean   :131.67    
-##  3rd Qu.: -0.3355            3rd Qu.: 25.068   3rd Qu.: 20.216   3rd Qu.:187.17    
-##  Max.   :  2.3846            Max.   :199.570   Max.   :269.711   Max.   :284.86    
-##                                                                                    
-##   dtm_mrn_250m    dtm_neg_openness_250m dtm_pos_openness_250m dtm_slope_250m    dtm_tpi_250m     
-##  Min.   :0.0000   Min.   :155.4         Min.   :155.0         Min.   :0.0000   Min.   :-3.56796  
-##  1st Qu.:0.0000   1st Qu.:157.0         1st Qu.:157.0         1st Qu.:0.0000   1st Qu.: 0.00000  
-##  Median :0.1366   Median :157.0         Median :157.0         Median :0.0000   Median : 0.00000  
-##  Mean   :0.8167   Mean   :156.9         Mean   :156.9         Mean   :0.4932   Mean   : 0.01338  
-##  3rd Qu.:0.9419   3rd Qu.:157.0         3rd Qu.:157.0         3rd Qu.:0.9890   3rd Qu.: 0.00000  
-##  Max.   :8.3336   Max.   :157.0         Max.   :157.0         Max.   :3.1449   Max.   : 3.16732  
+<pre><code>##     LabID                 om              ph            p_bray             k                ID       
+##  Length:119         Min.   :1.447   Min.   :5.540   Min.   : 4.160   Min.   : 216.9   Min.   :  1.0  
+##  Class :character   1st Qu.:3.524   1st Qu.:6.035   1st Qu.: 9.798   1st Qu.: 523.9   1st Qu.: 30.5  
+##  Mode  :character   Median :4.328   Median :6.270   Median :13.545   Median : 652.3   Median : 60.0  
+##                     Mean   :4.217   Mean   :6.306   Mean   :15.117   Mean   : 656.8   Mean   : 60.0  
+##                     3rd Qu.:4.914   3rd Qu.:6.515   3rd Qu.:17.723   3rd Qu.: 765.8   3rd Qu.: 89.5  
+##                     Max.   :6.261   Max.   :8.200   Max.   :54.561   Max.   :1103.0   Max.   :119.0  
+##                                                                                                      
+##       bio1           bio12          bio13          bio14          bio16          bio17           bio5      
+##  Min.   :44405   Min.   :6933   Min.   :2013   Min.   :1152   Min.   :2306   Min.   :1244   Min.   :41928  
+##  1st Qu.:44759   1st Qu.:8442   1st Qu.:2262   1st Qu.:1633   1st Qu.:2692   1st Qu.:1568   1st Qu.:45240  
+##  Median :45034   Median :8736   Median :2333   Median :1826   Median :2835   Median :1742   Median :45799  
+##  Mean   :45036   Mean   :8710   Mean   :2373   Mean   :1847   Mean   :2868   Mean   :1773   Mean   :45716  
+##  3rd Qu.:45257   3rd Qu.:8983   3rd Qu.:2463   3rd Qu.:2072   3rd Qu.:3011   3rd Qu.:1957   3rd Qu.:46447  
+##  Max.   :45958   Max.   :9749   Max.   :2904   Max.   :2634   Max.   :3480   Max.   :2528   Max.   :47644  
+##                                                                                                            
+##       bio6           crops       dtm_curvature_250m dtm_downslopecurvature_250m  dtm_dvm_250m    
+##  Min.   :44340   Min.   : 9.00   Min.   :-13.1433   Min.   :-13.5754            Min.   :-89.806  
+##  1st Qu.:44931   1st Qu.:38.50   1st Qu.: -1.0882   1st Qu.: -1.3200            1st Qu.:-20.461  
+##  Median :45437   Median :46.00   Median : -0.9197   Median : -1.0000            Median :  7.328  
+##  Mean   :45498   Mean   :42.93   Mean   : -1.1741   Mean   : -1.2107            Mean   :  8.514  
+##  3rd Qu.:45691   3rd Qu.:51.00   3rd Qu.: -0.4017   3rd Qu.: -0.3355            3rd Qu.: 25.068  
+##  Max.   :47939   Max.   :62.00   Max.   :  0.6796   Max.   :  2.3846            Max.   :199.570  
 ##                                                                                                  
-##   dtm_twi_500m   dtm_upslopecurvature_250m  dtm_vbf_250m    flooded_vegetation
-##  Min.   :100.2   Min.   :-5.3686           Min.   : 27.47   Min.   :3.000     
-##  1st Qu.:111.3   1st Qu.: 0.1398           1st Qu.:369.30   1st Qu.:3.000     
-##  Median :116.0   Median : 0.9123           Median :461.43   Median :3.000     
-##  Mean   :114.9   Mean   : 1.0011           Mean   :463.81   Mean   :3.286     
-##  3rd Qu.:118.4   3rd Qu.: 1.7750           3rd Qu.:608.62   3rd Qu.:3.000     
-##  Max.   :122.5   Max.   : 7.9242           Max.   :843.12   Max.   :9.000     
-##                                                                               
-##  fpar_030405_500m_mean fpar_030405_500m_sd fpar_060708_500m_mean fpar_060708_500m_sd
-##  Min.   :26.19         Min.   : 8.125      Min.   :18.19         Min.   : 8.000     
-##  1st Qu.:40.56         1st Qu.:13.094      1st Qu.:25.97         1st Qu.: 9.953     
-##  Median :47.25         Median :15.844      Median :32.62         Median :11.875     
-##  Mean   :46.32         Mean   :15.549      Mean   :32.61         Mean   :11.912     
-##  3rd Qu.:52.23         3rd Qu.:17.875      3rd Qu.:38.33         3rd Qu.:13.188     
-##  Max.   :62.44         Max.   :20.500      Max.   :52.19         Max.   :18.688     
-##  NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1          
-##  fpar_091011_500m_mean fpar_091011_500m_sd fpar_120102_500m_mean fpar_120102_500m_sd
-##  Min.   :40.50         Min.   : 8.50       Min.   :28.75         Min.   : 7.25      
-##  1st Qu.:50.33         1st Qu.:13.14       1st Qu.:43.53         1st Qu.:12.50      
-##  Median :52.44         Median :14.88       Median :47.19         Median :14.28      
-##  Mean   :52.75         Mean   :14.79       Mean   :47.10         Mean   :13.97      
-##  3rd Qu.:55.33         3rd Qu.:16.97       3rd Qu.:53.11         3rd Qu.:15.44      
-##  Max.   :63.19         Max.   :20.56       Max.   :60.75         Max.   :18.56      
-##  NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1          
-##      grass       lstd_030405_mean lstd_030405_sd  lstd_060708_mean lstd_060708_sd 
-##  Min.   : 6.00   Min.   :14550    Min.   :223.4   Min.   :14177    Min.   :131.1  
-##  1st Qu.:13.00   1st Qu.:14642    1st Qu.:250.9   1st Qu.:14214    1st Qu.:151.2  
-##  Median :15.00   Median :14653    Median :273.8   Median :14227    Median :159.0  
-##  Mean   :17.71   Mean   :14655    Mean   :273.6   Mean   :14228    Mean   :158.6  
-##  3rd Qu.:19.00   3rd Qu.:14671    3rd Qu.:292.1   3rd Qu.:14243    3rd Qu.:165.6  
-##  Max.   :50.00   Max.   :14710    Max.   :339.0   Max.   :14278    Max.   :181.7  
-##                                                                                   
-##  lstd_091011_mean lstd_091011_sd  lstd_120102_mean lstd_120102_sd  ndlst_030405_mean
-##  Min.   :14729    Min.   :213.7   Min.   :15111    Min.   :135.6   Min.   :1839     
-##  1st Qu.:14842    1st Qu.:240.2   1st Qu.:15194    1st Qu.:177.9   1st Qu.:2004     
-##  Median :14861    Median :248.4   Median :15256    Median :190.4   Median :2063     
-##  Mean   :14863    Mean   :250.1   Mean   :15248    Mean   :188.8   Mean   :2066     
-##  3rd Qu.:14887    3rd Qu.:259.5   3rd Qu.:15289    3rd Qu.:198.6   3rd Qu.:2130     
-##  Max.   :14935    Max.   :353.7   Max.   :15418    Max.   :240.2   Max.   :2371     
-##                                                                                     
-##  ndlst_030405_sd ndlst_060708_mean ndlst_060708_sd ndlst_091011_mean ndlst_091011_sd
-##  Min.   :427.4   Min.   :1540      Min.   :468.7   Min.   :2423      Min.   :489.2  
-##  1st Qu.:491.6   1st Qu.:1673      1st Qu.:556.9   1st Qu.:2865      1st Qu.:591.2  
-##  Median :531.8   Median :1757      Median :589.2   Median :2929      Median :630.7  
-##  Mean   :533.8   Mean   :1785      Mean   :592.1   Mean   :2935      Mean   :629.8  
-##  3rd Qu.:568.6   3rd Qu.:1881      3rd Qu.:629.9   3rd Qu.:3013      3rd Qu.:657.7  
-##  Max.   :663.2   Max.   :2284      Max.   :716.7   Max.   :3191      Max.   :797.4  
-##                                                                                     
-##  ndlst_120102_mean ndlst_120102_sd ndvi_030405_250m_mean ndvi_030405_250m_sd ndvi_060708_250m_mean
-##  Min.   :2629      Min.   :464.0   Min.   :3369          Min.   : 692        Min.   :3147         
-##  1st Qu.:2902      1st Qu.:610.8   1st Qu.:4659          1st Qu.:1171        1st Qu.:3786         
-##  Median :3030      Median :633.0   Median :5097          Median :1384        Median :4182         
-##  Mean   :3035      Mean   :634.2   Mean   :5054          Mean   :1399        Mean   :4238         
-##  3rd Qu.:3133      3rd Qu.:658.0   3rd Qu.:5489          3rd Qu.:1668        3rd Qu.:4604         
-##  Max.   :3463      Max.   :787.3   Max.   :6506          Max.   :2081        Max.   :5613         
+##  dtm_dvm2_250m     dtm_elevation_250m  dtm_mrn_250m    dtm_neg_openness_250m dtm_pos_openness_250m
+##  Min.   :-89.221   Min.   : 15.00     Min.   :0.0000   Min.   :155.4         Min.   :155.0        
+##  1st Qu.:-18.593   1st Qu.: 76.35     1st Qu.:0.0000   1st Qu.:157.0         1st Qu.:157.0        
+##  Median :  6.035   Median :135.08     Median :0.1366   Median :157.0         Median :157.0        
+##  Mean   :  7.941   Mean   :131.67     Mean   :0.8167   Mean   :156.9         Mean   :156.9        
+##  3rd Qu.: 20.216   3rd Qu.:187.17     3rd Qu.:0.9419   3rd Qu.:157.0         3rd Qu.:157.0        
+##  Max.   :269.711   Max.   :284.86     Max.   :8.3336   Max.   :157.0         Max.   :157.0        
 ##                                                                                                   
-##  ndvi_060708_250m_sd ndvi_091011_250m_mean ndvi_091011_250m_sd ndvi_120102_250m_mean
-##  Min.   : 557.0      Min.   :4607          Min.   : 574        Min.   :3537         
-##  1st Qu.: 937.5      1st Qu.:5342          1st Qu.:1244        1st Qu.:4852         
-##  Median :1095.0      Median :5624          Median :1696        Median :5255         
-##  Mean   :1126.9      Mean   :5611          Mean   :1669        Mean   :5239         
-##  3rd Qu.:1282.5      3rd Qu.:5864          3rd Qu.:2104        3rd Qu.:5802         
-##  Max.   :1768.0      Max.   :6669          Max.   :2602        Max.   :6823         
-##                                                                                     
-##  ndvi_120102_250m_sd     ngd10       pet_penman_max  pet_penman_mean pet_penman_min
-##  Min.   : 778        Min.   :42549   Min.   :18539   Min.   :17555   Min.   :7255  
-##  1st Qu.:1278        1st Qu.:44130   1st Qu.:19701   1st Qu.:18503   1st Qu.:7930  
-##  Median :1583        Median :45011   Median :20420   Median :18931   Median :8478  
-##  Mean   :1544        Mean   :45444   Mean   :20459   Mean   :19002   Mean   :8439  
-##  3rd Qu.:1820        3rd Qu.:46400   3rd Qu.:21025   3rd Qu.:19578   3rd Qu.:8879  
-##  Max.   :2175        Max.   :50621   Max.   :22640   Max.   :20793   Max.   :9682  
-##                                                                                    
+##  dtm_slope_250m    dtm_tpi_250m       dtm_twi_500m   dtm_upslopecurvature_250m  dtm_vbf_250m   
+##  Min.   :0.0000   Min.   :-3.56796   Min.   :100.2   Min.   :-5.3686           Min.   : 27.47  
+##  1st Qu.:0.0000   1st Qu.: 0.00000   1st Qu.:111.3   1st Qu.: 0.1398           1st Qu.:369.30  
+##  Median :0.0000   Median : 0.00000   Median :116.0   Median : 0.9123           Median :461.43  
+##  Mean   :0.4932   Mean   : 0.01338   Mean   :114.9   Mean   : 1.0011           Mean   :463.81  
+##  3rd Qu.:0.9890   3rd Qu.: 0.00000   3rd Qu.:118.4   3rd Qu.: 1.7750           3rd Qu.:608.62  
+##  Max.   :3.1449   Max.   : 3.16732   Max.   :122.5   Max.   : 7.9242           Max.   :843.12  
+##                                                                                                
+##  flooded_vegetation fpar_030405_500m_mean fpar_030405_500m_sd fpar_060708_500m_mean fpar_060708_500m_sd
+##  Min.   :3.000      Min.   :26.19         Min.   : 8.125      Min.   :18.19         Min.   : 8.000     
+##  1st Qu.:3.000      1st Qu.:40.56         1st Qu.:13.094      1st Qu.:25.97         1st Qu.: 9.953     
+##  Median :3.000      Median :47.25         Median :15.844      Median :32.62         Median :11.875     
+##  Mean   :3.286      Mean   :46.32         Mean   :15.549      Mean   :32.61         Mean   :11.912     
+##  3rd Qu.:3.000      3rd Qu.:52.23         3rd Qu.:17.875      3rd Qu.:38.33         3rd Qu.:13.188     
+##  Max.   :9.000      Max.   :62.44         Max.   :20.500      Max.   :52.19         Max.   :18.688     
+##                     NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1          
+##  fpar_091011_500m_mean fpar_091011_500m_sd fpar_120102_500m_mean fpar_120102_500m_sd     grass      
+##  Min.   :40.50         Min.   : 8.50       Min.   :28.75         Min.   : 7.25       Min.   : 6.00  
+##  1st Qu.:50.33         1st Qu.:13.14       1st Qu.:43.53         1st Qu.:12.50       1st Qu.:13.00  
+##  Median :52.44         Median :14.88       Median :47.19         Median :14.28       Median :15.00  
+##  Mean   :52.75         Mean   :14.79       Mean   :47.10         Mean   :13.97       Mean   :17.71  
+##  3rd Qu.:55.33         3rd Qu.:16.97       3rd Qu.:53.11         3rd Qu.:15.44       3rd Qu.:19.00  
+##  Max.   :63.19         Max.   :20.56       Max.   :60.75         Max.   :18.56       Max.   :50.00  
+##  NA&#39;s   :1             NA&#39;s   :1           NA&#39;s   :1             NA&#39;s   :1                          
+##  lstd_030405_mean lstd_030405_sd  lstd_060708_mean lstd_060708_sd  lstd_091011_mean lstd_091011_sd 
+##  Min.   :14550    Min.   :223.4   Min.   :14177    Min.   :131.1   Min.   :14729    Min.   :213.7  
+##  1st Qu.:14642    1st Qu.:250.9   1st Qu.:14214    1st Qu.:151.2   1st Qu.:14842    1st Qu.:240.2  
+##  Median :14653    Median :273.8   Median :14227    Median :159.0   Median :14861    Median :248.4  
+##  Mean   :14655    Mean   :273.6   Mean   :14228    Mean   :158.6   Mean   :14863    Mean   :250.1  
+##  3rd Qu.:14671    3rd Qu.:292.1   3rd Qu.:14243    3rd Qu.:165.6   3rd Qu.:14887    3rd Qu.:259.5  
+##  Max.   :14710    Max.   :339.0   Max.   :14278    Max.   :181.7   Max.   :14935    Max.   :353.7  
+##                                                                                                    
+##  lstd_120102_mean lstd_120102_sd  ndlst_030405_mean ndlst_030405_sd ndlst_060708_mean ndlst_060708_sd
+##  Min.   :15111    Min.   :135.6   Min.   :1839      Min.   :427.4   Min.   :1540      Min.   :468.7  
+##  1st Qu.:15194    1st Qu.:177.9   1st Qu.:2004      1st Qu.:491.6   1st Qu.:1673      1st Qu.:556.9  
+##  Median :15256    Median :190.4   Median :2063      Median :531.8   Median :1757      Median :589.2  
+##  Mean   :15248    Mean   :188.8   Mean   :2066      Mean   :533.8   Mean   :1785      Mean   :592.1  
+##  3rd Qu.:15289    3rd Qu.:198.6   3rd Qu.:2130      3rd Qu.:568.6   3rd Qu.:1881      3rd Qu.:629.9  
+##  Max.   :15418    Max.   :240.2   Max.   :2371      Max.   :663.2   Max.   :2284      Max.   :716.7  
+##                                                                                                      
+##  ndlst_091011_mean ndlst_091011_sd ndlst_120102_mean ndlst_120102_sd ndvi_030405_250m_mean
+##  Min.   :2423      Min.   :489.2   Min.   :2629      Min.   :464.0   Min.   :3369         
+##  1st Qu.:2865      1st Qu.:591.2   1st Qu.:2902      1st Qu.:610.8   1st Qu.:4659         
+##  Median :2929      Median :630.7   Median :3030      Median :633.0   Median :5097         
+##  Mean   :2935      Mean   :629.8   Mean   :3035      Mean   :634.2   Mean   :5054         
+##  3rd Qu.:3013      3rd Qu.:657.7   3rd Qu.:3133      3rd Qu.:658.0   3rd Qu.:5489         
+##  Max.   :3191      Max.   :797.4   Max.   :3463      Max.   :787.3   Max.   :6506         
+##                                                                                           
+##  ndvi_030405_250m_sd ndvi_060708_250m_mean ndvi_060708_250m_sd ndvi_091011_250m_mean ndvi_091011_250m_sd
+##  Min.   : 692        Min.   :3147          Min.   : 557.0      Min.   :4607          Min.   : 574       
+##  1st Qu.:1171        1st Qu.:3786          1st Qu.: 937.5      1st Qu.:5342          1st Qu.:1244       
+##  Median :1384        Median :4182          Median :1095.0      Median :5624          Median :1696       
+##  Mean   :1399        Mean   :4238          Mean   :1126.9      Mean   :5611          Mean   :1669       
+##  3rd Qu.:1668        3rd Qu.:4604          3rd Qu.:1282.5      3rd Qu.:5864          3rd Qu.:2104       
+##  Max.   :2081        Max.   :5613          Max.   :1768.0      Max.   :6669          Max.   :2602       
+##                                                                                                         
+##  ndvi_120102_250m_mean ndvi_120102_250m_sd     ngd10       pet_penman_max  pet_penman_mean pet_penman_min
+##  Min.   :3537          Min.   : 778        Min.   :42549   Min.   :18539   Min.   :17555   Min.   :7255  
+##  1st Qu.:4852          1st Qu.:1278        1st Qu.:44130   1st Qu.:19701   1st Qu.:18503   1st Qu.:7930  
+##  Median :5255          Median :1583        Median :45011   Median :20420   Median :18931   Median :8478  
+##  Mean   :5239          Mean   :1544        Mean   :45444   Mean   :20459   Mean   :19002   Mean   :8439  
+##  3rd Qu.:5802          3rd Qu.:1820        3rd Qu.:46400   3rd Qu.:21025   3rd Qu.:19578   3rd Qu.:8879  
+##  Max.   :6823          Max.   :2175        Max.   :50621   Max.   :22640   Max.   :20793   Max.   :9682  
+##                                                                                                          
 ##  pet_penman_range  sfcWind_max    sfcWind_mean  sfcWind_range    shrub_and_scrub    snow_cover    
 ##  Min.   :17637    Min.   :4725   Min.   :4902   Min.   : 767.6   Min.   : 4.000   Min.   :0.0000  
 ##  1st Qu.:19615    1st Qu.:5410   1st Qu.:5662   1st Qu.:1164.9   1st Qu.: 6.000   1st Qu.:0.6562  
