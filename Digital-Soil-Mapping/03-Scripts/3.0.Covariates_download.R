@@ -43,6 +43,7 @@ library(terra)
 library(tidyverse)
 library(sf)
 library(rgee)
+library(googledrive)
 
 
 # 2 - Import shapefile =========================================================
@@ -81,15 +82,6 @@ region = region$geometry()
 # 6 - Clip and download covariates ========================================
 assetname <- read_csv("01-Data/covs_rgee.csv")
 assetname$num <- rownames(assetname)
-
-for (i in unique(assetname$ID)){
-  #Extract filename 
-  filename <- sub('.*\\/', '', i)
-  
-  #Clip image to the extent of the AOI
-  image <- ee$Image(i)
-  print(i)
-  }
 
 # Loop over the names of assets to clip and dowload the covariates
 for (i in unique(assetname$ID)){
