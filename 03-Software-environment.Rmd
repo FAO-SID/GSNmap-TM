@@ -72,19 +72,6 @@ In addition to that, the data catalog can be accessed via the search bar on the 
 knitr::include_graphics("images/2.1_GEE_codeeditor.png")
 ```
 
-The upload of *assets* in particular shapefiles with the area of interest (AOI) is often a key step to extract only the necessary information from a dataset. To upload a dataset, once has to right-click on "Assets" in the right panel and then on the red "New" button in the code editor interface (see Fig. \@ref(fig:asset)). After selecting the file format of file, a second window opens.
-
-```{r asset, echo = FALSE, fig.cap = "Select files and filetype to be uploaded as GEE assets."}
-knitr::include_graphics("images/2.2_upload-assets-1.png")
-```
-
-Here the source file needs to be selected from the respective folder and a folder in the GEE environment has to be selected under "Asset ID". After that, the user right-clicks on "Upload" in the bottom right of the window (see Fig. \@ref(fig:upload)). In the right panel under "Tasks" appears the uploading task that is executed. Once this process is finished, a tick mark appears and after refreshing the "Assets" panel on the left, the user can see the uploaded shapefile.
-
-```{r upload, echo = FALSE, fig.cap = "Upload interface."}
-#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
-knitr::include_graphics("images/2.3_upload-assets-2.png")
-```
-
 ## rgee - Extension to use google earth engine in R
 To generate the GSNmap, the user is going to use an R package to interact with the GEE environment. The *rgee* package enables users to interact with the GEE servers using the R language [@rgee]. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.
 
