@@ -35,7 +35,7 @@ AOI <- '01-Data/AOI_Arg.shp'
 soilatt <- 'p_bray'
 
 # Repetitions (should be equal or greater than 50)
-n_sim = 5
+n_sim = 1
 
 # Function for Uncertainty Assessment
 load(file = "03-Scripts/eval.RData")
@@ -60,7 +60,18 @@ val_data <- read_csv("01-Data/data_with_coord.csv") %>%
 # Single-band files
 f <- list.files("01-Data/covs/", ".tif$", full.names = TRUE)
 f <- f[f !="01-Data/covs/covs.tif"]
-covs <- rast(f)
+ref <- rast(f[1])
+covs <- list()
+for (i in seq_along(f)) {
+  r <- rast(f[i])
+  r <- project(r, ref)
+  covs[[i]] <- r
+}
+covs <- rast(covs)
+ncovs <- str_remove(f, "01-Data/covs/")
+ncovs <- str_remove(ncovs, ".tif")
+ncovs <- str_replace(ncovs, "-", "_")
+names(covs) <- ncovs
 
 # Multi-band file
 # covs <- rast("01-Data/covs/covs.tif")
@@ -71,7 +82,7 @@ ncovs <- str_replace(ncovs, "-", "_")
 names(covs) <- ncovs
 
 ## 1.2 - extract values from covariates for validation data --------------------
-ex <- terra::extract(x = covs, y = val_data, xy=F)
+ex <- terra::extract(x = covs, y = val_data, xy=F, ID=FALSE)
 val_data <- as.data.frame(val_data)
 val_data <- cbind(val_data, ex)
 val_data <- na.omit(val_data)
@@ -152,10 +163,10 @@ for (i in 1:n_sim) {
   print(paste("start fitting model", i))
   model <- caret::train(fm,
                         data = d,
-                        method = "qrf",
+                        method = "ranger",
                         trControl = fitControl,
                         verbose = TRUE,
-                        tuneGrid = tuneGrid,
+                        # tuneGrid = tuneGrid,
                         keep.inbag = T,
                         importance = TRUE, )
   stopCluster(cl)
@@ -330,3 +341,5 @@ writeRaster(pred_mean,
 writeRaster(pred_sd, 
             paste0("02-Outputs/maps/",soilatt,"_no_coord_SD.tif"),
             overwrite=TRUE)
+
+r <- rast(paste0("02-Outputs/maps/",soilatt,"_no_coord.tif"))

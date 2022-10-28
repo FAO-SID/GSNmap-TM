@@ -51,7 +51,15 @@ library(doParallel)
 
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-covs <- rast(files)
+
+ref <- rast(files[1])
+covs <- list()
+for (i in seq_along(files)) {
+  r <- rast(files[i])
+  r <- project(r, ref)
+  covs[[i]] <- r
+}
+covs <- rast(covs)
 ncovs <- str_remove(files, "01-Data/covs/")
 ncovs <- str_remove(ncovs, ".tif")
 ncovs <- str_replace(ncovs, "-", "_")

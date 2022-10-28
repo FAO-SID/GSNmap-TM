@@ -1,6 +1,7 @@
 ---
 title: "GSNmap report"
-aothor: "Author"
+subtitle: "Country name"
+aothor: "Author1, Author2, et al."
 output: pdf_document
 date: "2022-10-13"
 ---
@@ -9,7 +10,13 @@ date: "2022-10-13"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Descriptive statistics of input data
+# Summary
+<!-- 300 words max -->
+
+Praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros in cursus turpis massa tincidunt dui ut ornare lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae semper quis lectus nulla at volutpat diam ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci porta non pulvinar neque.
+
+# Soil Attribute: Potassium
+## Descriptive statistics of input data
 
 ```{r load data, message=FALSE, warning=FALSE, include=FALSE}
 library(tidyverse)
@@ -39,16 +46,16 @@ dfSummary(dxy[,soilatt],
           tmp.img.dir  = "/tmp")
 ```
 
-# Resulting maps
+## Resulting maps
 
-## Predicted mean
+### Predicted mean
 
 ```{r pred_mean, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 pred_mean <- rast(paste0("02-Outputs/maps/",soilatt,"_QRF.tif"))
 terra:::plot(pred_mean, axes = TRUE, main = paste("Predicted mean", soilatt))
 ```
 
-## Predicted standard deviation
+### Predicted standard deviation
 
 ```{r pred_sd, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 pred_sd <- rast(paste0("02-Outputs/maps/",soilatt,"_QRF_SD.tif"))
@@ -57,9 +64,9 @@ terra:::plot(pred_sd, axes = TRUE,
 
 ```
 
-# Accuracy assessment
+## Accuracy assessment
 
-## Observed vs Predicted
+### Observed vs Predicted
 
 ```{r scatterplot, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 o <- model$pred$obs
@@ -75,17 +82,31 @@ ggplot(df, aes(x = o, y = p)) +
   xlab("Observed") + ylab("Predicted")
 ```
 
-## Accuracy indicators
+### Accuracy indicators
 
 ```{r accuracy, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 kable(eval(p,o)[,1:6])
 
 ```
 
-## Importance of covariates
+### Importance of covariates
 
 ```{r imp, echo=FALSE, fig.height=9, fig.width=6, message=FALSE, warning=FALSE, results='asis'}
 options(width = 60)
 # layout(matrix(1), widths = lcm(5), heights = lcm(10))
 randomForest::varImpPlot(model$finalModel, main = soilatt, type = 1, )
 ```
+
+
+<!-- --------------------------- NEW SOIL ATTRIBUTE ------------------------ -->
+<!-- ----------------------------------------------------------------------- -->
+# Soil Attribute: Available Phosphorous (Bray)
+## Descriptive statistics of input data
+
+
+
+
+
+
+
+
