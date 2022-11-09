@@ -2,7 +2,7 @@
 
 This chapter contains the complete list of R scripts to run the process of mapping soil nutrient and associated soil properties.
 
-## Script: rgee installation {-}
+## Script 0: Installation of rgee {-}
 
 ```{r rgee_installation, eval=F}
 #
