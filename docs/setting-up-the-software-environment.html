@@ -109,7 +109,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -122,7 +122,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -365,20 +365,6 @@ In addition to that, the data catalog can be accessed via the search bar on the 
 Figure 3.2: Google Earth Engine code editor.
 </p>
 </div>
-<p>The upload of <em>assets</em> in particular shapefiles with the area of interest (AOI) is often a key step to extract only the necessary information from a dataset. To upload a dataset, once has to right-click on “Assets” in the right panel and then on the red “New” button in the code editor interface (see Fig. <a href="setting-up-the-software-environment.html#fig:asset">3.3</a>). After selecting the file format of file, a second window opens.</p>
-<div class="figure"><span style="display:block;" id="fig:asset"></span>
-<img src="images/2.2_upload-assets-1.PNG" alt="Select files and filetype to be uploaded as GEE assets." width="843" />
-<p class="caption">
-Figure 3.3: Select files and filetype to be uploaded as GEE assets.
-</p>
-</div>
-<p>Here the source file needs to be selected from the respective folder and a folder in the GEE environment has to be selected under “Asset ID”. After that, the user right-clicks on “Upload” in the bottom right of the window (see Fig. <a href="setting-up-the-software-environment.html#fig:upload">3.4</a>). In the right panel under “Tasks” appears the uploading task that is executed. Once this process is finished, a tick mark appears and after refreshing the “Assets” panel on the left, the user can see the uploaded shapefile.</p>
-<div class="figure"><span style="display:block;" id="fig:upload"></span>
-<img src="images/2.3_upload-assets-2.png" alt="Upload interface." width="272" />
-<p class="caption">
-Figure 3.4: Upload interface.
-</p>
-</div>
 </div>
 <div id="rgee---extension-to-use-google-earth-engine-in-r" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> rgee - Extension to use google earth engine in R<a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -395,12 +381,49 @@ Figure 3.4: Upload interface.
 <p>Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of the created GEE account. The ee_Initialize command must be run every time rgee is used.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setting-up-the-software-environment.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize Google Earth Engine! (you need to create a user account)</span></span>
 <span id="cb2-2"><a href="setting-up-the-software-environment.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>()</span></code></pre></div>
-<p>In case problems arise during the installation, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (<a href="https://r-spatial.github.io/rgee/articles/rgee01.html" class="uri">https://r-spatial.github.io/rgee/articles/rgee01.html</a>) to get more detailed information on the installation procedure and possibilities for problem solving.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="setting-up-the-software-environment.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful functions</span></span>
-<span id="cb3-2"><a href="setting-up-the-software-environment.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="setting-up-the-software-environment.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_check() # check the dependencies that do not belong to R</span></span>
-<span id="cb3-4"><a href="setting-up-the-software-environment.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_credentials() # to remove the user credentials</span></span>
-<span id="cb3-5"><a href="setting-up-the-software-environment.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_pyenv() # Delete variables of the system</span></span></code></pre></div>
+<p>In case the <code>ee_Initialize()</code> function produces an error message, it is necessary to open the Anaconda command prompt to execute the following lines of code. This is done to manually install the necessary Python packages in the working directory called <code>rgee_py</code>. Then, we identify the file path in which the environment is stored and open <em>RStudio</em> to set the environment directory <code>rgee_environment_dir</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="setting-up-the-software-environment.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not, follow next steps: </span></span>
+<span id="cb3-2"><a href="setting-up-the-software-environment.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Open Anaconda Prompt and execute the following code, one by one:</span></span>
+<span id="cb3-3"><a href="setting-up-the-software-environment.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. conda create -n rgee_py python=3.9</span></span>
+<span id="cb3-4"><a href="setting-up-the-software-environment.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. activate rgee_py</span></span>
+<span id="cb3-5"><a href="setting-up-the-software-environment.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. pip install google-api-python-client</span></span>
+<span id="cb3-6"><a href="setting-up-the-software-environment.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. pip install earthengine-api</span></span>
+<span id="cb3-7"><a href="setting-up-the-software-environment.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. pip install numpy</span></span>
+<span id="cb3-8"><a href="setting-up-the-software-environment.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. conda env list</span></span>
+<span id="cb3-9"><a href="setting-up-the-software-environment.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="setting-up-the-software-environment.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the path of the rgee_py environment and write it correctly </span></span>
+<span id="cb3-11"><a href="setting-up-the-software-environment.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (note the backslash \)</span></span>
+<span id="cb3-12"><a href="setting-up-the-software-environment.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># rgee_py            *  C:\Users\angel\MINICO~1\envs\rgee_py &lt;&lt;&lt;</span></span>
+<span id="cb3-13"><a href="setting-up-the-software-environment.html#cb3-13" aria-hidden="true" tabindex="-1"></a>rgee_environment_dir <span class="ot">=</span> <span class="st">&quot;C:/Users/angel/miniconda3/envs/rgee_py/&quot;</span></span></code></pre></div>
+<p>In continuation, we tell <em>RStudio</em> to access the Python packages from the environment directory installed previously in Anaconda. Finally, we re-run the <code>ee_Initialize()</code> function to start <code>rgee</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="setting-up-the-software-environment.html#cb4-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_python</span>(rgee_environment_dir, <span class="at">required=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="setting-up-the-software-environment.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb4-3"><a href="setting-up-the-software-environment.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="fu">paste0</span>(rgee_environment_dir,<span class="st">&quot;python.exe&quot;</span>))</span>
+<span id="cb4-4"><a href="setting-up-the-software-environment.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the environment. Select &#39;Yes&#39; to restart your R session</span></span>
+<span id="cb4-5"><a href="setting-up-the-software-environment.html#cb4-5" aria-hidden="true" tabindex="-1"></a>rgee<span class="sc">::</span><span class="fu">ee_install_set_pyenv</span>(</span>
+<span id="cb4-6"><a href="setting-up-the-software-environment.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">py_path =</span> rgee_environment_dir,</span>
+<span id="cb4-7"><a href="setting-up-the-software-environment.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">py_env =</span> <span class="st">&quot;rgee_py&quot;</span> </span>
+<span id="cb4-8"><a href="setting-up-the-software-environment.html#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="setting-up-the-software-environment.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb4-10"><a href="setting-up-the-software-environment.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
+<span id="cb4-11"><a href="setting-up-the-software-environment.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> rgee_environment_dir)</span>
+<span id="cb4-12"><a href="setting-up-the-software-environment.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">EARTHENGINE_PYTHON =</span> rgee_environment_dir)</span>
+<span id="cb4-13"><a href="setting-up-the-software-environment.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="setting-up-the-software-environment.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Run next function and follow the steps in your browser (e.g. Chrome)</span></span>
+<span id="cb4-15"><a href="setting-up-the-software-environment.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check the box to give GEE access to your Google Drive folders. </span></span>
+<span id="cb4-16"><a href="setting-up-the-software-environment.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Give rgee access to your account</span></span>
+<span id="cb4-17"><a href="setting-up-the-software-environment.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. When it finish, come back to RStudio</span></span>
+<span id="cb4-18"><a href="setting-up-the-software-environment.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>(<span class="at">drive =</span> T)</span>
+<span id="cb4-19"><a href="setting-up-the-software-environment.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="setting-up-the-software-environment.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If there is no error message, then that is all.</span></span>
+<span id="cb4-21"><a href="setting-up-the-software-environment.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># If you need to remove the credentials to repeat the previous step, use</span></span>
+<span id="cb4-22"><a href="setting-up-the-software-environment.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ee_clean_credentials()</span></span></code></pre></div>
+<p>In case problems persist after following this alternative approach, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (<a href="https://r-spatial.github.io/rgee/articles/rgee01.html" class="uri">https://r-spatial.github.io/rgee/articles/rgee01.html</a>) to get more detailed information on the installation procedure and possibilities for problem solving.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="setting-up-the-software-environment.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful functions</span></span>
+<span id="cb5-2"><a href="setting-up-the-software-environment.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="setting-up-the-software-environment.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_check() # check the dependencies that do not belong to R</span></span>
+<span id="cb5-4"><a href="setting-up-the-software-environment.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_credentials() # to remove the user credentials</span></span>
+<span id="cb5-5"><a href="setting-up-the-software-environment.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_pyenv() # Delete variables of the system</span></span></code></pre></div>
 
 </div>
 </div>

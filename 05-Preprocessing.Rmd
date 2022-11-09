@@ -143,8 +143,9 @@ Next to in-built base R functions, there is a vast amount of so-called packages 
 ```{r, echo = T, eval = T}
 
 #install.packages(tidyverse)
-library(tidyverse)
 library(readxl)
+library(tidyverse)
+library(dplyr)
 
 # load in data
 data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
@@ -158,7 +159,7 @@ The loaded dataset may comprise columns that are not of interest for the specifi
 
 ```{r, echo = T, eval = T}
 # Select columns
-locations <- data %>% select(LabID, x, y)
+locations <- data %>% dplyr::select(LabID, x, y)
 head(locations)
 ```
 

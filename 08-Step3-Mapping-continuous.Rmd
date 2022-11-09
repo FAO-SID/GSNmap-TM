@@ -52,7 +52,16 @@ Since soil data and environmental covariaes are stored in different files and fo
 
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= 'Digital-Soil-Mapping/01-Data/covs/', pattern = '.tif$', full.names = T)
-covs <- rast(files)
+
+ref <- rast(files[1])
+covs <- list()
+for (i in seq_along(files)) {
+  r <- rast(files[i])
+  r <- project(r, ref)
+  covs[[i]] <- r
+}
+
+covs <- rast(covs)
 ncovs <- str_remove(files, "Digital-Soil-Mapping/01-Data/covs/")
 ncovs <- str_remove(ncovs, ".tif")
 ncovs <- str_replace(ncovs, "-", "_")
@@ -86,7 +95,7 @@ dat <- as.data.frame(dat)
 summary(dat)
 
 ## 1.4 - Target soil attribute + covariates ------------------------------------
-d <- select(dat, soilatt, names(covs))
+d <- dplyr::select(dat, soilatt, names(covs))
 d <- na.omit(d)
 ```
 

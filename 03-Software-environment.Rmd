@@ -66,7 +66,6 @@ The middle panel contains the scripts that can be run by clicking on the "Run" b
 The right panel is composed of three functionalities. The "Inspector" provides basic information on a pixel of a layer displayed in the map below. The information consists of longitude, latitude, and - if layers are loaded - values of the pixel. The "Console" is the place where certain commands expressed in the code are shown. The most common expressions shown here are print() commands or figures derived from the loaded data. Finally, the "Tasks" button shows all tasks that were formulated in the code/script and are to be submitted to the server for computation. Once a task is submitted, the user has to click on the "Run" button appearing in the "Tasks" section to submit the task to the server.
 In addition to that, the data catalog can be accessed via the search bar on the top of the page. Here, key information on the available datasets, origin, resolution and related publications can be found. 
 
-
 ```{r GEE, echo = FALSE, fig.cap = "Google Earth Engine code editor."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.1_GEE_codeeditor.png")
@@ -96,7 +95,54 @@ Once the dependencies are installed, it is necessary to initialize rgee by provi
 ee_Initialize()
 ```
 
-In case problems arise during the installation, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (https://r-spatial.github.io/rgee/articles/rgee01.html) to get more detailed information on the installation procedure and possibilities for problem solving.
+In case the `ee_Initialize()` function produces an error message, it is necessary to open the Anaconda command prompt to execute the following lines of code. This is done to manually install the necessary Python packages in the working directory called `rgee_py`. Then, we identify the file path in which the environment is stored and open *RStudio* to set the environment directory `rgee_environment_dir`.
+
+```{r, eval = F}
+
+# If not, follow next steps: 
+# Open Anaconda Prompt and execute the following code, one by one:
+# 1. conda create -n rgee_py python=3.9
+# 2. activate rgee_py
+# 3. pip install google-api-python-client
+# 4. pip install earthengine-api
+# 5. pip install numpy
+# 6. conda env list
+
+# Copy the path of the rgee_py environment and write it correctly 
+# (note the backslash \)
+# rgee_py            *  C:\Users\angel\MINICO~1\envs\rgee_py <<<
+rgee_environment_dir = "C:/Users/angel/miniconda3/envs/rgee_py/"
+```
+
+In continuation, we tell *RStudio* to access the Python packages from the environment directory installed previously in Anaconda. Finally, we re-run the `ee_Initialize()` function to start `rgee`.
+
+```{r, eval = F}
+
+reticulate::use_python(rgee_environment_dir, required=TRUE)
+library(reticulate)
+Sys.setenv(RETICULATE_PYTHON=paste0(rgee_environment_dir,"python.exe"))
+# Install the environment. Select 'Yes' to restart your R session
+rgee::ee_install_set_pyenv(
+  py_path = rgee_environment_dir,
+  py_env = "rgee_py" 
+)
+library(reticulate)
+library(rgee)
+Sys.setenv(RETICULATE_PYTHON = rgee_environment_dir)
+Sys.setenv(EARTHENGINE_PYTHON = rgee_environment_dir)
+
+# 1. Run next function and follow the steps in your browser (e.g. Chrome)
+# 2. Check the box to give GEE access to your Google Drive folders. 
+# 3. Give rgee access to your account
+# 3. When it finish, come back to RStudio
+ee_Initialize(drive = T)
+
+# If there is no error message, then that is all.
+# If you need to remove the credentials to repeat the previous step, use
+# ee_clean_credentials()
+```
+
+In case problems persist after following this alternative approach, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (https://r-spatial.github.io/rgee/articles/rgee01.html) to get more detailed information on the installation procedure and possibilities for problem solving.
 
 ```{r, eval = F}
 # Useful functions

@@ -49,8 +49,8 @@ Finally, every time new datasets are loaded into **R**, it is recommendable to c
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
 hor <- read_csv(file = "Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
-site <- select(hor, id_prof, x, y, date) %>% unique()
-hor <- select(hor, id_prof, id_hor, top:cec)
+site <- dplyr::select(hor, id_prof, x, y, date) %>% unique()
+hor <- dplyr::select(hor, id_prof, id_hor, top:cec)
 
 # change names of key columns
 names(site)
@@ -68,7 +68,7 @@ The selection of useful columns is very important since it ensures that users ke
 ```{r select, eval = T}
 # 3 - select useful columns ====================================================
 ## 3.1 - select columns --------------------------------------------------------
-hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+hor <- dplyr::select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
 
 # the variable ph_h2o was renamed as ph
 ```
@@ -136,12 +136,12 @@ subset(profiles, grepl(7726, ProfID, ignore.case = TRUE))
 
 ## 4.5 - keep only valid profiles ----------------------------------------------
 clean_prof <- HzDepthLogicSubset(profiles)
-metadata(clean_prof)$removed.profiles
+aqp::metadata(clean_prof)$removed.profiles
 # write_rds(clean_prof, "01-Data/soilProfileCollection.rds")
 
 ## 4.6 convert soilProfileCollection to a table --------------------------------
 dat <- left_join(clean_prof@site, clean_prof@horizons)
-dat <- select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
+dat <- dplyr::select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
 
 ```
 
@@ -293,7 +293,7 @@ In the following a new dataframe 'd' is created in which the standard depth laye
 # 6 - Harmonize soil layers ====================================================
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
-dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, clay, bd, cec)
+dat <- dplyr::select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, clay, bd, cec)
 
 target <- c("ph", "k", "soc", "clay", "bd", "cec")
 depths <- t(c(0,30))

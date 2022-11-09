@@ -2,8 +2,6 @@ fig:steps
 tab:nutrients
 fig:Rstudio
 fig:GEE
-fig:asset
-fig:upload
 eq:scorpan
 fig:workflow1
 tab:table2
