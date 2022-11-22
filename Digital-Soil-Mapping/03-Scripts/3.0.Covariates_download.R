@@ -13,13 +13,14 @@ gc()
 # 4 - Initialize GEE
 # 5 - Upload shapefile to GEE OR use uploaded UN borders
 # 6 - Clip and download the covariates
+# 7 - Clip and download cropland mask (Copernicus Global Land Service)
 #_______________________________________________________________________________
 
 
 # 0 - User-defined variables ===================================================
 # Working directory
-#wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
-wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
 
 # Output covariate folder
 #output_dir <-''
@@ -27,7 +28,7 @@ output_dir <-'01-Data/covs/'
 
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
-AOI <- '01-Data/AOI_Arg.shp'
+aoi <- '01-Data/AOI_Arg.shp'
 # AOI <- 'MKD'
 # Resolution and projection
 res = 250
@@ -47,7 +48,7 @@ library(googledrive)
 
 
 # 2 - Import shapefile =========================================================
-AOI <- read_sf(AOI)
+AOI <- read_sf(aoi)
 # convert AOI to a box polygon
 AOI <- st_as_sfc(st_bbox(AOI))
 AOI <- st_as_sf(AOI)
@@ -79,7 +80,7 @@ region = region$geometry()
 # write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
 # aoi <- vect(AOI_shp)
 
-# 6 - Clip and download covariates ========================================
+# 6 - Clip and download covariates =============================================
 assetname <- read_csv("01-Data/covs_rgee.csv")
 assetname$num <- rownames(assetname)
 
@@ -116,3 +117,42 @@ for (i in unique(assetname$ID)){
   writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
   print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
 }
+
+# 7 - Clip and download cropland mask (Copernicus Global Land Service) =========
+image1 <- ee$ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global") %>%
+  ee$ImageCollection$select("discrete_classification")%>%
+  ee$ImageCollection$filterBounds(region)%>%
+  ee$ImageCollection$toBands()
+
+# default resampling = nearest neighbor
+image1 = image1$resample()$reproject(
+  crs= crs,
+  scale= res)
+
+
+#Reclassify 
+# for more info on the single land cover classes: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_Landcover_100m_Proba-V-C3_Global
+
+inList <- ee$List(c(0  ,20  ,30  ,40  ,50  ,60  ,70  ,80  ,90 ,100 ,111 ,112 ,113 ,114 ,115 ,116 ,121 ,122 ,123 ,124 ,125 ,126, 200))
+outList <- ee$List(c(0,  0,  0,  1,  0,  0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0))
+
+# Extract points for target classes (works for medium/small countries) Solution for large countries below
+FAO_lu<- image1$remap(inList, outList)
+FAO_lu <-FAO_lu$toDouble()
+FAO_lu =FAO_lu$clip(region)
+#Convert 0 to NA
+mask <- FAO_lu$neq(0)
+FAO_lu <- FAO_lu$updateMask(mask)
+
+#Obtain points
+FAO_lu <- ee_as_raster(
+  image = FAO_lu,
+  scale= res,
+  region = region,
+  via = "drive"
+)
+
+AOI <- read_sf(aoi)
+FAO_lu <- mask(FAO_lu,AOI)
+
+writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)

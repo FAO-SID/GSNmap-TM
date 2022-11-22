@@ -26,7 +26,8 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-setwd('C:/GIT/GSNmap-TM/Digital-Soil-Mapping')
+wd <-'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+setwd(wd)
 
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI_Arg.shp'
@@ -280,7 +281,7 @@ plot(pred_sd)
 
 # 6 - Export final maps ========================================================
 ## 6.1 - Mask croplands --------------------------------------------------------
-msk <- rast("01-Data/mask_arg.tif")
+msk <- rast("01-Data/mask.tif")
 plot(msk)
 pred_mean <- mask(pred_mean, msk)
 plot(pred_mean)

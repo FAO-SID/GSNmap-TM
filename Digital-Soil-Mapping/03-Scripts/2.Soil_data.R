@@ -26,8 +26,8 @@ gc()
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-#wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
-wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
+wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
@@ -37,8 +37,8 @@ library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 library(aqp) # for soil profile data
-# install.packages("devtools") 
-# devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
+#install.packages("devtools") 
+#devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(ithir) # for horizon harmonization
 
 
@@ -130,6 +130,7 @@ estimateBD <- function(SOC=NULL, method=NULL){
   if(method=="Grigal1989"){BD <- 0.669 + 0.941 * exp(1)^(-0.06 * OM)}
   if(method=="Adams1973"){BD <- 100 / (OM /0.244 + (100 - OM)/2.65)}
   if(method=="Honeyset_Ratkowsky1989"){BD <- 1/(0.564 + 0.0556 * OM)}
+  if(method=="Álvarez2010"){BD <- 1.62465-0.00748 *OM)}
   return(BD)
 }
 
