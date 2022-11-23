@@ -29,6 +29,9 @@ gc()
 wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 setwd(wd)
 
+# Define country of interes throuhg 3-digit ISO code
+ISO ='demo'
+
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI.shp'
 
@@ -297,13 +300,30 @@ plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
 
-
+# Harmonized naming 
+if (soilatt == 'ph_0_30'){
+  name <-'_GSNmap_pH_Map030.tiff'
+}else if (soilatt == 'k_0_30'){
+  name <-'_GSNmap_Ktot_Map030.tiff'
+}else if (soilatt == 'soc_0_30'){
+  name <-'_GSNmap_SOC_Map030.tiff'
+}else if (soilatt == 'clay_0_30'){
+  name <-']_GSNmap_Clay_Map030.tiff'
+}else if (soilatt == 'bd_0_30'){
+  name <-'_GSNmap_BD_Map030.tiff'
+}else if (soilatt == 'cec_0_30'){
+  name <-'_GSNmap_CEC_Map030.tiff'
+}else if (soilatt == 'p_0_30'){
+  name <-'_GSNmap_Pav_Map030.tiff'
+}else if (soilatt == 'n_0_30'){
+  name <-'_GSNmap_Ntot_Map030.tiff'
+}
 
 writeRaster(pred_mean, 
-            paste0("02-Outputs/maps/",soilatt,"_QRF.tif"),
+            paste0("02-Outputs/maps/",ISO,name),
             overwrite=TRUE)
 writeRaster(pred_sd, 
-            paste0("02-Outputs/maps/",soilatt,"_QRF_SD.tif"),
+            paste0("02-Outputs/maps/",ISO, '_SD',name),
             overwrite=TRUE)
 
 
