@@ -19,8 +19,8 @@ gc()
 
 # 0 - User-defined variables ===================================================
 # Working directory
-wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-#wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # Output covariate folder
 #output_dir <-''
@@ -28,7 +28,7 @@ output_dir <-'01-Data/covs/'
 
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
-aoi <- '01-Data/AOI_Arg.shp'
+aoi <- '01-Data/AOI.shp'
 # AOI <- 'MKD'
 # Resolution and projection
 res = 250
@@ -50,8 +50,8 @@ library(googledrive)
 # 2 - Import shapefile =========================================================
 AOI <- read_sf(aoi)
 # convert AOI to a box polygon
-AOI <- st_as_sfc(st_bbox(AOI))
-AOI <- st_as_sf(AOI)
+#AOI <- st_as_sfc(st_bbox(AOI))
+#AOI <- st_as_sf(AOI)
 
 
 # 3 - Overview of covariates ===================================================
@@ -81,7 +81,7 @@ region = region$geometry()
 # aoi <- vect(AOI_shp)
 
 # 6 - Clip and download covariates =============================================
-assetname <- read_csv("01-Data/covs_rgee.csv")
+assetname <- read_csv("01-Data/covs/covs_rgee.csv")
 assetname$num <- rownames(assetname)
 
 # Loop over the names of assets to clip and dowload the covariates

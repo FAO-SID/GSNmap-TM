@@ -22,11 +22,12 @@ gc()
 # 4 - Quality check
 # 5 - Estimate BD using pedotransfer function
 # 6 - Harmonize soil layers
-# 7 - Plot and save results
+# 7 - Add chemical properties from additional dataaset
+# 8 - Plot and save results
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
@@ -40,7 +41,7 @@ library(aqp) # for soil profile data
 #install.packages("devtools") 
 #devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(ithir) # for horizon harmonization
-
+library(data.table)
 
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
@@ -51,11 +52,13 @@ library(ithir) # for horizon harmonization
 # hor <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
 # # Import site-level data
 # site <- read_excel("01-Data/soil_data.xlsx", sheet = 1)
+# chem <- read_excel("01-Data/soil_data.xlsx", sheet = 3)
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
 hor <- read_csv(file = "01-Data/soil_profile_data.csv")
-site <- select(hor, id_prof, x, y, date) %>% unique()
+chem <- read_csv(file = "01-Data/soil_chem_data030.csv")
+site <- select(hor, id_prof, x, y) %>% unique()
 hor <- select(hor, id_prof, id_hor, top:cec)
 
 # change names of key columns
@@ -130,7 +133,6 @@ estimateBD <- function(SOC=NULL, method=NULL){
   if(method=="Grigal1989"){BD <- 0.669 + 0.941 * exp(1)^(-0.06 * OM)}
   if(method=="Adams1973"){BD <- 100 / (OM /0.244 + (100 - OM)/2.65)}
   if(method=="Honeyset_Ratkowsky1989"){BD <- 1/(0.564 + 0.0556 * OM)}
-  if(method=="Álvarez2010"){BD <- 1.62465-0.00748 *OM)}
   return(BD)
 }
 
@@ -253,18 +255,40 @@ for (i in seq_along(target)) {
 d
 
 
-# 7 - Plot  and save results ===================================================
 
-x <- pivot_longer(d, cols = ph_0_30:cec_0_30, values_to = "value",
+# 7 - Add chemical properties from additional dataset ==========================
+#The chem data set has measured NPK for 0-30 depth 
+View(chem)
+
+#Harmonize units if different from target (all target units here)
+chem$k <-chem$k /100
+
+# Rename columns to match the main data set
+names(d)
+names(chem)[1] <- 'ProfID'
+names(chem)[4] <- 'p_0_30'
+names(chem)[5] <- 'k_0_30' 
+names(chem)[6] <- 'n_0_30'
+
+
+
+#Create unique ProfID 
+chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
+
+# Add the new data as new rows using data.table we can add empty rows
+# automatically for the not measured properties in the chem dataset
+d <- rbind(setDT(d),setDT(chem), fill = TRUE)
+
+# 8 - Plot  and save results ===================================================
+
+x <- pivot_longer(d, cols = ph_0_30:n_0_30, values_to = "value",
                   names_sep = "_", 
                   names_to = c("soil_property", "top", "bottom"))
 x <- mutate(x, depth = paste(top, "-" , bottom))
-x <- na.omit(x)
+#x <- na.omit(x)
 ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
   geom_boxplot() + 
   facet_wrap(~soil_property, scales = "free")
 
-# remove BD and CF
-# d <- select(d, ProfID:y, soc_0_30:ocs_60_100)
-# save data
-write_csv(d, "02-Outputs/spline_soil_profile.csv")
+# save the data
+write_csv(d, "02-Outputs/harmonized_soil_data.csv")

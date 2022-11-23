@@ -26,14 +26,14 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-wd <-'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 setwd(wd)
 
 # Load Area of interest (shp)
-AOI <- '01-Data/AOI_Arg.shp'
+AOI <- '01-Data/AOI.shp'
 
 # Terget soil attribute
-soilatt <- 'k'
+target_properties<- c("ph_0_30","k_0_30","soc_0_30", "clay_0_30", "bd_0_30","cec_0_30","p_0_30" , "n_0_30" )
 
 # Function for Uncertainty Assessment
 load(file = "03-Scripts/eval.RData")
@@ -61,16 +61,19 @@ for (i in seq_along(files)) {
   covs[[i]] <- r
 }
 covs <- rast(covs)
+
+
 ncovs <- str_remove(files, "01-Data/covs/")
 ncovs <- str_remove(ncovs, ".tif")
 ncovs <- str_replace(ncovs, "-", "_")
 names(covs) <- ncovs
-
+names(covs)[19] <- "dtm_pos_openness2_250m" 
+names(covs)[17] <- "dtm_pos_openness3_250m"
 # covs <- rast("01-Data/covs/covs.tif")
 # ncovs <- names(covs)
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
-dat <- read_csv("01-Data/data_with_coord.csv")
+dat <- read_csv("02-Outputs/harmonized_soil_data.csv")
 
 # Convert soil data into a spatial object (check https://epsg.io/6204)
 dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
@@ -85,6 +88,9 @@ dat <- cbind(dat,pv)
 dat <- as.data.frame(dat)
 
 summary(dat)
+
+for(soilatt in unique(target_properties)){
+
 
 ## 1.4 - Target soil attribute + covariates ------------------------------------
 d <- dplyr::select(dat, soilatt, names(covs))
@@ -299,6 +305,6 @@ writeRaster(pred_sd,
 
 
 
-
+}
 
 
