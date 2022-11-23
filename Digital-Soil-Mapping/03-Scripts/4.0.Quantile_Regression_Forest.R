@@ -276,9 +276,9 @@ r_sd <-sprc(r_sd_l)
 pred_mean <- mosaic(r_mean)
 pred_sd <- mosaic(r_sd)
 
-AOI <- vect(AOI)
-pred_mean <- mask(pred_mean,AOI)
-pred_sd <- mask(pred_sd,AOI)
+aoi <- vect(AOI)
+pred_mean <- mask(pred_mean,aoi)
+pred_sd <- mask(pred_sd,aoi)
 
 
 plot(pred_mean)
@@ -296,6 +296,9 @@ plot(pred_sd)
 plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
+
+
+
 writeRaster(pred_mean, 
             paste0("02-Outputs/maps/",soilatt,"_QRF.tif"),
             overwrite=TRUE)
