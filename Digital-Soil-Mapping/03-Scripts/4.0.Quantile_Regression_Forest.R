@@ -30,13 +30,14 @@ wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 setwd(wd)
 
 # Define country of interes throuhg 3-digit ISO code
-ISO ='demo'
+ISO ='ISO'
 
 # Load Area of interest (shp)
 AOI <- '01-Data/AOI.shp'
 
-# Terget soil attribute
-target_properties<- c("ph_0_30","k_0_30","soc_0_30", "clay_0_30", "bd_0_30","cec_0_30","p_0_30" , "n_0_30" )
+# Terget soil attribute (Mandatory 10)
+target_properties<- c("ph_0_30", "k_0_30" , "soc_0_30" ,"bd_0_30", "cec_0_30","p_0_30",   
+                      "n_0_30","clay_0_30", "sand_0_30" ,"silt_0_30")
 
 # Function for Uncertainty Assessment
 load(file = "03-Scripts/eval.RData")
@@ -56,6 +57,7 @@ library(doParallel)
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
 
+#In case of extent error, or if covariates other than the default ones are added
 ref <- rast(files[1])
 covs <- list()
 for (i in seq_along(files)) {
@@ -308,7 +310,7 @@ if (soilatt == 'ph_0_30'){
 }else if (soilatt == 'soc_0_30'){
   name <-'_GSNmap_SOC_Map030.tiff'
 }else if (soilatt == 'clay_0_30'){
-  name <-']_GSNmap_Clay_Map030.tiff'
+  name <-'_GSNmap_Clay_Map030.tiff'
 }else if (soilatt == 'bd_0_30'){
   name <-'_GSNmap_BD_Map030.tiff'
 }else if (soilatt == 'cec_0_30'){
@@ -317,6 +319,10 @@ if (soilatt == 'ph_0_30'){
   name <-'_GSNmap_Pav_Map030.tiff'
 }else if (soilatt == 'n_0_30'){
   name <-'_GSNmap_Ntot_Map030.tiff'
+}else if (soilatt == 'sand_0_30'){
+  name <-'_GSNmap_Sand_Map030.tiff'
+}else if (soilatt == 'silt_0_30'){
+  name <-'_GSNmap_Silt_Map030.tiff'
 }
 
 writeRaster(pred_mean, 

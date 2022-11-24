@@ -114,6 +114,7 @@ for (i in unique(assetname$ID)){
   
   num <- assetname[assetname$ID == i, 'num']
   
+  raster <- mask(raster, AOI)
   writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
   print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
 }

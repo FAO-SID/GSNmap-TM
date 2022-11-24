@@ -22,7 +22,7 @@ gc()
 # 4 - Quality check
 # 5 - Estimate BD using pedotransfer function
 # 6 - Harmonize soil layers
-# 7 - Add chemical properties from additional dataaset
+# 7 - Add chemical properties from additional dataset
 # 8 - Plot and save results
 #_______________________________________________________________________________
 
@@ -52,12 +52,17 @@ library(data.table)
 # hor <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
 # # Import site-level data
 # site <- read_excel("01-Data/soil_data.xlsx", sheet = 1)
-# chem <- read_excel("01-Data/soil_data.xlsx", sheet = 3)
+# chem <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
+# phys <- read_excel("01-Data/soil_data.xlsx", sheet = 3)
+
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
 hor <- read_csv(file = "01-Data/soil_profile_data.csv")
 chem <- read_csv(file = "01-Data/soil_chem_data030.csv")
+phys <- read_csv(file = "01-Data/soil_phys_data030.csv")
+
+
 site <- select(hor, id_prof, x, y) %>% unique()
 hor <- select(hor, id_prof, id_hor, top:cec)
 
@@ -73,7 +78,7 @@ summary(hor)
 
 # 3 - select useful columns ====================================================
 ## 3.1 - select columns --------------------------------------------------------
-hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, bd, cec)
 
 # 4 - Quality check ============================================================
 
@@ -228,9 +233,9 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 # 6 - Harmonize soil layers ====================================================
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
-dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, clay, bd, cec)
+dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
 
-target <- c("ph", "k", "soc", "clay", "bd", "cec")
+target <- c("ph", "k", "soc",  "bd", "cec")
 depths <- t(c(0,30))
 
 ## 6.2 - Create standard layers ------------------------------------------------
@@ -256,12 +261,38 @@ d
 
 
 
-# 7 - Add chemical properties from additional dataset ==========================
-#The chem data set has measured NPK for 0-30 depth 
-View(chem)
+# 7 - Harmonize units ==========================================================
+#Harmonize units if different from target units
+# Mandatory Soil Propertes and corresponing units:
+# Total N - ppm
+# Available P - ppm
+# Available K - ppm
+# Cation exchange capacity cmolc/kg
+# pH
+# SOC - %
+# Bulk density g/cm3
+# Soil fractions (clay, silt and sand) - 
 
-#Harmonize units if different from target (all target units here)
-chem$k <-chem$k /100
+# Units soil profile data (dataframe d)
+# 
+head(d) # pH; K cmolc/kg; SOC %; BD g/cm3; CEC  cmolc/kg
+
+# K => convert cmolc/kg to ppm (K *10 * 39.096)
+d$k_0_30 <- d$k_0_30*10 * 39.096
+
+head(chem)# P ppm; N %; K ppm
+# N => convert % to ppm (N * 10000)
+chem$tn <-chem$tn*10000
+
+head(phys)# clay, sand, silt g/kg
+# convert g/kg to % (/10)
+phys$clay_0_30 <-phys$clay_0_30/10
+phys$sand_0_30  <-phys$sand_0_30 /10
+phys$silt_0_30 <-phys$silt_0_30/10
+
+
+# Add chemical and physical properties from additional datasets ==========================
+  
 
 # Rename columns to match the main data set
 names(d)
@@ -271,7 +302,7 @@ names(chem)[5] <- 'k_0_30'
 names(chem)[6] <- 'n_0_30'
 
 
-
+#The chem dataframe comes from and independent dataset we need to create new unique ProfIDs 
 #Create unique ProfID 
 chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
 
@@ -279,9 +310,12 @@ chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
 # automatically for the not measured properties in the chem dataset
 d <- rbind(setDT(d),setDT(chem), fill = TRUE)
 
-# 8 - Plot  and save results ===================================================
+#The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)
+d <- merge(d, phys, by=c('ProfID', 'x', 'y'), all.x =T)
 
-x <- pivot_longer(d, cols = ph_0_30:n_0_30, values_to = "value",
+# 8 - Plot  and save results ===================================================
+names(d)
+x <- pivot_longer(d, cols = ph_0_30:silt_0_30, values_to = "value",
                   names_sep = "_", 
                   names_to = c("soil_property", "top", "bottom"))
 x <- mutate(x, depth = paste(top, "-" , bottom))
