@@ -12,8 +12,8 @@ As specified in the previous Chapter in regards to [pre-processing](preproc), th
 
 ```{r, eval = F}
 # 0 - User-defined variables ===================================================
-wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
-#wd <- "C:/GIT/Digital-Soil-Mapping"
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
@@ -22,10 +22,12 @@ library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
-
-# install.packages("devtools") 
-# devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
+library(aqp) # for soil profile data
+#install.packages("devtools") 
+#devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(ithir) # for horizon harmonization
+library(data.table)
+
 
 ```
 
@@ -45,12 +47,19 @@ Finally, every time new datasets are loaded into **R**, it is recommendable to c
 # hor <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
 # # Import site-level data
 # site <- read_excel("01-Data/soil_data.xlsx", sheet = 1)
+# chem <- read_excel("01-Data/soil_data.xlsx", sheet = 2)
+# phys <- read_excel("01-Data/soil_data.xlsx", sheet = 3)
+
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
-hor <- read_csv(file = "Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
-site <- dplyr::select(hor, id_prof, x, y, date) %>% unique()
-hor <- dplyr::select(hor, id_prof, id_hor, top:cec)
+hor <- read_csv(file = "01-Data/soil_profile_data.csv")
+chem <- read_csv(file = "01-Data/soil_chem_data030.csv")
+phys <- read_csv(file = "01-Data/soil_phys_data030.csv")
+
+
+site <- select(hor, id_prof, x, y) %>% unique()
+hor <- select(hor, id_prof, id_hor, top:cec)
 
 # change names of key columns
 names(site)
@@ -61,6 +70,7 @@ names(hor)[2] <- "HorID"
 # scan the data
 summary(site)
 summary(hor)
+
 ```
 
 The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below).
@@ -68,9 +78,8 @@ The selection of useful columns is very important since it ensures that users ke
 ```{r select, eval = T}
 # 3 - select useful columns ====================================================
 ## 3.1 - select columns --------------------------------------------------------
-hor <- dplyr::select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, clay, bd, cec)
+hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, bd, cec)
 
-# the variable ph_h2o was renamed as ph
 ```
 
 
@@ -289,7 +298,7 @@ The last step towards a soil data table that can be used for mapping, is to harm
 
 In the following a new dataframe 'd' is created in which the standard depth layers are stored. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the 'ithir' package. The spline functions are also explained in [Format requirements of soil data].
 
-```{r, eval = F}
+```{r, eval = T}
 # 6 - Harmonize soil layers ====================================================
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
@@ -321,24 +330,83 @@ d
 
 ```
 
+
+
+```{r units, eval = T}
+# 7 - Harmonize units ==========================================================
+#Harmonize units if different from target units
+# Mandatory Soil Propertes and corresponing units:
+# Total N - ppm
+# Available P - ppm
+# Available K - ppm
+# Cation exchange capacity cmolc/kg
+# pH
+# SOC - %
+# Bulk density g/cm3
+# Soil fractions (clay, silt and sand) - 
+
+# Units soil profile data (dataframe d)
+# 
+head(d) # pH; K cmolc/kg; SOC %; BD g/cm3; CEC  cmolc/kg
+
+# K => convert cmolc/kg to ppm (K *10 * 39.096)
+d$k_0_30 <- d$k_0_30*10 * 39.096
+
+head(chem)# P ppm; N %; K ppm
+# N => convert % to ppm (N * 10000)
+chem$tn <-chem$tn*10000
+
+head(phys)# clay, sand, silt g/kg
+# convert g/kg to % (/10)
+phys$clay_0_30 <-phys$clay_0_30/10
+phys$sand_0_30  <-phys$sand_0_30 /10
+phys$silt_0_30 <-phys$silt_0_30/10
+
+```
+
+
+
+```{r, eval = T}
+# Add chemical and physical properties from additional datasets ==========================
+  
+
+# Rename columns to match the main data set
+names(d)
+names(chem)[1] <- 'ProfID'
+names(chem)[4] <- 'p_0_30'
+names(chem)[5] <- 'k_0_30' 
+names(chem)[6] <- 'n_0_30'
+
+
+#The chem dataframe comes from and independent dataset we need to create new unique ProfIDs 
+#Create unique ProfID 
+chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
+
+# Add the new data as new rows using data.table we can add empty rows
+# automatically for the not measured properties in the chem dataset
+d <- rbind(setDT(d),setDT(chem), fill = TRUE)
+
+#The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)
+d <- merge(d, phys, by=c('ProfID', 'x', 'y'), all.x =T)
+
+```
+
 ## Save the results
 Before finalising the soil data preparation, it is recommendable to check again visually if the calculations were conducted correctly. Again, the combination of tidyverse and ggplot functions provides high efficiency and versatility to visualise figures with the desired soil properties. At last, the write_csv() function is used to save the dataframe as a .csv file in the Outputs folder (02-Outputs). With this, the soil data preparation is finalised.
 
 ```{r, eval = F}
-# 7 - Plot  and save results ===================================================
-
-x <- pivot_longer(d, cols = ph_0_30:cec_0_30, values_to = "value",
+# 8 - Plot  and save results ===================================================
+names(d)
+x <- pivot_longer(d, cols = ph_0_30:silt_0_30, values_to = "value",
                   names_sep = "_", 
                   names_to = c("soil_property", "top", "bottom"))
 x <- mutate(x, depth = paste(top, "-" , bottom))
-x <- na.omit(x)
+#x <- na.omit(x)
 ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
   geom_boxplot() + 
   facet_wrap(~soil_property, scales = "free")
 
-# remove BD and CF
-# d <- select(d, ProfID:y, soc_0_30:ocs_60_100)
-# save data
-write_csv(d, "02-Outputs/spline_soil_profile.csv")
+# save the data
+write_csv(d, "02-Outputs/harmonized_soil_data.csv")
 ```
 
