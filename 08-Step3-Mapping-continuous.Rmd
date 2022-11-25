@@ -6,7 +6,8 @@ In this chapter, the cleaned soil data and the previously downloaded covariate l
 
 To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
 
-```{r, eval = T, message = F, warning = F}
+```{r, eval = F, message = F, warning = F}
+
 #_______________________________________________________________________________
 #
 # Quantile Regression Forest
@@ -19,17 +20,34 @@ To begin, we open *RStudio* and empty our global environment. Then, we set the w
 
 #Empty environment and cache 
 rm(list = ls())
+gc()
+
+# Content of this script =======================================================
+# 0 - Set working directory, soil attribute, and packages
+# 1 - Merge soil data with environmental covariates 
+# 2 - Covariate selection
+# 3 - Model calibration
+# 4 - Uncertainty assessment
+# 5 - Prediction
+# 6 - Export final maps
+#_______________________________________________________________________________
+
 
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-#setwd('Digital-Soil-Mapping/')
+#wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#setwd(wd)
+
+# Define country of interes throuhg 3-digit ISO code
+ISO ='ISO'
 
 # Load Area of interest (shp)
-AOI <- 'Digital-Soil-Mapping/01-Data/AOI_Arg.shp'
+AOI <- '01-Data/AOI.shp'
 
-# Target soil attribute
-soilatt <- 'k'
+# Terget soil attribute (Mandatory 10)
+target_properties<- c("ph_0_30", "k_0_30" , "soc_0_30" ,"bd_0_30", "cec_0_30","p_0_30",   
+                      "n_0_30","clay_0_30", "sand_0_30" ,"silt_0_30")
 
 # Function for Uncertainty Assessment
 load(file = "Digital-Soil-Mapping/03-Scripts/eval.RData")
@@ -43,16 +61,19 @@ library(terra)
 library(sf)
 library(doParallel)
 
+
+
 ```
 
 Since soil data and environmental covariaes are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
-```{r, eval = T, message = F, warning = F}
+```{r, eval = F, message = F, warning = F}
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= 'Digital-Soil-Mapping/01-Data/covs/', pattern = '.tif$', full.names = T)
 
+#In case of extent error, or if covariates other than the default ones are added
 ref <- rast(files[1])
 covs <- list()
 for (i in seq_along(files)) {
@@ -60,43 +81,44 @@ for (i in seq_along(files)) {
   r <- project(r, ref)
   covs[[i]] <- r
 }
-
 covs <- rast(covs)
+
+
 ncovs <- str_remove(files, "Digital-Soil-Mapping/01-Data/covs/")
 ncovs <- str_remove(ncovs, ".tif")
 ncovs <- str_replace(ncovs, "-", "_")
 names(covs) <- ncovs
-
+names(covs)[19] <- "dtm_pos_openness2_250m" 
+names(covs)[17] <- "dtm_pos_openness3_250m"
 # covs <- rast("01-Data/covs/covs.tif")
 # ncovs <- names(covs)
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
-dat <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+dat <- read_csv("Digital-Soil-Mapping/02-Outputs/harmonized_soil_data.csv")
 
 # Convert soil data into a spatial object (check https://epsg.io/6204)
 dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
+
+
+
 ```
 
 The shapefile can be reprojected to match the CRS of the covariates using the project function of the terra package. 
-```{r, eval = T}
+```{r, eval = F}
 # Reproject point coordinates to match coordinate system of covariates
 dat <- terra::project(dat, covs)
 names(dat)
 ```
 
-Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the summary() command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the na.omit() function.
+Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the `summary()` command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the `na.omit()` function.
 
-```{r, eval = T}
+```{r, eval = F}
 ## 1.3 - Extract values from covariates to the soil points ---------------------
 pv <- terra::extract(x = covs, y = dat, xy=F)
 dat <- cbind(dat,pv)
 dat <- as.data.frame(dat)
 
 summary(dat)
-
-## 1.4 - Target soil attribute + covariates ------------------------------------
-d <- dplyr::select(dat, soilatt, names(covs))
-d <- na.omit(d)
 ```
 
 ## Covariate selection and repeated k-fold cross-validation
@@ -111,7 +133,15 @@ The cross-validation is repeated and after every iteration, i.e. each single spl
 Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods. Here, we use the rfeControl() function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called "fitControl". Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
 
 
-```{r, eval = T}
+
+```{r, eval = F}
+for(soilatt in unique(target_properties)){
+
+
+## 1.4 - Target soil attribute + covariates ------------------------------------
+d <- dplyr::select(dat, soilatt, names(covs))
+d <- na.omit(d)
+
 # 2 - Covariate selection with RFE =============================================
 ## 2.1 - Setting parameters ----------------------------------------------------
 # Repeatedcv = 3-times repeated 10-fold cross-validation
@@ -127,17 +157,17 @@ fitControl <- rfeControl(functions = rfFuncs,
 fm = as.formula(paste(soilatt," ~", paste0(ncovs,
                                              collapse = "+")))
 
-```
-
-The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict.
-The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.
-
-```{r, eval = T}
 # Calibrate the model using multiple cores
 cl <- makeCluster(detectCores()-1)
 registerDoParallel(cl)
 
 
+```
+
+The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict.
+The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.
+
+```{r, eval = F}
 ## 2.2 - Calibrate a RFE model to select covariates ----------------------------
 covsel <- rfe(fm,
               data = d,  
@@ -146,9 +176,15 @@ covsel <- rfe(fm,
               verbose = TRUE,
               keep.inbag = T)
 stopCluster(cl)
+saveRDS(covsel, "Digital-Soil-Mapping/02-Outputs/models/covsel.rda")
 ```
 
 The selected covariates can be visualised in Trellis displays. Finally, the optimal predictors are stored in a dedicated R object.
+
+```{r, eval = T, echo = F, message = F, warning = F}
+covsel <- readRDS("Digital-Soil-Mapping/02-Outputs/models/covsel.rda")
+```
+
 
 ```{r, eval = T}
 ## 2.3 - Plot selection of covariates ------------------------------------------
@@ -163,7 +199,7 @@ opt_covs <- predictors(covsel)
 
 ## Model calibration
 
-The model calibration step involves the use of a statistical model to find the relations between soil observations and environmental covariates. One of the most widely used models in DSM is random forest [@Breiman2001]. Random forest is considered a machine learning method which belongs to the decision-tree type of model. Random forest creates an ensemble of trees using a random selection of covariate. The prediction of a single tree is made based on the observed samples mean in the leaf. The random forest prediction is made by taking the average of the predictions of the single trees. The size of the number of covariates at each tree (mtry) can be fine-tuned before calibrating the model. 
+The model calibration step involves the use of a statistical model to find the relations between soil observations and environmental covariates. One of the most widely used models in DSM is random forest [@Breiman2001]. Random forest is considered a machine learning method which belongs to the decision-tree type of model. Random forest creates an ensemble of trees using a random selection of covariates. The prediction of a single tree is made based on the observed samples mean in the leaf. The random forest prediction is made by taking the average of the predictions of the single trees. The size of the number of covariates at each tree (mtry) can be fine-tuned before calibrating the model. 
 Quantile regression forests (QRF, @Meinshausen2006) are a generalisation of the random forest models, capable of not only predicting the conditional mean, but also the conditional probability density function. This feature allows one to estimate the standard deviation of the prediction, as well as the likelihood of the target variable falling below a given threshold. In a context where a minimum level of a soil nutrient concentration may be decisive for improving the crop yield, this feature can play an important role for the GSNmap initiative. 
 Model calibration will be implemented using the caret package [@Kuhn2022]. While we suggest to use QRF, caret provides a large set of models https://topepo.github.io/caret/available- models.html#) that might perform better in specific cases. In this regard, it is up to the user to implement a different model, ensuring  the product specifications (Section Product Specifications).
 
@@ -201,6 +237,7 @@ model <- caret::train(fm,
                       importance = TRUE)
 stopCluster(cl)
 gc()
+
 ```
 
 The results have been stored in an R object called model. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted. Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
@@ -211,11 +248,12 @@ x <- randomForest::importance(model$finalModel)
 model$importance <- x
 ## 3.5 - Print and save model --------------------------------------------------
 print(model)
-saveRDS(model, file = paste0("Digital-Soil-Mapping/02-Outputs/models/model_",soilatt,".rds"))
+saveRDS(model, file = paste0("02-Outputs/models/model_",soilatt,".rds"))
+
 ```
 
 ```{r, echo = F, eval = T}
-model <- readRDS(file = paste0("Digital-Soil-Mapping/02-Outputs/models/model_",soilatt,".rds"))
+model <- readRDS(file = paste0("Digital-Soil-Mapping/02-Outputs/models/model_","k_0_30",".rds"))
 print(model)
 ```
 
@@ -293,8 +331,9 @@ While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterp
   ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
   labs(title = soilatt) + 
   xlab("Observed") + ylab("Predicted"))
-ggsave(g1, filename = paste0("Digital-Soil-Mapping/02-Outputs/residuals_",soilatt,".png"), scale = 1, 
-       units = "cm", width = 12, height = 12)
+# ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1, 
+#        units = "cm", width = 12, height = 12)
+
 
 ```
 
@@ -312,10 +351,10 @@ Finally, a variable importance plot is generated to visualise the relative impor
 ## 4.3 - Plot Covariate importance ---------------------------------------------
 (g2 <- varImpPlot(model$finalModel, main = soilatt, type = 1))
 
-png(filename = paste0("Digital-Soil-Mapping/02-Outputs/importance_",soilatt,".png"), 
-   width = 15, height = 15, units = "cm", res = 600)
-g2
-dev.off()
+# png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
+#     width = 15, height = 15, units = "cm", res = 600)
+# g2
+# dev.off()
 ```
 
 ```{r, eval = T, echo = F, message=F}
@@ -340,6 +379,7 @@ r <-covs[[1]]
 t <- rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))
 tile <- makeTiles(r, t,overwrite=TRUE,filename="02-Outputs/tiles/tiles.tif")
 
+
 ```
 
 Next, a for loop is formulated to predict each soil attribute for each tile. The tiling significantly improves the computational speed of the prediction. For each tile the mean and the standard deviation are stored in two separated objects that are then saved as raster files.
@@ -359,6 +399,8 @@ for (j in seq_along(tile)) {
                               cpkgs="quantregForest", what=mean)
   pred_sd <- terra::predict(covst, model = model$finalModel, na.rm=TRUE,  
                             cpkgs="quantregForest", what=sd)  
+  
+  
   
   # ###### Raster package solution (in case terra results in many NA pixels)
   # library(raster)
@@ -417,14 +459,13 @@ r_sd <-sprc(r_sd_l)
 pred_mean <- mosaic(r_mean)
 pred_sd <- mosaic(r_sd)
 
-AOI <- vect(AOI)
-pred_mean <- mask(pred_mean,AOI)
-pred_sd <- mask(pred_sd,AOI)
+aoi <- vect(AOI)
+pred_mean <- mask(pred_mean,aoi)
+pred_sd <- mask(pred_sd,aoi)
 
 
 plot(pred_mean)
 plot(pred_sd)
-
 ```
 
 The final step then consists of applying a cropland mask that is applied to the map and the uncertainty map since the soil data comes only from croplands and thus no assumption can be made to soil property values under different land covers. Additionally, a map is calculated to visualise the coefficient of variation (in Percent). The maps are then stored as raster files (GeoTiff/.tif) in the Outputs folder. 
@@ -433,7 +474,7 @@ The final step then consists of applying a cropland mask that is applied to the 
 ```{r, eval = F}
 # 6 - Export final maps ========================================================
 ## 6.1 - Mask croplands --------------------------------------------------------
-msk <- rast("01-Data/mask_arg.tif")
+msk <- rast("01-Data/mask.tif")
 plot(msk)
 pred_mean <- mask(pred_mean, msk)
 plot(pred_mean)
@@ -442,18 +483,48 @@ plot(pred_sd)
 plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
 
 ## 6.2 - Save results ----------------------------------------------------------
+
+# Harmonized naming 
+if (soilatt == 'ph_0_30'){
+  name <-'_GSNmap_pH_Map030.tiff'
+}else if (soilatt == 'k_0_30'){
+  name <-'_GSNmap_Ktot_Map030.tiff'
+}else if (soilatt == 'soc_0_30'){
+  name <-'_GSNmap_SOC_Map030.tiff'
+}else if (soilatt == 'clay_0_30'){
+  name <-'_GSNmap_Clay_Map030.tiff'
+}else if (soilatt == 'bd_0_30'){
+  name <-'_GSNmap_BD_Map030.tiff'
+}else if (soilatt == 'cec_0_30'){
+  name <-'_GSNmap_CEC_Map030.tiff'
+}else if (soilatt == 'p_0_30'){
+  name <-'_GSNmap_Pav_Map030.tiff'
+}else if (soilatt == 'n_0_30'){
+  name <-'_GSNmap_Ntot_Map030.tiff'
+}else if (soilatt == 'sand_0_30'){
+  name <-'_GSNmap_Sand_Map030.tiff'
+}else if (soilatt == 'silt_0_30'){
+  name <-'_GSNmap_Silt_Map030.tiff'
+}
+
 writeRaster(pred_mean, 
-            paste0("02-Outputs/maps/",soilatt,"_QRF.tif"),
+            paste0("02-Outputs/maps/",ISO,name),
             overwrite=TRUE)
 writeRaster(pred_sd, 
-            paste0("02-Outputs/maps/",soilatt,"_QRF_SD.tif"),
+            paste0("02-Outputs/maps/",ISO, '_SD',name),
             overwrite=TRUE)
+
+
+
+}
 ```
 
-```{r, eval = T, echo = F, message = F}
-pred_mean <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF.tif")
-plot(pred_mean, main = "Mean")
-pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/maps/k_QRF_SD.tif")
-plot(pred_sd, main = "Standard deviation")
-plot(pred_sd/pred_mean*100, main = paste("CV",soilatt))
+```{r, eval = T, echo = F}
+k_mean <- rast("Digital-Soil-Mapping/02-Outputs/maps/ISO_GSNmap_Ktot_Map030.tiff")
+plot(k_mean, main = "K tot Mean")
+k_sd <- rast("Digital-Soil-Mapping/02-Outputs/maps/ISO_SD_GSNmap_Ktot_Map030.tiff")
+plot(k_sd, main = "K tot StDev")
+
+
 ```
+

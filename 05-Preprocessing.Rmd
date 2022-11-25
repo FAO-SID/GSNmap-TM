@@ -1,10 +1,11 @@
 # Arranging soil data in **R**
 
-In this chapter, the datasets used in this technical manual are presented. Then, step-by-step instructions are given on how to carry out necessary steps in **RStudio** in order to be able to work with your soil data and generate maps. Instructions are given on how to:
+In this chapter, the datasets used in this technical manual are presented. They were adapted for educational purposes by the GSP Secretariat in order to best explain the way towards generating all necessary layers of the GSNmap initiative.
+Step-by-step instructions are given on how to carry out necessary steps in *RStudio* in order to be able to work with your soil data and generate maps. Instructions are given on how to:
 
 1. Generate user-defined variables, 
 2. Set the working directory and load necessary packages, 
-3. Import national data to **R Studio**
+3. Import national data to *RStudio*
 4. Handle data (select, filter useful columns, etc.)
 
 Thus, the instructions also serve as a continuation of the basic introduction to the functioning of **R** and *RStudio* given in [Chapter 3](https://fao-gsp.github.io/GSNmap-TM/setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages). Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
@@ -15,22 +16,38 @@ The study area is located in the southeast of the Pampas Region, in Argentina, f
 To illustrate the different processes of this Technical Manual, we use three datasets from this region:
 
 * Georeferenced topsoil data
-* Non-georeferenced topsoil data
+  * Chemical soil properties
+  * Physical soil properties
 * Soil profile data
 
 ### Georeferenced topsoil data
 
-These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The dataset is a subset with 118 locations of topsoil samples (0-20 cm) that contains measurements of Organic Matter (om), P Bray (p_bray), pH (ph), and K (k) (Table \@ref(tab:table2)) and is shown in the following map as points. This dataset is used in [Chapter 8](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html) for mapping K. 
+These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The modified dataset is derived from a subset of 118 locations and covers the target depth of 0-30 cm. It is structured in two different spreadsheets that contain *soil chemical properties* (soil_chem_data030.csv) and *soil physical properties* (soil_phys_data030.csv). All datasets are located in the `01-Data` folder in the training material `Digital-Soil-Mapping` folder. 
+Soil chemical properties spreadsheet data from laboratories with point coordinates (lat/long) together with data on available Phosphorus (p_bray, in ppm), available Potassium (k, in ppm), and total nitrogen (tn, in Percent) (see Table \@ref(tab:table2)).  
 
 ```{r table2, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
-data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
-kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
+kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for chemical soil properties.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Only the ten first rows are shown.", general_title = "")
 ```
+
+The spreadsheet with soil physical data contains data on soil texture for clay (clay_0_30, in g/kg), silt (silt_0_30, in g/kg), and sand (sand_0_30, in g/kg) (see Table \@ref(tab:table2.2)).
+
+```{r table2.2, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_phys_data030.csv")
+kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for physical soil properties.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+kable_classic(full_width = F) %>%
+  #kable_styling(latex_options = 'striped', font_size = 10) %>%
+footnote(general = "Only the ten first rows are shown.", general_title = "")
+```
+
+The distribution of points is shown in the following map for available Phosphorus values as points. This dataset is used in [Chapter 8](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html) for mapping.
 
 ```{r exploratory1, eval=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -38,39 +55,14 @@ library(sf)
 library(mapview)
 
 mapviewOptions(fgb = FALSE)
-data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
 s <- st_as_sf(data, coords = c("x", "y"), crs = 4326)
 mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 ```
 
-### Non-georeferenced topsoil data 
-
-The second dataset consist of topsoil samples (0-20cm) of P Bray (p_bray) without geographical coordinates collected during 2005 by @sainz2011 to map the status of soil nutrients in the Argentinian Pampas. Each sample is linked to an administrative unit (Partido) of the Buenos Aires Province (Table \@ref(tab:table3)). This dataset is used in [Annex III: Mapping without point coordinates](https://fao-gsp.github.io/GSNmap-TM/annex-iii-mapping-without-point-coordinates.html)
-
-
-```{r table3, echo=FALSE, message=FALSE, warning=FALSE}
-data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
-kable(booktabs = T, data[c(1:5,4001:4005),], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for mapping nutrients.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
-kable_classic(full_width = F) %>%
-  #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Only ten rows are shown.", general_title = "")
-```
-
-The following map shows the districts with colours according to the sample size (n).
-
-```{r exploratory data 2, eval=TRUE, message=FALSE, warning=FALSE, hide = T}
-library(tidyverse)
-library(sf)
-library(mapview)
-mapviewOptions(fgb = FALSE)
-data <- read_csv("Digital-Soil-Mapping/01-Data/Buenos_Aires_sur_P_Bray.csv")
-district <- st_read("Digital-Soil-Mapping/01-Data/district.shp", quiet = T)
-mapview(district, zcol = "n", lwd = 0)
-```
-
 ### Soil profile data
 
-Finally, the third dataset belongs to the Soil Information System of Argentina ([SISINTA](http://sisinta.inta.gob.ar/), @Olmedo2017) which contains soil profiles collected from the sixties to recently years for soil survey purposes. The data can be fetched using the package [SISINTAR](https://github.com/INTA-Suelos/SISINTAR#readme). Table \@ref(tab:table4) shows a subset of the data, and the map presents the distribution of soil profiles for the study area. This dataset is used in this chapter to illustrate the preprocessing steps required for data that come from soil profiles.
+Finally, the third dataset belongs to the Soil Information System of Argentina ([SISINTA](http://sisinta.inta.gob.ar/), @Olmedo2017) which contains soil profiles collected from the sixties to recently years for soil survey purposes. The data can be fetched using the package [SISINTAR](https://github.com/INTA-Suelos/SISINTAR#readme). Table \@ref(tab:table4) shows a subset of the data, and the map presents the distribution of soil profiles for the study area. Soil profile data consists of measurements of soil organic carbon (soc, in Percent), soil pH (ph_h2o), available Potassium (k), bulk density (bd, in g/cm^3^), cation exchange capacity (cec, in cmol~c~/100g). This dataset is used in this chapter to illustrate the preprocessing steps required for data that come from soil profiles.
 
 ```{r table4, echo=FALSE, message=FALSE, warning=FALSE}
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
@@ -148,7 +140,7 @@ library(tidyverse)
 library(dplyr)
 
 # load in data
-data <- read_csv("Digital-Soil-Mapping/01-Data/data_with_coord.csv")
+data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
 head(data)
 
 ```
@@ -181,7 +173,7 @@ names(south_locations)
 names <- names(south_locations)
 # renaming - base R option
 names[1] <- "ID"
-names[6] <- "p"
+names[6] <- "k"
 names(south_locations)
 
 # renaming - tidyverse option

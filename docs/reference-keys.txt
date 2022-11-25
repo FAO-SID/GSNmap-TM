@@ -5,7 +5,6 @@ fig:GEE
 eq:scorpan
 fig:workflow1
 tab:table2
-tab:table3
 tab:table4
 tab:data1
 fig:explorer
@@ -45,7 +44,6 @@ mapping-of-soil-nutrients-and-associated-soil-attributes
 arranging-soil-data-in-r
 study-area-and-training-material
 georeferenced-topsoil-data
-non-georeferenced-topsoil-data
 soil-profile-data
 preproc
 pre-processing-steps
@@ -57,6 +55,7 @@ data-quality-check
 calculation-of-pedo-transfer-functions
 check-for-outliers
 harmonise-soil-layer-depths
+harmonise-units
 save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1

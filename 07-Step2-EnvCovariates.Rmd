@@ -46,11 +46,11 @@ wd <- 'C:/GIT/Digital-Soil-Mapping'
 
 # Output covariate folder
 #output_dir <-''
-output_dir <-'01-Data/covs/'
+output_dir <-'Digital-Soil-Mapping/01-Data/covs/'
 
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
-AOI <- '01-Data/AOI_Arg.shp'
+AOI <- 'Digital-Soil-Mapping/01-Data/AOI_Arg.shp'
 # AOI <- 'MKD'
 # Resolution and projection
 res = 250
