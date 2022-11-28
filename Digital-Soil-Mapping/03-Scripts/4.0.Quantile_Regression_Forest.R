@@ -56,7 +56,7 @@ library(doParallel)
 
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-
+ncovs <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = F)
 #In case of extent error, or if covariates other than the default ones are added
 # ref <- rast(files[1])
 # covs <- list()
@@ -68,9 +68,10 @@ files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
 # covs <- rast(covs)
 
 covs<- rast(files)
-ncovs <-  filename <- sub('.*\\/', '', files)
 ncovs <-  filename <- sub('.tif', '', ncovs)
 
+ncovs[ncovs=="dtm_neg-openness_250m"] = 'dtm_neg'
+ncovs[ncovs=="dtm_pos-openness_250m"] = 'dtm_pos'
 names(covs) <- ncovs
 
 
@@ -90,6 +91,8 @@ dat <- cbind(dat,pv)
 dat <- as.data.frame(dat)
 
 summary(dat)
+
+
 
 for(soilatt in unique(target_properties)){
 

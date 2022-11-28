@@ -156,4 +156,7 @@ FAO_lu <- ee_as_raster(
 AOI <- read_sf(aoi)
 FAO_lu <- mask(FAO_lu,AOI)
 
+cov  <- rast('01-Data/covs/bio1.tif')
+FAO_lu <- project(rast(FAO_lu),cov)
+
 writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)
