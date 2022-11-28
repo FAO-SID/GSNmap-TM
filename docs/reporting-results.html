@@ -312,14 +312,14 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a .Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="reporting-results.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb135-2"><a href="reporting-results.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb135-3"><a href="reporting-results.html#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb135-4"><a href="reporting-results.html#cb135-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb135-5"><a href="reporting-results.html#cb135-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb135-6"><a href="reporting-results.html#cb135-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb135-7"><a href="reporting-results.html#cb135-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-8"><a href="reporting-results.html#cb135-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="reporting-results.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb123-2"><a href="reporting-results.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb123-3"><a href="reporting-results.html#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb123-4"><a href="reporting-results.html#cb123-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb123-5"><a href="reporting-results.html#cb123-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb123-6"><a href="reporting-results.html#cb123-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb123-7"><a href="reporting-results.html#cb123-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-8"><a href="reporting-results.html#cb123-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 <p>The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.</p>
 <div id="data-submission-form" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Data submission form<a href="reporting-results.html#data-submission-form" class="anchor-section" aria-label="Anchor link to header"></a></h2>
