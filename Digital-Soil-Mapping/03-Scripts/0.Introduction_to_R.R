@@ -92,11 +92,6 @@ dat <-
 # function aes()
 
 
-## 5.4 2D plot + facets --------------------------------------------------------
-# Make a histogram of pH for each year
-# use dat_6
-
-
 # 6. Geospatial data with terra ================================================
 ## Load packages (install them if needed)
 
