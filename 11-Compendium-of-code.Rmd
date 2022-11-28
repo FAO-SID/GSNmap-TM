@@ -435,13 +435,14 @@ gc()
 # 4 - Initialize GEE
 # 5 - Upload shapefile to GEE OR use uploaded UN borders
 # 6 - Clip and download the covariates
+# 7 - Clip and download cropland mask (Copernicus Global Land Service)
 #_______________________________________________________________________________
 
 
 # 0 - User-defined variables ===================================================
 # Working directory
-#wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
-wd <- 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # Output covariate folder
 #output_dir <-''
@@ -449,7 +450,7 @@ output_dir <-'01-Data/covs/'
 
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
-AOI <- '01-Data/AOI_Arg.shp'
+aoi <- '01-Data/AOI.shp'
 # AOI <- 'MKD'
 # Resolution and projection
 res = 250
@@ -462,15 +463,17 @@ setwd(wd)
 #load libraries
 library(raster)
 library(terra)
+library(tidyverse)
 library(sf)
 library(rgee)
+library(googledrive)
 
 
 # 2 - Import shapefile =========================================================
-AOI <- read_sf(AOI)
+AOI <- read_sf(aoi)
 # convert AOI to a box polygon
-AOI <- st_as_sfc(st_bbox(AOI))
-AOI <- st_as_sf(AOI)
+#AOI <- st_as_sfc(st_bbox(AOI))
+#AOI <- st_as_sf(AOI)
 
 
 # 3 - Overview of covariates ===================================================
@@ -499,15 +502,8 @@ region = region$geometry()
 # write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
 # aoi <- vect(AOI_shp)
 
-# 6 - Clip and download covariates ========================================
-# Obtain list of climatic variables
-assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/CHELSA"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/MODIS"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP"))
-
-
-
+# 6 - Clip and download covariates =============================================
+assetname <- read_csv("01-Data/covs/covs_rgee.csv")
 assetname$num <- rownames(assetname)
 
 # Loop over the names of assets to clip and dowload the covariates
@@ -540,9 +536,53 @@ for (i in unique(assetname$ID)){
   
   num <- assetname[assetname$ID == i, 'num']
   
+  raster <- mask(raster, AOI)
   writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
   print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
 }
+
+# 7 - Clip and download cropland mask (Copernicus Global Land Service) =========
+image1 <- ee$ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global") %>%
+  ee$ImageCollection$select("discrete_classification")%>%
+  ee$ImageCollection$filterBounds(region)%>%
+  ee$ImageCollection$toBands()
+
+# default resampling = nearest neighbor
+image1 = image1$resample()$reproject(
+  crs= crs,
+  scale= res)
+
+
+#Reclassify 
+# for more info on the single land cover classes: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_Landcover_100m_Proba-V-C3_Global
+
+inList <- ee$List(c(0  ,20  ,30  ,40  ,50  ,60  ,70  ,80  ,90 ,100 ,111 ,112 ,113 ,114 ,115 ,116 ,121 ,122 ,123 ,124 ,125 ,126, 200))
+outList <- ee$List(c(0,  0,  0,  1,  0,  0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0))
+
+# Extract points for target classes (works for medium/small countries) Solution for large countries below
+FAO_lu<- image1$remap(inList, outList)
+FAO_lu <-FAO_lu$toDouble()
+FAO_lu =FAO_lu$clip(region)
+#Convert 0 to NA
+mask <- FAO_lu$neq(0)
+FAO_lu <- FAO_lu$updateMask(mask)
+
+#Obtain points
+FAO_lu <- ee_as_raster(
+  image = FAO_lu,
+  scale= res,
+  region = region,
+  via = "drive"
+)
+
+AOI <- read_sf(aoi)
+FAO_lu <- mask(FAO_lu,AOI)
+
+cov  <- rast('01-Data/covs/bio1.tif')
+FAO_lu <- project(rast(FAO_lu),cov)
+
+writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)
+
 ```
 
 
@@ -607,26 +647,24 @@ library(doParallel)
 
 ## 1.1 - Load covariates -------------------------------------------------------
 files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-
+ncovs <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = F)
 #In case of extent error, or if covariates other than the default ones are added
-ref <- rast(files[1])
-covs <- list()
-for (i in seq_along(files)) {
-  r <- rast(files[i])
-  r <- project(r, ref)
-  covs[[i]] <- r
-}
-covs <- rast(covs)
+# ref <- rast(files[1])
+# covs <- list()
+# for (i in seq_along(files)) {
+#   r <- rast(files[i])
+#   r <- project(r, ref)
+#   covs[[i]] <- r
+# }
+# covs <- rast(covs)
 
+covs<- rast(files)
+ncovs <-  filename <- sub('.tif', '', ncovs)
 
-ncovs <- str_remove(files, "01-Data/covs/")
-ncovs <- str_remove(ncovs, ".tif")
-ncovs <- str_replace(ncovs, "-", "_")
+ncovs[ncovs=="dtm_neg-openness_250m"] = 'dtm_neg'
+ncovs[ncovs=="dtm_pos-openness_250m"] = 'dtm_pos'
 names(covs) <- ncovs
-names(covs)[19] <- "dtm_pos_openness2_250m" 
-names(covs)[17] <- "dtm_pos_openness3_250m"
-# covs <- rast("01-Data/covs/covs.tif")
-# ncovs <- names(covs)
+
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
 dat <- read_csv("02-Outputs/harmonized_soil_data.csv")
@@ -644,6 +682,8 @@ dat <- cbind(dat,pv)
 dat <- as.data.frame(dat)
 
 summary(dat)
+
+
 
 for(soilatt in unique(target_properties)){
 

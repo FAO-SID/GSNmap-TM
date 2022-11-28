@@ -50,7 +50,7 @@ output_dir <-'Digital-Soil-Mapping/01-Data/covs/'
 
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
-AOI <- 'Digital-Soil-Mapping/01-Data/AOI_Arg.shp'
+AOI <- 'Digital-Soil-Mapping/01-Data/AOI.shp'
 # AOI <- 'MKD'
 # Resolution and projection
 res = 250
@@ -60,7 +60,7 @@ crs = "EPSG:4326"
 ```
 
 
-Next, the working directory is set and the required packages for the download of the covariates are called with the library() command. In case users are using their own shapefiles, the read_sf() function is applied to load it into R and then convert it to a box polygon in order to be used with GEE. 
+Next, the working directory is set and the required packages for the download of the covariates are called with the `library()` command. In case users are using their own shapefiles, the `read_sf()` function is applied to load it into R and then convert it to a box polygon in order to be used with GEE. 
 
 ```{r, eval = F}
 #  1 - Set working directory and load necessary packages ======================= 
@@ -69,15 +69,17 @@ setwd(wd)
 #load libraries
 library(raster)
 library(terra)
+library(tidyverse)
 library(sf)
 library(rgee)
+library(googledrive)
 
 
 # 2 - Import shapefile =========================================================
-AOI <- read_sf(AOI)
+AOI <- read_sf(aoi)
 # convert AOI to a box polygon
-AOI <- st_as_sfc(st_bbox(AOI))
-AOI <- st_as_sf(AOI)
+#AOI <- st_as_sfc(st_bbox(AOI))
+#AOI <- st_as_sf(AOI)
 ```
 
 The next step consists in initialising our GEE account using the rgee package in **R**. However, before starting it is necessary to give a brief overview of the covariates that were listed in Table \@ref(tab:covs1) and where they can be found in the GEE environment. The GSP has created an repository of covariates that can be added to your GEE environment in the browser. For that users have to right-click on "Assets" in the left panel of the GEE code editor and select "Add a project". Then the window shown in Fig. \@ref(fig:assets_GSP) appears and one has to enter the project ID which is "digital-soil-mapping-gsp-fao" and click on select. 
@@ -109,13 +111,13 @@ This is illustrated in the lines of code below. A user-defined variable "region"
 ```{r, eval = F, tidy = FALSE}
 # 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
 ## 5.1 Convert shp to gee geometry ---------------------------------------------
-#region <- sf_as_ee(AOI)
-#region = region$geometry()
+region <- sf_as_ee(AOI)
+region = region$geometry()
 
 ## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
-region <- ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
-  ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
-region = region$geometry()
+# region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
+#   ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
+# region = region$geometry()
 # AOI_shp <-ee_as_sf(region)
 # AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
 # write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
@@ -128,18 +130,9 @@ One central option in R to execute repetitive tasks with one command is a *for l
 The assets are all in raster format (.tif/GeoTiff). Raster files are denominated as "Image" or "ImageCollection" (for timeseries data) in GEE. Thus, the "ee$Image" command is used to load the respective asset from the file path i (that changes after each iteration of the loop). The loaded raster is clipped to the extent of the "region" that we defined previously. The resampling to our target resolution is carried out with the bilinear method. The EE object is then exported from GEE to a Google drive folder. It may be necessary to increase the number of maximum pixels depending on the size of the AOI. Finally, the raster file is also saved in the output folder on the local drive specified at the beginning of this script.
 
 ```{r, eval = F, tidy = FALSE}
-
-# 6 - Clip and download covariates ========================================
-# Obtain list of climatic variables
-assetname<-  rbind(ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/CHELSA"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/MODIS"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER"),
-                   ee_manage_assetlist(path_asset = "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP"))
-
-
-
-
-assetname$num <- 1:nrow(assetname)
+# 6 - Clip and download covariates =============================================
+assetname <- read_csv("01-Data/covs/covs_rgee.csv")
+assetname$num <- rownames(assetname)
 
 # Loop over the names of assets to clip and dowload the covariates
 for (i in unique(assetname$ID)){
@@ -171,7 +164,64 @@ for (i in unique(assetname$ID)){
   
   num <- assetname[assetname$ID == i, 'num']
   
+  raster <- mask(raster, AOI)
   writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
   print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
 }
 ```
+
+## Obtaining the cropland mask
+Since the soil samples that are going to be used in the mapping process are meant to be from croplands, it is necessary to ensure that the final maps only cover cropland areas. For this purpose, a cropland mask is generated that is based on a reclassified land use layer provided by the Copernicus Global Land Service. This raster file is available on GEE and is reprojected to the above specified resolution and coordinate reference system.
+
+```{r maks, eval = F, echo = T}
+# 7 - Clip and download cropland mask (Copernicus Global Land Service) =========
+image1 <- ee$ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global") %>%
+  ee$ImageCollection$select("discrete_classification")%>%
+  ee$ImageCollection$filterBounds(region)%>%
+  ee$ImageCollection$toBands()
+
+# default resampling = nearest neighbor
+image1 = image1$resample()$reproject(
+  crs= crs,
+  scale= res)
+```
+
+The reclassification matrix assigns all land cover classes the value 0, if they are non-croplands and 1 if it is cropland. For large countries it may be preferable to extract target points for each class and reclassify them to croplands. This saves computational power and time. 
+
+```{r reclassify, echo = T, eval = F}
+#Reclassify 
+# for more info on the single land cover classes: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_Landcover_100m_Proba-V-C3_Global
+
+inList <- ee$List(c(0  ,20  ,30  ,40  ,50  ,60  ,70  ,80  ,90 ,100 ,111 ,112 ,113 ,114 ,115 ,116 ,121 ,122 ,123 ,124 ,125 ,126, 200))
+outList <- ee$List(c(0,  0,  0,  1,  0,  0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0))
+
+# Extract points for target classes (works for medium/small countries) Solution for large countries below
+FAO_lu<- image1$remap(inList, outList)
+FAO_lu <-FAO_lu$toDouble()
+FAO_lu =FAO_lu$clip(region)
+#Convert 0 to NA
+mask <- FAO_lu$neq(0)
+FAO_lu <- FAO_lu$updateMask(mask)
+
+#Obtain points
+FAO_lu <- ee_as_raster(
+  image = FAO_lu,
+  scale= res,
+  region = region,
+  via = "drive"
+)
+
+```
+
+Finally, the mask is fitted to the AOI and it is ensured that the projections match. Then a raster file is saved on the local drive in the folder `01-Data`.
+
+```{r exporting_mask, echo = T, eval = F}
+AOI <- read_sf(aoi)
+FAO_lu <- mask(FAO_lu,AOI)
+
+cov  <- rast('01-Data/covs/bio1.tif')
+FAO_lu <- project(rast(FAO_lu),cov)
+
+writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)
+```
+
