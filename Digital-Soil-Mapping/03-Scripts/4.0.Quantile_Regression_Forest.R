@@ -58,24 +58,21 @@ library(doParallel)
 files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
 
 #In case of extent error, or if covariates other than the default ones are added
-ref <- rast(files[1])
-covs <- list()
-for (i in seq_along(files)) {
-  r <- rast(files[i])
-  r <- project(r, ref)
-  covs[[i]] <- r
-}
-covs <- rast(covs)
+# ref <- rast(files[1])
+# covs <- list()
+# for (i in seq_along(files)) {
+#   r <- rast(files[i])
+#   r <- project(r, ref)
+#   covs[[i]] <- r
+# }
+# covs <- rast(covs)
 
+covs<- rast(files)
+ncovs <-  filename <- sub('.*\\/', '', files)
+ncovs <-  filename <- sub('.tif', '', ncovs)
 
-ncovs <- str_remove(files, "01-Data/covs/")
-ncovs <- str_remove(ncovs, ".tif")
-ncovs <- str_replace(ncovs, "-", "_")
 names(covs) <- ncovs
-names(covs)[19] <- "dtm_pos_openness2_250m" 
-names(covs)[17] <- "dtm_pos_openness3_250m"
-# covs <- rast("01-Data/covs/covs.tif")
-# ncovs <- names(covs)
+
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
 dat <- read_csv("02-Outputs/harmonized_soil_data.csv")
