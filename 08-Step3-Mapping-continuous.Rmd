@@ -6,7 +6,7 @@ In this chapter, the cleaned soil data and the previously downloaded covariate l
 
 To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
 
-```{r, eval = F, message = F, warning = F}
+```{r, eval = T, message = F, warning = F}
 
 #_______________________________________________________________________________
 #
@@ -183,6 +183,7 @@ The selected covariates can be visualised in Trellis displays. Finally, the opti
 
 ```{r, eval = T, echo = F, message = F, warning = F}
 covsel <- readRDS("Digital-Soil-Mapping/02-Outputs/models/covsel.rda")
+soilatt <- "k_0_30"
 ```
 
 
@@ -336,6 +337,7 @@ While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterp
 
 
 ```
+
 
 Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the ME, RMSE, MAE, the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.
 

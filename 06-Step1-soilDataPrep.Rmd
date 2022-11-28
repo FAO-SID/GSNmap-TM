@@ -296,7 +296,7 @@ The last step towards a soil data table that can be used for mapping, is to harm
 
 In the following a new dataframe 'd' is created in which the standard depth layers are stored and named. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the 'ithir' package.
 
-```{r, eval = T}
+```{r, eval = T, message = F, warning = F, results = 'hide'}
 # 6 - Harmonize soil layers ====================================================
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
