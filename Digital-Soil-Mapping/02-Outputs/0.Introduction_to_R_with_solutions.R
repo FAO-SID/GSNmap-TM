@@ -56,27 +56,27 @@ read_excel(path = "01-Data/soil_data.xlsx", sheet = 2)
 
 ## 3.2 Read the csv file with the native function ------------------------------
 # 01-Data/horizon.csv
-read.csv("01-Data/horizon.csv")
+read.csv("01-Data/soil_profile_data.csv")
 
 ## 3.3 Read the csv file with the tidyverse function ---------------------------
-read_csv("01-Data/horizon.csv")
+read_csv("01-Data/soil_profile_data.csv")
 
 ## 3.4 Read the csv file with the data.table function --------------------------
-fread("01-Data/horizon.csv")
+fread("01-Data/soil_profile_data.csv")
 
 ## 3.5 Assign the dataframe to an object called dat ----------------------------
-dat <- read_csv("01-Data/horizon.csv")
+dat <- read_csv("01-Data/soil_profile_data.csv")
 
 # 4. Tidyverse functions =======================================================
-## 4.1 Select pid, hip, top, bottom, ph_h2o, clay from dat ---------------------
+## 4.1 Select pid, hip, top, bottom, ph_h2o, cec from dat ---------------------
 dat_1 <- dat %>% 
-  select(pid, hid, top, bottom, ph_h2o, clay)
+  select(id_prof, id_hor, top, bottom, ph_h2o, cec)
 
 ## 4.2 Filter: pick observations by their values -------------------------------
-# filter observations with clay > 50%
+# filter observations with cec > 50 cmolc/100g
 
 dat_2 <- dat_1 %>% 
-  filter(clay > 50)
+  filter(cec > 30)
 
 dat_2
 ## 4.3 Mutate: create a new variable -------------------------------------------
@@ -87,38 +87,41 @@ dat_3 <- dat_2 %>%
 
 ## 4.4 Group_by and summarise --------------------------------------------------
 # group by variable pid
-# summarise taking the mean of pH and clay
+# summarise taking the mean of pH and cec
 
 dat_4 <- dat_3 %>% 
-  group_by(pid) %>% 
+  group_by(id_prof) %>% 
   summarise(mean_ph = mean(ph_h2o),
-            mean_clay = mean(clay))
+            mean_cec = mean(cec))
 
 ## 4.5 Reshape the table using pivot_longer ------------------------------------
 # use dat_3
-# put the names of the variables ph_h2o, clay and thickness in the column 
+# put the names of the variables ph_h2o, cec and thickness in the column 
 # variable and keep the rest of the table. Save in dat_5 
 
 dat_5 <- dat_3 %>% 
   pivot_longer(ph_h2o:thickness, names_to = "soil_property", values_to = "value")
 
 ## 4.6 Join the table sites.csv with dat_3 -------------------------------------
-# Load site.csv (in 01-Data folder) 
+# Load soil_phys_data030.csv (in 01-Data folder) 
 # Join its columns with dat_3 keeping all the rows of dat_3
 # save the result as dat_6
 
-sites <- read_csv("01-Data/site.csv") 
+phys <- read_csv("01-Data/soil_phys_data030.csv")
+
+phys <- phys %>% rename(id_prof = "ProfID")
+
 dat_6 <- dat_3 %>% 
-  left_join(sites)
+  left_join(phys)
 # or
-dat_6 <- sites %>% 
+dat_6 <- phys %>% 
   right_join(dat_3)
 
 # 5. Data visualization with ggplot2 ===========================================
 ## 5.1 1D plot: histograms -----------------------------------------------------
-# histograms of clay and ph_h2o
+# histograms of cec and ph_h2o
 
-ggplot(dat_3, aes(x=clay)) + geom_histogram()
+ggplot(dat_3, aes(x=cec)) + geom_histogram()
 
 ## 5.2 2D plot: scatterplot ----------------------------------------------------
 # Scatterplot bottom vs. ph_h2o
@@ -136,16 +139,8 @@ ggplot(dat_3, aes(x = bottom, y = ph_h2o)) +
 # Scatterplot bottom vs. ph_h2o, add clay as color and size inside the 
 # function aes()
 
-ggplot(dat_3, aes(x = bottom, y = ph_h2o, color = clay, size = clay)) + 
-  geom_point() 
-
-## 5.4 2D plot + facets --------------------------------------------------------
-# Make a histogram of pH for each year
-# use dat_6
-
-ggplot(dat_6, aes(x = ph_h2o, fill = year)) +
-  geom_histogram()+
-  facet_wrap(~year)
+ggplot(dat_3, aes(x = bottom, y = ph_h2o, color = cec, size = cec)) + 
+  geom_point()
 
 # 6. Geospatial data with terra ================================================
 ## Load packages (install them if needed)
@@ -155,10 +150,10 @@ library(terra)
 # Load 01-Data/soil map/SoilTypes.shp using vect() function and plot it 
 # explore the attributes of these layers
 
-r <- rast("01-Data/covs/grass.tif")
+r <- rast("01-Data/Macedonia/grass.tif")
 plot(r)
 
-v <- vect("01-Data/soil map/SoilTypes.shp")
+v <- vect("01-Data/Macedonia/SoilTypes.shp")
 plot(v)
 
 ## 6.2 Load a raster and a vector layer ----------------------------------------
@@ -225,7 +220,7 @@ x <- extract(r_proj,s, ID=FALSE)
 s <- cbind(s,x)
 d <- as.data.frame(s)
 d
-GGally::ggscatmat(d)
+#GGally::ggscatmat(d)
 
 ## 6.7 Zonal statistics using polygons and rasters -----------------------------
 # Use the extract() func. to estimate the mean value of r_proj at each polygon
