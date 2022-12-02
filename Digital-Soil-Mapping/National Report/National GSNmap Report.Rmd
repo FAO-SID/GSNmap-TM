@@ -1,0 +1,184 @@
+---
+title: "GSNmap report"
+subtitle: "Country name"
+aothor: "Author1, Author2, et al."
+output: word_document
+date: "2022-10-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 
+<!-- 300 words max -->
+
+Contents of the summary:
+
+* Specify the data products generated (mandatory & additional)
+
+All national maps were generated following the Country guidelines and technical specifications for
+Global Soil Nutrient and Nutrient Budget Maps (GSNmap) – Phase I (FAO, 2022). 
+All layers and accompanying standard deviation layers were created using a digital soil mapping approach based on the Quantile Regression Forest algorithm. 
+
+The following table (Table 1) summarizes the data points used for generating a national GSNmap product.
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(terra)
+library(caret)
+library(knitr)
+
+table1 <- read.csv('National Report Table 1.csv')
+
+kable(table1, col.names = c("Data type" ,  "Source", "Number of points" ,"Year(s)"))
+
+```
+
+
+
+
+# Soil Attribute: Total Nitrogen
+## Descriptive statistics of input data
+
+```{r load data, message=FALSE, warning=FALSE, include=FALSE}
+
+# setwd("C:/GIT/GSNmap-TM/Digital-Soil-Mapping/")
+load(file = "../03-Scripts/eval.RData")
+
+# target_properties<- c("ph_0_30", "k_0_30" , "soc_0_30" ,"bd_0_30", "cec_0_30","p_0_30",   
+#                       "n_0_30","clay_0_30", "sand_0_30" ,"silt_0_30")
+
+soilatt <- "n_0_30"
+dxy <- read.csv("../02-Outputs/harmonized_soil_data.csv")
+model <- read_rds(paste0("../02-Outputs/models/model_",soilatt,".rds"))
+```
+
+```{r input data, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+
+
+  
+  dat <-as.data.frame(dxy[,soilatt])
+  names(dat)<-soilatt
+  
+  
+if (soilatt == 'ph_0_30'){
+  unit <-'NA'
+  name <- 'pH'
+}else if (soilatt == 'k_0_30'){
+  unit <-'ppm'
+  name <- 'Available Potassium'
+}else if (soilatt == 'soc_0_30'){
+  unit <-'percent'
+  name <- 'Soil Organic Carbon'
+}else if (soilatt == 'clay_0_30'){
+  unit <-'percent'
+   name <- 'Clay'
+}else if (soilatt == 'bd_0_30'){
+  unit <-'g/cm3'
+  name <- 'Bulk Density'
+}else if (soilatt == 'cec_0_30'){
+  unit <-'cmolc/kg'
+   name <- 'Cation Exchange Capacity'
+}else if (soilatt == 'p_0_30'){
+  name <- 'Available Phosphorus'
+  unit <-'ppm'
+}else if (soilatt == 'n_0_30'){
+  name <- 'Total Nitrogen'
+  unit <-'ppm'
+}else if (soilatt == 'sand_0_30'){
+  name <- 'Sand'
+  unit <-'percent'
+}else if (soilatt == 'silt_0_30'){
+  name <- 'Silt'
+  unit <-'percent'
+}
+
+  
+
+ 
+  
+  table2 <- data.frame(
+  mean = round(mean(dat[,1],na.rm =T),1),
+  min =  round(min(dat[,1],na.rm=T),1),
+  median = round(median(dat[,1],na.rm=T),1),
+  max =  round(max(dat[,1],na.rm=T),1),
+  npoint = length(dat[complete.cases(dat),]),
+  unit=unit
+  )
+  
+kable(table2,col.names =c("mean",   "min" ,   "median" ,"max"  ,  "Number of points", "Unit"  ),
+      caption = paste('Overview of the input data used for the', name, 'soil property map'),)  
+  
+  
+
+
+```
+
+## Resulting maps
+
+### Predicted mean
+
+```{r pred_mean, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+pred_mean <- rast(paste0("../02-Outputs/maps/ISO_GSNmap_Ntot_Map030.tiff"))
+terra:::plot(pred_mean, axes = TRUE, main = paste("Predicted mean", soilatt))
+```
+
+### Predicted standard deviation
+
+```{r pred_sd, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+pred_sd <- rast(paste0("../02-Outputs/maps/ISO_SD_GSNmap_Ntot_Map030.tiff"))
+terra:::plot(pred_sd, axes = TRUE, 
+             main = paste("Predicted standard deviation", soilatt))
+
+```
+
+## Accuracy assessment
+
+### Observed vs Predicted
+
+```{r scatterplot, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+o <- model$pred$obs
+p <- model$pred$pred
+df <- data.frame(o,p)
+
+
+
+## 4.1 - Plot and save scatterplot --------------------------------------------- 
+ggplot(df, aes(x = o, y = p)) + 
+  geom_point(alpha = 0.1) + 
+   geom_abline(slope = 1, intercept = 0, color = "red")+
+  ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
+  labs(title = soilatt) + 
+  xlab("Observed") + ylab("Predicted")
+```
+
+### Accuracy indicators
+
+```{r accuracy, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+kable(eval(p,o)[,1:6])
+
+```
+
+### Importance of covariates
+
+```{r imp, echo=FALSE, fig.height=9, fig.width=6, message=FALSE, warning=FALSE, results='asis'}
+options(width = 60)
+# layout(matrix(1), widths = lcm(5), heights = lcm(10))
+randomForest::varImpPlot(model$finalModel, main = soilatt, type = 1, )
+```
+
+
+<!-- --------------------------- NEW SOIL ATTRIBUTE ------------------------ -->
+<!-- ----------------------------------------------------------------------- -->
+# Soil Attribute: Available Phosphorous (Bray)
+## Descriptive statistics of input data
+
+
+# References
+
+*FAO.* 2022. Country guidelines and technical specifications for global soil nutrient and nutrient budget maps – GSNmap: Phase 1. Rome. https://doi.org/10.4060/cc1717en 
+
+
+
+
+
