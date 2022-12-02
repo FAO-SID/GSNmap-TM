@@ -60,6 +60,7 @@ save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1
 download-covariates-with-rgee
+obtaining-the-cropland-mask
 step-3-mapping-continuous-soil-properties
 getting-prepared-to-map
 covariate-selection-and-repeated-k-fold-cross-validation

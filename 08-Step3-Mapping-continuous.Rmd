@@ -6,7 +6,7 @@ In this chapter, the cleaned soil data and the previously downloaded covariate l
 
 To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
 
-```{r, eval = F, message = F, warning = F}
+```{r, eval = T, message = F, warning = F}
 
 #_______________________________________________________________________________
 #
@@ -65,33 +65,30 @@ library(doParallel)
 
 ```
 
-Since soil data and environmental covariaes are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
+Since soil data and environmental covariates are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster files are loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
 ```{r, eval = F, message = F, warning = F}
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
-files <- list.files(path= 'Digital-Soil-Mapping/01-Data/covs/', pattern = '.tif$', full.names = T)
-
+files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
+ncovs <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = F)
 #In case of extent error, or if covariates other than the default ones are added
-ref <- rast(files[1])
-covs <- list()
-for (i in seq_along(files)) {
-  r <- rast(files[i])
-  r <- project(r, ref)
-  covs[[i]] <- r
-}
-covs <- rast(covs)
+# ref <- rast(files[1])
+# covs <- list()
+# for (i in seq_along(files)) {
+#   r <- rast(files[i])
+#   r <- project(r, ref)
+#   covs[[i]] <- r
+# }
+# covs <- rast(covs)
 
+covs<- rast(files)
+ncovs <-  filename <- sub('.tif', '', ncovs)
 
-ncovs <- str_remove(files, "Digital-Soil-Mapping/01-Data/covs/")
-ncovs <- str_remove(ncovs, ".tif")
-ncovs <- str_replace(ncovs, "-", "_")
+ncovs[ncovs=="dtm_neg-openness_250m"] = 'dtm_neg'
+ncovs[ncovs=="dtm_pos-openness_250m"] = 'dtm_pos'
 names(covs) <- ncovs
-names(covs)[19] <- "dtm_pos_openness2_250m" 
-names(covs)[17] <- "dtm_pos_openness3_250m"
-# covs <- rast("01-Data/covs/covs.tif")
-# ncovs <- names(covs)
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
 dat <- read_csv("Digital-Soil-Mapping/02-Outputs/harmonized_soil_data.csv")
@@ -183,6 +180,7 @@ The selected covariates can be visualised in Trellis displays. Finally, the opti
 
 ```{r, eval = T, echo = F, message = F, warning = F}
 covsel <- readRDS("Digital-Soil-Mapping/02-Outputs/models/covsel.rda")
+soilatt <- "k_0_30"
 ```
 
 
@@ -336,6 +334,7 @@ While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterp
 
 
 ```
+
 
 Additionally, it is necessary to calculate standard metrics of error estimation. The function eval() below returns values for the ME, RMSE, MAE, the squared pearson correlation coefficient, the concordance correlation coefficient, scale shift and location shift relative to scale.
 

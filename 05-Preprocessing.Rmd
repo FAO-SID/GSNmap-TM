@@ -35,9 +35,9 @@ kable_classic(full_width = F) %>%
 footnote(general = "Only the ten first rows are shown.", general_title = "")
 ```
 
-The spreadsheet with soil physical data contains data on soil texture for clay (clay_0_30, in g/kg), silt (silt_0_30, in g/kg), and sand (sand_0_30, in g/kg) (see Table \@ref(tab:table2.2)).
+The spreadsheet with soil physical data contains data on soil texture for clay (clay_0_30, in g/kg), silt (silt_0_30, in g/kg), and sand (sand_0_30, in g/kg) (see Table \@ref(tab:table2_2)).
 
-```{r table2.2, echo=FALSE, message=FALSE, warning=FALSE}
+```{r table2_2, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_phys_data030.csv")
