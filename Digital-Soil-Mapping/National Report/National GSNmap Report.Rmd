@@ -22,7 +22,7 @@ Global Soil Nutrient and Nutrient Budget Maps (GSNmap) – Phase I (FAO, 2022).
 All layers and accompanying standard deviation layers were created using a digital soil mapping approach based on the Quantile Regression Forest algorithm. 
 
 The following table (Table 1) summarizes the data points used for generating a national GSNmap product.
-```{r, message=FALSE, warning=FALSE, include=FALSE}
+```{r, echo =FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(terra)
 library(caret)
