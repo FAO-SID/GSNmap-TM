@@ -1,0 +1,251 @@
+--- 
+title:  |
+  <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
+  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
+subtitle: "version 0.2"
+author: "Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y."
+date: "26-Oct-2022"
+site: bookdown::bookdown_site
+output: 
+  bookdown::pdf_book:
+    keep_tex: yes
+  bookdown::gitbook:
+    config:
+      fig_caption: yes
+      download: ["pdf"]
+header-includes:
+    - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
+    - \usepackage{titling}
+    - \usepackage{natbib}
+    - \usepackage{pdfpages}
+    - \usepackage{fancyhdr}
+    - \usepackage{booktabs}
+    - \usepackage{longtable}
+    - \usepackage{subfig}
+    - \usepackage{array}
+    - \usepackage{amsmath}
+    - \usepackage{multirow}
+    - \usepackage{wrapfig}
+    - \usepackage{bookmark}
+    - \usepackage[utf8]{inputenc}
+    - \usepackage{float}
+    - \usepackage{colortbl}
+    - \usepackage{pdflscape}
+    - \usepackage{tabu}
+    - \usepackage{threeparttable}
+    - \usepackage{threeparttablex}
+    - \usepackage[normalem]{ulem}
+    - \usepackage{makecell}
+    - \usepackage{xcolor}
+    - \DeclareUnicodeCharacter{2212}{\textendash}
+    - \usepackage{rotating, graphicx}
+documentclass: book
+csl: food-and-agriculture-organization-of-the-united-nations.csl
+bibliography: "reference-list.bib"
+link-citations: yes
+classoption: oneside
+papersize: b5
+fontsize: 10pt
+description: "GSNmap - Technical Manual"
+always_allow_html: yes
+template: null
+---
+
+# Licence {-}
+
+Placeholder
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Presentation
+
+Placeholder
+
+
+## Global Soil Partnership
+## Country-driven approach and tasks
+## How to use this book
+## Training material
+
+<!--chapter:end:01-Presentation.Rmd-->
+
+
+# Soil Nutrients
+
+Placeholder
+
+
+## Soil properties governing nutrient availability
+
+<!--chapter:end:02-SoilNutrients.Rmd-->
+
+
+# Setting-up the software environment
+
+Placeholder
+
+
+## Use of R, RStudio and R Packages
+### Obtaining and installing R
+### Obtaining and installing RStudio
+### Getting started with R	
+## R packages
+## GEE - google earth engine
+## rgee - Extension to use google earth engine in R
+
+<!--chapter:end:03-Software-environment.Rmd-->
+
+
+# Digital Soil Mapping
+
+Placeholder
+
+
+## Principles 
+## Environmental covariates
+## Machine learning techniques
+## Mapping of soil nutrients and associated soil attributes
+
+<!--chapter:end:04-Introduction-to-DSM.Rmd-->
+
+
+# Arranging soil data in **R**
+
+Placeholder
+
+
+## Study area and training material
+### Georeferenced topsoil data
+### Soil profile data
+## Format requirements of soil data {#preproc}
+## Pre-processing steps
+### Set the scene (set working directory, packages, load data)
+### Basic data handling operations
+
+<!--chapter:end:05-Preprocessing.Rmd-->
+
+
+# Step 1: soil data preparation
+
+Placeholder
+
+
+## Load national data
+## Data quality check
+## Calculation of pedo-transfer functions
+## Check for outliers
+## Harmonise soil layer depths
+## Harmonise units
+## Save the results
+
+<!--chapter:end:06-Step1-soilDataPrep.Rmd-->
+
+
+# Step 2: download environmental covariates
+
+Placeholder
+
+
+## Environmental covariates
+## Download covariates with rgee
+
+<!--chapter:end:07-Step2-EnvCovariates.Rmd-->
+
+
+# Step 3: Mapping continuous soil properties
+
+Placeholder
+
+
+## Getting prepared to map
+## Covariate selection and repeated k-fold cross-validation
+## Model calibration
+## Uncertainty assessment
+## Predicting soil attributes
+
+<!--chapter:end:08-Step3-Mapping-continuous.Rmd-->
+
+
+# Reporting results
+
+Placeholder
+
+
+## Data submission form
+
+<!--chapter:end:09-Reporting.Rmd-->
+
+# Way forward
+
+This technical manual provided step-by-step guidance on how to generate nutrient maps by means of quantile regression forest models within a digital soil mapping framework. The array of maps produced belongs to the first implementation phase of the GSNmap initiative and provides urgently needed data on nutrient stocks and soil properties that govern nutrient availability. Policymakers will be able to use this data to derive conclusions on where to concentrate efforts to improve soil and land management to strengthen agrifood systems.
+The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group. The technical documentation towards implementing the second phase will be made available in mid 2023.
+
+## Frequent asked questions and Troubleshooting answers
+
+To be developed soon...
+
+## Issues in the GSNmap Technical Manual
+
+Please, report any issue in the GSNmap Technical Manual in its issues GitHub page [https://github.com/FAO-GSP/GSNmap-TM/issues](https://github.com/FAO-GSP/GSNmap-TM/issues).
+
+## Get help
+
+- Check the issues GitHub page [https://github.com/FAO-GSP/GSNmap-TM/issues](https://github.com/FAO-GSP/GSNmap-TM/issues)
+- Issues with R packages: search for solutions in [https://stackoverflow.com/](https://stackoverflow.com/)
+- ```caret``` package [https://topepo.github.io/caret/](https://topepo.github.io/caret/)
+- ```terra``` package [https://rspatial.org/terra/pkg/1-introduction.html](https://rspatial.org/terra/pkg/1-introduction.html)
+- ```tidyverse``` package [https://r4ds.had.co.nz/](https://r4ds.had.co.nz/)
+- ```sf``` package [https://r-spatial.github.io/sf/](https://r-spatial.github.io/sf/)
+
+If these links do not help you, contact us including the following text:
+
+*I am [FULL NAME], responsible for producing the GSNmap of [COUNTRY].*
+
+[marcos.angelini@fao.org](mailto:marcos.angelini@fao.org)
+
+<!--chapter:end:10-Way-Forward.Rmd-->
+
+
+# Annex I: Compendium of R scripts {-}
+
+Placeholder
+
+
+## Script 0: Installation of rgee {-}
+## Script 1: Data preparation {-}
+## Script 2: Download environmental covariates {-}
+## Script 3: Modelling, validation and prediction using soil data with coordinates {-}
+
+<!--chapter:end:11-Compendium-of-code.Rmd-->
+
+
+# Annex III: Mapping without point coordinates {-}
+
+Placeholder
+
+
+
+<!--chapter:end:12-Step-No-coordinates.Rmd-->
+
+
+# Annex IV: Quality assurance and quality control {-}
+
+Placeholder
+
+
+## Step 1: Completeness of layers {-}
+## Step 2: Check the projection and resolution of all data products {-}
+## Step 3: Check the extent {-}
+## Step 4: Check the units, ranges, and outliers {-}
+### Major nutrients {-}
+### Associated soil properties {-}
+
+<!--chapter:end:13-QualityCheck.Rmd-->
+
+# References {-}
+
+<!--chapter:end:References.rmd-->
+
