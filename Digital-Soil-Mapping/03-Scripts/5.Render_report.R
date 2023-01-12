@@ -1,7 +1,14 @@
-# 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd
+# 1 - Open the file in the folder Digital-Soil-Mapping/National Report/National GSNmap Report.Rmd
 # 2 - adjust the content
-# 3 - Run the following code
-wd <-'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping/National Report' 
+# 3 - Run the following code below
+rm(list=ls())
+gc()
+
+
+#wd <-'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping/National Report' 
+wd <-'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping/National Report' 
+
+
 setwd(wd)
 
 ISO <- 'AOI'
