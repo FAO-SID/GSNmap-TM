@@ -29,11 +29,11 @@ remotes::install_github("r-spatial/rgee")
 library(rgee)
 
 # Set up rgee environment 
-ee_install(py_env = "rgee") 
+# ee_install(py_env = "rgee") 
 
 # Check if you can initialize rgee for the first time
-library(rgee)
-ee_Initialize() 
+# library(rgee)
+# ee_Initialize() 
 
 # If not, follow next steps: 
 # Open Anaconda Prompt and execute the following code, one by one:
@@ -46,12 +46,13 @@ ee_Initialize()
 
 # Copy the path of the rgee_py environment and write it correctly 
 # (note the backslash \)
-# rgee_py            *  C:\Users\angel\MINICO~1\envs\rgee_py <<<
-rgee_environment_dir = "C:/Users/angel/miniconda3/envs/rgee_py/"
+# rgee_py            C:\Users\angel\AppData\Local\R-MINI~1\envs\rgee_py <<<
+rgee_environment_dir = "C:/Users/angel/AppData/Local/r-miniconda/envs/rgee_py/"
 
 reticulate::use_python(rgee_environment_dir, required=TRUE)
-library(reticulate)
 Sys.setenv(RETICULATE_PYTHON=paste0(rgee_environment_dir,"python.exe"))
+library(reticulate)
+
 # Install the environment. Select 'Yes' to restart your R session
 rgee::ee_install_set_pyenv(
   py_path = rgee_environment_dir,
