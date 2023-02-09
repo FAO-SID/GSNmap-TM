@@ -27,8 +27,9 @@ gc()
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
+wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
@@ -64,6 +65,8 @@ phys <- read_csv(file = "01-Data/soil_phys_data030.csv")
 
 
 site <- select(hor, id_prof, x, y) %>% unique()
+
+
 hor <- select(hor, id_prof, id_hor, top:cec)
 
 # change names of key columns
@@ -88,6 +91,11 @@ site %>%
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
   mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 
+site_sub <- site[site$ProfID=='6524',]
+
+site_sub %>% 
+  st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
+  mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 # profile 2823 is wrongly located, so let's remove it
 site <- filter(site, ProfID != 2823)
 
@@ -101,7 +109,7 @@ profiles <- hor
 profiles
 
 ## 4.3 - plot first 20 profiles using pH as color ------------------------------
-plotSPC(x = profiles[1:20], name = "cec", color = "cec",
+plotSPC(x = profiles[1:20], name = "pH", color = "ph",
         name.style = "center-center")
 
 ## 4.4 - check data integrity --------------------------------------------------
@@ -114,8 +122,8 @@ aqp::checkHzDepthLogic(profiles)
 
 # visualize some of these profiles by the pid
 subset(profiles, grepl(6566, ProfID, ignore.case = TRUE))
-subset(profiles, grepl(6915, ProfID, ignore.case = TRUE))
-subset(profiles, grepl(7726, ProfID, ignore.case = TRUE))
+subset(profiles, grepl(7410 , ProfID, ignore.case = TRUE))
+subset(profiles, grepl(8002, ProfID, ignore.case = TRUE))
 
 
 ## 4.5 - keep only valid profiles ----------------------------------------------
@@ -125,7 +133,7 @@ metadata(clean_prof)$removed.profiles
 
 ## 4.6 convert soilProfileCollection to a table --------------------------------
 dat <- left_join(clean_prof@site, clean_prof@horizons)
-dat <- select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
+dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph:cec )
 
 # 5 - Estimate BD using pedotransfer functions =================================
 

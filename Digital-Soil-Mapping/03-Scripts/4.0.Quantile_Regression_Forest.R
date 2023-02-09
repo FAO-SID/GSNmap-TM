@@ -26,7 +26,9 @@ gc()
 # 0 - Set working directory, soil attribute, and packages ======================
 
 # Working directory
-wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+
 setwd(wd)
 
 # Define country of interes throuhg 3-digit ISO code
@@ -36,8 +38,7 @@ ISO ='ISO'
 AOI <- '01-Data/AOI.shp'
 
 # Terget soil attribute (Mandatory 10)
-target_properties<- c("ph_0_30", "k_0_30" , "soc_0_30" ,"bd_0_30", "cec_0_30","p_0_30",   
-                      "n_0_30","clay_0_30", "sand_0_30" ,"silt_0_30")
+soilatt<- "soc_0_30" 
 
 # Function for Uncertainty Assessment
 load(file = "03-Scripts/eval.RData")
@@ -92,9 +93,6 @@ dat <- as.data.frame(dat)
 
 summary(dat)
 
-
-
-for(soilatt in unique(target_properties)){
 
 
 ## 1.4 - Target soil attribute + covariates ------------------------------------
@@ -334,6 +332,6 @@ writeRaster(pred_sd,
 
 
 
-}
+
 
 

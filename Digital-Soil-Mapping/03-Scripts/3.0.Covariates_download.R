@@ -20,6 +20,7 @@ gc()
 # 0 - User-defined variables ===================================================
 # Working directory
 wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <-'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 
 # Output covariate folder
@@ -29,7 +30,7 @@ output_dir <-'01-Data/covs/'
 # Area of interest: either own shapefile or 3-digit ISO code to extract from 
 # UN 2020 boundaries
 aoi <- '01-Data/AOI.shp'
-# AOI <- 'MKD'
+#AOI <- 'MKD'
 # Resolution and projection
 res = 250
 crs = "EPSG:4326"
