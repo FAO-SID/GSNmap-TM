@@ -92,7 +92,7 @@ for (i in unique(assetname$ID)){
   filename <- sub('.*\\/', '', i)
   
   #Clip image to the extent of the AOI
-  image <- ee$Image(i) %>%
+   image <- ee$Image(i) %>%
     ee$Image$clip(region)%>%
     ee$Image$toFloat()
   

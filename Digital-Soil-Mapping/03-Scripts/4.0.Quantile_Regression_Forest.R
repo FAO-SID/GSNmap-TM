@@ -173,6 +173,7 @@ model$importance <- x
 ## 3.5 - Print and save model --------------------------------------------------
 print(model)
 saveRDS(model, file = paste0("02-Outputs/models/model_",soilatt,".rds"))
+#readRDS('02-Outputs/models/model_bd_0_30.rds')
 
 # 4 - Uncertainty assessment ===================================================
 # extract observed and predicted values
@@ -276,6 +277,7 @@ for (g in 1:length(f_sd)){
 }
 r_mean <-sprc(r_mean_l)
 r_sd <-sprc(r_sd_l)
+
 pred_mean <- mosaic(r_mean)
 pred_sd <- mosaic(r_sd)
 
