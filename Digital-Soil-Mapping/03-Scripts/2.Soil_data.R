@@ -41,7 +41,7 @@ library(sf) # to manage spatial data (shp vectors)
 library(aqp) # for soil profile data
 #install.packages("devtools") 
 #devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
-library(ithir) # for horizon harmonization
+library(mpspline2) # for horizon harmonization
 library(data.table)
 
 # 2 - Import national data =====================================================
@@ -112,6 +112,7 @@ profiles
 plotSPC(x = profiles[1:20], name = "pH", color = "ph",
         name.style = "center-center")
 
+
 ## 4.4 - check data integrity --------------------------------------------------
 # A valid profile is TRUE if all of the following criteria are false:
 #    + depthLogic : boolean, errors related to depth logic
@@ -135,68 +136,64 @@ metadata(clean_prof)$removed.profiles
 dat <- left_join(clean_prof@site, clean_prof@horizons)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph:cec )
 
+
 # 5 - Estimate BD using pedotransfer functions =================================
 
 # create the function with all PTF
-estimateBD <- function(SOC=NULL, method=NULL){
+estimateBD <- function(SOC=NULL, method=NULL) {
   OM <- SOC * 1.724
-  if(method=="Saini1996"){BD <- 1.62 - 0.06 * OM}
-  if(method=="Drew1973"){BD <- 1 / (0.6268 + 0.0361 * OM)}
-  if(method=="Jeffrey1979"){BD <- 1.482 - 0.6786 * (log(OM))}
-  if(method=="Grigal1989"){BD <- 0.669 + 0.941 * exp(1)^(-0.06 * OM)}
-  if(method=="Adams1973"){BD <- 100 / (OM /0.244 + (100 - OM)/2.65)}
-  if(method=="Honeyset_Ratkowsky1989"){BD <- 1/(0.564 + 0.0556 * OM)}
+  BD <- switch(method,
+               "Saini1996" = 1.62 - 0.06 * OM,
+               "Drew1973" = 1 / (0.6268 + 0.0361 * OM),
+               "Jeffrey1979" = 1.482 - 0.6786 * (log(OM)),
+               "Grigal1989" = 0.669 + 0.941 * exp(1)^(-0.06 * OM),
+               "Adams1973" = 100 / (OM / 0.244 + (100 - OM) / 2.65),
+               "Honeyset_Ratkowsky1989" = 1 / (0.564 + 0.0556 * OM),
+               stop("Invalid method specified.")
+  )
   return(BD)
 }
 
-## 5.1 - Select a pedotransfer function ----------------------------------------
-# create a vector of BD values to test the best fitting pedotransfer function
-BD_test <- tibble(SOC = clean_prof@horizons$soc,
-                  BD_test = clean_prof@horizons$bd)
-BD_test <-  na.omit(BD_test)
+# 5.1 - Select a pedotransfer function ----------------------------------------
+method_names <- c("Saini1996", "Drew1973", "Jeffrey1979", "Grigal1989", 
+                  "Adams1973", "Honeyset_Ratkowsky1989")
 
-## 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
-BD_test$Saini <- estimateBD(BD_test$SOC, method="Saini1996")
-BD_test$Drew <- estimateBD(BD_test$SOC, method="Drew1973")
-BD_test$Jeffrey <- estimateBD(BD_test$SOC, method="Jeffrey1979")
-BD_test$Grigal <- estimateBD(BD_test$SOC, method="Grigal1989")
-BD_test$Adams <- estimateBD(BD_test$SOC, method="Adams1973")
-BD_test$Honeyset_Ratkowsky <- estimateBD(BD_test$SOC,
-                                         method="Honeyset_Ratkowsky1989")
+# Create a test dataset with BD and SOC data
+BD_test <- data.frame(SOC = dat$soc, BD_observed = dat$bd)
+
+# Remove missing values
+BD_test <- BD_test[complete.cases(BD_test),]
+
+# 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
+for (i in method_names) {
+  BD_test[[i]] <- estimateBD(BD_test$SOC, method = i)
+}
+
+# Print the resulting data frame
+BD_test
+
 
 ## 5.3 Compare results ---------------------------------------------------------
-
 # Observed values:
-summary(BD_test$BD_test)
-
-# Predicted values:
-summary(BD_test$Saini)
-summary(BD_test$Drew)
-summary(BD_test$Jeffrey)
-summary(BD_test$Grigal)
-summary(BD_test$Adams)
-summary(BD_test$Honeyset_Ratkowsky)
+summary(BD_test)
 
 # Compare data distributions for observed and predicted BLD
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,5),
-     lwd=2, main="Bulk Density Pedotransfer Functions")
-lines(density(BD_test$Saini),col="green", lwd=2)
-lines(density(BD_test$Drew),col="red", lwd=2)
-lines(density(BD_test$Jeffrey),col="cyan", lwd=2)
-lines(density(BD_test$Grigal),col="orange", lwd=2)
-lines(density(BD_test$Adams),col="magenta", lwd=2)
-lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
-legend("topleft",
-       legend = c("Original", "Saini", "Drew", "Jeffrey", "Grigal", "Adams",
-                  "Honeyset_Ratkowsky"),
-       fill=c("black", "green", "red", "cyan", "orange","magenta", "blue"))
+BD_test %>% 
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed", "Saini1996", "Drew1973", "Jeffrey1979",
+                        "Grigal1989", "Adams1973", "Honeyset_Ratkowsky1989"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density()
+
 
 # Plot the Selected function again
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
-     lwd=2, main="Bulk Density Selected Function")
-lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
-legend("topleft",legend = c("Original", "Honeyset_Ratkowsky"),
-       fill=c("black", "blue"))
+BD_test %>% 
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed", "Honeyset_Ratkowsky1989"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density() + xlim(c(0,2.5))
 
 
 ## 5.4 Estimate BD for the missing horizons ------------------------------------
@@ -205,11 +202,15 @@ dat$bd[is.na(dat$bd)] <-
 
 # Explore the results
 summary(dat$bd)
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
-     lwd=2, main="Bulk Density Gap-Filling")
-lines(density(dat$bd, na.rm = TRUE), col="green", lwd=2)
-legend("topleft",legend = c("Original", "Original+Estimated"),
-       fill=c("black", "green"))
+
+g <- BD_test %>% 
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density() +
+  xlim(c(0,2.5))
+g + geom_density(data = dat, aes(x=bd, color = "Predicted"))
 
 
 ## 5.5 - Explore outliers ------------------------------------------------------
@@ -239,33 +240,65 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 
 
 # 6 - Harmonize soil layers ====================================================
+# Function to apply mpspline to a single soil property and depth range
+apply_mpspline <- function(df, property, depth_range) {
+  # Prepare input data for mpspline function
+  input_data <- df[, c("ProfID", "top", "bottom", property)]
+  colnames(input_data) <- c("SID", "UD", "LD", "VAL")
+  
+  # Apply mpspline function
+  mpspline_result <- mpspline(obj = input_data, 
+                              var_name = "VAL", 
+                              d = depth_range,
+                              vlow = min(input_data$VAL), 
+                              vhigh = max(input_data$VAL))
+  
+  # Extract predicted values for the depth range
+  predicted_values <- t(unique(as.data.frame(sapply(mpspline_result, function(x) x$est_dcm))))
+  predicted_values <- as.data.frame(predicted_values)
+  predicted_values$ProfID <- sub(x = rownames(predicted_values), pattern = "X", replacement = "")
+  class(predicted_values$ProfID) <- class(df$ProfID)
+  
+  # Create a new dataframe with the interpolated values
+  result_df <- unique(data.frame(ProfID = df$ProfID))
+  result_df <- left_join(result_df, predicted_values)
+  n <- length(depth_range)
+  coln <- NULL
+  for(layer in 2:n){
+    coln <- append(coln, paste0(property,"_", depth_range[layer-1], "_", depth_range[layer]))
+  }
+  names(result_df)[-1] <- coln
+  return(result_df)
+}
+
+# Function to apply mpspline to all soil properties and depth ranges
+apply_mpspline_all <- function(df, properties, depth_range) {
+  final_df <- data.frame(ProfID = df$ProfID)
+  for (property in properties) {
+    final_df <- left_join(final_df, apply_mpspline(df, property, depth_range))
+  }
+  final_df <- unique(final_df)
+  return(final_df)
+}
+
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
 
 target <- c("ph", "k", "soc",  "bd", "cec")
-depths <- t(c(0,30))
+depths <- c(0,30,60)
 
 ## 6.2 - Create standard layers ------------------------------------------------
 d <- unique(select(dat, ProfID, x, y))
 
-for (i in seq_along(target)) {
-  vlow <- min(dat[,target[i]][[1]], na.rm = TRUE)
-  vhigh <- max(dat[,target[i]][[1]], na.rm = TRUE)
-  o <- dat[,c("ProfID", "top", "bottom",target[i])] %>% 
-    na.omit() %>%
-    as.data.frame(stringsAsFactors = FALSE)
-  x <- ithir::ea_spline(obj = o, var.name = target[i], d = depths, 
-                        vlow = vlow[[1]], vhigh = vhigh[[1]])$harmonised 
-  x[x==-9999] <- NA
-  x <- x %>% 
-    as_tibble() %>% 
-    select(-`soil depth`)
-  
-  names(x) <- c("ProfID",paste0(target[i],c("_0_30","_30_60","_60_100")))
-  d <- d %>% left_join(x, by = "ProfID" )
-}
-d
+
+splines <- apply_mpspline_all(df = dat, 
+                                   properties = target,
+                                   depth_range = depths)
+summary(splines)
+
+# merge splines with x and y
+d <- left_join(d, splines)
 
 
 
