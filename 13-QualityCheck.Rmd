@@ -42,7 +42,7 @@ In the following section possible value ranges for each product category (except
 
 The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties.
 
-The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. *et al.* 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profile sampled globally from a wide array of land covers and land uses. 
+The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. *et al.* 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profiles sampled globally from a wide array of land covers and land uses. 
 
 ```{r ranges, echo = FALSE, message=F, warning=F}
 library(readxl)
