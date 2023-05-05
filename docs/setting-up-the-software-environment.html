@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Setting-up the software environment |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Setting-up the software environment |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -53,16 +53,16 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -109,7 +109,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -122,7 +122,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -270,11 +270,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
-<ul>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -322,7 +318,7 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <li>Follow the installation instruction on your local device.</li>
 </ol>
 <div class="figure"><span style="display:block;" id="fig:Rstudio"></span>
-<img src="images/2_RStudio-interface.PNG" alt="R Studio interface." width="683" />
+<img src="images/2_RStudio-interface.png" alt="R Studio interface." width="683" />
 <p class="caption">
 Figure 3.1: R Studio interface.
 </p>

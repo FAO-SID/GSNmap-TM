@@ -1,5 +1,5 @@
 # Annex IV: Quality assurance and quality control {-}
-The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 11 GSNmap first phase products.
+The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 10 GSNmap first phase products.
 
 The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.
 
@@ -13,9 +13,9 @@ Each step in the following protocol should be considered in order to detect and 
 
 ## Step 1: Completeness of layers {-}
 
-The following Table \ref(tab:products) gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.
+The following Table \ref(tab:products) gives an overview of all the GSNmap products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.
 
-All 29 products must be georeferenced TIF (.tif) files.
+All 10 soil property and soil nutrient maps with their corresponding 10 uncertainty layers must be georeferenced TIF (.tif) files.
 
 ```{r products, echo = FALSE, message=F, warning=F}
 options(knitr.table.format = "HTML")
@@ -31,63 +31,24 @@ kable_classic(full_width = F) %>%
 ```
 
 ## Step 2: Check the projection and resolution of all data products {-}
-Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to ~0.00833 degrees ; 1 km x 1km at the equator.
+Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to ~0.002246 degrees ; 250 m x 250 m at the equator.
 
 ## Step 3: Check the extent {-}
 Visualize the 20 products in QGIS or any preferred GIS platform. Load a land-use layer to visually assess that the simulations were done exclusively on croplands.
 
 ## Step 4: Check the units, ranges, and outliers {-}
 
-In the following section expected value ranges for each product category are presented. It is important to note that the provided ranges represent a gross approximation of what can be normally expected when running the proposed methodology. Results that fall outside these ranges and that did not occur due to common issues presented in the section 15.2 need to be carefully evaluated based on local expertise and available literature.
+In the following section possible value ranges for each product category (except available potassium) are presented. It is important to note that the provided ranges represent a gross approximation of the extremes within which the values should fall in. Results that fall outside these ranges need to be carefully evaluated based on local expertise and available literature.
 
-The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties in the Information tab (Figure 16.2).
+The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties.
 
-```{r qgis, echo = FALSE, fig.cap = "Quality assurance and quality control."}
-knitr::include_graphics("images/QA_QC.png")
+The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. *et al.* 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profile sampled globally from a wide array of land covers and land uses. 
 
+```{r ranges, echo = FALSE, message=F, warning=F}
+library(readxl)
+options(knitr.table.format = "HTML")
+dt <- read_xlsx("tables/wosis_dist.xlsx")
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.', format = 'html') %>%
+kable_classic(full_width = F)
 ```
-
-### Major nutrients {-}
-
-* Total N
-  * Unit:
-  * Range:
-  * Outliers:
-* Total P
-  * Unit:
-  * Range:
-  * Outliers:
-* Total K
-  * Unit:
-  * Range:
-  * Outliers:
-  
-  
-### Associated soil properties {-}
-
-* Cation exchange capacity
-  * Unit:
-  * Range:
-  * Outliers:
-* Soil pH
-  * Unit: N/A
-  * Range: 3-11
-  * Outliers: minima and maxima above or below the range should be checked carefully
-* Soil clay, silt, and sand
-  * Unit: %
-  * Range: 0-100
-  * Outliers: minima and maxima above or below the range are impossible, values close to 0 or 100 should be checked carefully
-* Soil organic carbon
-  * Unit: %
-  * Range: 0-15
-  * Outliers: Values above 15 Percent should be checked carefully.
-* Soil bulk density
-  * Unit: g/cm^3^
-  * Range: 1.0 - 1.8
-  * Outliers: minima and maxima above or below the range should be checked carefully 
-* Uncertainties
-  * Unit: respective property unit
-  * Range: flexible
-  * Outliers: 
-  
   

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Annex IV: Quality assurance and quality control |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Annex IV: Quality assurance and quality control |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -53,16 +53,16 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -109,7 +109,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -122,7 +122,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -270,11 +270,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-1-completeness-of-layers"><i class="fa fa-check"></i>Step 1: Completeness of layers</a></li>
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products"><i class="fa fa-check"></i>Step 2: Check the projection and resolution of all data products</a></li>
 <li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-3-check-the-extent"><i class="fa fa-check"></i>Step 3: Check the extent</a></li>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a>
-<ul>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#major-nutrients"><i class="fa fa-check"></i>Major nutrients</a></li>
-<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#associated-soil-properties"><i class="fa fa-check"></i>Associated soil properties</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="annex-iv-quality-assurance-and-quality-control.html"><a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers"><i class="fa fa-check"></i>Step 4: Check the units, ranges, and outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -297,7 +293,7 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
             <section class="normal" id="section-">
 <div id="annex-iv-quality-assurance-and-quality-control" class="section level1 unnumbered hasAnchor">
 <h1>Annex IV: Quality assurance and quality control<a href="annex-iv-quality-assurance-and-quality-control.html#annex-iv-quality-assurance-and-quality-control" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 11 GSNmap first phase products.</p>
+<p>The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 10 GSNmap first phase products.</p>
 <p>The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 7.</p>
 <p>Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure @ref(fig:qa_qc)).</p>
 <div class="figure">
@@ -309,8 +305,8 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <p>Each step in the following protocol should be considered in order to detect and eliminate errors, address data inaccuracies and assess the output completeness.</p>
 <div id="step-1-completeness-of-layers" class="section level2 unnumbered hasAnchor">
 <h2>Step 1: Completeness of layers<a href="annex-iv-quality-assurance-and-quality-control.html#step-1-completeness-of-layers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The following Table (tab:products) gives an overview of all the GSOCseq products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.</p>
-<p>All 29 products must be georeferenced TIF (.tif) files.</p>
+<p>The following Table (tab:products) gives an overview of all the GSNmap products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO_GSNmap_Ntot_Map030 should be changed to TUR_GSNmap_Ntot_Map030.</p>
+<p>All 10 soil property and soil nutrient maps with their corresponding 10 uncertainty layers must be georeferenced TIF (.tif) files.</p>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:products">Table 10.1: </span>Data product overview.
@@ -506,7 +502,7 @@ ISO_GSNmap_BD_UncertaintyMap030.tiff
 </div>
 <div id="step-2-check-the-projection-and-resolution-of-all-data-products" class="section level2 unnumbered hasAnchor">
 <h2>Step 2: Check the projection and resolution of all data products<a href="annex-iv-quality-assurance-and-quality-control.html#step-2-check-the-projection-and-resolution-of-all-data-products" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to ~0.00833 degrees ; 1 km x 1km at the equator.</p>
+<p>Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to ~0.002246 degrees ; 250 m x 250 m at the equator.</p>
 </div>
 <div id="step-3-check-the-extent" class="section level2 unnumbered hasAnchor">
 <h2>Step 3: Check the extent<a href="annex-iv-quality-assurance-and-quality-control.html#step-3-check-the-extent" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -514,79 +510,332 @@ ISO_GSNmap_BD_UncertaintyMap030.tiff
 </div>
 <div id="step-4-check-the-units-ranges-and-outliers" class="section level2 unnumbered hasAnchor">
 <h2>Step 4: Check the units, ranges, and outliers<a href="annex-iv-quality-assurance-and-quality-control.html#step-4-check-the-units-ranges-and-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the following section expected value ranges for each product category are presented. It is important to note that the provided ranges represent a gross approximation of what can be normally expected when running the proposed methodology. Results that fall outside these ranges and that did not occur due to common issues presented in the section 15.2 need to be carefully evaluated based on local expertise and available literature.</p>
-<p>The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties in the Information tab (Figure 16.2).</p>
-<div class="figure"><span style="display:block;" id="fig:qgis"></span>
-<img src="images/QA_QC.png" alt="Quality assurance and quality control." width="232" />
-<p class="caption">
-Figure 10.2: Quality assurance and quality control.
-</p>
-</div>
-<div id="major-nutrients" class="section level3 unnumbered hasAnchor">
-<h3>Major nutrients<a href="annex-iv-quality-assurance-and-quality-control.html#major-nutrients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the following section possible value ranges for each product category (except available potassium) are presented. It is important to note that the provided ranges represent a gross approximation of the extremes within which the values should fall in. Results that fall outside these ranges need to be carefully evaluated based on local expertise and available literature.</p>
+<p>The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties.</p>
+<p>The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. <em>et al.</em> 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profile sampled globally from a wide array of land covers and land uses.</p>
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<caption>
+<span id="tab:ranges">Table 10.2: </span>Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Soil property
+</th>
+<th style="text-align:right;">
+Min
+</th>
+<th style="text-align:right;">
+1st Quartile
+</th>
+<th style="text-align:right;">
+Median
+</th>
+<th style="text-align:right;">
+3st Quartile
+</th>
+<th style="text-align:right;">
+Max
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+Unit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Total N
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+400.0
+</td>
+<td style="text-align:right;">
+700.0
+</td>
+<td style="text-align:right;">
+1500.0
+</td>
+<td style="text-align:right;">
+84000.0
+</td>
+<td style="text-align:right;">
+216362
+</td>
+<td style="text-align:left;">
+ppm
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P Bray I
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+16.0
+</td>
+<td style="text-align:right;">
+150.0
+</td>
+<td style="text-align:right;">
+40486
+</td>
+<td style="text-align:left;">
+ppm
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P Mehlich 3
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+22.0
+</td>
+<td style="text-align:right;">
+149.4
+</td>
+<td style="text-align:right;">
+7242
+</td>
+<td style="text-align:left;">
+ppm
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P Olsen
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+141.0
+</td>
+<td style="text-align:right;">
+8434
+</td>
+<td style="text-align:left;">
+ppm
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CEC
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+14.0
+</td>
+<td style="text-align:right;">
+23.0
+</td>
+<td style="text-align:right;">
+140.0
+</td>
+<td style="text-align:right;">
+295688
+</td>
+<td style="text-align:left;">
+cmol(c)/kg
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pH water
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+12.3
+</td>
+<td style="text-align:right;">
+613322
+</td>
+<td style="text-align:left;">
 <ul>
-<li>Total N
-<ul>
-<li>Unit:</li>
-<li>Range:</li>
-<li>Outliers:</li>
-</ul></li>
-<li>Total P
-<ul>
-<li>Unit:</li>
-<li>Range:</li>
-<li>Outliers:</li>
-</ul></li>
-<li>Total K
-<ul>
-<li>Unit:</li>
-<li>Range:</li>
-<li>Outliers:</li>
-</ul></li>
-</ul>
-</div>
-<div id="associated-soil-properties" class="section level3 unnumbered hasAnchor">
-<h3>Associated soil properties<a href="annex-iv-quality-assurance-and-quality-control.html#associated-soil-properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Cation exchange capacity
-<ul>
-<li>Unit:</li>
-<li>Range:</li>
-<li>Outliers:</li>
-</ul></li>
-<li>Soil pH
-<ul>
-<li>Unit: N/A</li>
-<li>Range: 3-11</li>
-<li>Outliers: minima and maxima above or below the range should be checked carefully</li>
-</ul></li>
-<li>Soil clay, silt, and sand
-<ul>
-<li>Unit: %</li>
-<li>Range: 0-100</li>
-<li>Outliers: minima and maxima above or below the range are impossible, values close to 0 or 100 should be checked carefully</li>
-</ul></li>
-<li>Soil organic carbon
-<ul>
-<li>Unit: %</li>
-<li>Range: 0-15</li>
-<li>Outliers: Values above 15 Percent should be checked carefully.</li>
-</ul></li>
-<li>Soil bulk density
-<ul>
-<li>Unit: g/cm<sup>3</sup></li>
-<li>Range: 1.0 - 1.8</li>
-<li>Outliers: minima and maxima above or below the range should be checked carefully</li>
-</ul></li>
-<li>Uncertainties
-<ul>
-<li>Unit: respective property unit</li>
-<li>Range: flexible</li>
-<li>Outliers:</li>
-</ul></li>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clay
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+11.1
+</td>
+<td style="text-align:right;">
+21.9
+</td>
+<td style="text-align:right;">
+35.3
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+<td style="text-align:right;">
+590368
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Silt
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+30.0
+</td>
+<td style="text-align:right;">
+47.6
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+<td style="text-align:right;">
+558233
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sand
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+36.0
+</td>
+<td style="text-align:right;">
+60.2
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+<td style="text-align:right;">
+482334
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SOC
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+14.0
+</td>
+<td style="text-align:right;">
+99.4
+</td>
+<td style="text-align:right;">
+471301
+</td>
+<td style="text-align:left;">
+%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bulk density
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+116756
+</td>
+<td style="text-align:left;">
+g/cm3
+</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 
-</div>
 </div>
 </div>
             </section>
