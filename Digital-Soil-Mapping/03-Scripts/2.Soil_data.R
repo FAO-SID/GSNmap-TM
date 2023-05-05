@@ -249,15 +249,11 @@ target <- c("ph", "k", "soc",  "bd", "cec")
 depths <- c(0,30)
 
 ## 6.2 - Create standard layers ------------------------------------------------
-d <- unique(select(dat, ProfID, x, y))
-
-
-splines <- apply_mpspline_all(df = dat, 
-                                   properties = target,
-                                   depth_range = depths)
+splines <- apply_mpspline_all(df = dat, properties = target, depth_range = depths)
 summary(splines)
 
 # merge splines with x and y
+d <- unique(select(dat, ProfID, x, y))
 d <- left_join(d, splines)
 
 
