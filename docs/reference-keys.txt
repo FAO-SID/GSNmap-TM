@@ -27,6 +27,7 @@ fig:unnamed-chunk-47
 fig:unnamed-chunk-52-1
 fig:unnamed-chunk-52-2
 fig:workflow2
+fig:qaqc
 tab:products
 tab:ranges
 presentation
