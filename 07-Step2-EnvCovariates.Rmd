@@ -28,7 +28,7 @@ kable_styling(bootstrap_options = "striped", full_width = F) %>%
 
 ```
 
-## Download covariates with Google Earth Engine (GEE)
+## Download covariatesand cropland mask with Google Earth Engine (GEE)
 
 The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates by reducing the need to clip and download layers from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script.
 
@@ -122,7 +122,7 @@ var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
 ```
 
 
-### Define the region of Interest (ROI)
+### Define the region of interest (ROI)
 
 This script in GEE loads borders of a specific country or a user-defined shapefile into the workspace. It does this by creating a region of interest (ROI) based on the country borders. The script first specifies a list of countries to be included in the ROI and then loads the corresponding geometries from the 'USDOS/LSIB_SIMPLE/2017' feature collection in the case of the LSIB 2017 dataset. In the case of a user-defined shapefile, the script uploads the borders of the ROI as an asset and replaces 'your_shapefile' with the path to the uploaded shapefile. Finally, the region variable is assigned the geometry of the ROI, which can be used to clip and process data within the specified boundary. You must change either the name of the country or the shape file (as an asset) to download the covariates for your specific ROI.
 

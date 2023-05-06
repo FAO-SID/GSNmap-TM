@@ -61,7 +61,7 @@ harmonise-units
 save-the-results
 step-2-download-environmental-covariates
 environmental-covariates-1
-download-covariates-with-google-earth-engine-gee
+download-covariatesand-cropland-mask-with-google-earth-engine-gee
 assets
 define-the-region-of-interest-roi
 load-and-clip-the-covariates

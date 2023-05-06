@@ -234,10 +234,10 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates with Google Earth Engine (GEE)</a>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariatesand cropland mask with Google Earth Engine (GEE)</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
-<li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of Interest (ROI)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of interest (ROI)</a></li>
 <li class="chapter" data-level="7.2.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#load-and-clip-the-covariates"><i class="fa fa-check"></i><b>7.2.3</b> Load and clip the covariates</a></li>
 <li class="chapter" data-level="7.2.4" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#clean-holes-in-fpar-layers"><i class="fa fa-check"></i><b>7.2.4</b> Clean holes in FPAR layers</a></li>
 <li class="chapter" data-level="7.2.5" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#visualize-and-export-the-covariates"><i class="fa fa-check"></i><b>7.2.5</b> Visualize and export the covariates</a></li>
@@ -320,8 +320,8 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <span id="cb95-12"><a href="step-3-mapping-continuous-soil-properties.html#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
 <span id="cb95-13"><a href="step-3-mapping-continuous-soil-properties.html#cb95-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <pre><code>##            used  (Mb) gc trigger  (Mb) max used  (Mb)
-## Ncells  5755522 307.4    9339220 498.8  9339220 498.8
-## Vcells 10296421  78.6   21574693 164.7 21574693 164.7</code></pre>
+## Ncells  5755497 307.4    9339220 498.8  9339220 498.8
+## Vcells 10283771  78.5   21575396 164.7 21575396 164.7</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="step-3-mapping-continuous-soil-properties.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Content of this script =======================================================</span></span>
 <span id="cb97-2"><a href="step-3-mapping-continuous-soil-properties.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory, soil attribute, and packages</span></span>
 <span id="cb97-3"><a href="step-3-mapping-continuous-soil-properties.html#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Merge soil data with environmental covariates </span></span>

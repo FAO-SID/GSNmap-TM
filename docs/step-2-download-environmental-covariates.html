@@ -234,10 +234,10 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates with Google Earth Engine (GEE)</a>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariatesand cropland mask with Google Earth Engine (GEE)</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
-<li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of Interest (ROI)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of interest (ROI)</a></li>
 <li class="chapter" data-level="7.2.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#load-and-clip-the-covariates"><i class="fa fa-check"></i><b>7.2.3</b> Load and clip the covariates</a></li>
 <li class="chapter" data-level="7.2.4" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#clean-holes-in-fpar-layers"><i class="fa fa-check"></i><b>7.2.4</b> Clean holes in FPAR layers</a></li>
 <li class="chapter" data-level="7.2.5" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#visualize-and-export-the-covariates"><i class="fa fa-check"></i><b>7.2.5</b> Visualize and export the covariates</a></li>
@@ -1184,8 +1184,8 @@ vbf
 </tbody>
 </table>
 </div>
-<div id="download-covariates-with-google-earth-engine-gee" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Download covariates with Google Earth Engine (GEE)<a href="step-2-download-environmental-covariates.html#download-covariates-with-google-earth-engine-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="download-covariatesand-cropland-mask-with-google-earth-engine-gee" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Download covariatesand cropland mask with Google Earth Engine (GEE)<a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates by reducing the need to clip and download layers from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script.</p>
 <p>You can find the JavaScript code in the material provided in this technical manual under <a href="https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts">03-scripts/3.0.Download_Covariates_&amp;_Mask.txt</a>. To use the code, simply copy and paste the text in the GEE console as shown in the figure below.</p>
 <div class="figure"><span style="display:block;" id="fig:screenshot"></span>
@@ -1271,7 +1271,7 @@ Figure 7.1: R Studio interface.
 <span id="cb87-69"><a href="step-2-download-environmental-covariates.html#cb87-69" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m&quot;</span>]<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="define-the-region-of-interest-roi" class="section level3 hasAnchor" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Define the region of Interest (ROI)<a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.2.2</span> Define the region of interest (ROI)<a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This script in GEE loads borders of a specific country or a user-defined shapefile into the workspace. It does this by creating a region of interest (ROI) based on the country borders. The script first specifies a list of countries to be included in the ROI and then loads the corresponding geometries from the ‘USDOS/LSIB_SIMPLE/2017’ feature collection in the case of the LSIB 2017 dataset. In the case of a user-defined shapefile, the script uploads the borders of the ROI as an asset and replaces ‘your_shapefile’ with the path to the uploaded shapefile. Finally, the region variable is assigned the geometry of the ROI, which can be used to clip and process data within the specified boundary. You must change either the name of the country or the shape file (as an asset) to download the covariates for your specific ROI.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb88-1"><a href="step-2-download-environmental-covariates.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Load borders </span></span>
 <span id="cb88-2"><a href="step-2-download-environmental-covariates.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
