@@ -66,8 +66,8 @@ Deviation from mean value,dvm,250
 deviation from mean value,dvm2,250
 Elevation,elevation,250
 Melton ruggedness number,mrn,250
-Negative openness,neg-openness,250
-Positive openness,pos-openness,250
+Negative openness,neg_openness,250
+Positive openness,pos_openness,250
 Slope,slope,250
 Topographic position index,tpi,250
 Terrain wetness index,twi,250
