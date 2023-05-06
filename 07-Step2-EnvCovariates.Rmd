@@ -322,7 +322,7 @@ Export.image.toDrive({
 
 To execute a script in GEE, you can run it by clicking the "Run" button in the upper right-hand corner of the code editor. The "Run" button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the "Tasks" tab.
 
-```{r RUN, echo = FALSE, fig.cap = "Run button un code editor and RUN task in Tasks bar."}
+```{r RUN, echo = FALSE, fig.cap = "Run button in code editor and RUN task in Tasks bar."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/GEE_export.png")
 ```
