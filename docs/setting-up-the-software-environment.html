@@ -199,7 +199,6 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#r-packages"><i class="fa fa-check"></i><b>3.2</b> R packages</a></li>
 <li class="chapter" data-level="3.3" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#gee---google-earth-engine"><i class="fa fa-check"></i><b>3.3</b> GEE - google earth engine</a></li>
-<li class="chapter" data-level="3.4" data-path="setting-up-the-software-environment.html"><a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r"><i class="fa fa-check"></i><b>3.4</b> rgee - Extension to use google earth engine in R</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html"><i class="fa fa-check"></i><b>4</b> Digital Soil Mapping</a>
 <ul>
@@ -235,8 +234,18 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-rgee"><i class="fa fa-check"></i><b>7.2</b> Download covariates with rgee</a></li>
-<li class="chapter" data-level="7.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#obtaining-the-cropland-mask"><i class="fa fa-check"></i><b>7.3</b> Obtaining the cropland mask</a></li>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates with Google Earth Engine (GEE)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
+<li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of Interest (ROI)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#load-and-clip-the-covariates"><i class="fa fa-check"></i><b>7.2.3</b> Load and clip the covariates</a></li>
+<li class="chapter" data-level="7.2.4" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#clean-holes-in-fpar-layers"><i class="fa fa-check"></i><b>7.2.4</b> Clean holes in FPAR layers</a></li>
+<li class="chapter" data-level="7.2.5" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#visualize-and-export-the-covariates"><i class="fa fa-check"></i><b>7.2.5</b> Visualize and export the covariates</a></li>
+<li class="chapter" data-level="7.2.6" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#load-and-clip-the-copernicus-land-cover-map-and"><i class="fa fa-check"></i><b>7.2.6</b> Load and clip the Copernicus land cover map and</a></li>
+<li class="chapter" data-level="7.2.7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#reclassify-the-land-cover-map"><i class="fa fa-check"></i><b>7.2.7</b> Reclassify the land cover map</a></li>
+<li class="chapter" data-level="7.2.8" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#visualization-and-exporting-mask"><i class="fa fa-check"></i><b>7.2.8</b> Visualization and exporting mask</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#run-and-export-in-gee"><i class="fa fa-check"></i><b>7.3</b> Run and export in GEE</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>8</b> Step 3: Mapping continuous soil properties</a>
 <ul>
@@ -352,82 +361,17 @@ Finally, the <strong>R</strong> software offers a broad range of powerful tools 
 <h2><span class="header-section-number">3.3</span> GEE - google earth engine<a href="setting-up-the-software-environment.html#gee---google-earth-engine" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Google earth engine (GEE) provides a large range of remote sensing datasets for users. It allows to use the GEE code editor to run computations using the google servers. The high computational power of these servers enables users with limited computational caapacities to run complex calculations.
 A user account must be created to use the code editor. This step can take some time. Once the account is validated, scripts can be written in the code editor using the Javascript language. An extensive array of instructions and guides are available on the platform. Alternatively, the Python language can be used to interact with the data.</p>
-<p>The code editor interface is structured by three panels and a map viewer (see Fig. <a href="setting-up-the-software-environment.html#fig:GEE">3.2</a>). The left panel is structured in “Scripts”, “Docs”, and “Assets”. Under “Scripts” users can organize and save the scripts they wrote for specific purposes. “Docs” provides further information on so-called “server-side” functions that can be used to manipulate the data. Finally, in “Assets” users can upload own spatial data in common formats such as shapefiles (.shp) or raster files (.tif).
+<p>The code editor interface is structured by three panels and a map viewer (see Fig. <a href="#fig:GEE"><strong>??</strong></a>). The left panel is structured in “Scripts”, “Docs”, and “Assets”. Under “Scripts” users can organize and save the scripts they wrote for specific purposes. “Docs” provides further information on so-called “server-side” functions that can be used to manipulate the data. Finally, in “Assets” users can upload own spatial data in common formats such as shapefiles (.shp) or raster files (.tif).
 The middle panel contains the scripts that can be run by clicking on the “Run” button.
 The right panel is composed of three functionalities. The “Inspector” provides basic information on a pixel of a layer displayed in the map below. The information consists of longitude, latitude, and - if layers are loaded - values of the pixel. The “Console” is the place where certain commands expressed in the code are shown. The most common expressions shown here are print() commands or figures derived from the loaded data. Finally, the “Tasks” button shows all tasks that were formulated in the code/script and are to be submitted to the server for computation. Once a task is submitted, the user has to click on the “Run” button appearing in the “Tasks” section to submit the task to the server.
 In addition to that, the data catalog can be accessed via the search bar on the top of the page. Here, key information on the available datasets, origin, resolution and related publications can be found.</p>
-<div class="figure"><span style="display:block;" id="fig:GEE"></span>
+<div class="figure"><span style="display:block;" id="fig:GEE2"></span>
 <img src="images/2.1_GEE_codeeditor.png" alt="Google Earth Engine code editor." width="961" />
 <p class="caption">
 Figure 3.2: Google Earth Engine code editor.
 </p>
 </div>
-</div>
-<div id="rgee---extension-to-use-google-earth-engine-in-r" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> rgee - Extension to use google earth engine in R<a href="setting-up-the-software-environment.html#rgee---extension-to-use-google-earth-engine-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To generate the GSNmap, the user is going to use an R package to interact with the GEE environment. The <em>rgee</em> package enables users to interact with the GEE servers using the R language <span class="citation">(<a href="#ref-rgee" role="doc-biblioref">Aybar, 2022</a>)</span>. The package makes use of the Python language to interact with GEE. The package can be downloaded easily either directly from the GitHub repository or via CRAN.</p>
-<p>The prerequisite to have access to GEE is to create a user account on <a href="https://earthengine.google.com/" class="uri">https://earthengine.google.com/</a>. Once you have a GEE account, it is necessary to install the rgee package on your machine. After installing and loading the package to your session in <strong>R studio</strong>, it is necessary to install the so-called “<em>Miniconda</em>” command prompt which acts as a Python interpreter mediating between R and GEE. The ‘ee_install()’ function automatically downloads and install all the software that is needed.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setting-up-the-software-environment.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install package</span></span>
-<span id="cb1-2"><a href="setting-up-the-software-environment.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rgee&quot;</span>)</span>
-<span id="cb1-3"><a href="setting-up-the-software-environment.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="setting-up-the-software-environment.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load rgee package</span></span>
-<span id="cb1-5"><a href="setting-up-the-software-environment.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
-<span id="cb1-6"><a href="setting-up-the-software-environment.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="setting-up-the-software-environment.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install miniconda and other dependencies</span></span>
-<span id="cb1-8"><a href="setting-up-the-software-environment.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_install</span>(<span class="at">py_env =</span> <span class="st">&quot;rgee&quot;</span>) </span></code></pre></div>
-<p>Once the dependencies are installed, it is necessary to initialize rgee by providing the user credentials of the created GEE account. The ee_Initialize command must be run every time rgee is used.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setting-up-the-software-environment.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize Google Earth Engine! (you need to create a user account)</span></span>
-<span id="cb2-2"><a href="setting-up-the-software-environment.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>()</span></code></pre></div>
-<p>In case the <code>ee_Initialize()</code> function produces an error message, it is necessary to open the Anaconda command prompt to execute the following lines of code. This is done to manually install the necessary Python packages in the working directory called <code>rgee_py</code>. Then, we identify the file path in which the environment is stored and open <em>RStudio</em> to set the environment directory <code>rgee_environment_dir</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="setting-up-the-software-environment.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not, follow next steps: </span></span>
-<span id="cb3-2"><a href="setting-up-the-software-environment.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Open Anaconda Prompt and execute the following code, one by one:</span></span>
-<span id="cb3-3"><a href="setting-up-the-software-environment.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. conda create -n rgee_py python=3.9</span></span>
-<span id="cb3-4"><a href="setting-up-the-software-environment.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. activate rgee_py</span></span>
-<span id="cb3-5"><a href="setting-up-the-software-environment.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. pip install google-api-python-client</span></span>
-<span id="cb3-6"><a href="setting-up-the-software-environment.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. pip install earthengine-api</span></span>
-<span id="cb3-7"><a href="setting-up-the-software-environment.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. pip install numpy</span></span>
-<span id="cb3-8"><a href="setting-up-the-software-environment.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. conda env list</span></span>
-<span id="cb3-9"><a href="setting-up-the-software-environment.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="setting-up-the-software-environment.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the path of the rgee_py environment and write it correctly </span></span>
-<span id="cb3-11"><a href="setting-up-the-software-environment.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (note the backslash \)</span></span>
-<span id="cb3-12"><a href="setting-up-the-software-environment.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># rgee_py            *  C:\Users\angel\MINICO~1\envs\rgee_py &lt;&lt;&lt;</span></span>
-<span id="cb3-13"><a href="setting-up-the-software-environment.html#cb3-13" aria-hidden="true" tabindex="-1"></a>rgee_environment_dir <span class="ot">=</span> <span class="st">&quot;C:/Users/angel/miniconda3/envs/rgee_py/&quot;</span></span></code></pre></div>
-<p>In continuation, we tell <em>RStudio</em> to access the Python packages from the environment directory installed previously in Anaconda. Finally, we re-run the <code>ee_Initialize()</code> function to start <code>rgee</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="setting-up-the-software-environment.html#cb4-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_python</span>(rgee_environment_dir, <span class="at">required=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="setting-up-the-software-environment.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb4-3"><a href="setting-up-the-software-environment.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="fu">paste0</span>(rgee_environment_dir,<span class="st">&quot;python.exe&quot;</span>))</span>
-<span id="cb4-4"><a href="setting-up-the-software-environment.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the environment. Select &#39;Yes&#39; to restart your R session</span></span>
-<span id="cb4-5"><a href="setting-up-the-software-environment.html#cb4-5" aria-hidden="true" tabindex="-1"></a>rgee<span class="sc">::</span><span class="fu">ee_install_set_pyenv</span>(</span>
-<span id="cb4-6"><a href="setting-up-the-software-environment.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">py_path =</span> rgee_environment_dir,</span>
-<span id="cb4-7"><a href="setting-up-the-software-environment.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">py_env =</span> <span class="st">&quot;rgee_py&quot;</span> </span>
-<span id="cb4-8"><a href="setting-up-the-software-environment.html#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-9"><a href="setting-up-the-software-environment.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb4-10"><a href="setting-up-the-software-environment.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
-<span id="cb4-11"><a href="setting-up-the-software-environment.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> rgee_environment_dir)</span>
-<span id="cb4-12"><a href="setting-up-the-software-environment.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">EARTHENGINE_PYTHON =</span> rgee_environment_dir)</span>
-<span id="cb4-13"><a href="setting-up-the-software-environment.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="setting-up-the-software-environment.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Run next function and follow the steps in your browser (e.g. Chrome)</span></span>
-<span id="cb4-15"><a href="setting-up-the-software-environment.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check the box to give GEE access to your Google Drive folders. </span></span>
-<span id="cb4-16"><a href="setting-up-the-software-environment.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Give rgee access to your account</span></span>
-<span id="cb4-17"><a href="setting-up-the-software-environment.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. When it finish, come back to RStudio</span></span>
-<span id="cb4-18"><a href="setting-up-the-software-environment.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>(<span class="at">drive =</span> T)</span>
-<span id="cb4-19"><a href="setting-up-the-software-environment.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="setting-up-the-software-environment.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If there is no error message, then that is all.</span></span>
-<span id="cb4-21"><a href="setting-up-the-software-environment.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># If you need to remove the credentials to repeat the previous step, use</span></span>
-<span id="cb4-22"><a href="setting-up-the-software-environment.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ee_clean_credentials()</span></span></code></pre></div>
-<p>In case problems persist after following this alternative approach, the following functions may be helpful to clear user credentials or clean the python environment created with the ee_install() command. In first place, it is recommendable to consult the rgee documentation website (<a href="https://r-spatial.github.io/rgee/articles/rgee01.html" class="uri">https://r-spatial.github.io/rgee/articles/rgee01.html</a>) to get more detailed information on the installation procedure and possibilities for problem solving.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="setting-up-the-software-environment.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful functions</span></span>
-<span id="cb5-2"><a href="setting-up-the-software-environment.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="setting-up-the-software-environment.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_check() # check the dependencies that do not belong to R</span></span>
-<span id="cb5-4"><a href="setting-up-the-software-environment.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_credentials() # to remove the user credentials</span></span>
-<span id="cb5-5"><a href="setting-up-the-software-environment.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ee_clean_pyenv() # Delete variables of the system</span></span></code></pre></div>
 
-</div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-rgee" class="csl-entry">
-<strong>Aybar, C.</strong> 2022. <em>Rgee: R bindings for calling the ’earth engine’ API</em>. (also available at <a href="https://CRAN.R-project.org/package=rgee">https://CRAN.R-project.org/package=rgee</a>).
 </div>
 </div>
             </section>
