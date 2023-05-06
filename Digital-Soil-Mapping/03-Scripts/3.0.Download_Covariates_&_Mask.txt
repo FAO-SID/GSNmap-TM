@@ -140,7 +140,7 @@ Map.addLayer(renamed, visParams, 'Covariates');
 // Export the stacked image to Google Drive
 Export.image.toDrive({
   image: renamed,
-  description: 'Covariates',
+  description: 'covariates',
   folder: 'GEE',
   scale: 250,
   maxPixels: 1e13,
