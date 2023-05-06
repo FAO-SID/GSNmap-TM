@@ -34,7 +34,7 @@ The following are the steps to access and download the environmental covariates 
 
 You can find the JavaScript code in the material provided in this technical manual under [03-scripts/3.0.Download_Covariates_&_Mask.txt](https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts). To use the code, simply copy and paste the text in the GEE console as shown in the figure below.
 
-```{r screenshot, echo = FALSE, fig.cap = "R Studio interface."}
+```{r screenshot, echo = FALSE, fig.cap = "Copy and paste script in the code editor."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/javaScript_GEE.png")
 ```
@@ -322,7 +322,7 @@ Export.image.toDrive({
 
 To execute a script in GEE, you can run it by clicking the "Run" button in the upper right-hand corner of the code editor. The "Run" button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the "Tasks" tab.
 
-```{r RUN, echo = FALSE, fig.cap = "R Studio interface."}
+```{r RUN, echo = FALSE, fig.cap = "Run button un code editor and RUN task in Tasks bar."}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/GEE_export.png")
 ```

@@ -1189,9 +1189,9 @@ vbf
 <p>The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates by reducing the need to clip and download layers from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script.</p>
 <p>You can find the JavaScript code in the material provided in this technical manual under <a href="https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts">03-scripts/3.0.Download_Covariates_&amp;_Mask.txt</a>. To use the code, simply copy and paste the text in the GEE console as shown in the figure below.</p>
 <div class="figure"><span style="display:block;" id="fig:screenshot"></span>
-<img src="images/javaScript_GEE.png" alt="R Studio interface." width="924" />
+<img src="images/javaScript_GEE.png" alt="Copy and paste script in the code editor." width="924" />
 <p class="caption">
-Figure 7.1: R Studio interface.
+Figure 7.1: Copy and paste script in the code editor.
 </p>
 </div>
 <p>If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our <strong>R</strong> session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the “Digital-Soil-Mapping-GSP-FAO” based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission.</p>
@@ -1440,9 +1440,9 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <h2><span class="header-section-number">7.3</span> Run and export in GEE<a href="step-2-download-environmental-covariates.html#run-and-export-in-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To execute a script in GEE, you can run it by clicking the “Run” button in the upper right-hand corner of the code editor. The “Run” button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the “Tasks” tab.</p>
 <div class="figure"><span style="display:block;" id="fig:RUN"></span>
-<img src="images/GEE_export.png" alt="R Studio interface." width="946" />
+<img src="images/GEE_export.png" alt="Run button un code editor and RUN task in Tasks bar." width="946" />
 <p class="caption">
-Figure 7.2: R Studio interface.
+Figure 7.2: Run button un code editor and RUN task in Tasks bar.
 </p>
 </div>
 <p>To run a task for exporting files to Google Drive in GEE, the Export.image.toDrive() function exports the image Google Drive. To start the task, you need to RUN the task, and it will be added to the GEE task list. You can monitor its progress and download the exported file once the task is complete.</p>
