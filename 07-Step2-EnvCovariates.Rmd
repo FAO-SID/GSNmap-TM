@@ -28,200 +28,304 @@ kable_styling(bootstrap_options = "striped", full_width = F) %>%
 
 ```
 
-## Download covariates with rgee
+## Download covariates with Google Earth Engine (GEE)
 
-In the following, the steps to access and download the environmental covariates are described. The GSP has optimised the download of environmental covariates by minimising the efforts needed to clip and download the layers from Google Earth Engine (GEE). Here is where the *rgee* package comes into play, too. The objectives of this chapter are to explain how to set our working environment in *RStudio* and connect to GEE, how to import a shapefile of the area of interest (AOI), and how to clip and download the covariate layers for our respective AOI.
+The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates by reducing the need to clip and download layers from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script.
+
+You can find the JavaScript code in the material provided in this technical manual under [03-scripts/3.0.Download_Covariates_&_Mask.txt](https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts). To use the code, simply copy and paste the text in the GEE console as shown in the figure below.
+
+```{r screenshot, echo = FALSE, fig.cap = "R Studio interface."}
+#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
+knitr::include_graphics("images/javaScript_GEE.png")
+```
 
 If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our **R** session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the "Digital-Soil-Mapping-GSP-FAO" based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission. 
 
-```{r, eval = F}
+The following text explains the structure of the script that will be executed in GEE, and which parts of the script need to be modified to extract the covariates from the area of interest (AOI).
+
+### Assets
+
+In GEE, an "asset" refers to any data or code that has been uploaded and stored in GEE's cloud-based servers. Assets can include remote sensing data, vector data, and even scripts or functions.
+
+The following code reads the assets that have been created by the GSP in GEE. This means that the code accesses the data and scripts that GSP has uploaded to GEE, and uses them to perform specific tasks or analyses. By leveraging GEE's cloud-based infrastructure and GSP's assets, users can easily access and analyze large amounts of data without the need for local storage or processing power.
+
+```{js assets, eval=FALSE, include=TRUE}
 #Empty environment and cache
-rm(list = ls());
-gc()
-
-# 0 - User-defined variables ===================================================
-# Working directory
-#wd <- 'C:/Users/luottoi/Documents/GitHub/Digital-Soil-Mapping'
-wd <- 'C:/GIT/Digital-Soil-Mapping'
-
-# Output covariate folder
-#output_dir <-''
-output_dir <-'Digital-Soil-Mapping/01-Data/covs/'
-
-# Area of interest: either own shapefile or 3-digit ISO code to extract from 
-# UN 2020 boundaries
-AOI <- 'Digital-Soil-Mapping/01-Data/AOI.shp'
-# AOI <- 'MKD'
-# Resolution and projection
-res = 250
-crs = "EPSG:4326"
-#_______________________________________________________________________________
-
+var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio16",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio17",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio5",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio6",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/ngd10",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_min",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_range",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_range",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/snow_cover",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/swir_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/crops",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/flooded_vegetation",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/grass",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/shrub_and_scrub",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/trees",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_curvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_downslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm2_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_elevation_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_mrn_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_neg_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_pos_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_slope_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m"];
 ```
 
 
-Next, the working directory is set and the required packages for the download of the covariates are called with the `library()` command. In case users are using their own shapefiles, the `read_sf()` function is applied to load it into R and then convert it to a box polygon in order to be used with GEE. 
+### Define the region of Interest (ROI)
 
-```{r, eval = F}
-#  1 - Set working directory and load necessary packages ======================= 
-# Set working directory
-setwd(wd)
-#load libraries
-library(raster)
-library(terra)
-library(tidyverse)
-library(sf)
-library(rgee)
-library(googledrive)
+This script in GEE loads borders of a specific country or a user-defined shapefile into the workspace. It does this by creating a region of interest (ROI) based on the country borders. The script first specifies a list of countries to be included in the ROI and then loads the corresponding geometries from the 'USDOS/LSIB_SIMPLE/2017' feature collection in the case of the LSIB 2017 dataset. In the case of a user-defined shapefile, the script uploads the borders of the ROI as an asset and replaces 'your_shapefile' with the path to the uploaded shapefile. Finally, the region variable is assigned the geometry of the ROI, which can be used to clip and process data within the specified boundary. You must change either the name of the country or the shape file (as an asset) to download the covariates for your specific ROI.
 
+```{js roi, eval=FALSE, include=TRUE}
+// Load borders 
 
-# 2 - Import shapefile =========================================================
-AOI <- read_sf(aoi)
-# convert AOI to a box polygon
-#AOI <- st_as_sfc(st_bbox(AOI))
-#AOI <- st_as_sf(AOI)
-```
+/// Using LSIB 2017 (replace the countries that you want to download)
+var country_list = ['Italy'];
+var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
+  .filter(ee.Filter.inList('country_na', country_list));
+var region = aoi.geometry();
 
-The next step consists in initialising our GEE account using the rgee package in **R**. However, before starting it is necessary to give a brief overview of the covariates that were listed in Table \@ref(tab:covs1) and where they can be found in the GEE environment. The GSP has created an repository of covariates that can be added to your GEE environment in the browser. For that users have to right-click on "Assets" in the left panel of the GEE code editor and select "Add a project". Then the window shown in Fig. \@ref(fig:assets_GSP) appears and one has to enter the project ID which is "digital-soil-mapping-gsp-fao" and click on select. 
-
-```{r assets_GSP, echo = FALSE, fig.cap = "Add GSP covariate repository to your assets in GEE."}
-knitr::include_graphics("images/6.1_GSP_Covariate_repository.PNG")
-```
-
-Now that the covariates were added to our GEE assets, we can initialise GEE via rgee in our *RStudio*.
-
-```{r, eval = F}
-# 3 - Overview of covariates ===================================================
-# CLIMATIC VARIABLES from CHELSA
-# VEGETATION INDICES, FPAR and LAND SURFACE TEMPERATURE from MODIS
-# LAND COVER LAYERS from Dynamic World 10m near-real-time (NRT) 
-# TERRAINE attributes from OpenLandMap
-
-# for more information about the single covariates: open covariates.xslx in the 
-# training material folder
-
-# 4 - Initialize GEE ===========================================================
-ee_Initialize()
+/// Using a shapefile
+/// 1. Upload the borders of your countries as an asset
+/// 2. Replace 'your_shapefile' with the path to your shapefile
+// var shapefile = ee.FeatureCollection('users/your_username/your_shapefile');
+// var region = shapefile.geometry();
 
 ```
 
-In the case that users do not have their own shapefile but need to clip it from the UN map, the following lines of code. The structure of the commands that are used in the rgee package, are related to the way in which the JavaScript programming language is used in the GEE Code Editor (https://developers.google.com/earth-engine/guides/getstarted). However, the periods (.) that combine different commands in JavaScript are replaced by the dollar sign ($) in rgee. 
-This is illustrated in the lines of code below. A user-defined variable "region" is created that calls an Earth Engine (EE) object. This is signalled by the letters ee + $. The type of EE object is a so-called feature collection which corresponds to the shapefile format (.shp or GeoJSON, ...). Finally, the path where the feature collection is located on the Google server is specified. By using the "pipe" ( %>% ) symbol from tidyverse, we specify that only the section of the feature collection that equals to the ISO code of our AOI is selected and assigned to the region variable in **R**. Once this is specified, we set "region" as a geometry object that can be used to clip the covariates later in the next steps.
+### Load and clip the covariates
 
-```{r, eval = F, tidy = FALSE}
-# 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
-## 5.1 Convert shp to gee geometry ---------------------------------------------
-region <- sf_as_ee(AOI)
-region = region$geometry()
+This script loads an asset collection into an Earth Engine (EE) image collection and clips each image in the collection to a specific region of interest (ROI).
 
-## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
-# region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
-#   ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
-# region = region$geometry()
-# AOI_shp <-ee_as_sf(region)
-# AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
-# write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
-# aoi <- vect(AOI_shp)
+First, the ee.ImageCollection function is used to load the assets into an EE image collection. The assets variable is expected to be a list of asset IDs.
+
+Next, the map function is applied to the image collection to clip each image to the specified ROI. The clip function clips the image to the given ROI, and toFloat() converts the data type of the clipped image to floating-point values. The result of this operation is a new EE image collection called clippedCollection, where each image has been clipped to the specified ROI.
+
+
+```{js clip, eval=FALSE, include=TRUE}
+// Load assets as ImageCollection
+var assetsCollection = ee.ImageCollection(assets);
+
+// Clip each image in the collection to the region of interest
+var clippedCollection = assetsCollection.map(function(img){
+  return img.clip(region).toFloat();
+});
 ```
 
-After defining and loading the AOI from GEE into our **R** environment, it is necessary to create a vector that contains all file paths to the covariates. As can be seen below, these are differentiated by the covariate origin. CHELSA contains the climate-related covariate layers, i.e. temperature, precipitation, potential evapotranspiration, etc., MODIS contains for instance the land surface temperature and snow cover covariates, LANDCOVER has the layers of different vegetation types, and OPENLANDMAP contains all terrain covariates derived from digital elevation models (DEM).
+### Clean holes in FPAR layers
 
-One central option in R to execute repetitive tasks with one command is a *for loop*. It follows a specific syntax that is explained in multiple online resources such as in https://www.r-bloggers.com/2015/12/how-to-write-the-first-for-loop-in-r/. In this instance, the *for loop* iterates through the file paths assigned previously to the object "assetname" to clip them to the extent of the AOI, resample the resolution to 250 x 250 m, and exports them as raster files to a google drive folder. 
-The assets are all in raster format (.tif/GeoTiff). Raster files are denominated as "Image" or "ImageCollection" (for timeseries data) in GEE. Thus, the "ee$Image" command is used to load the respective asset from the file path i (that changes after each iteration of the loop). The loaded raster is clipped to the extent of the "region" that we defined previously. The resampling to our target resolution is carried out with the bilinear method. The EE object is then exported from GEE to a Google drive folder. It may be necessary to increase the number of maximum pixels depending on the size of the AOI. Finally, the raster file is also saved in the output folder on the local drive specified at the beginning of this script.
+The Fraction of Photosynthetically Active Radiation (FPAR) MODIS product represents the fraction of incident photosynthetically active radiation (PAR) that is absorbed by vegetation. This product is calculated from satellite-based observations of surface reflectance, and it is commonly used to estimate vegetation growth and productivity.
 
-```{r, eval = F, tidy = FALSE}
-# 6 - Clip and download covariates =============================================
-assetname <- read_csv("01-Data/covs/covs_rgee.csv")
-assetname$num <- rownames(assetname)
+In some areas, the FPAR MODIS product contains no data values in areas where the vegatation is scarce or absent. To avoin transferring these holes to the digital soil maps, we covert no data values to zeroes.
+ The rest of the script in this section is to reclip the rasters, stack them in a single object and rename them.
 
-# Loop over the names of assets to clip and dowload the covariates
-for (i in unique(assetname$ID)){
+```{js clean, eval=FALSE, include=TRUE}
+// Function to replace masked values with zeroes for fpar bands
+function replaceMaskedFpar(img) {
+  var allBands = img.bandNames();
+  var fparBands = allBands.filter(ee.Filter.stringStartsWith('item', 'fpar'));
+  var nonFparBands = allBands.removeAll(fparBands);
   
-  #Extract filename 
-  filename <- sub('.*\\/', '', i)
+  var fparImg = img.select(fparBands).unmask(0);
+  var nonFparImg = img.select(nonFparBands);
   
-  #Clip image to the extent of the AOI
-  image <- ee$Image(i) %>%
-    ee$Image$clip(region)%>%
-    ee$Image$toFloat()
+  // If there are no fpar bands, return the original image
+  var result = ee.Algorithms.If(fparBands.length().eq(0),
+                                 img,
+                                 nonFparImg.addBands(fparImg));
   
-  # Resample to target resolution
-  image = image$resample('bilinear')$reproject(
-    crs= crs,
-    scale= res)
-  
-  
-  #Export clipped covariate as raster
-  raster <- ee_as_raster(
-    image = image,
-    scale= res,
-    region = region,
-    via = "drive",
-    maxPixels = 1e+12
-  )
-  
-  plot(raster)
-  
-  num <- assetname[assetname$ID == i, 'num']
-  
-  raster <- mask(raster, AOI)
-  writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
-  print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
+  return ee.Image(result);
 }
+
+// Clip each image in the collection to the region of interest and replace masked values for fpar bands
+var clippedCollection = assetsCollection.map(function(img){
+  var clippedImg = img.clip(region).toFloat();
+  return replaceMaskedFpar(clippedImg);
+});
+
+// Stack the layers and maintain the layer names in the final file
+var stacked = clippedCollection.toBands();
+
+// Get the list of asset names
+var assetNames = ee.List(assets).map(function(asset) {
+  return ee.String(asset).split('/').get(-1);
+});
+
+// Rename the bands with asset names
+var renamed = stacked.rename(assetNames);
+print(renamed, 'Covariates to be exported')
 ```
 
-## Obtaining the cropland mask
-Since the soil samples that are going to be used in the mapping process are meant to be from croplands, it is necessary to ensure that the final maps only cover cropland areas. For this purpose, a cropland mask is generated that is based on a reclassified land use layer provided by the Copernicus Global Land Service. This raster file is available on GEE and is reprojected to the above specified resolution and coordinate reference system.
+### Visualize and export the covariates
 
-```{r maks, eval = F, echo = T}
-# 7 - Clip and download cropland mask (Copernicus Global Land Service) =========
-image1 <- ee$ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global") %>%
-  ee$ImageCollection$select("discrete_classification")%>%
-  ee$ImageCollection$filterBounds(region)%>%
-  ee$ImageCollection$toBands()
+This script has two main parts: visualizing the result and exporting the stacked image to Google Drive.
 
-# default resampling = nearest neighbor
-image1 = image1$resample()$reproject(
-  crs= crs,
-  scale= res)
+In the first part, the script sets a visualization parameter (visParams) to define the visualization properties of the stacked image. Specifically, the script specifies that the visualization should use the 'bio1' band and a color palette with four colors to represent the range of values in the band. The min and max values are also set to control the range of values that are displayed. 
+
+Next, the script adds the renamed image (renamed) to the map and applies the visualization parameters defined in visParams. The Map.centerObject() function centers the map on the renamed image, and the Map.addLayer() function adds the image layer to the map with the specified name ('Covariates').
+
+In the second part of the script, the Export.image.toDrive() function is used to export the stacked image to Google Drive. This function exports the renamed image as a GeoTIFF file with the description 'covariates', which is saved in the 'GEE' folder in the user's Google Drive (you have to either create the folder in GDrive, or indicate a different target folder). The scale parameter specifies the spatial resolution of the exported image, while the maxPixels parameter sets the maximum number of pixels that can be exported. Finally, the region parameter specifies the geographic extent of the exported image, which is set to the region variable defined earlier in the script.
+
+```{js vis1, eval=FALSE, include=TRUE}
+// Visualize the result
+// Set a visualization parameter (you can adjust the colors as desired)
+var visParams = {
+  bands: 'bio1',
+  min: 19248,
+  max: 46139,
+  palette: ['blue', 'green', 'yellow', 'red']
+};
+
+// Add the layer to the map
+Map.centerObject(renamed, 6)
+Map.addLayer(renamed, visParams, 'Covariates');
+
+
+// Export the stacked image to Google Drive
+Export.image.toDrive({
+  image: renamed,
+  description: 'covariates',
+  folder: 'GEE',
+  scale: 250,
+  maxPixels: 1e13,
+  region: region
+});
 ```
 
-The reclassification matrix assigns all land cover classes the value 0, if they are non-croplands and 1 if it is cropland. For large countries it may be preferable to extract target points for each class and reclassify them to croplands. This saves computational power and time. 
+### Load and clip the Copernicus land cover map and 
 
-```{r reclassify, echo = T, eval = F}
-#Reclassify 
-# for more info on the single land cover classes: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_Landcover_100m_Proba-V-C3_Global
+This script loads an image collection of global land cover, selects the 'discrete_classification' band, and clips the image to a specified region. It then sets the CRS and spatial resolution of the output image, and applies resampling to change the spatial resolution to the desired value. The resulting image is stored in the variable image1.
 
-inList <- ee$List(c(0  ,20  ,30  ,40  ,50  ,60  ,70  ,80  ,90 ,100 ,111 ,112 ,113 ,114 ,115 ,116 ,121 ,122 ,123 ,124 ,125 ,126, 200))
-outList <- ee$List(c(0,  0,  0,  1,  0,  0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0))
 
-# Extract points for target classes (works for medium/small countries) Solution for large countries below
-FAO_lu<- image1$remap(inList, outList)
-FAO_lu <-FAO_lu$toDouble()
-FAO_lu =FAO_lu$clip(region)
-#Convert 0 to NA
-mask <- FAO_lu$neq(0)
-FAO_lu <- FAO_lu$updateMask(mask)
+```{js mask, eval=FALSE, include=TRUE}
+/* Create mask for croplands ----------------------------*/
 
-#Obtain points
-FAO_lu <- ee_as_raster(
-  image = FAO_lu,
-  scale= res,
-  region = region,
-  via = "drive"
-)
+// Load the Copernicus Global Land Service image collection
+var imageCollection = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+  .select("discrete_classification")
+  .clip(region)
+
+var crs = 'EPSG:4326'; // WGS84
+var res = 250; // Resolution in decimal degrees
+
+// Default resampling is nearest neighbor
+var image1 = imageCollection.resample()
+  .reproject({
+    crs: crs, // Add your desired CRS here
+    scale: res // Add your desired scale here
+  });
+```
+
+### Reclassify the land cover map
+
+This script reclassifies the land cover classes of the image1 using the remap function, which replaces the values in inList with the corresponding values in outList. We only keep class 40 which refer to Cultivated and managed vegetation / agriculture. The resulting image is then converted to a double data type, clipped to a specified region, and stored in the variable FAO_lu. The script then converts all 0 values in FAO_lu to NA values using the updateMask function and stores the resulting masked image in FAO_lu. The intermediate results are printed using the print function.
+
+```{js reclass, eval=FALSE, include=TRUE}
+// Reclassify the land cover classes
+var inList = [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 111, 112, 113, 114, 115, 116, 
+              121, 122, 123, 124, 125, 126, 200];
+var outList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+var FAO_lu = image1.remap(inList, outList)
+  .toDouble()
+  .clip(region);
+
+// print(FAO_lu)
+
+// Convert 0 to NA
+var mask = FAO_lu.neq(0);
+print(mask)
+FAO_lu = FAO_lu.updateMask(mask);
+
+print(FAO_lu, "Mask")
 
 ```
 
-Finally, the mask is fitted to the AOI and it is ensured that the projections match. Then a raster file is saved on the local drive in the folder `01-Data`.
+### Visualization and exporting mask
 
-```{r exporting_mask, echo = T, eval = F}
-AOI <- read_sf(aoi)
-FAO_lu <- mask(FAO_lu,AOI)
+The code sets up visualization parameters for the reclassified land cover image and adds it as a layer to the map using the Map.addLayer function. The resulting image is then exported as a raster to Google Drive using the Export.image.toDrive function with specified parameters such as the folder to save the image, the desired scale and CRS, the region of interest, and the maximum number of pixels for export if needed. The resulting image is a binary mask where 1 represents the forest class and 0 represents all other classes.
 
-cov  <- rast('01-Data/covs/bio1.tif')
-FAO_lu <- project(rast(FAO_lu),cov)
+```{js vis2, eval=FALSE, include=TRUE}
+var visParams = {
+  bands: 'remapped',
+  min: 0,
+  max: 1,
+  palette: ['green', 'yellow']
+};
 
-writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)
+// Add the layer to the map
+Map.addLayer(FAO_lu,visParams ,'Mask');
+
+// Export the land cover image as a raster to Google Drive
+Export.image.toDrive({
+  image: FAO_lu,
+  folder: 'GEE',
+  description: 'mask',
+  scale: res, // Add your desired scale here
+  region: region,
+  crs: crs, // Add your desired CRS here
+  maxPixels: 1e13 // Add a maximum number of pixels for export if needed
+});
 ```
+
+## Run and export in GEE
+
+To execute a script in GEE, you can run it by clicking the "Run" button in the upper right-hand corner of the code editor. The "Run" button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the "Tasks" tab.
+
+```{r RUN, echo = FALSE, fig.cap = "R Studio interface."}
+#settings needed for pdf-document: fig.width = 7, out.width = "12cm"
+knitr::include_graphics("images/GEE_export.png")
+```
+
+To run a task for exporting files to Google Drive in GEE, the Export.image.toDrive() function exports the image Google Drive. To start the task, you need to RUN the task, and it will be added to the GEE task list. You can monitor its progress and download the exported file once the task is complete.
 
