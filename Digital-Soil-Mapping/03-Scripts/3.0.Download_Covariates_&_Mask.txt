@@ -1,0 +1,205 @@
+var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio16",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio17",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio5",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio6",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/ngd10",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_min",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_range",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_range",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/snow_cover",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/swir_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/crops",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/flooded_vegetation",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/grass",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/shrub_and_scrub",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/trees",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_curvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_downslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm2_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_elevation_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_mrn_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_neg_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_pos_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_slope_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m"];
+
+// Load borders 
+
+/// Using LSIB 2017 (replace the countries that you want to download)
+var country_list = ['Italy'];
+var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
+  .filter(ee.Filter.inList('country_na', country_list));
+var region = aoi.geometry();
+
+/// Using a shapefile
+/// 1. Upload the borders of your countries as an asset
+/// 2. Replace 'your_shapefile' with the path to your shapefile
+// var shapefile = ee.FeatureCollection('users/your_username/your_shapefile');
+// var region = shapefile.geometry();
+
+
+// Load assets as ImageCollection
+var assetsCollection = ee.ImageCollection(assets);
+
+// Clip each image in the collection to the region of interest
+var clippedCollection = assetsCollection.map(function(img){
+  return img.clip(region).toFloat();
+});
+
+// Function to replace masked values with zeroes for fpar bands
+function replaceMaskedFpar(img) {
+  var allBands = img.bandNames();
+  var fparBands = allBands.filter(ee.Filter.stringStartsWith('item', 'fpar'));
+  var nonFparBands = allBands.removeAll(fparBands);
+  
+  var fparImg = img.select(fparBands).unmask(0);
+  var nonFparImg = img.select(nonFparBands);
+  
+  // If there are no fpar bands, return the original image
+  var result = ee.Algorithms.If(fparBands.length().eq(0),
+                                 img,
+                                 nonFparImg.addBands(fparImg));
+  
+  return ee.Image(result);
+}
+
+// Clip each image in the collection to the region of interest and replace masked values for fpar bands
+var clippedCollection = assetsCollection.map(function(img){
+  var clippedImg = img.clip(region).toFloat();
+  return replaceMaskedFpar(clippedImg);
+});
+
+// Stack the layers and maintain the layer names in the final file
+var stacked = clippedCollection.toBands();
+
+// Get the list of asset names
+var assetNames = ee.List(assets).map(function(asset) {
+  return ee.String(asset).split('/').get(-1);
+});
+
+// Rename the bands with asset names
+var renamed = stacked.rename(assetNames);
+print(renamed, 'Covariates to be exported')
+
+// Visualize the result
+// Set a visualization parameter (you can adjust the colors as desired)
+var visParams = {
+  bands: 'bio1',
+  min: 0,
+  max: 1,
+  palette: ['blue', 'green', 'yellow', 'red']
+};
+
+// Add the layer to the map
+Map.centerObject(renamed, 6)
+Map.addLayer(renamed, visParams, 'Covariates');
+// Export the stacked image to Google Drive
+Export.image.toDrive({
+  image: renamed,
+  description: 'Covariates',
+  folder: 'GEE',
+  scale: 250,
+  maxPixels: 1e13,
+  region: region
+});
+
+/* Create mask for croplands ----------------------------*/
+
+// Load the Copernicus Global Land Service image collection
+var imageCollection = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+  .select("discrete_classification")
+  .clip(region)
+
+var crs = 'EPSG:4326'; // WGS84
+var res = 250; // Resolution in decimal degrees
+
+// Default resampling is nearest neighbor
+var image1 = imageCollection.resample()
+  .reproject({
+    crs: crs, // Add your desired CRS here
+    scale: res // Add your desired scale here
+  });
+
+// Reclassify the land cover classes
+var inList = [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 111, 112, 113, 114, 115, 116, 
+              121, 122, 123, 124, 125, 126, 200];
+var outList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+var FAO_lu = image1.remap(inList, outList)
+  .toDouble()
+  .clip(region);
+
+// print(FAO_lu)
+
+// Convert 0 to NA
+var mask = FAO_lu.neq(0);
+print(mask)
+FAO_lu = FAO_lu.updateMask(mask);
+
+print(FAO_lu, "Mask")
+
+var visParams = {
+  bands: 'remapped',
+  min: 0,
+  max: 1,
+  palette: ['green', 'yellow']
+};
+
+// Add the layer to the map
+Map.addLayer(FAO_lu,visParams ,'Mask');
+
+// Export the land cover image as a raster to Google Drive
+Export.image.toDrive({
+  image: FAO_lu,
+  folder: 'GEE',
+  description: 'mask',
+  scale: res, // Add your desired scale here
+  region: region,
+  crs: crs, // Add your desired CRS here
+  maxPixels: 1e13 // Add a maximum number of pixels for export if needed
+});
+
