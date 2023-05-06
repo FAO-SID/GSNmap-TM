@@ -3,3 +3,8 @@
 .RData
 .Ruserdata
 Digital-Soil-Mapping/01-Data/covs/Covariates.tif
+Digital-Soil-Mapping/01-Data/covs/dem_derivatives.tif
+Digital-Soil-Mapping/01-Data/create_covariates/MERIT_DEM.tif
+Digital-Soil-Mapping/03-Scripts/3.0.Download_Covariates_&_Mask.txt.bak
+Digital-Soil-Mapping/03-Scripts/3.0.Download_Covariates_&_Mask.txt.bak
+Digital-Soil-Mapping/03-Scripts/3.0.Download_Covariates_&_Mask.txt.bak
