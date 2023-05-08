@@ -27,23 +27,23 @@ gc()
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-#wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
-wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "/Users/luislado/Library/CloudStorage/Dropbox/GeoForsk/Clientes/FAO/GSNmap/Training Material/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
+#(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
 
 library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 library(aqp) # for soil profile data
-#install.packages("devtools") 
-#devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(mpspline2) # for horizon harmonization
 library(data.table)
-
+library(plotly) # interactive plots
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
 # as a .xlsx file
@@ -59,9 +59,9 @@ library(data.table)
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
-hor <- read_csv(file = "01-Data/soil_profile_data.csv")
-chem <- read_csv(file = "01-Data/soil_chem_data030.csv")
-phys <- read_csv(file = "01-Data/soil_phys_data030.csv")
+hor <- read_csv(file = "01-Data/soil_profile_data.csv",show_col_types = FALSE)
+chem <- read_csv(file = "01-Data/soil_chem_data030.csv",show_col_types = FALSE)
+phys <- read_csv(file = "01-Data/soil_phys_data030.csv",show_col_types = FALSE)
 
 
 site <- select(hor, id_prof, x, y) %>% unique()
@@ -80,18 +80,19 @@ summary(site)
 summary(hor)
 
 # 3 - select useful columns ====================================================
-## 3.1 - select columns --------------------------------------------------------
+## 3.1 - select AND RENAME columns --------------------------------------------------------
 hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, bd, cec)
 
 # 4 - Quality check ============================================================
 
 ## 4.1 - Check locations -------------------------------------------------------
-# https://epsg.io/6204
+# Macedonian State Coordinate System EPSG:6204  
+# https://epsg.io/6204 
 site %>% 
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
   mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 
-site_sub <- site[site$ProfID=='6524',]
+site_sub <- site[site$ProfID=='2823',] 
 
 site_sub %>% 
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
@@ -101,8 +102,8 @@ site <- filter(site, ProfID != 2823)
 
 
 ## 4.2 - Convert data into a Soil Profile Collection ---------------------------
-depths(hor) <- ProfID ~ top + bottom
-hor@site$ProfID <- as.numeric(hor@site$ProfID)
+aqp::depths(hor) <- ProfID ~ top + bottom 
+hor@site$ProfID <- as.numeric(hor@site$ProfID) 
 site(hor) <- left_join(site(hor), site)
 profiles <- hor
 
@@ -121,11 +122,14 @@ plotSPC(x = profiles[1:20], name = "pH", color = "ph",
 #    + overlapOrGap : boolean, gaps or overlap in adjacent horizons
 aqp::checkHzDepthLogic(profiles)
 
+# Identify non-valid profiles 
+dl <- checkHzDepthLogic(profiles)
+dl[dl$depthLogic==T | dl$sameDepth==T | dl$missingDepth==T | dl$overlapOrGap==T,"ProfID"]
+
 # visualize some of these profiles by the pid
 subset(profiles, grepl(6566, ProfID, ignore.case = TRUE))
 subset(profiles, grepl(7410 , ProfID, ignore.case = TRUE))
 subset(profiles, grepl(8002, ProfID, ignore.case = TRUE))
-
 
 ## 4.5 - keep only valid profiles ----------------------------------------------
 clean_prof <- HzDepthLogicSubset(profiles)
@@ -140,6 +144,9 @@ dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph:cec )
 # 5 - Estimate BD using pedotransfer functions =================================
 
 # create the function with all PTF
+method_names <- c("Saini1996", "Drew1973", "Jeffrey1979", "Grigal1989", 
+                  "Adams1973", "Honeyset_Ratkowsky1989") 
+
 estimateBD <- function(SOC=NULL, method=NULL) {
   OM <- SOC * 1.724
   BD <- switch(method,
@@ -155,14 +162,15 @@ estimateBD <- function(SOC=NULL, method=NULL) {
 }
 
 # 5.1 - Select a pedotransfer function ----------------------------------------
-method_names <- c("Saini1996", "Drew1973", "Jeffrey1979", "Grigal1989", 
-                  "Adams1973", "Honeyset_Ratkowsky1989")
+
 
 # Create a test dataset with BD and SOC data
 BD_test <- data.frame(SOC = dat$soc, BD_observed = dat$bd)
 
 # Remove missing values
 BD_test <- BD_test[complete.cases(BD_test),]
+BD_test <- na.omit(BD_test) 
+
 
 # 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
 for (i in method_names) {
@@ -178,7 +186,7 @@ BD_test
 summary(BD_test)
 
 # Compare data distributions for observed and predicted BLD
-BD_test %>% 
+plot.bd <- BD_test %>%
   select(-SOC) %>% 
   pivot_longer(cols = c("BD_observed", "Saini1996", "Drew1973", "Jeffrey1979",
                         "Grigal1989", "Adams1973", "Honeyset_Ratkowsky1989"), 
@@ -186,6 +194,15 @@ BD_test %>%
   ggplot(aes(x = BD, color = Method)) + 
   geom_density()
 
+plot.bd
+
+# Dymanic plot with plotly 
+
+
+ggplotly(plot.bd)
+
+ggplotly(plot.bd) %>%
+  layout(hovermode = "x")
 
 # Plot the Selected function again
 BD_test %>% 
@@ -195,6 +212,14 @@ BD_test %>%
   ggplot(aes(x = BD, color = Method)) + 
   geom_density() + xlim(c(0,2.5))
 
+# Same dynamic plot 
+ggplotly(BD_test %>% 
+           select(-SOC) %>% 
+           pivot_longer(cols = c("BD_observed", "Honeyset_Ratkowsky1989"), 
+                        names_to = "Method", values_to = "BD") %>% 
+           ggplot(aes(x = BD, color = Method)) + 
+           geom_density() + xlim(c(0,2.5))) %>%
+  layout(hovermode = "x")
 
 ## 5.4 Estimate BD for the missing horizons ------------------------------------
 dat$bd[is.na(dat$bd)] <-
@@ -222,8 +247,12 @@ g + geom_density(data = dat, aes(x=bd, color = "Predicted +\n observed"))
 # We will remove all atypically high SOC as outliers
 summary(dat$soc)
 na.omit(dat$ProfID[dat$soc > 10])
+dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])] 
+
 dat <- dat[dat$ProfID != 6915,]
 dat <- dat[dat$ProfID != 7726,]
+
+dat<- dat[!(dat$ProfID %in% dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])]),]
 
 # Explore bulk density data, identify outliers
 # remove layers with Bulk Density < 1 g/cm^3
@@ -240,7 +269,7 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 
 
 # 6 - Harmonize soil layers ====================================================
-source("03-Scripts/.spline_functions.R")
+source("03-Scripts/.spline_functions.R") 
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
@@ -275,7 +304,7 @@ d <- left_join(d, splines)
 head(d) # pH; K cmolc/kg; SOC %; BD g/cm3; CEC  cmolc/kg
 
 # K => convert cmolc/kg to ppm (K *10 * 39.096)
-d$k_0_30 <- d$k_0_30*10 * 39.096
+d$k_0_30 <- d$k_0_30 * 10 * 39.096
 
 head(chem)# P ppm; N %; K ppm
 # N => convert % to ppm (N * 10000)
@@ -287,9 +316,12 @@ phys$clay_0_30 <-phys$clay_0_30/10
 phys$sand_0_30  <-phys$sand_0_30 /10
 phys$silt_0_30 <-phys$silt_0_30/10
 
+# Correct negative clay content
+phys$clay_0_30[phys$clay_0_30<0] <- 0
+
 
 # Add chemical and physical properties from additional datasets ==========================
-  
+
 
 # Rename columns to match the main data set
 names(d)
@@ -320,6 +352,11 @@ x <- mutate(x, depth = paste(top, "-" , bottom))
 ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
   geom_boxplot() + 
   facet_wrap(~soil_property, scales = "free")
+
+
+ggplotly(ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
+           geom_boxplot() + 
+           facet_wrap(~soil_property, scales = "free"))
 
 # save the data
 write_csv(d, "02-Outputs/harmonized_soil_data.csv")
