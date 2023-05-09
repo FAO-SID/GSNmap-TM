@@ -42,8 +42,8 @@ library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 library(aqp) # for soil profile data
 library(mpspline2) # for horizon harmonization
-library(data.table)
 library(plotly) # interactive plots
+
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
 # as a .xlsx file
@@ -65,8 +65,6 @@ phys <- read_csv(file = "01-Data/soil_phys_data030.csv",show_col_types = FALSE)
 
 
 site <- select(hor, id_prof, x, y) %>% unique()
-
-
 hor <- select(hor, id_prof, id_hor, top:cec)
 
 # change names of key columns
@@ -197,8 +195,6 @@ plot.bd <- BD_test %>%
 plot.bd
 
 # Dymanic plot with plotly 
-
-
 ggplotly(plot.bd)
 
 ggplotly(plot.bd) %>%
@@ -335,12 +331,12 @@ names(chem)[6] <- 'n_0_30'
 #Create unique ProfID 
 chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
 
-# Add the new data as new rows using data.table we can add empty rows
+# Add the new data as new rows using dplyr we can add empty rows
 # automatically for the not measured properties in the chem dataset
-d <- rbind(setDT(d),setDT(chem), fill = TRUE)
+d <- bind_rows(d, chem)
 
 #The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)
-d <- merge(d, phys, by=c('ProfID', 'x', 'y'), all.x =T)
+d <- left_join(d, phys, by=c('ProfID', 'x', 'y'))
 
 # 8 - Plot  and save results ===================================================
 names(d)
