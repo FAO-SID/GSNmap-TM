@@ -2,87 +2,258 @@
 
 This chapter contains the complete list of R scripts to run the process of mapping soil nutrient and associated soil properties.
 
-## Script 0: Installation of rgee {-}
+## Script 0: Introduction to R {-}
 
-```{r rgee_installation, eval=F}
-#
-# Digital Soil Mapping
-# 
-# Install rgee
-#
-# GSP-Secretariat
-# Contact: Isabel.Luotto@fao.org
-#          Marcos.Angelini@fao.org
-#_______________________________________________________________________________
+```{r intro R, eval=F}
+# Introduction to R
 
-#Empty environment and cache 
-rm(list = ls())
-gc()
+# 0. Playground ================================================================
 
-# GEE account ------------------------------------------------------------------
+# learn important keyboard shortcuts
+# Ctrl + enter for running code
+# tab after writing the first three characters of the function name
+# F1 to access the help
 
-## you need a GEE account
-## log in the https://code.earthengine.google.com/ and register for one
+# explore the use of <-, $, [], ==, !=, c(), :, data.frame(), list(), as.factor()
 
+a <- 10:15
+a[2]
+a[2:3]
+b <- c("1", "a", a )
+length(b)
+df <- data.frame(column_a = 1:8, column_b = b)
 
-# installing conda environment -------------------------------------------------
-install.packages("geojsonio")
-install.packages("cli")
-install.packages("openssl")
-install.packages("stars")
+df[,1]
+df$column_b
+as.numeric(df$column_b)
+plot(df)
 
-#Install rgee
-remotes::install_github("r-spatial/rgee")
-library(rgee)
+df[1:3,]
+df[,1]
 
-# Set up rgee environment 
-ee_install(py_env = "rgee") 
+as.factor(b)
 
-# Check if you can initialize rgee for the first time
-library(rgee)
-ee_Initialize() 
+d <- list(a, b, df)
+d
+names(d)
+names(d) <- c("numeric_vector", "character_vector", "dataframe")
+d
+d[[1]]
+d$numeric_vector
 
-# If not, follow next steps: 
-# Open Anaconda Prompt and execute the following code, one by one:
-# 1. conda create -n rgee_py python=3.9
-# 2. activate rgee_py
-# 3. pip install google-api-python-client
-# 4. pip install earthengine-api
-# 5. pip install numpy
-# 6. conda env list
+a == b
+a != b
 
-# Copy the path of the rgee_py environment and write it correctly 
-# (note the backslash \)
-# rgee_py            *  C:\Users\angel\MINICO~1\envs\rgee_py <<<
-rgee_environment_dir = "C:/Users/angel/miniconda3/envs/rgee_py/"
+# 1. Set working directory ===================================================== 
+setwd("C:/GIT/Digital-Soil-Mapping/")
 
-reticulate::use_python(rgee_environment_dir, required=TRUE)
-library(reticulate)
-Sys.setenv(RETICULATE_PYTHON=paste0(rgee_environment_dir,"python.exe"))
-# Install the environment. Select 'Yes' to restart your R session
-rgee::ee_install_set_pyenv(
-  py_path = rgee_environment_dir,
-  py_env = "rgee_py" 
-)
-library(reticulate)
-library(rgee)
-Sys.setenv(RETICULATE_PYTHON = rgee_environment_dir)
-Sys.setenv(EARTHENGINE_PYTHON = rgee_environment_dir)
+# 2. Install and load packages =================================================
+# readxl, tidyverse, and data.table packages using the functions
+install.packages("tidyverse")
+install.packages("readxl")
+install.packages("data.table")
+library(tidyverse)
+library(readxl)
+library(data.table)
 
-# 1. Run next function and follow the steps in your browser (e.g. Chrome)
-# 2. Check the box to give GEE access to your Google Drive folders. 
-# 3. Give rgee access to your account
-# 3. When it finish, come back to RStudio
-ee_Initialize(drive = T)
+# 3. Import an spreadsheet =====================================================
+## 3.1 Read the MS Excel file --------------------------------------------------
+#Read the soil_data.xlsx file, spreadsheet 2, using read_excel 
+read_excel(path = "01-Data/soil_data.xlsx", sheet = 2)
 
-# If there is no error message, then that is all.
-# If you need to remove the credentials to repeat the previous step, use
-# ee_clean_credentials()
+## 3.2 Read the csv file with the native function ------------------------------
+# 01-Data/horizon.csv
+read.csv("01-Data/soil_profile_data.csv")
+
+## 3.3 Read the csv file with the tidyverse function ---------------------------
+read_csv("01-Data/soil_profile_data.csv")
+
+## 3.4 Read the csv file with the data.table function --------------------------
+fread("01-Data/soil_profile_data.csv")
+
+## 3.5 Assign the dataframe to an object called dat ----------------------------
+dat <- read_csv("01-Data/soil_profile_data.csv")
+
+# 4. Tidyverse functions =======================================================
+## 4.1 Select pid, hip, top, bottom, ph_h2o, cec from dat ---------------------
+dat_1 <- dat %>% 
+  select(id_prof, id_hor, top, bottom, ph_h2o, cec)
+
+## 4.2 Filter: pick observations by their values -------------------------------
+# filter observations with cec > 50 cmolc/100g
+
+dat_2 <- dat_1 %>% 
+  filter(cec > 30)
+
+dat_2
+## 4.3 Mutate: create a new variable -------------------------------------------
+# thickness = top - bottom
+
+dat_3 <- dat_2 %>% 
+  mutate(thickness = bottom - top)
+
+## 4.4 Group_by and summarise --------------------------------------------------
+# group by variable pid
+# summarise taking the mean of pH and cec
+
+dat_4 <- dat_3 %>% 
+  group_by(id_prof) %>% 
+  summarise(mean_ph = mean(ph_h2o),
+            mean_cec = mean(cec))
+
+## 4.5 Reshape the table using pivot_longer ------------------------------------
+# use dat_3
+# put the names of the variables ph_h2o, cec and thickness in the column 
+# variable and keep the rest of the table. Save in dat_5 
+
+dat_5 <- dat_3 %>% 
+  pivot_longer(ph_h2o:thickness, names_to = "soil_property", values_to = "value")
+
+## 4.6 Join the table sites.csv with dat_3 -------------------------------------
+# Load soil_phys_data030.csv (in 01-Data folder) 
+# Join its columns with dat_3 keeping all the rows of dat_3
+# save the result as dat_6
+
+phys <- read_csv("01-Data/soil_phys_data030.csv")
+
+phys <- phys %>% rename(id_prof = "ProfID")
+
+dat_6 <- dat_3 %>% 
+  left_join(phys)
+# or
+dat_6 <- phys %>% 
+  right_join(dat_3)
+
+# 5. Data visualization with ggplot2 ===========================================
+## 5.1 1D plot: histograms -----------------------------------------------------
+# histograms of cec and ph_h2o
+
+ggplot(dat_3, aes(x=cec)) + geom_histogram()
+
+## 5.2 2D plot: scatterplot ----------------------------------------------------
+# Scatterplot bottom vs. ph_h2o
+
+ggplot(dat_3, aes(x = bottom, y = ph_h2o)) + 
+  geom_point() 
+
+# add a fitting line
+
+ggplot(dat_3, aes(x = bottom, y = ph_h2o)) + 
+  geom_point() +
+  geom_smooth(method = "lm" )
+
+## 5.3 3D plot: scatterplot ----------------------------------------------------
+# Scatterplot bottom vs. ph_h2o, add clay as color and size inside the 
+# function aes()
+
+ggplot(dat_3, aes(x = bottom, y = ph_h2o, color = cec, size = cec)) + 
+  geom_point()
+
+# 6. Geospatial data with terra ================================================
+## Load packages (install them if needed)
+library(terra)
+## 6.1 Load a raster and a vector layer ----------------------------------------
+# Load 01-Data/covs/grass.tif using rast() function, then plot it
+# Load 01-Data/soil map/SoilTypes.shp using vect() function and plot it 
+# explore the attributes of these layers
+
+r <- rast("01-Data/Macedonia/grass.tif")
+plot(r)
+
+v <- vect("01-Data/Macedonia/SoilTypes.shp")
+plot(v)
+
+## 6.2 Load a raster and a vector layer ----------------------------------------
+# Check the current CRS (EPSG) of the raster and the vector. 
+# Find a *projected* CRS in http://epsg.io for Macedonia and copy the number
+# Check the Arguments of function project (?project) that need to be defined
+# Save the new object as r_proj and v_proj
+# plot both objects
+
+r_proj <- project(x = r, y = "epsg:6204", method = "bilinear", res = 250)
+plot(r_proj)
+v_proj <- project(x = v, y = "epsg:6204")
+plot(v_proj, add = TRUE)
+
+## 6.3 Cropping and masking a raster -------------------------------------------
+# Compute the area of the polygons in v_proj (search for a function) and
+# assign the values to a new column named area
+# select the largest polygon using [], $, == and max() func. and save it as pol
+# crop the raster with pol using the crop() function and save it as r_pol
+# mask the raster r_pol with the polygon pol and save it with the same name
+# plot each result
+
+v_proj$area <- expanse(v_proj, unit = "ha")
+pol <- v_proj[v_proj$area == max(v_proj$area)]
+plot(pol)
+r_pol <- crop(r_proj, pol)
+plot(r_pol)
+plot(pol, add = TRUE)
+r_pol <- mask(r_pol, pol)
+plot(r_pol)
+
+## 6.4 Replace values in a raster by filtering their cells ---------------------
+# Explore the following link to understand how terra manage cell values
+# https://rspatial.org/terra/pkg/4-algebra.html 
+# Replace values lower than 5 in r+pol by 0
+
+r_pol[r_pol$grass < 5] <- 0
+plot(r_pol)
+
+## 6.5 Rasterize a vector layer ------------------------------------------------
+# Use rasterize() function to convert v_proj to raster
+# Use r_proj as reference raster
+# Use field Symbol to assign cell values, and plot the new map
+
+v_class <- rasterize(x = v_proj, y = r_proj, field = "Symbol" )
+plot(v_class)
+v_class
+activeCat(v_class) <- 1
+
+## 6.6 Extracting raster values using points -----------------------------------
+# Covert dat_6 to spatial points using vect() function (check help of vect())
+# Note that the EPSG number is 6204
+# Save the points as s
+# Plot s and r_proj together in the same map (Argument add=TRUE)
+# Extract the values of the raster using extract() function (check the help)
+# Remove the ID column of the extracted values
+# merge the extracted data with s using cbind() function
+# Convert s as a dataframe
+
+s <- vect(dat_6, geom=c("x", "y"), crs = "epsg:6204")
+plot(r_proj)
+plot(s, add=TRUE)
+x <- extract(r_proj,s, ID=FALSE)
+s <- cbind(s,x)
+d <- as.data.frame(s)
+d
+#GGally::ggscatmat(d)
+
+## 6.7 Zonal statistics using polygons and rasters -----------------------------
+# Use the extract() func. to estimate the mean value of r_proj at each polygon
+# Use the fun= argument (check the help)
+# Use the cbind() func. to merge v_proj and the extracted values
+# convert v_proj to a dataframe
+# Create a ggplot boxplot (geom_boxplot) with x=Symbol and y=grass 
+
+x <- extract(r_proj, v_proj, fun = mean, ID=FALSE)
+v_proj <- cbind(v_proj, x)
+
+d <- as_tibble(v_proj)
+
+d %>% 
+  ggplot(aes(x =Symbol, y = grass, fill = Symbol)) +
+  geom_boxplot() +
+  ylab("Grass probability")
+
+## 6.8 Bonus track: use zonal() function ---------------------------------------
+
+zonal(r_proj, v_class, na.rm=T)
 
 ```
 
 
-## Script 1: Data preparation {-}
+## Script 2: Data preparation {-}
 
 ```{r data_preparation, eval=FALSE}
 #
@@ -116,19 +287,20 @@ gc()
 # 0 - User-defined variables ===================================================
 wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
+#wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+#wd <- "/Users/luislado/Library/CloudStorage/Dropbox/GeoForsk/Clientes/FAO/GSNmap/Training Material/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
 setwd(wd) # change the path accordingly
+#(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
 
 library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 library(aqp) # for soil profile data
-#install.packages("devtools") 
-#devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
-library(ithir) # for horizon harmonization
-library(data.table)
+library(mpspline2) # for horizon harmonization
+library(plotly) # interactive plots
 
 # 2 - Import national data =====================================================
 # Save your national soil dataset in the data folder /01-Data as a .csv file or 
@@ -145,9 +317,9 @@ library(data.table)
 
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
-hor <- read_csv(file = "01-Data/soil_profile_data.csv")
-chem <- read_csv(file = "01-Data/soil_chem_data030.csv")
-phys <- read_csv(file = "01-Data/soil_phys_data030.csv")
+hor <- read_csv(file = "01-Data/soil_profile_data.csv",show_col_types = FALSE)
+chem <- read_csv(file = "01-Data/soil_chem_data030.csv",show_col_types = FALSE)
+phys <- read_csv(file = "01-Data/soil_phys_data030.csv",show_col_types = FALSE)
 
 
 site <- select(hor, id_prof, x, y) %>% unique()
@@ -164,32 +336,39 @@ summary(site)
 summary(hor)
 
 # 3 - select useful columns ====================================================
-## 3.1 - select columns --------------------------------------------------------
+## 3.1 - select AND RENAME columns --------------------------------------------------------
 hor <- select(hor, ProfID, HorID, top, bottom, ph=ph_h2o, k, soc, bd, cec)
 
 # 4 - Quality check ============================================================
 
 ## 4.1 - Check locations -------------------------------------------------------
-# https://epsg.io/6204
+# Macedonian State Coordinate System EPSG:6204  
+# https://epsg.io/6204 
 site %>% 
   st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
   mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 
+site_sub <- site[site$ProfID=='2823',] 
+
+site_sub %>% 
+  st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
+  mapview(zcol = "ProfID", cex = 3, lwd = 0.1) # visualise in an interactive map
 # profile 2823 is wrongly located, so let's remove it
 site <- filter(site, ProfID != 2823)
 
 
 ## 4.2 - Convert data into a Soil Profile Collection ---------------------------
-depths(hor) <- ProfID ~ top + bottom
-hor@site$ProfID <- as.numeric(hor@site$ProfID)
+aqp::depths(hor) <- ProfID ~ top + bottom 
+hor@site$ProfID <- as.numeric(hor@site$ProfID) 
 site(hor) <- left_join(site(hor), site)
 profiles <- hor
 
 profiles
 
 ## 4.3 - plot first 20 profiles using pH as color ------------------------------
-plotSPC(x = profiles[1:20], name = "cec", color = "cec",
+plotSPC(x = profiles[1:20], name = "pH", color = "ph",
         name.style = "center-center")
+
 
 ## 4.4 - check data integrity --------------------------------------------------
 # A valid profile is TRUE if all of the following criteria are false:
@@ -199,11 +378,14 @@ plotSPC(x = profiles[1:20], name = "cec", color = "cec",
 #    + overlapOrGap : boolean, gaps or overlap in adjacent horizons
 aqp::checkHzDepthLogic(profiles)
 
+# Identify non-valid profiles 
+dl <- checkHzDepthLogic(profiles)
+dl[dl$depthLogic==T | dl$sameDepth==T | dl$missingDepth==T | dl$overlapOrGap==T,"ProfID"]
+
 # visualize some of these profiles by the pid
 subset(profiles, grepl(6566, ProfID, ignore.case = TRUE))
-subset(profiles, grepl(6915, ProfID, ignore.case = TRUE))
-subset(profiles, grepl(7726, ProfID, ignore.case = TRUE))
-
+subset(profiles, grepl(7410 , ProfID, ignore.case = TRUE))
+subset(profiles, grepl(8002, ProfID, ignore.case = TRUE))
 
 ## 4.5 - keep only valid profiles ----------------------------------------------
 clean_prof <- HzDepthLogicSubset(profiles)
@@ -212,71 +394,86 @@ metadata(clean_prof)$removed.profiles
 
 ## 4.6 convert soilProfileCollection to a table --------------------------------
 dat <- left_join(clean_prof@site, clean_prof@horizons)
-dat <- select(dat, ProfID, HorID, x, y, date, top, bottom, ph:cec )
+dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph:cec )
+
 
 # 5 - Estimate BD using pedotransfer functions =================================
 
 # create the function with all PTF
-estimateBD <- function(SOC=NULL, method=NULL){
+method_names <- c("Saini1996", "Drew1973", "Jeffrey1979", "Grigal1989", 
+                  "Adams1973", "Honeyset_Ratkowsky1989") 
+
+estimateBD <- function(SOC=NULL, method=NULL) {
   OM <- SOC * 1.724
-  if(method=="Saini1996"){BD <- 1.62 - 0.06 * OM}
-  if(method=="Drew1973"){BD <- 1 / (0.6268 + 0.0361 * OM)}
-  if(method=="Jeffrey1979"){BD <- 1.482 - 0.6786 * (log(OM))}
-  if(method=="Grigal1989"){BD <- 0.669 + 0.941 * exp(1)^(-0.06 * OM)}
-  if(method=="Adams1973"){BD <- 100 / (OM /0.244 + (100 - OM)/2.65)}
-  if(method=="Honeyset_Ratkowsky1989"){BD <- 1/(0.564 + 0.0556 * OM)}
+  BD <- switch(method,
+               "Saini1996" = 1.62 - 0.06 * OM,
+               "Drew1973" = 1 / (0.6268 + 0.0361 * OM),
+               "Jeffrey1979" = 1.482 - 0.6786 * (log(OM)),
+               "Grigal1989" = 0.669 + 0.941 * exp(1)^(-0.06 * OM),
+               "Adams1973" = 100 / (OM / 0.244 + (100 - OM) / 2.65),
+               "Honeyset_Ratkowsky1989" = 1 / (0.564 + 0.0556 * OM),
+               stop("Invalid method specified.")
+  )
   return(BD)
 }
 
-## 5.1 - Select a pedotransfer function ----------------------------------------
-# create a vector of BD values to test the best fitting pedotransfer function
-BD_test <- tibble(SOC = clean_prof@horizons$soc,
-                  BD_test = clean_prof@horizons$bd)
-BD_test <-  na.omit(BD_test)
+# 5.1 - Select a pedotransfer function ----------------------------------------
 
-## 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
-BD_test$Saini <- estimateBD(BD_test$SOC, method="Saini1996")
-BD_test$Drew <- estimateBD(BD_test$SOC, method="Drew1973")
-BD_test$Jeffrey <- estimateBD(BD_test$SOC, method="Jeffrey1979")
-BD_test$Grigal <- estimateBD(BD_test$SOC, method="Grigal1989")
-BD_test$Adams <- estimateBD(BD_test$SOC, method="Adams1973")
-BD_test$Honeyset_Ratkowsky <- estimateBD(BD_test$SOC,
-                                         method="Honeyset_Ratkowsky1989")
+
+# Create a test dataset with BD and SOC data
+BD_test <- data.frame(SOC = dat$soc, BD_observed = dat$bd)
+
+# Remove missing values
+BD_test <- BD_test[complete.cases(BD_test),]
+BD_test <- na.omit(BD_test) 
+
+
+# 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
+for (i in method_names) {
+  BD_test[[i]] <- estimateBD(BD_test$SOC, method = i)
+}
+
+# Print the resulting data frame
+BD_test
+
 
 ## 5.3 Compare results ---------------------------------------------------------
-
 # Observed values:
-summary(BD_test$BD_test)
-
-# Predicted values:
-summary(BD_test$Saini)
-summary(BD_test$Drew)
-summary(BD_test$Jeffrey)
-summary(BD_test$Grigal)
-summary(BD_test$Adams)
-summary(BD_test$Honeyset_Ratkowsky)
+summary(BD_test)
 
 # Compare data distributions for observed and predicted BLD
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,5),
-     lwd=2, main="Bulk Density Pedotransfer Functions")
-lines(density(BD_test$Saini),col="green", lwd=2)
-lines(density(BD_test$Drew),col="red", lwd=2)
-lines(density(BD_test$Jeffrey),col="cyan", lwd=2)
-lines(density(BD_test$Grigal),col="orange", lwd=2)
-lines(density(BD_test$Adams),col="magenta", lwd=2)
-lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
-legend("topleft",
-       legend = c("Original", "Saini", "Drew", "Jeffrey", "Grigal", "Adams",
-                  "Honeyset_Ratkowsky"),
-       fill=c("black", "green", "red", "cyan", "orange","magenta", "blue"))
+plot.bd <- BD_test %>%
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed", "Saini1996", "Drew1973", "Jeffrey1979",
+                        "Grigal1989", "Adams1973", "Honeyset_Ratkowsky1989"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density()
+
+plot.bd
+
+# Dymanic plot with plotly 
+ggplotly(plot.bd)
+
+ggplotly(plot.bd) %>%
+  layout(hovermode = "x")
 
 # Plot the Selected function again
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
-     lwd=2, main="Bulk Density Selected Function")
-lines(density(BD_test$Honeyset_Ratkowsky),col="blue", lwd=2)
-legend("topleft",legend = c("Original", "Honeyset_Ratkowsky"),
-       fill=c("black", "blue"))
+BD_test %>% 
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed", "Honeyset_Ratkowsky1989"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density() + xlim(c(0,2.5))
 
+# Same dynamic plot 
+ggplotly(BD_test %>% 
+           select(-SOC) %>% 
+           pivot_longer(cols = c("BD_observed", "Honeyset_Ratkowsky1989"), 
+                        names_to = "Method", values_to = "BD") %>% 
+           ggplot(aes(x = BD, color = Method)) + 
+           geom_density() + xlim(c(0,2.5))) %>%
+  layout(hovermode = "x")
 
 ## 5.4 Estimate BD for the missing horizons ------------------------------------
 dat$bd[is.na(dat$bd)] <-
@@ -284,11 +481,15 @@ dat$bd[is.na(dat$bd)] <-
 
 # Explore the results
 summary(dat$bd)
-plot(density(BD_test$BD_test),type="l",col="black", ylim=c(0,3.5),
-     lwd=2, main="Bulk Density Gap-Filling")
-lines(density(dat$bd, na.rm = TRUE), col="green", lwd=2)
-legend("topleft",legend = c("Original", "Original+Estimated"),
-       fill=c("black", "green"))
+
+g <- BD_test %>% 
+  select(-SOC) %>% 
+  pivot_longer(cols = c("BD_observed"), 
+               names_to = "Method", values_to = "BD") %>% 
+  ggplot(aes(x = BD, color = Method)) + 
+  geom_density() +
+  xlim(c(0,2.5))
+g + geom_density(data = dat, aes(x=bd, color = "Predicted +\n observed"))
 
 
 ## 5.5 - Explore outliers ------------------------------------------------------
@@ -300,8 +501,12 @@ legend("topleft",legend = c("Original", "Original+Estimated"),
 # We will remove all atypically high SOC as outliers
 summary(dat$soc)
 na.omit(dat$ProfID[dat$soc > 10])
+dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])] 
+
 dat <- dat[dat$ProfID != 6915,]
 dat <- dat[dat$ProfID != 7726,]
+
+dat<- dat[!(dat$ProfID %in% dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])]),]
 
 # Explore bulk density data, identify outliers
 # remove layers with Bulk Density < 1 g/cm^3
@@ -318,33 +523,21 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 
 
 # 6 - Harmonize soil layers ====================================================
+source("03-Scripts/.spline_functions.R") 
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
 
 target <- c("ph", "k", "soc",  "bd", "cec")
-depths <- t(c(0,30))
+depths <- c(0,30)
 
 ## 6.2 - Create standard layers ------------------------------------------------
-d <- unique(select(dat, ProfID, x, y))
+splines <- apply_mpspline_all(df = dat, properties = target, depth_range = depths)
+summary(splines)
 
-for (i in seq_along(target)) {
-  vlow <- min(dat[,target[i]][[1]], na.rm = TRUE)
-  vhigh <- max(dat[,target[i]][[1]], na.rm = TRUE)
-  o <- dat[,c("ProfID", "top", "bottom",target[i])] %>% 
-    na.omit() %>%
-    as.data.frame(stringsAsFactors = FALSE)
-  x <- ithir::ea_spline(obj = o, var.name = target[i], d = depths, 
-                        vlow = vlow[[1]], vhigh = vhigh[[1]])$harmonised 
-  x[x==-9999] <- NA
-  x <- x %>% 
-    as_tibble() %>% 
-    select(-`soil depth`)
-  
-  names(x) <- c("ProfID",paste0(target[i],c("_0_30","_30_60","_60_100")))
-  d <- d %>% left_join(x, by = "ProfID" )
-}
-d
+# merge splines with x and y
+d <- unique(select(dat, ProfID, x, y))
+d <- left_join(d, splines)
 
 
 
@@ -365,7 +558,7 @@ d
 head(d) # pH; K cmolc/kg; SOC %; BD g/cm3; CEC  cmolc/kg
 
 # K => convert cmolc/kg to ppm (K *10 * 39.096)
-d$k_0_30 <- d$k_0_30*10 * 39.096
+d$k_0_30 <- d$k_0_30 * 10 * 39.096
 
 head(chem)# P ppm; N %; K ppm
 # N => convert % to ppm (N * 10000)
@@ -377,9 +570,12 @@ phys$clay_0_30 <-phys$clay_0_30/10
 phys$sand_0_30  <-phys$sand_0_30 /10
 phys$silt_0_30 <-phys$silt_0_30/10
 
+# Correct negative clay content
+phys$clay_0_30[phys$clay_0_30<0] <- 0
+
 
 # Add chemical and physical properties from additional datasets ==========================
-  
+
 
 # Rename columns to match the main data set
 names(d)
@@ -393,12 +589,12 @@ names(chem)[6] <- 'n_0_30'
 #Create unique ProfID 
 chem$ProfID <- seq(max(d$ProfID)+1,max(d$ProfID)+1+nrow(chem)-1)
 
-# Add the new data as new rows using data.table we can add empty rows
+# Add the new data as new rows using dplyr we can add empty rows
 # automatically for the not measured properties in the chem dataset
-d <- rbind(setDT(d),setDT(chem), fill = TRUE)
+d <- bind_rows(d, chem)
 
 #The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)
-d <- merge(d, phys, by=c('ProfID', 'x', 'y'), all.x =T)
+d <- left_join(d, phys, by=c('ProfID', 'x', 'y'))
 
 # 8 - Plot  and save results ===================================================
 names(d)
@@ -411,182 +607,282 @@ ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
   geom_boxplot() + 
   facet_wrap(~soil_property, scales = "free")
 
+
+ggplotly(ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
+           geom_boxplot() + 
+           facet_wrap(~soil_property, scales = "free"))
+
 # save the data
 write_csv(d, "02-Outputs/harmonized_soil_data.csv")
 
 ```
 
 
-## Script 2: Download environmental covariates {-}
+## Scripts 3: Download environmental covariates {-}
 
-```{r covs, echo=TRUE, eval=FALSE}
-#Empty environment and cache
-rm(list = ls());
-gc()
+```{js covs, echo=TRUE, eval=FALSE}
+var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio16",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio17",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio5",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio6",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/ngd10",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_min",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_range",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_max",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_range",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_sd",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/snow_cover",
+"projects/digital-soil-mapping-gsp-fao/assets/MODIS/swir_060708_500m_mean",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/crops",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/flooded_vegetation",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/grass",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/shrub_and_scrub",
+"projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/trees",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_curvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_downslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm2_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_elevation_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_mrn_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_neg_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_pos_openness_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_slope_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m"];
 
-# Content of this script =======================================================
-# The goal of this script is to organise to clip and dowload the covariates and 
-# it includes the following steps:
-# 
-# 0 -User-defined variables 
-# 1 - Set working directory and load necessary packages
-# 2 - Import shapefile
-# 3 - Overview of covariates 
-# 4 - Initialize GEE
-# 5 - Upload shapefile to GEE OR use uploaded UN borders
-# 6 - Clip and download the covariates
-# 7 - Clip and download cropland mask (Copernicus Global Land Service)
-#_______________________________________________________________________________
+// Load borders 
+
+/// Using LSIB 2017 (replace the countries that you want to download)
+var country_list = ['Italy'];
+var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
+  .filter(ee.Filter.inList('country_na', country_list));
+var region = aoi.geometry();
+
+/// Using a shapefile
+/// 1. Upload the borders of your countries as an asset
+/// 2. Replace 'your_shapefile' with the path to your shapefile
+// var shapefile = ee.FeatureCollection('users/your_username/your_shapefile');
+// var region = shapefile.geometry();
 
 
-# 0 - User-defined variables ===================================================
-# Working directory
-wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
+// Load assets as ImageCollection
+var assetsCollection = ee.ImageCollection(assets);
 
-# Output covariate folder
-#output_dir <-''
-output_dir <-'01-Data/covs/'
+// Clip each image in the collection to the region of interest
+var clippedCollection = assetsCollection.map(function(img){
+  return img.clip(region).toFloat();
+});
 
-# Area of interest: either own shapefile or 3-digit ISO code to extract from 
-# UN 2020 boundaries
-aoi <- '01-Data/AOI.shp'
-# AOI <- 'MKD'
-# Resolution and projection
-res = 250
-crs = "EPSG:4326"
-#_______________________________________________________________________________
-
-#  1 - Set working directory and load necessary packages ======================= 
-# Set working directory
-setwd(wd)
-#load libraries
-library(raster)
-library(terra)
-library(tidyverse)
-library(sf)
-library(rgee)
-library(googledrive)
-
-
-# 2 - Import shapefile =========================================================
-AOI <- read_sf(aoi)
-# convert AOI to a box polygon
-#AOI <- st_as_sfc(st_bbox(AOI))
-#AOI <- st_as_sf(AOI)
-
-
-# 3 - Overview of covariates ===================================================
-# CLIMATIC VARIABLES from CHELSA
-# VEGETATION INDICES, FPAR and LAND SURFACE TEMPERATURE from MODIS
-# LAND COVER LAYERS from Dynamic World 10m near-real-time (NRT) 
-# TERRAINE attributes from OpenLandMap
-
-# for more information about the single covariates: open covariates.xslx in the 
-# training material folder
-
-# 4 - Initialize GEE ===========================================================
-ee_Initialize()
-
-# 5 - Upload shapefile to GEE OR use uploaded UN borders =======================
-## 5.1 Convert shp to gee geometry ---------------------------------------------
-region <- sf_as_ee(AOI)
-region = region$geometry()
-
-## 5.2 Extract from UN 2020 map using ISO code ---------------------------------
-# region <-ee$FeatureCollection("projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY")%>%
-#   ee$FeatureCollection$filterMetadata('ISO3CD', 'equals', AOI)
-# region = region$geometry()
-# AOI_shp <-ee_as_sf(region)
-# AOI_shp <- st_collection_extract(AOI_shp, "POLYGON")
-# write_sf(AOI_shp, paste0('01-Data/',AOI,'.shp'))
-# aoi <- vect(AOI_shp)
-
-# 6 - Clip and download covariates =============================================
-assetname <- read_csv("01-Data/covs/covs_rgee.csv")
-assetname$num <- rownames(assetname)
-
-# Loop over the names of assets to clip and dowload the covariates
-for (i in unique(assetname$ID)){
+// Function to replace masked values with zeroes for fpar bands
+function replaceMaskedFpar(img) {
+  var allBands = img.bandNames();
+  var fparBands = allBands.filter(ee.Filter.stringStartsWith('item', 'fpar'));
+  var nonFparBands = allBands.removeAll(fparBands);
   
-  #Extract filename 
-  filename <- sub('.*\\/', '', i)
+  var fparImg = img.select(fparBands).unmask(0);
+  var nonFparImg = img.select(nonFparBands);
   
-  #Clip image to the extent of the AOI
-  image <- ee$Image(i) %>%
-    ee$Image$clip(region)%>%
-    ee$Image$toFloat()
+  // If there are no fpar bands, return the original image
+  var result = ee.Algorithms.If(fparBands.length().eq(0),
+                                 img,
+                                 nonFparImg.addBands(fparImg));
   
-  # Resample to target resolution
-  image = image$resample('bilinear')$reproject(
-    crs= crs,
-    scale= res)
-  
-  
-  #Export clipped covariate as raster
-  raster <- ee_as_raster(
-    image = image,
-    scale= res,
-    region = region,
-    via = "drive",
-    maxPixels = 1e+12
-  )
-  
-  plot(raster)
-  
-  num <- assetname[assetname$ID == i, 'num']
-  
-  raster <- mask(raster, AOI)
-  writeRaster(raster, paste0(output_dir,filename, '.tif'), overwrite=T)
-  print(paste(filename, 'exported successfully - Covariate',num, 'out of 68'))
+  return ee.Image(result);
 }
 
-# 7 - Clip and download cropland mask (Copernicus Global Land Service) =========
-image1 <- ee$ImageCollection("COPERNICUS/Landcover/100m/Proba-V-C3/Global") %>%
-  ee$ImageCollection$select("discrete_classification")%>%
-  ee$ImageCollection$filterBounds(region)%>%
-  ee$ImageCollection$toBands()
+// Clip each image in the collection to the region of interest and replace masked values for fpar bands
+var clippedCollection = assetsCollection.map(function(img){
+  var clippedImg = img.clip(region).toFloat();
+  return replaceMaskedFpar(clippedImg);
+});
 
-# default resampling = nearest neighbor
-image1 = image1$resample()$reproject(
-  crs= crs,
-  scale= res)
+// Stack the layers and maintain the layer names in the final file
+var stacked = clippedCollection.toBands();
 
+// Get the list of asset names
+var assetNames = ee.List(assets).map(function(asset) {
+  return ee.String(asset).split('/').get(-1);
+});
 
-#Reclassify 
-# for more info on the single land cover classes: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_Landcover_100m_Proba-V-C3_Global
+// Rename the bands with asset names
+var renamed = stacked.rename(assetNames);
+print(renamed, 'Covariates to be exported')
 
-inList <- ee$List(c(0  ,20  ,30  ,40  ,50  ,60  ,70  ,80  ,90 ,100 ,111 ,112 ,113 ,114 ,115 ,116 ,121 ,122 ,123 ,124 ,125 ,126, 200))
-outList <- ee$List(c(0,  0,  0,  1,  0,  0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0))
+// Visualize the result
+// Set a visualization parameter (you can adjust the colors as desired)
+var visParams = {
+  bands: 'bio1',
+  min: 0,
+  max: 1,
+  palette: ['blue', 'green', 'yellow', 'red']
+};
 
-# Extract points for target classes (works for medium/small countries) Solution for large countries below
-FAO_lu<- image1$remap(inList, outList)
-FAO_lu <-FAO_lu$toDouble()
-FAO_lu =FAO_lu$clip(region)
-#Convert 0 to NA
-mask <- FAO_lu$neq(0)
-FAO_lu <- FAO_lu$updateMask(mask)
+// Add the layer to the map
+Map.centerObject(renamed, 6)
+Map.addLayer(renamed, visParams, 'Covariates');
+// Export the stacked image to Google Drive
+Export.image.toDrive({
+  image: renamed,
+  description: 'covariates',
+  folder: 'GEE',
+  scale: 250,
+  maxPixels: 1e13,
+  region: region
+});
 
-#Obtain points
-FAO_lu <- ee_as_raster(
-  image = FAO_lu,
-  scale= res,
-  region = region,
-  via = "drive"
-)
+/* Create mask for croplands ----------------------------*/
 
-AOI <- read_sf(aoi)
-FAO_lu <- mask(FAO_lu,AOI)
+// Load the Copernicus Global Land Service image collection
+var imageCollection = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+  .select("discrete_classification")
+  .clip(region)
 
-cov  <- rast('01-Data/covs/bio1.tif')
-FAO_lu <- project(rast(FAO_lu),cov)
+var crs = 'EPSG:4326'; // WGS84
+var res = 250; // Resolution in decimal degrees
 
-writeRaster(FAO_lu, ("01-Data/mask.tif"), overwrite= T)
+// Default resampling is nearest neighbor
+var image1 = imageCollection.resample()
+  .reproject({
+    crs: crs, // Add your desired CRS here
+    scale: res // Add your desired scale here
+  });
+
+// Reclassify the land cover classes
+var inList = [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 111, 112, 113, 114, 115, 116, 
+              121, 122, 123, 124, 125, 126, 200];
+var outList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+var FAO_lu = image1.remap(inList, outList)
+  .toDouble()
+  .clip(region);
+
+// print(FAO_lu)
+
+// Convert 0 to NA
+var mask = FAO_lu.neq(0);
+print(mask)
+FAO_lu = FAO_lu.updateMask(mask);
+
+print(FAO_lu, "Mask")
+
+var visParams = {
+  bands: 'remapped',
+  min: 0,
+  max: 1,
+  palette: ['green', 'yellow']
+};
+
+// Add the layer to the map
+Map.addLayer(FAO_lu,visParams ,'Mask');
+
+// Export the land cover image as a raster to Google Drive
+Export.image.toDrive({
+  image: FAO_lu,
+  folder: 'GEE',
+  description: 'mask',
+  scale: res, // Add your desired scale here
+  region: region,
+  crs: crs, // Add your desired CRS here
+  maxPixels: 1e13 // Add a maximum number of pixels for export if needed
+});
 
 ```
 
+```{r create covariates, echo=TRUE, eval=FALSE}
+# Create terrain derivatives from MERIT-DEM and 
+# harmonise their format with the rest of the covariates 
+# Marcos Angelini, Luis Rodríguez Lado & Isabel Luotto
+# Global Soil Partnership - FAO
+rm(list = ls())
+setwd("C:/GIT/GSNmap-TM/Digital-Soil-Mapping/")
 
-## Script 3: Modelling, validation and prediction using soil data with coordinates {-}
+# Load libraries
+  library(terra)
+  library(raster)
+
+# import high resolution raster  
+dem <- rast("01-Data/create_covariates/MERIT_DEM.tif")
+
+# Plot DEM
+plot(dem)
+
+# Obtain DEM derived maps
+derived_vars <- terrain(dem, 
+                        c("slope", "roughness", "aspect", "flowdir", 
+                          "aspect","TPI", "TRI", "TRIriley", "TRIrmsd"), 
+                        unit = "degrees")
+
+plot(derived_vars, nc=3, nr=3)
+
+# load rster of reference
+ref <- rast("01-Data/covs/Covariates.tif")[[1]]
+
+derived_vars
+ref
+# transform the variable's coordinates, resolution and extent 
+resampled_vars <- project(derived_vars, ref)
+# mask variables
+resampled_vars <- mask(resampled_vars, ref)
+plot(resampled_vars)
+
+resampled_vars
+ref
+# save the rasters
+writeRaster(resampled_vars, "01-Data/covs/dem_derivatives.tif")
+
+# # Load a vector layer (e.g.a soil map) 
+# v <- vect("01-Data/AOI.shp")
+# plot(v, "shape_Area")
+# # Vector rasterization with continuous data
+# x <- rasterize(x = v, y = ref, field = "shape_Area", fun = "max")
+# plot(x)
+# y <- rasterize(x = v, y = ref, field = "CABECERA")
+# 
+# writeRaster(y, "01-Data/create_covariates/polygon_map.tif")
+
+```
+
+## Script 4: Modelling, validation and prediction using soil data with coordinates {-}
 
 ```{r modelling validation and prediction, echo=TRUE, eval=FALSE}
 #_______________________________________________________________________________
