@@ -69,6 +69,12 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -267,10 +273,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html"><i class="fa fa-check"></i>Annex I: Compendium of R scripts</a>
 <ul>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-0-installation-of-rgee"><i class="fa fa-check"></i>Script 0: Installation of rgee</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-1-data-preparation"><i class="fa fa-check"></i>Script 1: Data preparation</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-download-environmental-covariates"><i class="fa fa-check"></i>Script 2: Download environmental covariates</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 3: Modelling, validation and prediction using soil data with coordinates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-0-introduction-to-r"><i class="fa fa-check"></i>Script 0: Introduction to R</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-data-preparation"><i class="fa fa-check"></i>Script 2: Data preparation</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#scripts-3-download-environmental-covariates"><i class="fa fa-check"></i>Scripts 3: Download environmental covariates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data with coordinates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
 <li class="chapter" data-level="" data-path="annex-iii-mapping-without-point-coordinates.html"><a href="annex-iii-mapping-without-point-coordinates.html"><i class="fa fa-check"></i>Annex III: Mapping without point coordinates</a></li>
@@ -317,14 +323,14 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a .Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="reporting-results.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb118-2"><a href="reporting-results.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb118-3"><a href="reporting-results.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb118-4"><a href="reporting-results.html#cb118-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb118-5"><a href="reporting-results.html#cb118-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb118-6"><a href="reporting-results.html#cb118-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb118-7"><a href="reporting-results.html#cb118-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-8"><a href="reporting-results.html#cb118-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="reporting-results.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb112-2"><a href="reporting-results.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb112-3"><a href="reporting-results.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb112-4"><a href="reporting-results.html#cb112-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb112-5"><a href="reporting-results.html#cb112-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb112-6"><a href="reporting-results.html#cb112-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb112-7"><a href="reporting-results.html#cb112-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-8"><a href="reporting-results.html#cb112-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 <p>The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.</p>
 <div id="data-submission-form" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Data submission form<a href="reporting-results.html#data-submission-form" class="anchor-section" aria-label="Anchor link to header"></a></h2>

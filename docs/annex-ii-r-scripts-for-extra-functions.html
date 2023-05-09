@@ -69,6 +69,12 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -267,10 +273,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html"><i class="fa fa-check"></i>Annex I: Compendium of R scripts</a>
 <ul>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-0-installation-of-rgee"><i class="fa fa-check"></i>Script 0: Installation of rgee</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-1-data-preparation"><i class="fa fa-check"></i>Script 1: Data preparation</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-download-environmental-covariates"><i class="fa fa-check"></i>Script 2: Download environmental covariates</a></li>
-<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 3: Modelling, validation and prediction using soil data with coordinates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-0-introduction-to-r"><i class="fa fa-check"></i>Script 0: Introduction to R</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-2-data-preparation"><i class="fa fa-check"></i>Script 2: Data preparation</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#scripts-3-download-environmental-covariates"><i class="fa fa-check"></i>Scripts 3: Download environmental covariates</a></li>
+<li class="chapter" data-level="" data-path="annex-i-compendium-of-r-scripts.html"><a href="annex-i-compendium-of-r-scripts.html#script-4-modelling-validation-and-prediction-using-soil-data-with-coordinates"><i class="fa fa-check"></i>Script 4: Modelling, validation and prediction using soil data with coordinates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="annex-ii-r-scripts-for-extra-functions.html"><a href="annex-ii-r-scripts-for-extra-functions.html"><i class="fa fa-check"></i>Annex II: R scripts for extra functions</a></li>
 <li class="chapter" data-level="" data-path="annex-iii-mapping-without-point-coordinates.html"><a href="annex-iii-mapping-without-point-coordinates.html"><i class="fa fa-check"></i>Annex III: Mapping without point coordinates</a></li>
@@ -303,21 +309,21 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <div id="annex-ii-r-scripts-for-extra-functions" class="section level1 unnumbered hasAnchor">
 <h1>Annex II: R scripts for extra functions<a href="annex-ii-r-scripts-for-extra-functions.html#annex-ii-r-scripts-for-extra-functions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Script to estimate Organic Carbon Stock</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate Organic Carbon Stock (ocs) ======================================</span></span>
-<span id="cb123-2"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SOC must be in g/kg (% * 10)</span></span>
-<span id="cb123-3"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BLD in kg/m3</span></span>
-<span id="cb123-4"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="co"># CRF in percentage</span></span>
-<span id="cb123-5"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;02-Outputs/spline_soil_profile.csv&quot;</span>)</span>
-<span id="cb123-6"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - 30 cm</span></span>
-<span id="cb123-7"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-7" aria-hidden="true" tabindex="-1"></a>ORCDRC <span class="ot">&lt;-</span> d<span class="sc">$</span>soc_0_30<span class="sc">*</span><span class="dv">10</span></span>
-<span id="cb123-8"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-8" aria-hidden="true" tabindex="-1"></a>HSIZE <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb123-9"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-9" aria-hidden="true" tabindex="-1"></a>BLD <span class="ot">&lt;-</span> d<span class="sc">$</span>bd_0_30<span class="sc">*</span><span class="dv">1000</span></span>
-<span id="cb123-10"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-10" aria-hidden="true" tabindex="-1"></a>CRFVOL <span class="ot">&lt;-</span> d<span class="sc">$</span>crf_0_30</span>
-<span id="cb123-11"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-12"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-12" aria-hidden="true" tabindex="-1"></a>OCSKG_0_30 <span class="ot">&lt;-</span> ORCDRC<span class="sc">/</span><span class="dv">1000</span> <span class="sc">*</span> HSIZE<span class="sc">/</span><span class="dv">100</span> <span class="sc">*</span> BLD <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">-</span> CRFVOL)<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb123-13"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-14"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Organic Carbon Stock from kg/m3 to t/ha</span></span>
-<span id="cb123-15"><a href="annex-ii-r-scripts-for-extra-functions.html#cb123-15" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ocs_0_30 <span class="ot">&lt;-</span> OCSKG_0_30<span class="sc">*</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate Organic Carbon Stock (ocs) ======================================</span></span>
+<span id="cb118-2"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SOC must be in g/kg (% * 10)</span></span>
+<span id="cb118-3"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="co"># BLD in kg/m3</span></span>
+<span id="cb118-4"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="co"># CRF in percentage</span></span>
+<span id="cb118-5"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;02-Outputs/spline_soil_profile.csv&quot;</span>)</span>
+<span id="cb118-6"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - 30 cm</span></span>
+<span id="cb118-7"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-7" aria-hidden="true" tabindex="-1"></a>ORCDRC <span class="ot">&lt;-</span> d<span class="sc">$</span>soc_0_30<span class="sc">*</span><span class="dv">10</span></span>
+<span id="cb118-8"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-8" aria-hidden="true" tabindex="-1"></a>HSIZE <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb118-9"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-9" aria-hidden="true" tabindex="-1"></a>BLD <span class="ot">&lt;-</span> d<span class="sc">$</span>bd_0_30<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb118-10"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-10" aria-hidden="true" tabindex="-1"></a>CRFVOL <span class="ot">&lt;-</span> d<span class="sc">$</span>crf_0_30</span>
+<span id="cb118-11"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-12"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-12" aria-hidden="true" tabindex="-1"></a>OCSKG_0_30 <span class="ot">&lt;-</span> ORCDRC<span class="sc">/</span><span class="dv">1000</span> <span class="sc">*</span> HSIZE<span class="sc">/</span><span class="dv">100</span> <span class="sc">*</span> BLD <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">-</span> CRFVOL)<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb118-13"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-14"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Organic Carbon Stock from kg/m3 to t/ha</span></span>
+<span id="cb118-15"><a href="annex-ii-r-scripts-for-extra-functions.html#cb118-15" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>ocs_0_30 <span class="ot">&lt;-</span> OCSKG_0_30<span class="sc">*</span><span class="dv">10</span></span></code></pre></div>
 
 </div>
             </section>
