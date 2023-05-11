@@ -27,8 +27,8 @@ gc()
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
+# wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
+wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
 #wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
 #wd <- "/Users/luislado/Library/CloudStorage/Dropbox/GeoForsk/Clientes/FAO/GSNmap/Training Material/Digital-Soil-Mapping"
 
@@ -60,6 +60,7 @@ library(plotly) # interactive plots
 ## 2.2 - for .csv files --------------------------------------------------------
 # Import horizon data 
 hor <- read_csv(file = "01-Data/soil_profile_data.csv",show_col_types = FALSE)
+hor
 chem <- read_csv(file = "01-Data/soil_chem_data030.csv",show_col_types = FALSE)
 phys <- read_csv(file = "01-Data/soil_phys_data030.csv",show_col_types = FALSE)
 
@@ -108,7 +109,7 @@ profiles <- hor
 profiles
 
 ## 4.3 - plot first 20 profiles using pH as color ------------------------------
-plotSPC(x = profiles[1:20], name = "pH", color = "ph",
+plotSPC(x = profiles[21:40], name = "ph", color = "ph",
         name.style = "center-center")
 
 
@@ -171,7 +172,7 @@ BD_test <- na.omit(BD_test)
 
 
 # 5.2 - Estimate BLD for a subset using the pedotransfer functions ------------
-for (i in method_names) {
+for(i in method_names) {
   BD_test[[i]] <- estimateBD(BD_test$SOC, method = i)
 }
 
@@ -248,7 +249,7 @@ dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])]
 dat <- dat[dat$ProfID != 6915,]
 dat <- dat[dat$ProfID != 7726,]
 
-dat<- dat[!(dat$ProfID %in% dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])]),]
+# dat<- dat[!(dat$ProfID %in% dat$ProfID[dat$soc > 10][!is.na(dat$ProfID[dat$soc > 10])]),]
 
 # Explore bulk density data, identify outliers
 # remove layers with Bulk Density < 1 g/cm^3
