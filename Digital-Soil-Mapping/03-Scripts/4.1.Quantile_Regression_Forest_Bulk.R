@@ -57,24 +57,8 @@ library(doParallel)
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
-files <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = T)
-ncovs <- list.files(path= '01-Data/covs/', pattern = '.tif$', full.names = F)
-#In case of extent error, or if covariates other than the default ones are added
-# ref <- rast(files[1])
-# covs <- list()
-# for (i in seq_along(files)) {
-#   r <- rast(files[i])
-#   r <- project(r, ref)
-#   covs[[i]] <- r
-# }
-# covs <- rast(covs)
-
-covs<- rast(files)
-ncovs <-  filename <- sub('.tif', '', ncovs)
-
-ncovs[ncovs=="dtm_neg-openness_250m"] = 'dtm_neg'
-ncovs[ncovs=="dtm_pos-openness_250m"] = 'dtm_pos'
-names(covs) <- ncovs
+covs <- rast("01-Data/covs/Covariates.tif") # match case of the file name
+ncovs <- names(covs)
 
 
 ## 1.2 - Load the soil data (Script 2) -----------------------------------------
@@ -294,7 +278,7 @@ for(soilatt in unique(target_properties)){
   
   # 6 - Export final maps ========================================================
   ## 6.1 - Mask croplands --------------------------------------------------------
-  msk <- rast("01-Data/mask.tif")
+  msk <- rast("01-Data/covs/mask.tif")
   plot(msk)
   pred_mean <- mask(pred_mean, msk)
   plot(pred_mean)
