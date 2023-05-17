@@ -59,6 +59,8 @@ options(scipen=999)
 
 library(kableExtra)
 library(data.table)
+library(mpspline2)
+library(plotly)
 # Cache results
 knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40),tidy=FALSE, size="tiny", fig.cap = T)
 
