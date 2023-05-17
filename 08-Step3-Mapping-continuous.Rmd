@@ -108,7 +108,7 @@ The shapefile can be reprojected to match the CRS of the covariates using the pr
 ```{r, eval = F}
 # Reproject point coordinates to match coordinate system of covariates
 dat <- terra::project(dat, covs)
-names(dat)
+names(dat) 
 ```
 
 Afterwards, the extract function can be used to extract the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the `summary()` command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the `na.omit()` function.
