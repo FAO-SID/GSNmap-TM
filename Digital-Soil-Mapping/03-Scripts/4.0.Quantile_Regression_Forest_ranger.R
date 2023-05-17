@@ -38,14 +38,13 @@ ISO ='ISO'
 AOI <- '01-Data/AOI.shp'
 
 # Terget soil attribute (Mandatory 10)
-soilatt<- "soc_0_30" 
+soilatt<- "n_0_30" 
 
 # Function for Uncertainty Assessment
 load(file = "03-Scripts/eval.RData")
 
 #load packages
 library(tidyverse)
-library(data.table)
 library(caret)
 library(terra)
 library(Boruta)
@@ -180,43 +179,31 @@ for (j in seq_along(tile)) {
   t <- rast(tile[j])
   # crop the selected covariates with the tile j
   covst <- crop(covs[[fs_vars]], t)
-  # convert the covariates into a dataframe (data.table object)
-  covsDt <- data.table(values(covst))
   
-  if(any(!is.na(covsDt))){
-    # identify number the cell IDs without NAs
-    idx <- which(complete.cases(covsDt))
-    # Predict conditional standard deviation
-    pred_sd <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                       data = covsDt[idx], 
-                                       type = "quantiles", 
-                                       what = sd) 
-    # Predict conditional mean
-    pred_mean <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                         data = covsDt[idx], 
-                                         type = "quantiles", 
-                                         what = mean) 
-    # Dataframe to image again
-    rn_sd <- covst[[1]]
-    names(rn_sd) <- "sd"
-    rn_sd[!is.na(rn_sd$sd)] <- NaN
-    rn_sd[idx] <- pred_sd$predictions[1,]
-    #plot(rn_sd)
-    rn_mean <- rn_sd
-    rn_mean[idx] <- pred_mean$predictions[1,]
-    #plot(rn_mean)
-    
-    # Save the tiles
-    writeRaster(rn_mean, 
-                filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                  soilatt,"_tile_", j, ".tif"), 
-                overwrite = TRUE)
-    writeRaster(rn_sd, 
-                filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                  soilatt,"_tileSD_", j, ".tif"), 
-                overwrite = TRUE)
-    rm(pred_mean, pred_sd, rn_sd, rn_mean)
-  }
+  # create a function to extract the predited values from ranger::predict.ranger()
+  pfun <- \(...) { predict(...)$predictions |> t() }
+  
+  # predict conditional standard deviation
+  terra::interpolate(covst, 
+                     model = model_rn$finalModel, 
+                     fun=pfun, 
+                     na.rm=TRUE, 
+                     type = "quantiles", 
+                     what=sd,
+                     filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                       soilatt,"_tileSD_", j, ".tif"), 
+                     overwrite = TRUE)
+  
+  # predict conditional mean
+  terra::interpolate(covst, 
+                     model = model_rn$finalModel, 
+                     fun=pfun, 
+                     na.rm=TRUE, 
+                     type = "quantiles", 
+                     what=mean,
+                     filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                       soilatt,"_tile_", j, ".tif"), 
+                     overwrite = TRUE)
   
   print(paste("tile", j, "of", length(tile)))
 }
@@ -252,7 +239,8 @@ pred_mean <- mask(pred_mean,aoi)
 pred_sd <- mask(pred_sd,aoi)
 
 
-plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt))
+plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt),
+     col = hcl.colors(100, "Viridis"))
 
 # 6 - Export final maps ========================================================
 ## 6.1 - Mask croplands --------------------------------------------------------
@@ -263,40 +251,16 @@ pred_mean <- mask(pred_mean, msk)
 plot(pred_mean)
 pred_sd <- mask(pred_sd, msk)
 plot(pred_sd)
-plot(pred_sd/pred_mean*100, main = paste("Coeficient of variation", soilatt))
+plot(pred_sd/pred_mean*100, main = paste("Coeficient of variation", soilatt),
+     col = hcl.colors(100, "Viridis"))
 
 ## 6.2 - Save results ----------------------------------------------------------
-
-# Harmonized naming 
-if (soilatt == 'ph_0_30'){
-  name <-'_GSNmap_pH_Map030.tiff'
-}else if (soilatt == 'k_0_30'){
-  name <-'_GSNmap_Ktot_Map030.tiff'
-}else if (soilatt == 'soc_0_30'){
-  name <-'_GSNmap_SOC_Map030.tiff'
-}else if (soilatt == 'clay_0_30'){
-  name <-'_GSNmap_Clay_Map030.tiff'
-}else if (soilatt == 'bd_0_30'){
-  name <-'_GSNmap_BD_Map030.tiff'
-}else if (soilatt == 'cec_0_30'){
-  name <-'_GSNmap_CEC_Map030.tiff'
-}else if (soilatt == 'p_0_30'){
-  name <-'_GSNmap_Pav_Map030.tiff'
-}else if (soilatt == 'n_0_30'){
-  name <-'_GSNmap_Ntot_Map030.tiff'
-}else if (soilatt == 'sand_0_30'){
-  name <-'_GSNmap_Sand_Map030.tiff'
-}else if (soilatt == 'silt_0_30'){
-  name <-'_GSNmap_Silt_Map030.tiff'
-}
-
 writeRaster(pred_mean, 
-            paste0("02-Outputs/maps/",ISO,name),
+            paste0("02-Outputs/maps/",ISO,"_mean_",soilatt, ".tif"),
             overwrite=TRUE)
 writeRaster(pred_sd, 
-            paste0("02-Outputs/maps/",ISO, '_SD',name),
+            paste0("02-Outputs/maps/",ISO,"_sd_",soilatt, ".tif"),
             overwrite=TRUE)
-
 
 
 
