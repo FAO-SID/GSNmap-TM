@@ -55,7 +55,6 @@ load(file = "03-Scripts/eval.RData")
 
 #load packages
 library(tidyverse)
-library(data.table)
 library(caret)
 library(terra)
 library(Boruta)
@@ -79,7 +78,6 @@ load(file = "03-Scripts/eval.RData")
 
 #load packages
 library(tidyverse)
-library(data.table)
 library(caret)
 library(terra)
 library(Boruta)
@@ -402,49 +400,37 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
   ## 5.2 - Predict soil attributes per tiles -------------------------------------
   # loop to predict soilatt on each tile
   
-  for (j in seq_along(tile)) {
+    for (j in seq_along(tile)) {
     gc()
     # read the tile
     t <- rast(tile[j])
     # crop the selected covariates with the tile j
     covst <- crop(covs[[fs_vars]], t)
-    # convert the covariates into a dataframe (data.table object)
-    covsDt <- data.table(values(covst))
-    # Chech if the tile has valid numbers
-    if(any(!is.na(covsDt))){
-      # identify number the cell IDs without NAs
-      idx <- which(complete.cases(covsDt))
-      # Predict conditional standard deviation
-      pred_sd <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                         data = covsDt[idx], 
-                                         type = "quantiles", 
-                                         what = sd) 
-      # Predict conditional mean
-      pred_mean <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                           data = covsDt[idx], 
-                                           type = "quantiles", 
-                                           what = mean) 
-      # Dataframe to image again
-      rn_sd <- covst[[1]]
-      names(rn_sd) <- "sd"
-      rn_sd[!is.na(rn_sd$sd)] <- NaN
-      rn_sd[idx] <- pred_sd$predictions[1,]
-      #plot(rn_sd, col = hcl.colors(100, "Viridis"))
-      rn_mean <- rn_sd
-      rn_mean[idx] <- pred_mean$predictions[1,]
-      #plot(rn_mean, col = hcl.colors(100, "Viridis"))
-      
-      # Save the tiles
-      writeRaster(rn_mean, 
-                  filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                    soilatt,"_tile_", j, ".tif"), 
-                  overwrite = TRUE)
-      writeRaster(rn_sd, 
-                  filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                    soilatt,"_tileSD_", j, ".tif"), 
-                  overwrite = TRUE)
-      rm(pred_mean, pred_sd, rn_sd, rn_mean)
-    }
+    
+    # create a function to extract the predited values from ranger::predict.ranger()
+    pfun <- \(...) { predict(...)$predictions |> t() }
+    
+    # predict conditional standard deviation
+    terra::interpolate(covst, 
+                       model = model_rn$finalModel, 
+                       fun=pfun, 
+                       na.rm=TRUE, 
+                       type = "quantiles", 
+                       what=sd,
+                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                         soilatt,"_tileSD_", j, ".tif"), 
+                       overwrite = TRUE)
+    
+    # predict conditional mean
+    terra::interpolate(covst, 
+                       model = model_rn$finalModel, 
+                       fun=pfun, 
+                       na.rm=TRUE, 
+                       type = "quantiles", 
+                       what=mean,
+                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                         soilatt,"_tile_", j, ".tif"), 
+                       overwrite = TRUE)
     
     print(paste("tile", j, "of", length(tile)))
   }
@@ -489,9 +475,9 @@ As a result, 25 tiles for the predicted mean and 25 tiles for the predicted stan
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(terra)
 pred_mean <- rast("Digital-Soil-Mapping/02-Outputs/noMaskedMaps/mean_n_0_30.tif")
 pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/noMaskedMaps/sd_n_0_30.tif")
-x <- c(pred_mean,pred_sd)
 plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt), 
        col = hcl.colors(100, "Viridis"))
 ```
