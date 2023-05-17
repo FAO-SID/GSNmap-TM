@@ -35,7 +35,7 @@ load(file = "../03-Scripts/eval.RData")
 table1 <- read.csv('National Report Table 1.csv')
 
 #Data info table to edit directly in the word document
-kable(table1, col.names = c("Data type" ,  "Source", "Number of points" ,"Year(s)"))
+kable(table1, col.names = c("Data type" ,  "Source", "Number of points","Year(s)"))
 
 ```
 
@@ -121,30 +121,32 @@ kable(table2,col.names =c("mean",   "min" ,   "median" ,"max"  ,  "Number of poi
 
 ## Resulting maps
 
-### Predicted mean
+### Predicted mean and standard deviation
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
-pred_mean <- rast(paste0("../02-Outputs/maps/ISO_GSNmap_Ntot_Map030.tiff"))
-terra:::plot(pred_mean, axes = TRUE, main = paste("Predicted mean", name))
-```
-
-### Predicted standard deviation
-
-```{r  echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
-pred_sd <- rast(paste0("../02-Outputs/maps/ISO_SD_GSNmap_Ntot_Map030.tiff"))
-terra:::plot(pred_sd, axes = TRUE, 
-             main = paste("Predicted standard deviation", name))
+pred_mean <- rast(paste0("../02-Outputs/maps/ISO_mean_n_0_30.tif"))
+pred_sd <- rast(paste0("../02-Outputs/maps/ISO_sd_n_0_30.tif"))
+terra:::plot(c(pred_sd, pred_mean), axes = TRUE, 
+             main = paste(c("mean","sd"), soilatt),
+             col = hcl.colors(100, "Viridis"))
 
 ```
 
 ## Accuracy assessment
-
 ### Observed vs Predicted
 
 ```{r  echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
-o <- model$pred$obs
-p <- model$pred$pred
-df <- data.frame(o,p)
+  o <- model_rn$pred %>% 
+    filter(mtry == model_rn$bestTune$mtry, 
+           splitrule==model_rn$bestTune$splitrule, 
+           min.node.size==model_rn$bestTune$min.node.size) %>% 
+    select(obs) %>% as.vector() %>% unlist()
+  p <- model_rn$pred %>% 
+    filter(mtry == model_rn$bestTune$mtry, 
+           splitrule==model_rn$bestTune$splitrule, 
+           min.node.size==model_rn$bestTune$min.node.size) %>% 
+    select(pred) %>% as.vector() %>% unlist()
+  df <- data.frame(o,p)
 
 
 
@@ -169,7 +171,7 @@ kable(eval(p,o)[,1:6], caption = paste0('Accuracy Indicators: ',name))
 ```{r  echo=FALSE, fig.height=9, fig.width=6, message=FALSE, warning=FALSE, results='asis'}
 options(width = 60)
 # layout(matrix(1), widths = lcm(5), heights = lcm(10))
-randomForest::varImpPlot(model$finalModel, main = paste0('Importance of the covariates: ',name), type = 1, )
+plot(varImp(model))
 ```
 
 
