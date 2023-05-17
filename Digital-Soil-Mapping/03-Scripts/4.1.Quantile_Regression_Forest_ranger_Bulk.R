@@ -46,7 +46,6 @@ load(file = "03-Scripts/eval.RData")
 
 #load packages
 library(tidyverse)
-library(data.table)
 library(caret)
 library(terra)
 library(Boruta)
@@ -138,10 +137,10 @@ for(soilatt in unique(target_properties)){
   print(model_rn$bestTune)
   
   ## 3.4 - Extract covariate importance ------------------------------------------
-  png(filename = paste0("02-Outputs/Model_varImp_",soilatt,".png"), 
-      width = 15, height = 25, units = "cm", res = 600)
+  # png(filename = paste0("02-Outputs/Model_varImp_",soilatt,".png"), 
+  #     width = 15, height = 25, units = "cm", res = 600)
   plot(varImp(model_rn))
-  dev.off()
+  # dev.off()
   
   ## 3.5 - Save the ranger model -------------------------------------------------
   saveRDS(model_rn, file = paste0("02-Outputs/models/ranger_model_",soilatt,".rds"))
@@ -193,46 +192,35 @@ for(soilatt in unique(target_properties)){
     t <- rast(tile[j])
     # crop the selected covariates with the tile j
     covst <- crop(covs[[fs_vars]], t)
-    # convert the covariates into a dataframe (data.table object)
-    covsDt <- data.table(values(covst))
     
-    if(any(!is.na(covsDt))){
-      # identify number the cell IDs without NAs
-      idx <- which(complete.cases(covsDt))
-      # Predict conditional standard deviation
-      pred_sd <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                         data = covsDt[idx], 
-                                         type = "quantiles", 
-                                         what = sd) 
-      # Predict conditional mean
-      pred_mean <- ranger:::predict.ranger(object = model_rn$finalModel,
-                                           data = covsDt[idx], 
-                                           type = "quantiles", 
-                                           what = mean) 
-      # Dataframe to image again
-      rn_sd <- covst[[1]]
-      names(rn_sd) <- "sd"
-      rn_sd[!is.na(rn_sd$sd)] <- NaN
-      rn_sd[idx] <- pred_sd$predictions[1,]
-      #plot(rn_sd, col = hcl.colors(100, "Viridis"))
-      rn_mean <- rn_sd
-      rn_mean[idx] <- pred_mean$predictions[1,]
-      #plot(rn_mean, col = hcl.colors(100, "Viridis"))
-      
-      # Save the tiles
-      writeRaster(rn_mean, 
-                  filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                    soilatt,"_tile_", j, ".tif"), 
-                  overwrite = TRUE)
-      writeRaster(rn_sd, 
-                  filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                    soilatt,"_tileSD_", j, ".tif"), 
-                  overwrite = TRUE)
-      rm(pred_mean, pred_sd, rn_sd, rn_mean)
-    }
+    # create a function to extract the predited values from ranger::predict.ranger()
+    pfun <- \(...) { predict(...)$predictions |> t() }
+    
+    # predict conditional standard deviation
+    terra::interpolate(covst, 
+                       model = model_rn$finalModel, 
+                       fun=pfun, 
+                       na.rm=TRUE, 
+                       type = "quantiles", 
+                       what=sd,
+                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                         soilatt,"_tileSD_", j, ".tif"), 
+                       overwrite = TRUE)
+    
+    # predict conditional mean
+    terra::interpolate(covst, 
+                       model = model_rn$finalModel, 
+                       fun=pfun, 
+                       na.rm=TRUE, 
+                       type = "quantiles", 
+                       what=mean,
+                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
+                                         soilatt,"_tile_", j, ".tif"), 
+                       overwrite = TRUE)
     
     print(paste("tile", j, "of", length(tile)))
   }
+  
   
   ## 5.3 - Merge tiles both prediction and st.Dev --------------------------------
   f_mean <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
