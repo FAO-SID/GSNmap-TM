@@ -2,6 +2,20 @@
 
 In this chapter, the cleaned soil data and the previously downloaded covariate layers are used to generate soil property maps using DSM techniques. These consist of merging soil and environmental covariates data, selecting the covariates, calibrating the machine learning model, assessing the uncertainty, predicting the soil properties and finally export the maps.
 
+## Mapping Soil Properties with Random Forest
+
+Random Forest is a popular machine learning algorithm used in Digital Soil Mapping (DSM) for predicting the distribution of continuous soil properties. It leverages an ensemble of decision trees to improve the accuracy of predictions for the expected value of the target soil parameters.
+
+In Random Forest, multiple individual decision trees are created, each trained on a random subset of the available data. These trees make independent predictions, and the final prediction is obtained by aggregating the predictions of all the trees. This ensemble approach helps to reduce the risk of overfitting and improves the model's generalization ability. Furthermore, Random Forest introduces an additional level of randomness by selecting different subsets of covariates (features) at each node of the trees. This feature sampling increases the independence between trees and helps mitigate potential collinearity issues in the individual regression tree models.
+
+By combining the predictions of multiple trees and incorporating randomness in feature selection, Random Forest provides robust and reliable predictions for soil properties in DSM applications.
+
+The main limitation of Random Forest is that it focuses primarily on predicting the mean value of the target variable thus it does not provide direct information about the variability or distribution of the target variable's predictions. This limits the possibility of  assessment of the uncertainty of the predictions.
+
+Quantile regression forests (QRF, @Meinshausen2006) are a generalisation of the random forest models, capable of not only predicting the conditional mean, but also the conditional probability density function. This provides a more comprehensive understanding of the full conditional distribution of the predictions, capturing the uncertainty and dispersion associated with different quantiles or levels of the target variable. This feature allows one to estimate the standard deviation of the prediction, as well as the likelihood of the target variable falling below a given threshold. By considering the dispersion of the predictions, QRF enables us to assess the model uncertainty and make more informed decisions. In a context where a minimum level of a soil nutrient concentration may be decisive for improving the crop yield, this feature can play an important role for the GSNmap initiative. Model calibration will be implemented using the caret package [@Kuhn2022]. While we suggest to use QRF, caret provides a large set of models https://topepo.github.io/caret/available- models.html#) that might perform better in specific cases. In this regard, it is up to the user to implement a different model, ensuring the product specifications (Section Product Specifications).
+
+We demonstrate the implementation of Quantile Regression Forest (QRF) for modeling and mapping soil properties and its associated uncertainty. The implementation presented here utilizes the Boruta, ranger, caret, and terra R packages.
+
 ## Getting prepared to map
 
 To begin, we open *RStudio* and empty our global environment. Then, we set the working directory and assign the file path to our AOI shapefile to an R object. The target soil property that is going to be mapped in this exercise is Potassium denoted as 'k' in the soil data table. Next, an R function that was built by the GSP is loaded from the training material folder. Finally, the packages that are going to be needed for mapping are called. 
@@ -62,27 +76,6 @@ library(ranger)
 
 ```
 
-```{r include=FALSE}
-setwd("Digital-Soil-Mapping/")
-# Define country of interes throuhg 3-digit ISO code
-ISO ='ISO'
-
-# Load Area of interest (shp)
-AOI <- '01-Data/AOI.shp'
-
-# Terget soil attribute (Mandatory 10)
-soilatt<- "soc_0_30" 
-
-# Function for Uncertainty Assessment
-load(file = "03-Scripts/eval.RData")
-
-#load packages
-library(tidyverse)
-library(caret)
-library(terra)
-library(Boruta)
-library(ranger)
-```
 
 Since soil data and environmental covariates are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster file is loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
@@ -120,37 +113,12 @@ dat <- as.data.frame(dat)
 summary(dat)
 ```
 
-## Covariate selection and repeated k-fold cross-validation
+## Covariate selection
 
-Cross validation is one of the most used methods in DSM for assessing the overall accuracy of the resulting maps. Since this is implemented along with the model calibration step, we explain the process at this stage. Cross validation consists of randomly splitting the input data into a training set and a testing set. However, a unique testing dataset can bias the overall accuracy. Therefore, k-fold cross validation randomly splits the data into k parts, using 1/k part of it for testing and k-1/k part for training the model. In order to make the final model more robust in terms of parameter estimations, we include repetitions of this process. The final approach is called repeated k-fold cross-validation, where k will be equal to ten in this process (see Figure \@ref(fig:workflow1). A graphical representation of the 10-fold cross validation is shown in Figure \@ref(fig:cv). Note that green balls represent the samples belonging to the testing set and yellow balls are samples of the training set. Each row is a splitting step of the 10-folds, while each block (repetitions) represent the repetition step.
-
-```{r cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
-knitr::include_graphics("images/cv.png")
-```
-
-The cross-validation is repeated and after every iteration, i.e. each single splitting step (the rows in Figure \@ref(fig:cv)), the training data is used to calibrate the model, which will be explained in the next paragraph. The testing data will be used with the calibrated model to produce the residuals that play a role in assessing the uncertainty at a later stage (see Figure \@ref(fig:workflow1). 
-Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods. Here, we use the `Boruta()` function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called "fitControl". Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
-
-
-
-```{r, eval = F}
-# create tiles for step 5 (predicting soil properties)
-r <-covs[[1]]
-t <- rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))
-tile <- makeTiles(r, t,overwrite=TRUE,filename="02-Outputs/tiles/tiles.tif")
-```
-
-```{r, eval = F}
-for(soilatt in unique(target_properties)){
-  
-  ## 1.4 - Target soil attribute + covariates ------------------------------------
-  d <- dplyr::select(dat, all_of(soilatt), all_of(ncovs))
-  d <- na.omit(d)
-  
-```
-
-The following step requires high computational power. To optimise the use of the computing power available on your device, parallel computing is activated that optimises the use of the available cores on your device. Then, the model is calibrated and only the covariates that actually have an effect on the target soil property are selected. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict.
-The model calibration is done using a recursive feature elimination (RFE) algorithm. Here, a model that contains all covariates as predictors is subsequently reduced to a more parsimonious model.
+In a high-dimensional datasets, not all available features are equally informative for training a model. By detecting and subsetting the only relevant features for modeling, we can improve model's predictive performance, reduce its complexity, speeds up computations and enhance interpretability, allowing us to gain deeper insights into the underlying relationships within the data. Feature selection serves this purpose by identifying and retaining only those relevant features that are uncorrelated and non-redundant in the prediction of a target soil parameter, resulting in a more focused and effective model that is capable of making more accurate predictions.
+Feature selection was implemented through the Boruta package [@miron2010], a feature selection algorithm that aims to identify the most relevant features in a dataset in both classification and regression problems. The algorithm is specifically designed for dealing with high-dimensional datasets and works by comparing the importance of each covariate against a randomized version of itself, known as shadow feature, that serve as a reference to determine whether the covariate has a higher importance than expected by chance.
+The algorithm goes through a series of iterations, where it progressively eliminates irrelevant features. In each iteration, it evaluates the importance of each feature based on the random forest model and compares it to the importance of the corresponding shadow feature. If a feature's importance is significantly higher than its shadow, it is considered relevant and retained. Otherwise, it is deemed uninformative and removed. The iterations continue until all features are either confirmed as relevant or identified as uninformative. The final outcome is a set of relevant features (covariates) that are statistically significant in terms of their importance for explaining the target variable, thus reducing data dimensionality for improved model performance and interpretability.
+The feature importance can be displayed in a graph showing different colors according to the importance of each feature in the model, with ‘green’, ‘yellow’, ‘red’ and ‘blue’ colors for ‘confirmed’, ‘tentative’, ‘rejected’ and ‘shadow’ features respectively (see \@ref(fig:borutaplot)). Only those marked in green color are retained as valuable predictors.
 
 ```{r, eval = F}
   # 2 - Covariate selection with Boruta package ==================================
@@ -176,19 +144,33 @@ The selected covariates can be visualised in Trellis displays. Finally, the opti
 soilatt <- "n_0_30"
 ```
 
-```{r, echo = FALSE, fig.cap = "Covariates selecction for Total Nitrogen using Boruta algorithm."}
+```{r borutaplot, echo = FALSE, fig.cap = "Covariates selecction for Total Nitrogen using Boruta algorithm."}
 knitr::include_graphics("images/importance_n_0_30.png")
 ```
 
+
 ## Model calibration
 
-The model calibration step involves the use of a statistical model to find the relations between soil observations and environmental covariates. One of the most widely used models in DSM is random forest [@Breiman2001]. Random forest is considered a machine learning method which belongs to the decision-tree type of model. Random forest creates an ensemble of trees using a random selection of covariates. The prediction of a single tree is made based on the observed samples mean in the leaf. The random forest prediction is made by taking the average of the predictions of the single trees. The size of the number of covariates at each tree (mtry) can be fine-tuned before calibrating the model. 
-Quantile regression forests (QRF, @Meinshausen2006) are a generalisation of the random forest models, capable of not only predicting the conditional mean, but also the conditional probability density function. This feature allows one to estimate the standard deviation of the prediction, as well as the likelihood of the target variable falling below a given threshold. In a context where a minimum level of a soil nutrient concentration may be decisive for improving the crop yield, this feature can play an important role for the GSNmap initiative. 
-Model calibration will be implemented using the caret package [@Kuhn2022]. While we suggest to use QRF, caret provides a large set of models https://topepo.github.io/caret/available- models.html#) that might perform better in specific cases. In this regard, it is up to the user to implement a different model, ensuring  the product specifications (Section Product Specifications).
+The QRF model is calibrated using only the previous selection of covariates that actually have shown an effect on the target soil property. This is an important step to avoid overfitting of the model that can hamper a model's capacity to predict. Calibration is done by the  'train' function from the caret package, utilizing the implementation of the random forest algorithm provided by the ranger package. During the model training, several important hyperparameters need to be set. These hyperparameters include:
 
-In the previous step, the number of covariates was reduced based on a 10-fold cross-validation that was repeated three times based on a regression model. To account for the reduced number of covariates, the model formula is updated at first.
-Again, parallel computing is used to speed up the computational process.
-The cross-validation is repeated with the new formula and different numbers of covariates (mtry) at each tree are assessed. After optimising this parameter, a QRF model is calibrated using the caret package.
+* 'mtry': This parameter determines the number of subset predictors considered for each split in the regression trees. It controls the level of randomness and feature diversity in the tree-building process.
+
+* 'splitrule': This parameter specifies the criterion used to evaluate the quality of a potential split at each node of the tree. For regression problems, it is often set to "variance," which measures the reduction in variance of the target variable achieved by splitting at a particular node. In our implementation, we consider three possible criteria: "variance," "extratrees," and "maxstat." We select the criterion that produces the best calibrated model.
+
+* 'min.node.size': This parameter represents the minimum number of observations (samples) required to create a terminal (leaf) node in a decision tree within the random forest algorithm. It ensures that each leaf contains a minimum number of observations to prevent overfitting and improve the generalization ability of the model. In regression problems, this number is typically set to 5.
+
+Additionally, certain control parameters are necessary for training the model. These parameters are defined in the trainControl function and relate to the resampling method used to construct the bootstrap datasets. In our case, the resampling method is set to 'repeatedcv,' with 10-fold cross-validation and 10 repetitions.
+
+As cross-validation plays a crucial role in the model calibration step, we explain the process in detail at this stage. Cross-validation is a widely used method in Digital Soil Mapping (DSM) to assess the overall accuracy of the resulting maps. It involves randomly dividing the input data into a training set and a testing set. However, relying on a single testing dataset can introduce bias in the overall accuracy estimation. To mitigate this bias, we employ k-fold cross-validation. In this approach, the data is randomly partitioned into k parts, with one part used for testing and the remaining k-1 parts used for training the model. This process is repeated multiple times to enhance the robustness of parameter estimations. The final approach we adopt is known as repeated k-fold cross-validation, with k set to ten in this specific process. To help visualize the 10-fold cross-validation process, refer to Figure \@ref(fig:cv). Each row in the figure represents a step where the data is split into 10 subsets, with some samples marked as green balls representing the testing set, and others as yellow balls representing the training set. The figure illustrates how the data is divided into subsets in each step of the 10-fold process, and the blocks represent the repetition steps.
+By employing repeated k-fold cross-validation, we can obtain a comprehensive assessment of the model's performance, ensuring reliable and robust parameter estimations for the final model.
+
+
+```{r cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
+knitr::include_graphics("images/cv.png")
+```
+
+Repeated cross validation has been nicely implemented in the caret R package [@Kuhn2022], along with several calibration methods. Here, we use the `Boruta()` function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called "fitControl". Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
+
 
 ```{r, eval = F}
   # 3 - QRF Model calibration with ranger ========================================
@@ -227,19 +209,12 @@ The cross-validation is repeated with the new formula and different numbers of c
 
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(ranger)
-library(caret)
-model_rn <- readRDS(paste0("Digital-Soil-Mapping/02-Outputs/models/ranger_model_",soilatt,".rds"))
-print(model_rn)
-print(model_rn$bestTune)
-```
+
+The results have been stored in an R object called model_rn. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted and plotted (Figure \@ref(fig:varimp) ). Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
 
 
 
-The results have been stored in an R object called model_rn. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted. Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
-
-```{r, eval = F}
+```{r , eval = F}
   ## 3.4 - Extract covariate importance ------------------------------------------
   png(filename = paste0("02-Outputs/Model_varImp_",soilatt,".png"), 
       width = 15, height = 25, units = "cm", res = 600)
@@ -252,8 +227,17 @@ The results have been stored in an R object called model_rn. To assess the contr
 
 ```
 
-```{r echo=FALSE}
-plot(varImp(model_rn))
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+  model_rn <- readRDS(paste0("Digital-Soil-Mapping/02-Outputs/models/ranger_model_",soilatt,".rds"))
+  print(model_rn)
+  print(model_rn$bestTune)
+```
+
+
+```{r varimp, fig.cap="Variable importance for the model", echo=FALSE}
+  plot(varImp(model_rn))
+
 ```
 
 
@@ -381,7 +365,9 @@ Finally, note that accuracy assessment has been discussed in @Wadoux2021, since 
 
 After calibrating the model, caret will select the best set of parameters and will fit the model using the whole dataset. Then, the final model can be used to predict the target soil properties. The process uses the model and the values of the covariates at target locations. This is generally done by using the same input covariates as a multilayer raster format, ensuring that the names of the layers are the same as the covariates in the calibration dataset. In this step we will predict the conditional mean and conditional standard deviation at each raster cell.
 
-First, the raster is split into so-called tiles that divide the whole area of interest in multiple rasters with a coarse resolution. In this case 25 tiles are produced (5 rows x 5 columns). The functions for tiling come from the terra package.
+To prevent for potential computational power limitations, first the raster is split into so-called tiles that divide the whole area of interest in multiple rasters with a coarse resolution. In this case 25 tiles are produced (5 rows x 5 columns). The functions for tiling come from the terra package. The predictions can also be hadled at one time by setting the parameters 'nrows' and 'ncols' in the 't' object to 1.
+
+
 
 ```{r, eval = F}
   # 5 - Prediction ===============================================================
@@ -481,7 +467,6 @@ pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/noMaskedMaps/sd_n_0_30.tif")
 plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt), 
        col = hcl.colors(100, "Viridis"))
 ```
-
 
 
 The final step then consists of applying a cropland mask that is applied to the map and the uncertainty map since the soil data comes only from croplands and thus no assumption can be made to soil property values under different land covers. Additionally, a map is calculated to visualise the coefficient of variation (in Percent). The maps are then stored as raster files (GeoTiff/.tif) in the Outputs folder. 
