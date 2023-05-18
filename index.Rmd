@@ -3,7 +3,7 @@ title:  |
   <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
   Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
 subtitle: "version 0.2"
-author: "Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y."
+author: "Angelini, M.E, Luotto, I., Rodriguez Lado, L.,  Mainka, M., Yigini, Y., Tong, Y."
 date: "26-Oct-2022"
 site: bookdown::bookdown_site
 output: 
@@ -177,21 +177,7 @@ SOM
 
 :   Soil organic matter
 
-# Publisher {-}
 
-<!-- *Prepared by:*\ -->
-FAO\
-<!-- - *Moritz Mainka*  -->
-<!-- - *Marcos E. Angelini*   -->
-<!-- - *Isabel Luotto* -->
-<!-- - *Yusuf Yigini*  -->
-<!-- - *Yuxin Tong*  -->
-
-
-
-
-**Global Soil Partnership Secretariat**\
-Ronald Vargas\
 
 # Contributors and reviewers {-}
 
