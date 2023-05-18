@@ -12,14 +12,14 @@ tab:covs1
 fig:screenshot
 fig:RUN
 fig:cv
-fig:unnamed-chunk-30
+fig:unnamed-chunk-32
 eq:me
 eq:mae
 eq:rmse
 eq:r2
 eq:r
 eq:mec
-tab:unnamed-chunk-39
+tab:unnamed-chunk-41
 fig:workflow2
 fig:qaqc
 tab:products

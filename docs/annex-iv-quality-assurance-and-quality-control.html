@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Annex IV: Quality assurance and quality control |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Annex IV: Quality assurance and quality control |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -142,6 +142,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -528,7 +532,7 @@ ISO_GSNmap_BD_UncertaintyMap030.tiff
 <p>In the following section possible value ranges for each product category (except available potassium) are presented. It is important to note that the provided ranges represent a gross approximation of the extremes within which the values should fall in. Results that fall outside these ranges need to be carefully evaluated based on local expertise and available literature.</p>
 <p>The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties.</p>
 <p>The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. <em>et al.</em> 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profiles sampled globally from a wide array of land covers and land uses.</p>
-<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:ranges">Table 10.2: </span>Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.
 </caption>
@@ -536,6 +540,12 @@ ISO_GSNmap_BD_UncertaintyMap030.tiff
 <tr>
 <th style="text-align:left;">
 Soil property
+</th>
+<th style="text-align:left;">
+property_id
+</th>
+<th style="text-align:left;">
+Unit
 </th>
 <th style="text-align:right;">
 Min
@@ -555,15 +565,18 @@ Max
 <th style="text-align:right;">
 n
 </th>
-<th style="text-align:left;">
-Unit
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
 Total N
+</td>
+<td style="text-align:left;">
+n_0_30
+</td>
+<td style="text-align:left;">
+ppm
 </td>
 <td style="text-align:right;">
 0.0
@@ -583,13 +596,16 @@ Total N
 <td style="text-align:right;">
 216362
 </td>
-<td style="text-align:left;">
-ppm
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 P Bray I
+</td>
+<td style="text-align:left;">
+p_0_30
+</td>
+<td style="text-align:left;">
+ppm
 </td>
 <td style="text-align:right;">
 0.0
@@ -609,13 +625,16 @@ P Bray I
 <td style="text-align:right;">
 40486
 </td>
-<td style="text-align:left;">
-ppm
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 P Mehlich 3
+</td>
+<td style="text-align:left;">
+p_0_30
+</td>
+<td style="text-align:left;">
+ppm
 </td>
 <td style="text-align:right;">
 0.0
@@ -635,13 +654,16 @@ P Mehlich 3
 <td style="text-align:right;">
 7242
 </td>
-<td style="text-align:left;">
-ppm
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 P Olsen
+</td>
+<td style="text-align:left;">
+p_0_30
+</td>
+<td style="text-align:left;">
+ppm
 </td>
 <td style="text-align:right;">
 0.0
@@ -661,13 +683,16 @@ P Olsen
 <td style="text-align:right;">
 8434
 </td>
-<td style="text-align:left;">
-ppm
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 CEC
+</td>
+<td style="text-align:left;">
+cec_0_30
+</td>
+<td style="text-align:left;">
+cmol(c)/kg
 </td>
 <td style="text-align:right;">
 0.1
@@ -687,13 +712,16 @@ CEC
 <td style="text-align:right;">
 295688
 </td>
-<td style="text-align:left;">
-cmol(c)/kg
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-pH water
+pH (water)
+</td>
+<td style="text-align:left;">
+ph_0_30
+</td>
+<td style="text-align:left;">
+/
 </td>
 <td style="text-align:right;">
 1.5
@@ -713,13 +741,16 @@ pH water
 <td style="text-align:right;">
 613322
 </td>
-<td style="text-align:left;">
-<ul>
-<li></td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Clay
+</td>
+<td style="text-align:left;">
+clay_0_30
+</td>
+<td style="text-align:left;">
+%
 </td>
 <td style="text-align:right;">
 0.0
@@ -739,13 +770,16 @@ Clay
 <td style="text-align:right;">
 590368
 </td>
-<td style="text-align:left;">
-%
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Silt
+</td>
+<td style="text-align:left;">
+silt_0_30
+</td>
+<td style="text-align:left;">
+%
 </td>
 <td style="text-align:right;">
 0.0
@@ -765,13 +799,16 @@ Silt
 <td style="text-align:right;">
 558233
 </td>
-<td style="text-align:left;">
-%
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Sand
+</td>
+<td style="text-align:left;">
+sand_0_30
+</td>
+<td style="text-align:left;">
+%
 </td>
 <td style="text-align:right;">
 0.0
@@ -791,13 +828,16 @@ Sand
 <td style="text-align:right;">
 482334
 </td>
-<td style="text-align:left;">
-%
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-SOC
+Soil Organic Carbon
+</td>
+<td style="text-align:left;">
+soc_0_30
+</td>
+<td style="text-align:left;">
+%
 </td>
 <td style="text-align:right;">
 0.0
@@ -817,13 +857,16 @@ SOC
 <td style="text-align:right;">
 471301
 </td>
-<td style="text-align:left;">
-%
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 Bulk density
+</td>
+<td style="text-align:left;">
+bd_0_30
+</td>
+<td style="text-align:left;">
+g/cm3
 </td>
 <td style="text-align:right;">
 0.0
@@ -843,13 +886,38 @@ Bulk density
 <td style="text-align:right;">
 116756
 </td>
+</tr>
+<tr>
 <td style="text-align:left;">
-g/cm3
+Available K
+</td>
+<td style="text-align:left;">
+k_0_30
+</td>
+<td style="text-align:left;">
+ppm
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 </tbody>
-</table></li>
-</ul>
+</table>
 
 </div>
 </div>
