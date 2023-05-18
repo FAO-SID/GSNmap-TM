@@ -27,14 +27,11 @@ gc()
 #_______________________________________________________________________________
 
 # 0 - User-defined variables ===================================================
-# wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
-#wd <- 'C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-#wd <- "/Users/luislado/Library/CloudStorage/Dropbox/GeoForsk/Clientes/FAO/GSNmap/Training Material/Digital-Soil-Mapping"
 
 # 1 - Set working directory and load necessary packages ========================
-setwd(wd) # change the path accordingly
-#(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))
+# Working directory
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("..")
 
 library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
@@ -266,7 +263,7 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 
 
 # 6 - Harmonize soil layers ====================================================
-source("03-Scripts/.spline_functions.R") 
+source("03-Scripts/spline_functions.R") 
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
