@@ -27,6 +27,18 @@ library(aqp) # for soil profile data
 #devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(mpspline2) # for horizon harmonization
 
+
+
+```
+
+
+```{r include=FALSE}
+library(kableExtra)
+library(data.table)
+library(mpspline2)
+library(plotly)
+
+
 ```
 
 The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). In both cases, each row represents a sample (or horizon) and each column represents a variable. Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
@@ -321,7 +333,7 @@ In the following a new dataframe 'd' is created in which the standard depth laye
 
 ```{r harmonize, eval = T, message = F, warning = F, results = 'hide'}
 # 6 - Harmonize soil layers ====================================================
-source("C:/GIT/GSNmap-TM/Digital-Soil-Mapping/03-Scripts/.spline_functions.R") 
+source("Digital-Soil-Mapping/03-Scripts/spline_functions.R") 
 ## 6.1 - Set target soil properties and depths ---------------------------------
 names(dat)
 dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)
