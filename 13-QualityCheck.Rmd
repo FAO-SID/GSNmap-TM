@@ -52,7 +52,7 @@ kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\la
 kable_classic(full_width = F)
 ```
 
-## QA/QC Script{-}  
+## QA/QC Script {-}  
 The following script automates the for Steps described in the previous sections. It is important to note that the script's main objective is to provide a fast alternative to check the output layers and that it does not replace the need to visually assess the final maps based on expert knowledge. 
 
 ```{r, eval=F}
