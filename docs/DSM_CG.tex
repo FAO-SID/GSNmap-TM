@@ -35,14 +35,46 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)},
-  pdfauthor={Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y.},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -197,9 +229,31 @@
 \usepackage{xcolor}
 \DeclareUnicodeCharacter{2212}{\textendash}
 \usepackage{rotating, graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)},
+  pdfauthor={Angelini, M.E, Luotto, I., Rodriguez Lado, L., Mainka, M., Yigini, Y., Tong, Y.},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{
 Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)}
@@ -210,7 +264,7 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)}
 }
 \makeatother
 \subtitle{version 0.2}
-\author{Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y.}
+\author{Angelini, M.E, Luotto, I., Rodriguez Lado, L., Mainka, M., Yigini, Y., Tong, Y.}
 \date{26-Oct-2022}
 
 \begin{document}
@@ -293,9 +347,6 @@ Placeholder
 \hypertarget{gee---google-earth-engine}{%
 \section{GEE - google earth engine}\label{gee---google-earth-engine}}
 
-\hypertarget{rgee---extension-to-use-google-earth-engine-in-r}{%
-\section{rgee - Extension to use google earth engine in R}\label{rgee---extension-to-use-google-earth-engine-in-r}}
-
 \hypertarget{digital-soil-mapping}{%
 \chapter{Digital Soil Mapping}\label{digital-soil-mapping}}
 
@@ -373,11 +424,35 @@ Placeholder
 \hypertarget{environmental-covariates-1}{%
 \section{Environmental covariates}\label{environmental-covariates-1}}
 
-\hypertarget{download-covariates-with-rgee}{%
-\section{Download covariates with rgee}\label{download-covariates-with-rgee}}
+\hypertarget{download-covariatesand-cropland-mask-with-google-earth-engine-gee}{%
+\section{Download covariatesand cropland mask with Google Earth Engine (GEE)}\label{download-covariatesand-cropland-mask-with-google-earth-engine-gee}}
 
-\hypertarget{obtaining-the-cropland-mask}{%
-\section{Obtaining the cropland mask}\label{obtaining-the-cropland-mask}}
+\hypertarget{assets}{%
+\subsection{Assets}\label{assets}}
+
+\hypertarget{define-the-region-of-interest-roi}{%
+\subsection{Define the region of interest (ROI)}\label{define-the-region-of-interest-roi}}
+
+\hypertarget{load-and-clip-the-covariates}{%
+\subsection{Load and clip the covariates}\label{load-and-clip-the-covariates}}
+
+\hypertarget{clean-holes-in-fpar-layers}{%
+\subsection{Clean holes in FPAR layers}\label{clean-holes-in-fpar-layers}}
+
+\hypertarget{visualize-and-export-the-covariates}{%
+\subsection{Visualize and export the covariates}\label{visualize-and-export-the-covariates}}
+
+\hypertarget{load-and-clip-the-copernicus-land-cover-map-and}{%
+\subsection{Load and clip the Copernicus land cover map and}\label{load-and-clip-the-copernicus-land-cover-map-and}}
+
+\hypertarget{reclassify-the-land-cover-map}{%
+\subsection{Reclassify the land cover map}\label{reclassify-the-land-cover-map}}
+
+\hypertarget{visualization-and-exporting-mask}{%
+\subsection{Visualization and exporting mask}\label{visualization-and-exporting-mask}}
+
+\hypertarget{run-and-export-in-gee}{%
+\section{Run and export in GEE}\label{run-and-export-in-gee}}
 
 \hypertarget{step-3-mapping-continuous-soil-properties}{%
 \chapter{Step 3: Mapping continuous soil properties}\label{step-3-mapping-continuous-soil-properties}}
@@ -454,21 +529,21 @@ If these links do not help you, contact us including the following text:
 
 Placeholder
 
-\hypertarget{script-0-installation-of-rgee}{%
-\section*{Script 0: Installation of rgee}\label{script-0-installation-of-rgee}}
-\addcontentsline{toc}{section}{Script 0: Installation of rgee}
+\hypertarget{script-0-introduction-to-r}{%
+\section*{Script 0: Introduction to R}\label{script-0-introduction-to-r}}
+\addcontentsline{toc}{section}{Script 0: Introduction to R}
 
-\hypertarget{script-1-data-preparation}{%
-\section*{Script 1: Data preparation}\label{script-1-data-preparation}}
-\addcontentsline{toc}{section}{Script 1: Data preparation}
+\hypertarget{script-2-data-preparation}{%
+\section*{Script 2: Data preparation}\label{script-2-data-preparation}}
+\addcontentsline{toc}{section}{Script 2: Data preparation}
 
-\hypertarget{script-2-download-environmental-covariates}{%
-\section*{Script 2: Download environmental covariates}\label{script-2-download-environmental-covariates}}
-\addcontentsline{toc}{section}{Script 2: Download environmental covariates}
+\hypertarget{scripts-3-download-environmental-covariates}{%
+\section*{Scripts 3: Download environmental covariates}\label{scripts-3-download-environmental-covariates}}
+\addcontentsline{toc}{section}{Scripts 3: Download environmental covariates}
 
-\hypertarget{script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates}{%
-\section*{Script 3: Modelling, validation and prediction using soil data with coordinates}\label{script-3-modelling-validation-and-prediction-using-soil-data-with-coordinates}}
-\addcontentsline{toc}{section}{Script 3: Modelling, validation and prediction using soil data with coordinates}
+\hypertarget{script-4-modelling-validation-and-prediction-using-soil-data-with-coordinates}{%
+\section*{Script 4: Modelling, validation and prediction using soil data with coordinates}\label{script-4-modelling-validation-and-prediction-using-soil-data-with-coordinates}}
+\addcontentsline{toc}{section}{Script 4: Modelling, validation and prediction using soil data with coordinates}
 
 \hypertarget{annex-iii-mapping-without-point-coordinates}{%
 \chapter*{Annex III: Mapping without point coordinates}\label{annex-iii-mapping-without-point-coordinates}}
@@ -480,31 +555,507 @@ Placeholder
 \chapter*{Annex IV: Quality assurance and quality control}\label{annex-iv-quality-assurance-and-quality-control}}
 \addcontentsline{toc}{chapter}{Annex IV: Quality assurance and quality control}
 
-Placeholder
+The following protocol was devised to provide National Experts with a step-by-step guideline to perform a Quality Assurance (QA) and Quality Control (QC) of the 10 GSNmap first phase products.
+
+The following protocol does not provide any guidance in terms of uncertainty estimation and validation. For more details and information on the estimation of uncertainties and potential map validation strategies please refer to Chapter 8.4.
+
+Quality assurance and quality control consist of activities to ensure the quality of a particular result. Quality control is a reactive process that focuses on identifying defects and errors while quality assurance is a proactive approach aimed at preventing defects and errors. In the context of digital soil mapping, both processes are often interlinked. A QA is interlinked with a QC when it identifies defects and the QA remodels the process to eliminate the defects and prevent them from recurring (Chapman, 2005)(Figure\ref{fig:qaqc}).
+
+\begin{figure}
+\includegraphics[width=6.43in]{images/QA_QC} \caption{Quality assurance and quality control.}\label{fig:qaqc}
+\end{figure}
+
+Each step in the following protocol should be considered in order to detect and eliminate errors, address data inaccuracies and assess the output completeness.
 
 \hypertarget{step-1-completeness-of-layers}{%
 \section*{Step 1: Completeness of layers}\label{step-1-completeness-of-layers}}
 \addcontentsline{toc}{section}{Step 1: Completeness of layers}
 
+The following Table \ref(tab:products) gives an overview of all the GSNmap products in alphabetical order. Each product should include the ISO 3166-1 alpha-3 country code as uppercase letters in its name. For instance, in the case of Turkiye, ISO\_GSNmap\_Ntot\_Map030 should be changed to TUR\_GSNmap\_Ntot\_Map030.
+
+All 10 soil property and soil nutrient maps with their corresponding 10 uncertainty layers must be georeferenced TIF (.tif) files.
+
+\label{tab:products}\label{tab:products}Data product overview.
+
+Product
+
+Filename
+
+Major nutrients (3 files)
+
+Total Nitrogen map
+
+ISO\_GSNmap\_Ntot\_Map030.tiff
+
+Available Phosphorus map
+
+ISO\_GSNmap\_Pav\_Map030.tiff
+
+Total Potassium map
+
+ISO\_GSNmap\_Ktot\_Map030.tiff
+
+Associated soil properties (7 files)
+
+Cation exchange capacity map
+
+ISO\_GSNmap\_CEC\_Map030.tiff
+
+Soil pH map
+
+ISO\_GSNmap\_pH\_Map030.tiff
+
+Soil clay map
+
+ISO\_GSNmap\_Clay\_Map030.tiff
+
+Soil silt map
+
+ISO\_GSNmap\_Silt\_Map030.tiff
+
+Soil sand map
+
+ISO\_GSNmap\_Sand\_Map030.tiff
+
+Soil organic carbon map
+
+ISO\_GSNmap\_SOC\_Map030.tiff
+
+Soil bulk density map
+
+ISO\_GSNmap\_BD\_Map030.tiff
+
+Uncertainty maps (10 files)
+
+Total Nitrogen uncertainty map
+
+ISO\_GSNmap\_Ntot\_UncertaintyMap030.tiff
+
+Available Phosphorus uncertainty map
+
+ISO\_GSNmap\_Pav\_UncertaintyMap030.tiff
+
+Total Potassium uncertainty map
+
+ISO\_GSNmap\_Ktot\_UncertaintyMap030.tiff
+
+Cation exchange capacity uncertainty map
+
+ISO\_GSNmap\_CEC\_UncertaintyMap030.tiff
+
+Soil pH uncertainty map
+
+ISO\_GSNmap\_pH\_UncertaintyMap030.tiff
+
+Soil clay uncertainty map
+
+ISO\_GSNmap\_Clay\_UncertaintyMap030.tiff
+
+Soil silt uncertainty map
+
+ISO\_GSNmap\_Silt\_UncertaintyMap030.tiff
+
+Soil sand uncertainty map
+
+ISO\_GSNmap\_Sand\_UncertaintyMap030.tiff
+
+Soil organic carbon uncertainty map
+
+ISO\_GSNmap\_SOC\_UncertaintyMap030.tiff
+
+Soil bulk density uncertainty map
+
+ISO\_GSNmap\_BD\_UncertaintyMap030.tiff
+
 \hypertarget{step-2-check-the-projection-and-resolution-of-all-data-products}{%
 \section*{Step 2: Check the projection and resolution of all data products}\label{step-2-check-the-projection-and-resolution-of-all-data-products}}
 \addcontentsline{toc}{section}{Step 2: Check the projection and resolution of all data products}
+
+Open the products in QGIS or any other preferred GIS platform. Check that the projection of all products is EPSG:4326 - WGS 84 (Layer properties). Check that the spatial resolution (pixel size) (Layer properties) is equal to \textasciitilde0.002246 degrees ; 250 m x 250 m at the equator.
 
 \hypertarget{step-3-check-the-extent}{%
 \section*{Step 3: Check the extent}\label{step-3-check-the-extent}}
 \addcontentsline{toc}{section}{Step 3: Check the extent}
 
+Visualize the 20 products in QGIS or any preferred GIS platform. Load a land-use layer to visually assess that the simulations were done exclusively on croplands.
+
 \hypertarget{step-4-check-the-units-ranges-and-outliers}{%
 \section*{Step 4: Check the units, ranges, and outliers}\label{step-4-check-the-units-ranges-and-outliers}}
 \addcontentsline{toc}{section}{Step 4: Check the units, ranges, and outliers}
 
-\hypertarget{major-nutrients}{%
-\subsection*{Major nutrients}\label{major-nutrients}}
-\addcontentsline{toc}{subsection}{Major nutrients}
+In the following section possible value ranges for each product category (except available potassium) are presented. It is important to note that the provided ranges represent a gross approximation of the extremes within which the values should fall in. Results that fall outside these ranges need to be carefully evaluated based on local expertise and available literature.
 
-\hypertarget{associated-soil-properties}{%
-\subsection*{Associated soil properties}\label{associated-soil-properties}}
-\addcontentsline{toc}{subsection}{Associated soil properties}
+The provided ranges can be compared in QGIS, R, or any preferred platform. Descriptive layer statistics can be viewed in QGIS under Layer Properties.
+
+The following table (Table 10.2) presents ranges of possible values for 9 of the 10 mandatory GSNmap products. The ranges were calculated based on the distribution of the soil profile data within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019 (Batjes, N. H. \emph{et al.} 2020). It is important to note that the data was not filtered for croplands and that the ranges were extracted from soil profiles sampled globally from a wide array of land covers and land uses.
+
+\label{tab:ranges}\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.
+
+Soil property
+
+property\_id
+
+Unit
+
+Min
+
+1st Quartile
+
+Median
+
+3st Quartile
+
+Max
+
+n
+
+Total N
+
+n\_0\_30
+
+ppm
+
+0.0
+
+400.0
+
+700.0
+
+1500.0
+
+84000.0
+
+216362
+
+P Bray I
+
+p\_0\_30
+
+ppm
+
+0.0
+
+1.6
+
+5.0
+
+16.0
+
+150.0
+
+40486
+
+P Mehlich 3
+
+p\_0\_30
+
+ppm
+
+0.0
+
+1.6
+
+6.1
+
+22.0
+
+149.4
+
+7242
+
+P Olsen
+
+p\_0\_30
+
+ppm
+
+0.0
+
+0.7
+
+2.0
+
+4.3
+
+141.0
+
+8434
+
+CEC
+
+cec\_0\_30
+
+cmol(c)/kg
+
+0.1
+
+7.5
+
+14.0
+
+23.0
+
+140.0
+
+295688
+
+pH (water)
+
+ph\_0\_30
+
+/
+
+1.5
+
+5.2
+
+6.2
+
+7.5
+
+12.3
+
+613322
+
+Clay
+
+clay\_0\_30
+
+\%
+
+0.0
+
+11.1
+
+21.9
+
+35.3
+
+100.0
+
+590368
+
+Silt
+
+silt\_0\_30
+
+\%
+
+0.0
+
+15.0
+
+30.0
+
+47.6
+
+100.0
+
+558233
+
+Sand
+
+sand\_0\_30
+
+\%
+
+0.0
+
+15.0
+
+36.0
+
+60.2
+
+100.0
+
+482334
+
+Soil Organic Carbon
+
+soc\_0\_30
+
+\%
+
+0.0
+
+2.0
+
+5.1
+
+14.0
+
+99.4
+
+471301
+
+Bulk density
+
+bd\_0\_30
+
+g/cm3
+
+0.0
+
+1.3
+
+1.4
+
+1.7
+
+2.6
+
+116756
+
+Available K
+
+k\_0\_30
+
+ppm
+
+NA
+
+NA
+
+NA
+
+NA
+
+NA
+
+NA
+
+\hypertarget{qaqc-script}{%
+\section*{QA/QC Script}\label{qaqc-script}}
+\addcontentsline{toc}{section}{QA/QC Script}
+
+The following script automates the for Steps described in the previous sections. It is important to note that the script's main objective is to provide a fast alternative to check the output layers and that it does not replace the need to visually assess the final maps based on expert knowledge.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#}
+\CommentTok{\# QA/QC}
+\CommentTok{\# Soil Property Mapping}
+\CommentTok{\#}
+\CommentTok{\# GSP{-}Secretariat}
+\CommentTok{\# Contact: Isabel.Luotto@fao.org}
+\CommentTok{\#          Marcos.Angelini@fao.org}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+
+\CommentTok{\#Empty environment and cache }
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+\FunctionTok{gc}\NormalTok{()}
+
+\CommentTok{\# Content of this script =======================================================}
+\CommentTok{\# 0 {-} Set working directory and packages}
+\CommentTok{\# 1 {-} Step 1: Completeness of layers }
+\CommentTok{\# 2 {-} Step 2: Check the projection and resolution of all data products}
+\CommentTok{\# 3 {-} Step 3: Check the extent}
+\CommentTok{\# 4 {-} Step 4: Check the units, ranges, and outliers}
+\CommentTok{\#}
+\CommentTok{\# 5 {-} Export QA/QC report}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+
+
+\CommentTok{\# 0 {-} Set working directory, soil attribute, and packages ======================}
+
+\CommentTok{\# Working directory}
+\NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}C:/Users/hp/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
+\CommentTok{\#wd \textless{}{-} \textquotesingle{}C:/Users/luottoi/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
+\FunctionTok{setwd}\NormalTok{(wd)}
+
+\CommentTok{\# Define country of interes throuhg 3{-}digit ISO code}
+\NormalTok{ISO }\OtherTok{=}\StringTok{\textquotesingle{}ISO\textquotesingle{}}
+
+\CommentTok{\#load packages}
+\FunctionTok{library}\NormalTok{(terra)}
+\FunctionTok{library}\NormalTok{(readxl)}
+
+\CommentTok{\# Load reference values}
+\NormalTok{dt }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"../tables/wosis\_dist.xlsx"}\NormalTok{)}
+\NormalTok{dt }\OtherTok{\textless{}{-}}\NormalTok{ dt[}\SpecialCharTok{!}\NormalTok{(dt}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Soil property}\StringTok{\textasciigrave{}} \SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{( }\StringTok{"P Bray I"}\NormalTok{,}\StringTok{"P Olsen"}\NormalTok{ )),]}
+
+\DocumentationTok{\#\# Set potential ranges for Available K in ppm}
+
+\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id}\SpecialCharTok{==}\StringTok{\textquotesingle{}k\_0\_30\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Min\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id}\SpecialCharTok{==}\StringTok{\textquotesingle{}k\_0\_30\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Max\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{150}
+\CommentTok{\# 1 {-} Step 1: Completeness of layers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\#Check number of layers}
+
+\DocumentationTok{\#\# Specify number of soil property maps generated (not including the uncertainty layers)}
+
+\DocumentationTok{\#\# Check if all layers were correctly generated (including uncertainty layers)}
+\CommentTok{\# and if the correct ISO code and soil property ids were included in the files names}
+\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}02{-}Outputs/maps/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ T)}
+\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}02{-}Outputs/maps/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ F)}
+\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{sub}\NormalTok{(}\StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, names)}
+
+\NormalTok{Step1 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id =}\NormalTok{dt}\SpecialCharTok{$}\NormalTok{property\_id)}
+\NormalTok{Step1}\SpecialCharTok{$}\NormalTok{Names }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Rename layer\textquotesingle{}}
+\NormalTok{Step1}\SpecialCharTok{$}\NormalTok{Uncertainty }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Missing\textquotesingle{}}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(dt}\SpecialCharTok{$}\NormalTok{property\_id))\{}
+
+\NormalTok{  t11 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}sd\_\textquotesingle{}}\NormalTok{,i), files)}
+\NormalTok{  t12 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), files)}
+\NormalTok{  t13 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(ISO, files)}
+  
+\NormalTok{  Step1[Step1}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}Names\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t12[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{\&}\NormalTok{ t13[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T, }\StringTok{\textquotesingle{}Correctly named\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Rename layer\textquotesingle{}}\NormalTok{)}
+\NormalTok{  Step1[Step1}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}Uncertainty\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t11[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T , }\StringTok{\textquotesingle{}Generated\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Missing\textquotesingle{}}\NormalTok{)}
+  
+\NormalTok{\}}
+
+
+\CommentTok{\# 2 {-} Step 2: Check the projection and resolution of all data products {-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(files)}
+\FunctionTok{names}\NormalTok{(r) }\OtherTok{\textless{}{-}}\NormalTok{ names}
+\CommentTok{\# Check projection (WGS 84)}
+\NormalTok{(}\AttributeTok{Step21=}\FunctionTok{crs}\NormalTok{(r, }\AttributeTok{describe=}\ConstantTok{TRUE}\NormalTok{)}\SpecialCharTok{$}\NormalTok{name }\SpecialCharTok{==}\StringTok{\textquotesingle{}WGS 84\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Check resolution (250 m)}
+\NormalTok{(}\AttributeTok{Step22=}\FunctionTok{round}\NormalTok{(}\FunctionTok{res}\NormalTok{(r)[[}\DecValTok{1}\NormalTok{]], }\DecValTok{5}\NormalTok{) }\SpecialCharTok{==} \FloatTok{0.00225}\NormalTok{)}
+
+\CommentTok{\# 3 {-} Step 3: Check the extent {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Check if the layers were masked with a cropland mask}
+
+\NormalTok{mask }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{\textquotesingle{}01{-}Data/covs/mask.tif\textquotesingle{}}\NormalTok{)}
+\NormalTok{mask }\OtherTok{\textless{}{-}} \FunctionTok{project}\NormalTok{(mask, r[[}\DecValTok{1}\NormalTok{]])}
+
+\NormalTok{t }\OtherTok{\textless{}{-}}\NormalTok{ r[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{t }\OtherTok{\textless{}{-}} \FunctionTok{ifel}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(t),}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+
+\NormalTok{(}\AttributeTok{Step3=} \FunctionTok{sum}\NormalTok{(}\FunctionTok{values}\NormalTok{(mask }\SpecialCharTok{{-}}\NormalTok{t, }\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textless{}=}\DecValTok{10}\NormalTok{)}
+
+
+
+\CommentTok{\# 4 {-} Step 4: Check the units, ranges, and outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{Step4 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id =}\NormalTok{dt}\SpecialCharTok{$}\NormalTok{property\_id)}
+\NormalTok{Step4}\SpecialCharTok{$}\NormalTok{in\_range }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Values not in range\textquotesingle{}}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(dt}\SpecialCharTok{$}\NormalTok{property\_id))\{}
+\NormalTok{t41 }\OtherTok{\textless{}{-}}\FunctionTok{min}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textgreater{}=}\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Min\textquotesingle{}}\NormalTok{]}
+\NormalTok{t42 }\OtherTok{\textless{}{-}}\FunctionTok{max}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textless{}=}\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Max\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{Step4[Step4}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}in\_range\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t41[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{\&}\NormalTok{ t42[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T, }\StringTok{\textquotesingle{}Values in range\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Values not in range\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{\}}
+
+
+
+\CommentTok{\# 5 {-} Export QA/QC report {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{report }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(Step4, Step1, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}property\_id\textquotesingle{}}\NormalTok{))}
+
+\NormalTok{report}\SpecialCharTok{$}\NormalTok{projection }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(Step21, }\StringTok{\textquotesingle{}WGS 84\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Reproject layer\textquotesingle{}}\NormalTok{)}
+\NormalTok{report}\SpecialCharTok{$}\NormalTok{resolution }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(Step21, }\StringTok{\textquotesingle{}250 m\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Resample layer\textquotesingle{}}\NormalTok{)}
+\NormalTok{report}\SpecialCharTok{$}\NormalTok{extent }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(Step3, }\StringTok{\textquotesingle{}Croplands\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mask out layer\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{report}
+
+\FunctionTok{write.csv}\NormalTok{(report, }\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}National Report/QA\_QC\_\textquotesingle{}}\NormalTok{, ISO, }\StringTok{\textquotesingle{}.csv\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{references}{%
 \chapter*{References}\label{references}}
