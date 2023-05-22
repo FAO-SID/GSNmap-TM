@@ -180,7 +180,7 @@ for (j in seq_along(tile)) {
   # crop the selected covariates with the tile j
   covst <- crop(covs[[fs_vars]], t)
   
-  # create a function to extract the predited values from ranger::predict.ranger()
+  # create a function to extract the predicted values from ranger::predict.ranger()
   pfun <- \(...) { predict(...)$predictions |> t() }
   
   # predict conditional standard deviation

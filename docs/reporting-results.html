@@ -187,7 +187,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="contributors-and-reviewers.html"><a href="contributors-and-reviewers.html"><i class="fa fa-check"></i>Contributors and reviewers</a></li>
 <li class="chapter" data-level="1" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>1</b> Presentation</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="presentation.html"><a href="presentation.html#background-and-objectives"><i class="fa fa-check"></i><b>1.1</b> Background and Objectives</a></li>
+<li class="chapter" data-level="1.1" data-path="presentation.html"><a href="presentation.html#background-and-objectives"><i class="fa fa-check"></i><b>1.1</b> Background and objectives</a></li>
 <li class="chapter" data-level="1.2" data-path="presentation.html"><a href="presentation.html#global-soil-partnership"><i class="fa fa-check"></i><b>1.2</b> Global Soil Partnership</a></li>
 <li class="chapter" data-level="1.3" data-path="presentation.html"><a href="presentation.html#country-driven-approach-and-tasks"><i class="fa fa-check"></i><b>1.3</b> Country-driven approach and tasks</a></li>
 <li class="chapter" data-level="1.4" data-path="presentation.html"><a href="presentation.html#how-to-use-this-book"><i class="fa fa-check"></i><b>1.4</b> How to use this book</a></li>
@@ -258,11 +258,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html"><i class="fa fa-check"></i><b>8</b> Step 3: Mapping continuous soil properties</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#getting-prepared-to-map"><i class="fa fa-check"></i><b>8.1</b> Getting prepared to map</a></li>
-<li class="chapter" data-level="8.2" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#covariate-selection-and-repeated-k-fold-cross-validation"><i class="fa fa-check"></i><b>8.2</b> Covariate selection and repeated k-fold cross-validation</a></li>
-<li class="chapter" data-level="8.3" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#model-calibration"><i class="fa fa-check"></i><b>8.3</b> Model calibration</a></li>
-<li class="chapter" data-level="8.4" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#uncertainty-assessment"><i class="fa fa-check"></i><b>8.4</b> Uncertainty assessment</a></li>
-<li class="chapter" data-level="8.5" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#predicting-soil-attributes"><i class="fa fa-check"></i><b>8.5</b> Predicting soil attributes</a></li>
+<li class="chapter" data-level="8.1" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#mapping-soil-properties-with-random-forest"><i class="fa fa-check"></i><b>8.1</b> Mapping Soil Properties with Random Forest</a></li>
+<li class="chapter" data-level="8.2" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#getting-prepared-to-map"><i class="fa fa-check"></i><b>8.2</b> Getting prepared to map</a></li>
+<li class="chapter" data-level="8.3" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#covariate-selection"><i class="fa fa-check"></i><b>8.3</b> Covariate selection</a></li>
+<li class="chapter" data-level="8.4" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#model-calibration"><i class="fa fa-check"></i><b>8.4</b> Model calibration</a></li>
+<li class="chapter" data-level="8.5" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#uncertainty-assessment"><i class="fa fa-check"></i><b>8.5</b> Uncertainty assessment</a></li>
+<li class="chapter" data-level="8.6" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#predicting-soil-attributes"><i class="fa fa-check"></i><b>8.6</b> Predicting soil attributes</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>9</b> Reporting results</a>
 <ul>
@@ -327,14 +328,14 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
 <p>We provide a .Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
 <p>Then, run the following code:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="reporting-results.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb112-2"><a href="reporting-results.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb112-3"><a href="reporting-results.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb112-4"><a href="reporting-results.html#cb112-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb112-5"><a href="reporting-results.html#cb112-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb112-6"><a href="reporting-results.html#cb112-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb112-7"><a href="reporting-results.html#cb112-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-8"><a href="reporting-results.html#cb112-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="reporting-results.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
+<span id="cb105-2"><a href="reporting-results.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
+<span id="cb105-3"><a href="reporting-results.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
+<span id="cb105-4"><a href="reporting-results.html#cb105-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
+<span id="cb105-5"><a href="reporting-results.html#cb105-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
+<span id="cb105-6"><a href="reporting-results.html#cb105-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
+<span id="cb105-7"><a href="reporting-results.html#cb105-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-8"><a href="reporting-results.html#cb105-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 <p>The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.</p>
 <div id="data-submission-form" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Data submission form<a href="reporting-results.html#data-submission-form" class="anchor-section" aria-label="Anchor link to header"></a></h2>
