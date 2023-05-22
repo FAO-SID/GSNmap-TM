@@ -91,7 +91,9 @@ mask <- project(mask, r[[1]])
 t <- r[[1]]
 t <- ifel(!is.na(t),1, NA)
 
-(Step3= sum(values(mask -t, na.rm=T)) <=10)
+t3 <- sum(values(t, na.rm=T))-sum(values(mask, na.rm=T))
+
+(Step3= t3 <=10)
 
 
 

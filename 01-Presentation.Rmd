@@ -2,8 +2,8 @@
 
 # Presentation
 
-##	Background and objectives
-Soil nutrient availability can affect ecosystem carbon cycling, plant phenology, plant diversity and community composition, plant-herbivore and plant-soil-microbe interactions, as well as the structure of trophic food webs [@vanSundert2020]. Thus, the broad range of effects of nutrient availability also affects ecosystem functioning in face of global change, for instance the response of plants to elevated levels of CO~2~ [@vicca2018]. 
+##	Background and Objectives
+Soil nutrient availability can affect ecosystem carbon cycling, plant phenology, plant diversity and community composition, plant-herbivore and plant-soil-microbe interactions, as well as the structure of trophic food webs [@vanSundert2020]. Thus, the broad range of effects of nutrient availability also affects ecosystem functioning in face of global changes, for instance the response of plants to elevated levels of CO~2~ [@vicca2018]. 
 
 In the context of agriculture, nutrient availability modulates crop productivity and thus food production. However, the COVID-19 pandemic, current conflicts and devastating extreme weather events triggered by climate change jeopardise achieving sustainable development goal (SDG) 2 (Zero Hunger) by 2030. To date, a total number of around 2.3 billion people are affected by moderate and severe food insecurity [@FAO2022]. Despite soil nutrient status and availability being vital to the provisioning of ecosystem services, globally-accessible and harmonised datasets on soil nutrient stocks and soil properties that govern nutrient availability are missing. 
 
