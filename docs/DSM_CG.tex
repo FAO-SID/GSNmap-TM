@@ -459,11 +459,14 @@ Placeholder
 
 Placeholder
 
+\hypertarget{mapping-soil-properties-with-random-forest}{%
+\section{Mapping Soil Properties with Random Forest}\label{mapping-soil-properties-with-random-forest}}
+
 \hypertarget{getting-prepared-to-map}{%
 \section{Getting prepared to map}\label{getting-prepared-to-map}}
 
-\hypertarget{covariate-selection-and-repeated-k-fold-cross-validation}{%
-\section{Covariate selection and repeated k-fold cross-validation}\label{covariate-selection-and-repeated-k-fold-cross-validation}}
+\hypertarget{covariate-selection}{%
+\section{Covariate selection}\label{covariate-selection}}
 
 \hypertarget{model-calibration}{%
 \section{Model calibration}\label{model-calibration}}
@@ -973,8 +976,12 @@ The following script automates the for Steps described in the previous sections.
 \FunctionTok{library}\NormalTok{(readxl)}
 
 \CommentTok{\# Load reference values}
-\NormalTok{dt }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"../tables/wosis\_dist.xlsx"}\NormalTok{)}
+\NormalTok{dt }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"C:/Users/luottoi/Documents/GitHub/GSNmap{-}TM/tables/wosis\_dist.xlsx"}\NormalTok{)}
 \NormalTok{dt }\OtherTok{\textless{}{-}}\NormalTok{ dt[}\SpecialCharTok{!}\NormalTok{(dt}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Soil property}\StringTok{\textasciigrave{}} \SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{( }\StringTok{"P Bray I"}\NormalTok{,}\StringTok{"P Olsen"}\NormalTok{ )),]}
+
+\CommentTok{\# In case old naming system was used}
+\NormalTok{dt}\SpecialCharTok{$}\NormalTok{old\_prop\_ids }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Ntot\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Pav\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}CEC\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pH\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Clay\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Silt\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sand\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}SOC\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}BD\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Kav\textquotesingle{}}\NormalTok{)}
+
 
 \DocumentationTok{\#\# Set potential ranges for Available K in ppm}
 
@@ -988,18 +995,23 @@ The following script automates the for Steps described in the previous sections.
 
 \DocumentationTok{\#\# Check if all layers were correctly generated (including uncertainty layers)}
 \CommentTok{\# and if the correct ISO code and soil property ids were included in the files names}
-\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}02{-}Outputs/maps/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ T)}
-\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}02{-}Outputs/maps/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ F)}
+\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ T)}
+\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{( }\AttributeTok{pattern=} \StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ F)}
 \NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{sub}\NormalTok{(}\StringTok{\textquotesingle{}.tif\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, names)}
 
-\NormalTok{Step1 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id =}\NormalTok{dt}\SpecialCharTok{$}\NormalTok{property\_id)}
+
+\CommentTok{\# Switch depending on the naming system (i.e. files have e.g. Pav instead of p\_0\_30)}
+\CommentTok{\#Step1 \textless{}{-}data.frame(property\_id =dt$property\_id)}
+\NormalTok{Step1 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id =}\NormalTok{dt}\SpecialCharTok{$}\NormalTok{old\_prop\_ids) }\CommentTok{\#old naming system}
+
 \NormalTok{Step1}\SpecialCharTok{$}\NormalTok{Names }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Rename layer\textquotesingle{}}
 \NormalTok{Step1}\SpecialCharTok{$}\NormalTok{Uncertainty }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Missing\textquotesingle{}}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(dt}\SpecialCharTok{$}\NormalTok{property\_id))\{}
-
-\NormalTok{  t11 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}sd\_\textquotesingle{}}\NormalTok{,i), files)}
-\NormalTok{  t12 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), files)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(Step1}\SpecialCharTok{$}\NormalTok{property\_id))\{}
+  
+\NormalTok{  t11 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}SD\_GSNmap\_\textquotesingle{}}\NormalTok{,i), files)}\SpecialCharTok{|}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}sd\_\textquotesingle{}}\NormalTok{,i), files)}
+\NormalTok{  t12 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(ISO,}\StringTok{\textquotesingle{}\_GSNmap\_\textquotesingle{}}\NormalTok{,i), files)}\SpecialCharTok{|}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), files)}
+  
 \NormalTok{  t13 }\OtherTok{\textless{}{-}} \ConstantTok{TRUE} \SpecialCharTok{\%in\%} \FunctionTok{grepl}\NormalTok{(ISO, files)}
   
 \NormalTok{  Step1[Step1}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}Names\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t12[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{\&}\NormalTok{ t13[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T, }\StringTok{\textquotesingle{}Correctly named\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Rename layer\textquotesingle{}}\NormalTok{)}
@@ -1020,26 +1032,29 @@ The following script automates the for Steps described in the previous sections.
 \CommentTok{\# 3 {-} Step 3: Check the extent {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Check if the layers were masked with a cropland mask}
 
-\NormalTok{mask }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{\textquotesingle{}01{-}Data/covs/mask.tif\textquotesingle{}}\NormalTok{)}
+\NormalTok{mask }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{\textquotesingle{}mask/mask.tif\textquotesingle{}}\NormalTok{)}
 \NormalTok{mask }\OtherTok{\textless{}{-}} \FunctionTok{project}\NormalTok{(mask, r[[}\DecValTok{1}\NormalTok{]])}
 
 \NormalTok{t }\OtherTok{\textless{}{-}}\NormalTok{ r[[}\DecValTok{1}\NormalTok{]]}
 \NormalTok{t }\OtherTok{\textless{}{-}} \FunctionTok{ifel}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(t),}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
 
-\NormalTok{(}\AttributeTok{Step3=} \FunctionTok{sum}\NormalTok{(}\FunctionTok{values}\NormalTok{(mask }\SpecialCharTok{{-}}\NormalTok{t, }\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textless{}=}\DecValTok{10}\NormalTok{)}
+\NormalTok{t3 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{values}\NormalTok{(t, }\AttributeTok{na.rm=}\NormalTok{T))}\SpecialCharTok{{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{values}\NormalTok{(mask, }\AttributeTok{na.rm=}\NormalTok{T))}
+
+\NormalTok{(}\AttributeTok{Step3=}\NormalTok{ t3 }\SpecialCharTok{\textless{}=}\DecValTok{10}\NormalTok{)}
 
 
 
 \CommentTok{\# 4 {-} Step 4: Check the units, ranges, and outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{Step4 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id =}\NormalTok{dt}\SpecialCharTok{$}\NormalTok{property\_id)}
+\NormalTok{Step4 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{property\_id=}\NormalTok{Step1}\SpecialCharTok{$}\NormalTok{property\_id)}
+\CommentTok{\#Step4 \textless{}{-} data.frame(property\_id =dt$property\_id)}
 \NormalTok{Step4}\SpecialCharTok{$}\NormalTok{in\_range }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Values not in range\textquotesingle{}}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(dt}\SpecialCharTok{$}\NormalTok{property\_id))\{}
-\NormalTok{t41 }\OtherTok{\textless{}{-}}\FunctionTok{min}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textgreater{}=}\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Min\textquotesingle{}}\NormalTok{]}
-\NormalTok{t42 }\OtherTok{\textless{}{-}}\FunctionTok{max}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textless{}=}\NormalTok{dt[dt}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Max\textquotesingle{}}\NormalTok{]}
-
-\NormalTok{Step4[Step4}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}in\_range\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t41[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{\&}\NormalTok{ t42[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T, }\StringTok{\textquotesingle{}Values in range\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Values not in range\textquotesingle{}}\NormalTok{)}
-
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(Step4}\SpecialCharTok{$}\NormalTok{property\_id))\{}
+\NormalTok{  t41 }\OtherTok{\textless{}{-}}\FunctionTok{min}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))}\SpecialCharTok{|}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(ISO,}\StringTok{\textquotesingle{}\_GSNmap\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textgreater{}=}\NormalTok{dt[Step4}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Min\textquotesingle{}}\NormalTok{]}
+\NormalTok{  t42 }\OtherTok{\textless{}{-}}\FunctionTok{max}\NormalTok{(}\FunctionTok{values}\NormalTok{(r[[}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}mean\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))}\SpecialCharTok{|}\FunctionTok{grepl}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(ISO,}\StringTok{\textquotesingle{}\_GSNmap\_\textquotesingle{}}\NormalTok{,i), }\FunctionTok{names}\NormalTok{(r))]],}\AttributeTok{na.rm=}\NormalTok{T)) }\SpecialCharTok{\textless{}=}\NormalTok{dt[Step4}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{ i, }\StringTok{\textquotesingle{}Max\textquotesingle{}}\NormalTok{]}
+  
+\NormalTok{  Step4[Step4}\SpecialCharTok{$}\NormalTok{property\_id }\SpecialCharTok{==}\NormalTok{i, }\StringTok{\textquotesingle{}in\_range\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(t41[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{\&}\NormalTok{ t42[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{T, }\StringTok{\textquotesingle{}Values in range\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Values not in range\textquotesingle{}}\NormalTok{)}
+  
 \NormalTok{\}}
 
 
@@ -1053,7 +1068,7 @@ The following script automates the for Steps described in the previous sections.
 
 \NormalTok{report}
 
-\FunctionTok{write.csv}\NormalTok{(report, }\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}National Report/QA\_QC\_\textquotesingle{}}\NormalTok{, ISO, }\StringTok{\textquotesingle{}.csv\textquotesingle{}}\NormalTok{))}
+\FunctionTok{write.csv}\NormalTok{(report, }\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}QA\_QC\_\textquotesingle{}}\NormalTok{, ISO, }\StringTok{\textquotesingle{}.csv\textquotesingle{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 

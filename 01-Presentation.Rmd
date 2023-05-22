@@ -25,7 +25,18 @@ The GSNmap initiative will be jointly implemented by the International Network o
 * Phase I: development of soil nutrient and associated soil property maps;
 * Phase II: quantification, analysis, projections of nutrient budgets for agricultural land use systems at national, regional and global scale. 
 
-These guidelines only concern GSNmap Phase I, while the guidelines for the GSNmap Phase II will be published in the fourth quarter of 2022.
+These guidelines only concern GSNmap Phase I, while the guidelines for the GSNmap Phase II will be published in the fourth quarter of 2022. The Technical Manual covers the generation of soil property maps for the soil attributes specified in table \@ref(tab:overview_prop). It is based on the contribution of each element to the average plant content.
+
+
+
+```{r overview_prop, echo = FALSE, message=F, warning=F}
+options(knitr.table.format = "HTML")
+library(readxl)
+library(kableExtra)
+dt <- read_xlsx("tables/wosis_dist.xlsx")
+kable(booktabs = T, dt[,c("Soil property","property_id","Unit" )], col.names = gsub("[.]", " ", names(dt[,c("Soil property","property_id","Unit" )])), caption = 'Mandatory soil attributes and units of the phase I Global Soil Nutrient and Nutrient Budget Maps', format = 'html') %>%
+kable_classic(full_width = F)
+```
 Depending on national data availability and technical capacities, ad-hoc solutions will be developed by the GSNmap WG to support countries during the national GSNmap production and/or harmonisation phase. Where possible, GSP Secretariat will use publicly available data to gap-fill the areas which are not covered by the national submissions unless the country requests to be left blank on the GSNmap products.
 
 ## How to use this book

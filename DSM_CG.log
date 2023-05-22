@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.23)  19 MAY 2023 10:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.3.23)  22 MAY 2023 14:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -929,43 +929,43 @@ Chapter 9.
 
 ]
 Chapter 10.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 499.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 499.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 499.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 499.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 499.
+(Font)              <10> on input line 502.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 499.
+(Font)              <7> on input line 502.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 499.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 499.
+(Font)              <5> on input line 502.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 499.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 502.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [13
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 507.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 510.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 511.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 514.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [14{c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [15
@@ -973,53 +973,49 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ] [16
 
 ]
-<images/QA_QC.png, id=557, 224.57054pt x 168.79167pt>
+<images/QA_QC.png, id=559, 224.57054pt x 168.79167pt>
 File: images/QA_QC.png Graphic file (type png)
 <use images/QA_QC.png>
-Package pdftex.def Info: images/QA_QC.png  used on input line 565.
+Package pdftex.def Info: images/QA_QC.png  used on input line 568.
 (pdftex.def)             Requested size: 224.58026pt x 168.79898pt.
 
-LaTeX Warning: Reference `(' on page 17 undefined on input line 574.
+LaTeX Warning: Reference `(' on page 17 undefined on input line 577.
 
 [17
 
 ] [18 <./images/QA_QC.png>] [19] [20] [21] [22] [23] [24] [25]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 964.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 967.
 (c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 979.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 986.
 
 LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 979.
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 986.
 
 [26]
-Overfull \vbox (2.22223pt too high) detected at line 1058
+Overfull \vbox (2.22223pt too high) detected at line 1073
  []
 
 [27]
-Underfull \vbox (badness 10000) detected at line 1058
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1058
+Overfull \vbox (2.22223pt too high) detected at line 1073
  []
 
 [28] [29]
 
 pdfTeX warning: pdflatex.exe (file ./images/backcover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/backcover.pdf, id=634, 597.23125pt x 772.8875pt>
+<images/backcover.pdf, id=636, 597.23125pt x 772.8875pt>
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf>
-Package pdftex.def Info: images/backcover.pdf  used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf  used on input line 1080.
 (pdftex.def)             Requested size: 345.00008pt x 446.47069pt.
 
 
 pdfTeX warning: pdflatex.exe (file ./images/backcover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf>
-Package pdftex.def Info: images/backcover.pdf  used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf  used on input line 1080.
 (pdftex.def)             Requested size: 345.00008pt x 446.47069pt.
 
 
@@ -1027,29 +1023,29 @@ pdfTeX warning: pdflatex.exe (file ./images/backcover.pdf): PDF inclusion: found
 
 
 pdfTeX warning: pdflatex.exe (file ./images/backcover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<images/backcover.pdf, id=637, page=1, 597.23125pt x 772.8875pt>
+<images/backcover.pdf, id=639, page=1, 597.23125pt x 772.8875pt>
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1080.
 (pdftex.def)             Requested size: 597.22978pt x 772.8856pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1080.
 (pdftex.def)             Requested size: 500.96pt x 648.3012pt.
 [30
 
 ]
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1080.
 (pdftex.def)             Requested size: 500.96pt x 648.3012pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1080.
 (pdftex.def)             Requested size: 500.96pt x 648.3012pt.
 File: images/backcover.pdf Graphic file (type pdf)
 <use images/backcover.pdf, page 1>
-Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1065.
+Package pdftex.def Info: images/backcover.pdf , page1 used on input line 1080.
 (pdftex.def)             Requested size: 500.96pt x 648.3012pt.
 [31 <./images/backcover.pdf>] (./DSM_CG.aux)
 
@@ -1060,18 +1056,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19102 strings out of 477985
- 324967 string characters out of 5837248
- 1863382 words of memory out of 5000000
- 38716 multiletter control sequences out of 15000+600000
+ 19106 strings out of 477985
+ 324996 string characters out of 5837248
+ 1864382 words of memory out of 5000000
+ 38718 multiletter control sequences out of 15000+600000
  572241 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  110i,17n,133p,973b,608s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/luottoi/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on DSM_CG.pdf (34 pages, 9732500 bytes).
+Output written on DSM_CG.pdf (34 pages, 9733440 bytes).
 PDF statistics:
- 959 PDF objects out of 1000 (max. 8388607)
- 715 compressed objects within 8 object streams
- 179 named destinations out of 1000 (max. 500000)
- 650 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 966 PDF objects out of 1000 (max. 8388607)
+ 722 compressed objects within 8 object streams
+ 181 named destinations out of 1000 (max. 500000)
+ 658 words of extra memory for PDF output out of 10000 (max. 10000000)
 
