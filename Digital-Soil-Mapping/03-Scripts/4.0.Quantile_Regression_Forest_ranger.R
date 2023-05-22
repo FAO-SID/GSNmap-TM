@@ -256,10 +256,10 @@ plot(pred_sd/pred_mean*100, main = paste("Coeficient of variation", soilatt),
 
 ## 6.2 - Save results ----------------------------------------------------------
 writeRaster(pred_mean, 
-            paste0("02-Outputs/maps/",ISO,"_mean_",soilatt, ".tif"),
+            paste0("02-Outputs/maps/",ISO,"_GSNmap_mean_",soilatt, ".tif"),
             overwrite=TRUE)
 writeRaster(pred_sd, 
-            paste0("02-Outputs/maps/",ISO,"_sd_",soilatt, ".tif"),
+            paste0("02-Outputs/maps/",ISO,"_GSNmap_sd_",soilatt, ".tif"),
             overwrite=TRUE)
 
 

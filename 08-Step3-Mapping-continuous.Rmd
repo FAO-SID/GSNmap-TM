@@ -487,19 +487,12 @@ The final step then consists of applying a cropland mask that is applied to the 
   
   ## 6.2 - Save results ----------------------------------------------------------
   writeRaster(pred_mean, 
-              paste0("02-Outputs/maps/",ISO,"_mean_",soilatt, ".tif"),
+              paste0("02-Outputs/maps/",ISO,"_GSNmap_mean_",soilatt, ".tif"),
               overwrite=TRUE)
   writeRaster(pred_sd, 
-              paste0("02-Outputs/maps/",ISO,"_sd_",soilatt, ".tif"),
+              paste0("02-Outputs/maps/",ISO,"_GSNmap_sd_",soilatt, ".tif"),
               overwrite=TRUE)
 ```
 
-```{r, eval = T, echo = F}
-# k_mean <- rast("Digital-Soil-Mapping/02-Outputs/maps/ISO_GSNmap_Ktot_Map030.tiff")
-# plot(k_mean, main = "K tot Mean")
-# k_sd <- rast("Digital-Soil-Mapping/02-Outputs/maps/ISO_SD_GSNmap_Ktot_Map030.tiff")
-# plot(k_sd, main = "K tot StDev")
 
-
-```
 
