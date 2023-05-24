@@ -13,14 +13,13 @@ fig:screenshot
 fig:RUN
 fig:borutaplot
 fig:cv
-fig:varimp
 eq:me
 eq:mae
 eq:rmse
 eq:r2
 eq:r
 eq:mec
-tab:unnamed-chunk-35
+tab:unnamed-chunk-33
 fig:workflow2
 fig:qaqc
 tab:products
@@ -82,7 +81,6 @@ model-calibration
 uncertainty-assessment
 predicting-soil-attributes
 reporting-results
-data-submission-form
 way-forward
 frequent-asked-questions-and-troubleshooting-answers
 issues-in-the-gsnmap-technical-manual

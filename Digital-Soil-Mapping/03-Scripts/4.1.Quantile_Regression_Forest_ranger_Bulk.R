@@ -55,7 +55,7 @@ library(ranger)
 # 1 - Merge soil data with environmental covariates ============================
 
 ## 1.1 - Load covariates -------------------------------------------------------
-covs <- rast("01-Data/covs/Covariates.tif") # match case of the file name
+covs <- rast("01-Data/covs/") # match case of the file name
 ncovs <- names(covs)
 
 

@@ -210,35 +210,10 @@ Repeated cross validation has been nicely implemented in the caret R package [@K
 ```
 
 
-The results have been stored in an R object called model_rn. To assess the contribution of each covariate on the model prediction, relative importances expressed in percent are extracted and plotted (Figure \@ref(fig:varimp) ). Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
+The results have been stored in an R object called model_rn. To assess the contribution of each covariate on the model prediction. Finally, the model output is saved in the model folder within the Outputs folder - specifying the target soil properties. 
 
 
 
-```{r , eval = F}
-  ## 3.4 - Extract covariate importance ------------------------------------------
-  png(filename = paste0("02-Outputs/Model_varImp_",soilatt,".png"), 
-      width = 15, height = 25, units = "cm", res = 600)
-  plot(varImp(model_rn))
-  dev.off()
-  
-  ## 3.5 - Save the ranger model -------------------------------------------------
-  saveRDS(model_rn, file = paste0("02-Outputs/models/ranger_model_",soilatt,".rds"))
-  # model_rn <- readRDS(paste0("02-Outputs/models/ranger_model_",soilatt,".rds"))
-
-```
-
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-  model_rn <- readRDS(paste0("Digital-Soil-Mapping/02-Outputs/models/ranger_model_",soilatt,".rds"))
-  print(model_rn)
-  print(model_rn$bestTune)
-```
-
-
-```{r varimp, fig.cap="Variable importance for the model", echo=FALSE}
-  plot(varImp(model_rn))
-
-```
 
 
 ## Uncertainty assessment

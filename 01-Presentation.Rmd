@@ -34,6 +34,9 @@ options(knitr.table.format = "HTML")
 library(readxl)
 library(kableExtra)
 dt <- read_xlsx("tables/wosis_dist.xlsx")
+dt <- dt[!(dt$`Soil property` %in%c( "P Bray I","P Olsen" )),]
+dt[dt$`Soil property` =='P Mehlich 3',"Soil property"] <- "Available P"
+
 kable(booktabs = T, dt[,c("Soil property","property_id","Unit" )], col.names = gsub("[.]", " ", names(dt[,c("Soil property","property_id","Unit" )])), caption = 'Mandatory soil attributes and units of the phase I Global Soil Nutrient and Nutrient Budget Maps', format = 'html') %>%
 kable_classic(full_width = F)
 ```

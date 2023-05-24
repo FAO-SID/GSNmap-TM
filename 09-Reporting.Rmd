@@ -2,7 +2,7 @@
 
 The GSNmap consists of a set of mandatory and optional maps that are to be generated as raster files (GeoTiff) at a resolution of 250 x 250 m.
 
-Mandatory data products are:
+The Mandatory data products are:
 
 * total N
 * available P
@@ -13,25 +13,83 @@ Mandatory data products are:
 * soil organic carbon concentration
 * bulk density
 
-Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.
+Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided. All layers need to be submitted with the corresponding standard deviation layers.
 
-We provide a .Rmd file were the user needs to set the `soilatt` variable and the path to the data used as input.
+An Rmarkdown script (with the extension .Rmd) is provided in the folder National Report. Script 5 can be used to translate the rmarkdown file into an automated report as a Word docx file. 
 
-Then, run the following code:
 
 ```{r rmd, eval=FALSE}
-# 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd
-# 2 - adjust the content
-# 3 - Run the following code
-path = 'C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd'
-output_format = 'pdf_document'
-output_file = paste0("Report_", soilatt,".pdf")
+#_______________________________________________________________________________
+#
+# QA/QC
+# Soil Property Mapping
+#
+# GSP-Secretariat
+# Contact: Isabel.Luotto@fao.org
+#          Marcos.Angelini@fao.org
+#_______________________________________________________________________________
 
+#Empty environment and cache 
+rm(list = ls())
+gc()
+
+# Content of this script =======================================================
+# 0 - Setup and user-defined variables
+# 1 -  User-defined variables
+# 2 - Render the .Rmd file to generate an automated report as a docx
+#_______________________________________________________________________________
+
+
+# 0 - Initial Setup ============================================================
+
+
+#install.packages("rmarkdown")
+#tinytex::install_tinytex()
+# library(sf)
+# library(ggplot2)
+# library(tidyverse)
+# library(terra)
+library(knitr)
+# library(tidyterra)
+# library(patchwork)
+
+# Working directory
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("..")
+
+# 1 -  User-defined variables ==================================================
+
+# Specify three-digit ISO code for your country
+ISO <- 'AOI'
+
+# Specify the properties you mapped (the code assumes harmonized naming)
+# using the output data frame from script 2
+dxy <- read.csv("02-Outputs/harmonized_soil_data.csv")
+
+target_properties <- names(dxy)[ !(names(dxy)%in% c("ProfID", "x" ,"y"))]
+
+#target_properties<-c('ph_0_30')
+
+# Map background file
+bckg<-vect('01-Data/AOI.shp')
+
+#Adjust figure width and height of the map plot
+
+figw <- 12
+figh <-8
+
+
+# Specify where you want your word document to be saved
+output_file = paste0("National Report/Report_GSNmap_",ISO,".docx")
+
+# 2 - Render the .Rmd file to generate an automated report as a docx ===========
+path = 'National Report/National GSNmap Report.Rmd'
+output_format = 'word_document'
 rmarkdown::render(path, output_format, output_file)
+
 ```
 
 The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.
 
-## Data submission form
 
-To be set soon...
+
