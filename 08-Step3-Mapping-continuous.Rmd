@@ -275,6 +275,8 @@ Now, back to the mapping exercise: In practical terms, before calculating any of
 ```{r, eval = T, message = F, warning = F}
   # 4 - Accuracy assessment ======================================================
   ## 4.1 - extract observed and predicted values ---------------------------------
+model_rn <- readRDS('Digital-Soil-Mapping/02-Outputs/models/ranger_model_soc_0_30.rds')
+
   o <- model_rn$pred %>% 
     filter(mtry == model_rn$bestTune$mtry, 
            splitrule==model_rn$bestTune$splitrule, 

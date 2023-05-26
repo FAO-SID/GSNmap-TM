@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Reporting results |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Reporting results |  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)" />
   <meta property="og:type" content="book" />
@@ -143,10 +143,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
@@ -265,10 +261,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.5" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#uncertainty-assessment"><i class="fa fa-check"></i><b>8.5</b> Uncertainty assessment</a></li>
 <li class="chapter" data-level="8.6" data-path="step-3-mapping-continuous-soil-properties.html"><a href="step-3-mapping-continuous-soil-properties.html#predicting-soil-attributes"><i class="fa fa-check"></i><b>8.6</b> Predicting soil attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>9</b> Reporting results</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="reporting-results.html"><a href="reporting-results.html#data-submission-form"><i class="fa fa-check"></i><b>9.1</b> Data submission form</a></li>
-</ul></li>
+<li class="chapter" data-level="9" data-path="reporting-results.html"><a href="reporting-results.html"><i class="fa fa-check"></i><b>9</b> Reporting results</a></li>
 <li class="chapter" data-level="10" data-path="way-forward.html"><a href="way-forward.html"><i class="fa fa-check"></i><b>10</b> Way forward</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="way-forward.html"><a href="way-forward.html#frequent-asked-questions-and-troubleshooting-answers"><i class="fa fa-check"></i><b>10.1</b> Frequent asked questions and Troubleshooting answers</a></li>
@@ -313,8 +306,8 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
             <section class="normal" id="section-">
 <div id="reporting-results" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Reporting results<a href="reporting-results.html#reporting-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The GSNmap consists of a set of mandatory and optional maps that are to be generated as raster files (GeoTiff) at a resolution of 250 x 250 m.</p>
-<p>Mandatory data products are:</p>
+<p>The GSNmap consists of a set of mandatory and optional maps that are to be generated as raster files (GeoTiff) at a resolution of 250 x 250 m and at the mandatory depth of 0-30 cm.</p>
+<p>The Mandatory data products are:</p>
 <ul>
 <li>total N</li>
 <li>available P</li>
@@ -325,23 +318,77 @@ Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)</p><
 <li>soil organic carbon concentration</li>
 <li>bulk density</li>
 </ul>
-<p>Optional products are the same products but for depths at 30-60 and 60-100 cm. Additionally, layers on micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided.</p>
-<p>We provide a .Rmd file were the user needs to set the <code>soilatt</code> variable and the path to the data used as input.</p>
-<p>Then, run the following code:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="reporting-results.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Open the file C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd</span></span>
-<span id="cb105-2"><a href="reporting-results.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - adjust the content</span></span>
-<span id="cb105-3"><a href="reporting-results.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Run the following code</span></span>
-<span id="cb105-4"><a href="reporting-results.html#cb105-4" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;C:/GIT/GSNmap-TM/Digital-Soil-Mapping/Report_k.Rmd&#39;</span></span>
-<span id="cb105-5"><a href="reporting-results.html#cb105-5" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;pdf_document&#39;</span></span>
-<span id="cb105-6"><a href="reporting-results.html#cb105-6" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;Report_&quot;</span>, soilatt,<span class="st">&quot;.pdf&quot;</span>)</span>
-<span id="cb105-7"><a href="reporting-results.html#cb105-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-8"><a href="reporting-results.html#cb105-8" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
+<p>Additionally, maps at deeper depths 30-60 cm and/or about micronutrients such as Ca, S, Mg, Fe, B, Cl, Mn, Zn, Cu, Mo, and Ni can be provided. All layers need to be submitted with the corresponding standard deviation layers.</p>
+<p>An Rmarkdown script (with the extension .Rmd) is provided in the folder National Report. Script 5 can be used to translate the rmarkdown file into an automated report as a Word docx file.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="reporting-results.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb103-2"><a href="reporting-results.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb103-3"><a href="reporting-results.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QA/QC</span></span>
+<span id="cb103-4"><a href="reporting-results.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Property Mapping</span></span>
+<span id="cb103-5"><a href="reporting-results.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb103-6"><a href="reporting-results.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSP-Secretariat</span></span>
+<span id="cb103-7"><a href="reporting-results.html#cb103-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact: Isabel.Luotto@fao.org</span></span>
+<span id="cb103-8"><a href="reporting-results.html#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          Marcos.Angelini@fao.org</span></span>
+<span id="cb103-9"><a href="reporting-results.html#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb103-10"><a href="reporting-results.html#cb103-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-11"><a href="reporting-results.html#cb103-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache </span></span>
+<span id="cb103-12"><a href="reporting-results.html#cb103-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb103-13"><a href="reporting-results.html#cb103-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
+<span id="cb103-14"><a href="reporting-results.html#cb103-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-15"><a href="reporting-results.html#cb103-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Content of this script =======================================================</span></span>
+<span id="cb103-16"><a href="reporting-results.html#cb103-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Setup and user-defined variables</span></span>
+<span id="cb103-17"><a href="reporting-results.html#cb103-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 -  User-defined variables</span></span>
+<span id="cb103-18"><a href="reporting-results.html#cb103-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Render the .Rmd file to generate an automated report as a docx</span></span>
+<span id="cb103-19"><a href="reporting-results.html#cb103-19" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb103-20"><a href="reporting-results.html#cb103-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-21"><a href="reporting-results.html#cb103-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-22"><a href="reporting-results.html#cb103-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Initial Setup ============================================================</span></span>
+<span id="cb103-23"><a href="reporting-results.html#cb103-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-24"><a href="reporting-results.html#cb103-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-25"><a href="reporting-results.html#cb103-25" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;rmarkdown&quot;)</span></span>
+<span id="cb103-26"><a href="reporting-results.html#cb103-26" aria-hidden="true" tabindex="-1"></a><span class="co">#tinytex::install_tinytex()</span></span>
+<span id="cb103-27"><a href="reporting-results.html#cb103-27" aria-hidden="true" tabindex="-1"></a><span class="co"># library(sf)</span></span>
+<span id="cb103-28"><a href="reporting-results.html#cb103-28" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ggplot2)</span></span>
+<span id="cb103-29"><a href="reporting-results.html#cb103-29" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidyverse)</span></span>
+<span id="cb103-30"><a href="reporting-results.html#cb103-30" aria-hidden="true" tabindex="-1"></a><span class="co"># library(terra)</span></span>
+<span id="cb103-31"><a href="reporting-results.html#cb103-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb103-32"><a href="reporting-results.html#cb103-32" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidyterra)</span></span>
+<span id="cb103-33"><a href="reporting-results.html#cb103-33" aria-hidden="true" tabindex="-1"></a><span class="co"># library(patchwork)</span></span>
+<span id="cb103-34"><a href="reporting-results.html#cb103-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-35"><a href="reporting-results.html#cb103-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
+<span id="cb103-36"><a href="reporting-results.html#cb103-36" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">dirname</span>(rstudioapi<span class="sc">::</span><span class="fu">getActiveDocumentContext</span>()<span class="sc">$</span>path))</span>
+<span id="cb103-37"><a href="reporting-results.html#cb103-37" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;..&quot;</span>)</span>
+<span id="cb103-38"><a href="reporting-results.html#cb103-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-39"><a href="reporting-results.html#cb103-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 -  User-defined variables ==================================================</span></span>
+<span id="cb103-40"><a href="reporting-results.html#cb103-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-41"><a href="reporting-results.html#cb103-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify three-digit ISO code for your country</span></span>
+<span id="cb103-42"><a href="reporting-results.html#cb103-42" aria-hidden="true" tabindex="-1"></a>ISO <span class="ot">&lt;-</span> <span class="st">&#39;AOI&#39;</span></span>
+<span id="cb103-43"><a href="reporting-results.html#cb103-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-44"><a href="reporting-results.html#cb103-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the properties you mapped (the code assumes harmonized naming)</span></span>
+<span id="cb103-45"><a href="reporting-results.html#cb103-45" aria-hidden="true" tabindex="-1"></a><span class="co"># using the output data frame from script 2</span></span>
+<span id="cb103-46"><a href="reporting-results.html#cb103-46" aria-hidden="true" tabindex="-1"></a>dxy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;02-Outputs/harmonized_soil_data.csv&quot;</span>)</span>
+<span id="cb103-47"><a href="reporting-results.html#cb103-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-48"><a href="reporting-results.html#cb103-48" aria-hidden="true" tabindex="-1"></a>target_properties <span class="ot">&lt;-</span> <span class="fu">names</span>(dxy)[ <span class="sc">!</span>(<span class="fu">names</span>(dxy)<span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ProfID&quot;</span>, <span class="st">&quot;x&quot;</span> ,<span class="st">&quot;y&quot;</span>))]</span>
+<span id="cb103-49"><a href="reporting-results.html#cb103-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-50"><a href="reporting-results.html#cb103-50" aria-hidden="true" tabindex="-1"></a><span class="co">#target_properties&lt;-c(&#39;ph_0_30&#39;)</span></span>
+<span id="cb103-51"><a href="reporting-results.html#cb103-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-52"><a href="reporting-results.html#cb103-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Map background file</span></span>
+<span id="cb103-53"><a href="reporting-results.html#cb103-53" aria-hidden="true" tabindex="-1"></a>bckg<span class="ot">&lt;-</span><span class="fu">vect</span>(<span class="st">&#39;01-Data/AOI.shp&#39;</span>)</span>
+<span id="cb103-54"><a href="reporting-results.html#cb103-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-55"><a href="reporting-results.html#cb103-55" aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust figure width and height of the map plot</span></span>
+<span id="cb103-56"><a href="reporting-results.html#cb103-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-57"><a href="reporting-results.html#cb103-57" aria-hidden="true" tabindex="-1"></a>figw <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb103-58"><a href="reporting-results.html#cb103-58" aria-hidden="true" tabindex="-1"></a>figh <span class="ot">&lt;-</span><span class="dv">8</span></span>
+<span id="cb103-59"><a href="reporting-results.html#cb103-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-60"><a href="reporting-results.html#cb103-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-61"><a href="reporting-results.html#cb103-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify where you want your word document to be saved</span></span>
+<span id="cb103-62"><a href="reporting-results.html#cb103-62" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;National Report/Report_GSNmap_&quot;</span>,ISO,<span class="st">&quot;.docx&quot;</span>)</span>
+<span id="cb103-63"><a href="reporting-results.html#cb103-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-64"><a href="reporting-results.html#cb103-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Render the .Rmd file to generate an automated report as a docx ===========</span></span>
+<span id="cb103-65"><a href="reporting-results.html#cb103-65" aria-hidden="true" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&#39;National Report/National GSNmap Report.Rmd&#39;</span></span>
+<span id="cb103-66"><a href="reporting-results.html#cb103-66" aria-hidden="true" tabindex="-1"></a>output_format <span class="ot">=</span> <span class="st">&#39;word_document&#39;</span></span>
+<span id="cb103-67"><a href="reporting-results.html#cb103-67" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(path, output_format, output_file)</span></code></pre></div>
 <p>The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.</p>
-<div id="data-submission-form" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Data submission form<a href="reporting-results.html#data-submission-form" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To be set soon…</p>
 
-</div>
 </div>
             </section>
 
