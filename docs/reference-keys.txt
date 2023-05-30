@@ -1,3 +1,4 @@
+tab:overviewprop
 fig:steps
 tab:nutrients
 fig:Rstudio
@@ -5,6 +6,7 @@ fig:GEE2
 eq:scorpan
 fig:workflow1
 tab:table2
+tab:table22
 tab:table4
 tab:data1
 fig:explorer

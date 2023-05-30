@@ -6,11 +6,11 @@ The SCORPAN equation (Eq. \@ref(eq:scorpan)) refers to the soil-forming factors 
 
 ```{r covs1, echo = F}
 
-options(knitr.table.format = "HTML")
+
 library(kableExtra)
 library(dplyr)
 dt <- read.csv("tables/Table_6.1.csv", sep = ",")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'List of environmental covariates.', format = 'html') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'List of environmental covariates.') %>%
 kable_styling(bootstrap_options = "striped", full_width = F) %>%
   kableExtra::pack_rows(group_label = "Temperature", start_row = 1, end_row = 3, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%
   kableExtra::pack_rows(group_label = "Precipitation", start_row = 4, end_row = 8, label_row_css = "background-color: #666; color: #fff;", bold = T) %>%

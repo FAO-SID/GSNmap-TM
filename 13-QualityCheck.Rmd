@@ -18,11 +18,11 @@ The following Table \ref(tab:products) gives an overview of all the GSNmap produ
 All 10 soil property and soil nutrient maps with their corresponding 10 uncertainty layers must be georeferenced TIF (.tif) files.
 
 ```{r products, echo = FALSE, message=F, warning=F}
-options(knitr.table.format = "HTML")
+
 library(dplyr)
 library(kableExtra)
 dt <- read.csv("tables/Table_Product-overview.csv", sep = ",")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:products}Data product overview.', format = 'html') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:products}Data product overview.') %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
   kableExtra::group_rows(group_label = "Major nutrients (3 files)", start_row = 1, end_row = 3) %>%
@@ -46,9 +46,9 @@ The following table (Table 10.2) presents ranges of possible values for 9 of the
 
 ```{r ranges, echo = FALSE, message=F, warning=F}
 library(readxl)
-options(knitr.table.format = "HTML")
+
 dt <- read_xlsx("tables/wosis_dist.xlsx")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.', format = 'html') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.') %>%
 kable_classic(full_width = F)
 ```
 

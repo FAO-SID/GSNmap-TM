@@ -29,19 +29,19 @@ Soil chemical properties spreadsheet data from laboratories with point coordinat
 library(tidyverse)
 
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
-kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for chemical soil properties.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for chemical soil properties.', digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Only the ten first rows are shown.", general_title = "")
 ```
 
-The spreadsheet with soil physical data contains data on soil texture for clay (clay_0_30, in g/kg), silt (silt_0_30, in g/kg), and sand (sand_0_30, in g/kg) (see Table \@ref(tab:table2_2)).
+The spreadsheet with soil physical data contains data on soil texture for clay (clay_0_30, in g/kg), silt (silt_0_30, in g/kg), and sand (sand_0_30, in g/kg) (see Table \@ref(tab:table22)).
 
-```{r table2_2, echo=FALSE, message=FALSE, warning=FALSE}
+```{r table22, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_phys_data030.csv")
-kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for physical soil properties.', format = 'html', digits = c(0,6,6,2,2,2,1)) %>%
+kable(booktabs = T, data[1:10,], col.names = gsub("[.]", " ", names(data)), caption = 'Dataset with coordinates for physical soil properties.',  digits = c(0,6,6,2,2,2,1)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Only the ten first rows are shown.", general_title = "")
@@ -66,7 +66,7 @@ Finally, the third dataset belongs to the Soil Information System of Argentina (
 
 ```{r table4, echo=FALSE, message=FALSE, warning=FALSE}
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
-kable(booktabs = T, data[c(1:10),1:10], col.names = gsub("[.]", " ", names(data)[1:10]), caption = 'Soil profile dataset.', format = 'html', digits = c(0,0,6,6,0,0,0,1,1,2)) %>%
+kable(booktabs = T, data[c(1:10),1:10], col.names = gsub("[.]", " ", names(data)[1:10]), caption = 'Soil profile dataset.',  digits = c(0,0,6,6,0,0,0,1,1,2)) %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Only ten rows are shown.", general_title = "")
@@ -88,11 +88,11 @@ mapview(s, zcol = "k", cex = 2.5, lwd = 0)
 Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
 ```{r data1, echo = FALSE, message=F, warning=F}
-options(knitr.table.format = "HTML")
+
 library(dplyr)
 library(kableExtra)
 dt <- read.csv("tables/Table_5.1.csv", sep = ",")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Example format of a database.', format = 'html') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Example format of a database.') %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
 footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique layer identifier, Lat = latitude in decimal degrees, Long = longitude in decimal degrees, Year = sampling year, Top = upper limit of the layer in cm, Bottom = lower limit of the layer in cm, cec = Cation Exchange Capacity (cmol_c/kg), ph = pH in water, clay = Clay (g/100g soil), silt = Silt (g/100g soil), sand = Sand ((g/100g soil), soc = Soil Organic Carbon (g/100g soil), bd = Bulk Density (g/cm3).", threeparttable = TRUE)

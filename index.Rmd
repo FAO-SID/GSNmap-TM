@@ -1,8 +1,8 @@
 --- 
 title:  |
   <img src="images/frontcover.jpg" style="top:0px;height:100px;" align="right" />
-  Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap)
-subtitle: "version 0.2"
+  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I
+subtitle: "Technical Manual"
 author: "Angelini, M.E, Luotto, I., Rodriguez Lado, L.,  Mainka, M., Yigini, Y., Tong, Y."
 date: "26-Oct-2022"
 site: bookdown::bookdown_site
@@ -53,7 +53,7 @@ template: null
 
 
 ```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE}
-options(knitr.table.format = "latex")
+
 options(width = 60)
 options(scipen=999)
 

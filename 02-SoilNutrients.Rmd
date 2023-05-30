@@ -21,11 +21,11 @@ It is important to point out that the discussion on how to accurately define *es
 
 
 ```{r nutrients, echo = FALSE, message=F, warning=F}
-options(knitr.table.format = "HTML")
+
 library(dplyr)
 library(kableExtra)
 dt <- read.csv("tables/Table_2.1.csv", sep = ";")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Classification of major and micronutrients by FAO (2022).', format = 'html') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Classification of major and micronutrients by FAO (2022).') %>%
 kable_classic(full_width = F)
 ```
 
