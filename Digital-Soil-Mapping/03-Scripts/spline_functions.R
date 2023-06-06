@@ -1,4 +1,5 @@
 # Function to apply mpspline to a single soil property and depth range
+library(purrr)
 apply_mpspline <- function(df, property, depth_range) {
   # Prepare input data for mpspline function
   input_data <- df[, c("ProfID", "top", "bottom", property)]
@@ -12,8 +13,10 @@ apply_mpspline <- function(df, property, depth_range) {
                               vhigh = max(input_data$VAL))
   
   # Extract predicted values for the depth range
-  predicted_values <- t(unique(as.data.frame(sapply(mpspline_result, function(x) x$est_dcm))))
-  predicted_values <- as.data.frame(predicted_values)
+  xx <- sapply(mpspline_result, function(x) x$est_dcm)
+  xx <- purrr::map(xx, function(x) x[!is.na(names(x))])
+  predicted_values <- t(unique(as.data.frame(xx)))
+  predicted_values <- as.data.frame(predicted_values)[1:(length(depth_range)-1)]
   predicted_values$ProfID <- sub(x = rownames(predicted_values), pattern = "X", replacement = "")
   class(predicted_values$ProfID) <- class(df$ProfID)
   
@@ -33,7 +36,8 @@ apply_mpspline <- function(df, property, depth_range) {
 apply_mpspline_all <- function(df, properties, depth_range) {
   final_df <- data.frame(ProfID = df$ProfID)
   for (property in properties) {
-    final_df <- left_join(final_df, apply_mpspline(df, property, depth_range))
+    x <- apply_mpspline(df, property, depth_range)
+    final_df <- left_join(final_df, x)
   }
   final_df <- unique(final_df)
   return(final_df)
