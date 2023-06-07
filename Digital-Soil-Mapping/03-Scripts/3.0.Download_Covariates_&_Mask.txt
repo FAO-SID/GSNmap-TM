@@ -65,7 +65,11 @@ var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m",
-"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m"];
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/hfp2013_merisINT",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/night_lights_stable_2013",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020"
+];
 
 // Load borders 
 
