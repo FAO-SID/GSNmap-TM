@@ -103,8 +103,8 @@ model <- read_rds(paste0("02-Outputs/models/ranger_model_",soilatt,".rds"))
   }
  
   #Map name
-  pred_mean <- paste0('02-Outputs/maps/ISO_GSNmap_mean_', soilatt,'.tif')
-  pred_sd <- paste0('02-Outputs/maps/ISO_GSNmap_sd_', soilatt,'.tif')
+  pred_mean <- paste0('02-Outputs/maps/',ISO,'_GSNmap_mean_', soilatt,'.tif')
+  pred_sd <- paste0('02-Outputs/maps/',ISO,'_GSNmap_sd_', soilatt,'.tif')
   
     # Harmonized naming 
   if (soilatt == 'ph_0_30'){
