@@ -87,6 +87,7 @@ path = 'National Report/National GSNmap Report.Rmd'
 output_format = 'word_document'
 rmarkdown::render(path, output_format, output_file)
 
+
 ```
 
 The output report document is to be submitted along with the layers using a submission form provided by the GSP Secretariat.
