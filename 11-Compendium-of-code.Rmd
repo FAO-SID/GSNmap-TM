@@ -1249,3 +1249,23 @@ d$ocs_0_30 <- OCSKG_0_30*10
 
 ```
 
+Script to mosaic tiles from covariates downloaded from GEE
+```{r Annex A, echo=TRUE, eval=FALSE}
+library(terra)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("..")
+# read the tiles
+f <- list.files(path = "01-Data/covs/", pattern = ".tif$", full.names = TRUE)
+# put the tiles in a list
+r_l <- list()
+for (i in seq_along(f)){
+  r_l[i] <- rast(f[i])
+}
+# Convert the list in a spatial raster collection
+r <- sprc(r_l)
+# Mosaic the tiles
+covs <- mosaic(r)
+# Rename the layers in case the names were lost
+x <- rast(f[1])
+names(covs) <- names(x)
+```
