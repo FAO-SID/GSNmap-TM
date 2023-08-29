@@ -1250,7 +1250,7 @@ d$ocs_0_30 <- OCSKG_0_30*10
 ```
 
 Script to mosaic tiles from covariates downloaded from GEE
-```{r Annex A, echo=TRUE, eval=FALSE}
+```{r Annex B, echo=TRUE, eval=FALSE}
 library(terra)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("..")
@@ -1268,4 +1268,172 @@ covs <- mosaic(r)
 # Rename the layers in case the names were lost
 x <- rast(f[1])
 names(covs) <- names(x)
+```
+
+Script for large countries that cannot mosaic covariates downloaded from GEE
+
+Part I:
+
+```{r Annex C, echo=TRUE, eval=FALSE}
+## 1.1 - Load covariates files (list of GEE tiles of covariates) ---------------
+f <- list.files("01-Data/covs", ".tif$", full.names = TRUE)
+covs <- rast(f[1])
+ncovs <- names(covs)
+
+# 1.2 - Load the soil data (Script 2) -----------------------------------------
+dat <- read_csv("02-Outputs/harmonized_AFACI_soil_data.csv")
+X <- dat
+# Convert soil data into a spatial object (check https://epsg.io/6204)
+dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
+
+## 1.3 - Extract values from covariates to the soil points ---------------------
+X$ID <- 1:nrow(X)
+
+for (i in seq_along(f)) {
+  covs <- rast(f[i])
+  pv <- terra::extract(x = covs, y = dat, xy=FALSE, ID=TRUE)
+  ids <- pv$ID[complete.cases(pv)]
+  if (i==1) {
+    X <- left_join(X,pv, by = "ID")
+  } else {
+    if (length(ids)>0) {
+      ID.idx <- which(names(X)=="ID")
+      X.ncol <- ncol(X)
+      X[,ID.idx:X.ncol] <- map2_df(X[,ID.idx:X.ncol], pv, ~ coalesce(.x, .y))
+    }
+  }
+  print(i)
+}
+
+summary(X)
+
+X%>%
+  sf::st_as_sf(coords = c("x", "y"), crs = 4326) %>% # convert to spatial object
+  mapview::mapview(zcol = "dtm_twi_500m", cex = 3, lwd = 0.1)
+
+write_csv(X, "02-Outputs/regression_matrix.csv")
+```
+
+Part II:
+
+```{r Annex D, echo=TRUE, eval=FALSE}
+## Load covariates -------------------------------------------------------
+terra::terraOptions(memfrac = 0.9)
+covs <- list()
+f <- list.files("01-Data/covs", ".tif$", full.names = TRUE)
+for (i in seq_along(f)) {
+  covs[[i]] <- rast(f[i])
+}
+ncovs <- names(covs[[i]])
+
+## 5.2 - Predict soil attributes per tiles -------------------------------------
+# country borders
+v <- vect(shp)
+
+for (i in seq_along(target_properties)) {
+  (soilatt <- target_properties[i])
+  #load model
+  model_rn <- read_rds(paste0("02-Outputs/models/ranger_model_",soilatt,".rds"))
+
+  for (j in seq_along(covs)) {
+    
+    gc()
+    
+    # select covariates with the tile j
+    r <- covs[[j]][[1]]
+    # Split GEE tiles into 4 smaller tiles
+    t <- rast(nrows = 4, ncols = 1, extent = ext(r), crs = crs(r))
+    tile <- makeTiles(r, t,overwrite=TRUE, filename= "02-Outputs/tiles/tiles.tif")
+    
+    for (n in seq_along(tile)) {
+      t <- rast(tile[n])
+      covst <- crop(covs[[j]], t)
+      
+      # create a function to extract the predited values from ranger::predict.ranger()
+      pfun <- \(...) { predict(...)$predictions |> t() }
+      
+      # predict conditional standard deviation
+      terra::interpolate(covst, 
+                         model = model_rn$finalModel, 
+                         fun=pfun, 
+                         na.rm=TRUE, 
+                         type = "quantiles", 
+                         what=sd,
+                         filename = paste0("02-Outputs/tiles/soilatt_tiles/sd_",
+                                           soilatt,"_tile_", j,"_",n, ".tif"), 
+                         overwrite = TRUE, gdal=c("COMPRESS=DEFLATE"))
+      gc()
+      # predict conditional mean
+      terra::interpolate(covst, 
+                         model = model_rn$finalModel, 
+                         fun=pfun, 
+                         na.rm=TRUE, 
+                         type = "quantiles", 
+                         what=mean,
+                         filename = paste0("02-Outputs/tiles/soilatt_tiles/mean_",
+                                           soilatt,"_tile_", j,"_",n, ".tif"), 
+                         overwrite = TRUE, gdal=c("COMPRESS=DEFLATE"))
+      gc()
+      print(paste("tile", j,"_", n, "of", length(covs)))
+    }
+    
+  }
+  ## 5.3 - Merge tiles both prediction and st --------------------------------
+  f_mean <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
+                     pattern = paste0("mean_", soilatt), full.names = TRUE)
+  f_sd <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
+                     pattern =  paste0("sd_", soilatt), full.names = TRUE)
+  r_mean_l <- list()
+  r_sd_l <- list()
+  
+  for (g in 1:length(f_mean)){
+    r <- rast(f_mean[g])
+    r_mean_l[[g]] <-r
+    rm(r)
+  }
+
+  for (g in 1:length(f_sd)){
+    r <- rast(f_sd[g])
+    r_sd_l[[g]] <-r
+    rm(r)
+  }
+  r_mean <-sprc(r_mean_l)
+  r_sd <-sprc(r_sd_l)
+  
+  pred_mean <- mosaic(r_mean)
+  pred_sd <- mosaic(r_sd)
+  
+  # Crop and mask the maps for each country
+  for (h in seq_along(cty)) {
+    pred_mean %>% 
+      crop(v[v$ISO3CD==cty[h]]) %>% 
+      mask(v[v$ISO3CD==cty[h]]) %>% 
+      writeRaster(paste0("02-Outputs/maps/", 
+                         cty[h],
+                         "/",
+                         cty[h],
+                         "_mean_",
+                         soilatt,
+                         ".tif"),
+                  gdal=c("COMPRESS=DEFLATE"))
+    pred_sd %>% 
+      crop(v[v$ISO3CD==cty[h]]) %>% 
+      mask(v[v$ISO3CD==cty[h]]) %>% 
+      writeRaster(paste0("02-Outputs/maps/", 
+                         cty[h],
+                         "/",
+                         cty[h],
+                         "_sd_",
+                         soilatt,
+                         ".tif"),
+                  gdal=c("COMPRESS=DEFLATE"))
+    print(cty[h])
+  }
+  rm(pred_sd)
+  rm(pred_mean)
+  unlink(f_mean)
+  unlink(f_sd)
+  gc()
+}
+
 ```

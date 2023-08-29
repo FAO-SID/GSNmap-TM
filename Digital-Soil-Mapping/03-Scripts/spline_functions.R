@@ -23,13 +23,13 @@ apply_mpspline <- function(df, property, depth_range) {
   names(temp) <- c("ProfID", "value", "name")
   temp$value <- as.numeric(temp$value)
   temp <- group_by(temp, ProfID)
+  temp <- pivot_wider(temp, id_cols = "ProfID", values_from = "value", names_from = name)
   
   n <- length(depth_range)
   coln <- NULL
   for(layer in 2:n){
     coln <- append(coln, paste0(property,"_", depth_range[layer-1], "_", depth_range[layer]))
   }
-  temp <- pivot_wider(temp, id_cols = "ProfID", values_from = "value", names_from = name)
   names(temp) <- c("ProfID", coln)
   return(temp)
 }
@@ -39,7 +39,7 @@ apply_mpspline_all <- function(df, properties, depth_range) {
   final_df <- data.frame(ProfID = df$ProfID)
   for (property in properties) {
     if(any(!is.na(df[,property]))){
-    x <- apply_mpspline(df, property, depth_range)
+    x <- apply_mpspline(df = df, property = property,depth_range = depth_range)
     final_df <- left_join(final_df, x)}
   }
   final_df <- unique(final_df)
