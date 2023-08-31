@@ -68,8 +68,7 @@ var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m",
 "projects/digital-soil-mapping-gsp-fao/assets/POP/hfp2013_merisINT",
 "projects/digital-soil-mapping-gsp-fao/assets/POP/night_lights_stable_2013",
-"projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020"
-];
+"projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020"];
 
 // Load borders 
 
@@ -83,7 +82,7 @@ var region = aoi.geometry();
 /// 1. Upload the borders of your countries as an asset
 /// 2. Replace 'your_shapefile' with the path to your shapefile
 // var shapefile = ee.FeatureCollection('users/your_username/your_shapefile');
-// var region = shapefile.geometry();
+// var region = shapefile.geometry().bounds();
 
 
 // Load assets as ImageCollection
