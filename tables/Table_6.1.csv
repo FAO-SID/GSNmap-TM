@@ -72,3 +72,6 @@ Slope,slope,250
 Topographic position index,tpi,250
 Terrain wetness index,twi,250
 Multiresolution of valley bottom flatness,vbf,250
+Global terrestrial Human Footprint dataset from 2013,hfp2013_merisINT,1000
+DMSP-OLS Nighttime Lights Time Series,night_lights_stable_2013,1000
+Global Human Settlement Layer 2020,population_density_2020,1000
