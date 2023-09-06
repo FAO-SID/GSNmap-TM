@@ -1,6 +1,6 @@
 # Setting-up the software environment
 
-This chapter provides an overview on the software required to map soil nutrients and associated soil properties. The tools are open source and can be downloaded and installed by users following the steps that are described here. The instructions given are for Microsoft Windows operational systems. Instructions for other operational systems (e.g. Linux Flavours, MacOS) can be found through free online resources.
+This chapter provides an overview on the software required to map soil nutrients and associated soil properties. The tools are open source and can be downloaded and installed by users following the steps that are described here. 
 
 ## Use of R, RStudio and R Packages
 

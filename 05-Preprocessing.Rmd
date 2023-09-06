@@ -1,15 +1,18 @@
-# Arranging soil data in **R**
+# The training dataset and basic computations in **R**
 
-In this chapter, the datasets used in this technical manual are presented. They were adapted for educational purposes by the GSP Secretariat in order to best explain the way towards generating all necessary layers of the GSNmap initiative.
-Step-by-step instructions are given on how to carry out necessary steps in *RStudio* in order to be able to work with your soil data and generate maps. Instructions are given on how to:
+In this chapter, the datasets used in this technical manual are presented. They were adapted for educational purposes by the GSP Secretariat.
+The tutorial provided in this chapter is for demonstration purposes and is meant for users with no prior experience in **R**. 
+Thus, the instructions also serve as a continuation of the basic introduction to the functioning of **R** and *RStudio* given in [Chapter 3](https://fao-gsp.github.io/GSNmap-TM/setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages).
+
+Instructions are given on how to:
 
 1. Generate user-defined variables, 
 2. Set the working directory and load necessary packages, 
 3. Import national data to *RStudio*
-4. Handle data (select, filter useful columns, etc.)
 
-Thus, the instructions also serve as a continuation of the basic introduction to the functioning of **R** and *RStudio* given in [Chapter 3](https://fao-gsp.github.io/GSNmap-TM/setting-up-the-software-environment.html#use-of-r-rstudio-and-r-packages). Still, in case for further information there is a vast amount of websites that offer help and or information on **R** and *RStudio*.
+Users with prior experience may skip this chapter and go directly to Chapters 6 to 9 which cover all the necessary steps from data preparation to mapping and reporting.
 
+ 
 ## Study area and training material
 
 The study area is located in the southeast of the Pampas Region, in Argentina, from the foothills of the Ventania and Tandilia hill systems, until the southern coasts of the Buenos Aires Province. 
@@ -23,7 +26,7 @@ To illustrate the different processes of this Technical Manual, we use three dat
 ### Georeferenced topsoil data
 
 These data were collected in 2011 by the National Institute of Agriculture Technology and Faculty of Agricultural Science of the National University of Mar del Plata  (Unidad Integrada INTA-FCA) to map the status of soil nutrients in the Argentinian Pampas [@sainz2019]. The modified dataset is derived from a subset of 118 locations and covers the target depth of 0-30 cm. It is structured in two different spreadsheets that contain *soil chemical properties* (soil_chem_data030.csv) and *soil physical properties* (soil_phys_data030.csv). All datasets are located in the `01-Data` folder in the training material `Digital-Soil-Mapping` folder. 
-Soil chemical properties spreadsheet data from laboratories with point coordinates (lat/long) together with data on available Phosphorus (p_bray, in ppm), available Potassium (k, in ppm), and total nitrogen (tn, in Percent) (see Table \@ref(tab:table2)).  
+The soil chemical properties spreadsheet provides data from laboratories with point coordinates (lat/long) together with data on available Phosphorus (p_bray, in ppm), available Potassium (k, in ppm), and total nitrogen (tn, in Percent) (see Table \@ref(tab:table2)).  
 
 ```{r table2, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -85,7 +88,7 @@ mapview(s, zcol = "k", cex = 2.5, lwd = 0)
 
 ## Format requirements of soil data {#preproc}
 
-Soil data consist of measurement at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
+Soil data generally consists of measurements at a specific geographical location, time and soil depth. Therefore, it is necessary to arrange the data following the format shown in Table \@ref(tab:data1).
 
 ```{r data1, echo = FALSE, message=F, warning=F}
 
@@ -109,7 +112,7 @@ Soil data is often arranged in a different way which requires specific pre-proce
 
 ### Set the scene (set working directory, packages, load data)
 
-So, let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. 
+Let's open *RStudio*. Whenever starting to work on a project or task, it is necessary to set the *working directory* (WD). The WD is the folder path that is used by **R** to save the output, for instance a plot or a table that was generated while working in **R**. Thus, the WD is central since it dictates where the files and calculations can be found afterwards. As it is so important, there are multiple ways of setting the WD. 
 One option is to right click on 'Session' menu > 'Set working directory ...' and select either 'To Source File Location' (then the WD corresponds to the file path where the Script is saved to) or 'Choose Directory...'. Then, the user can browse to the folder that should be the WD. 
 
 In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Since the file paths differ depending on where you stored the file on your computer, it is crucial to identify the correct file path. This can be done by accessing the *file explorer*. There you can browse to your training material folder and then right-click on the bar highlighted in red in the Figure \@ref(fig:explorer).
@@ -130,6 +133,18 @@ wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
 setwd(wd) # change the path accordingly
 ```
 
+An alternative and more automatic approach for setting the working directory makes use of the rstudioapi package, which provides functions for interacting with RStudio's API (Application Programming Interface). The code below first sets the working directory to the directory containing the active document (in this case the script). Then, the second line of code it changes the working directory to the parent directory using the ".." specification.
+
+```{r, echo = T, eval = F}
+
+#Set the working directory automatically using rstudioapi 
+# It is important to note that the directory is set to the folder containing the script
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# The ".." is used to go up a directory (in this case our project folder)
+setwd("..")
+```
+
+
 Next to in-built base R functions, there is a vast amount of so-called packages that extend the functionalities of **R** and allow the use of **R** for a broad range of purposes. For data handling and management, the `tidyverse` package and its dependencies offer a great help. To load packages into the *RStudio* session, the `library` function is used. However, if the package is not installed, it is necessary to use the `install.packages` function first.
 
 ```{r, echo = T, eval = T}
@@ -145,75 +160,6 @@ head(data)
 
 ```
 
-### Basic data handling operations
-In this section, basic operations with data in **R** are covered. It is explained how to select columns, filter observations/rows by certain values, remove missing values (NAs), how to rename columns and finally how to check the structure and classes of the whole dataframe or specific columns.
-The loaded dataset may comprise columns that are not of interest for the specific task you are working on. Therefore, it is recommendable to select the columns that are relevant to keep your working environment in *RStudio* clean. In the following example we specify the dataframe we want to select columns from and then link the dataset to the `select` function of the tidyverse to select only the coordinates and the ID column. Then, we store the selected columns in a new object called locations.
-
-```{r, echo = T, eval = T}
-# Select columns
-locations <- data %>% dplyr::select(LabID, x, y)
-head(locations)
-```
-
-Another important operation is to filter by certain row values. For that, we can use the `filter` function of the tidyverse. Here, we want to filter to have only samples that are located below -38 degrees latitude (y). To do this, we can follow the same syntax as in the example above
-
-```{r, echo = T, eval = T}
-# Filter
-south_locations <- data %>% filter(y <= -38)
-head(south_locations)
-```
-
-One key operation is to rename column names. This is highly recommended before you start running the scripts explained in the following chapters. **R** is case-sensitive. This means that it matters whether you write `ph`, `PH`, or `pH`. Therefore, it is of utmost importance to be consistent and aware of any typos. To rename columns, it may be of interest to know how the columns are named. This can be checked by the `names()` function.
-Let's say we want to rename the "LabID" column and the "p_bray" column to "ID" and "p" in the south_locations dataframe with base R. The way to do this, is to assign the names of the columns of the dataframe to a vector (here called `names`) and select the name of a specific column in the vector by using squared brackets `[]` and a number that indicates the position of the column in the vector. Then, you can replace it with another name.
-Alternatively, one can follow the already known syntax of the tidyverse. Here, we rename three columns of the locations dataset using the `rename` function. Note that the new name is specified on the left side of the equal sign and the name to be replaced on the right side. 
-
-```{r, echo = T, eval = T}
-#check names
-names(south_locations)
-names <- names(south_locations)
-# renaming - base R option
-names[1] <- "ID"
-names[6] <- "k"
-names(south_locations)
-
-# renaming - tidyverse option
-names(locations)
-locations1 <- locations %>% rename(
-  ID = LabID,
-  long = x,
-  lat = y
-)
-names(locations1)
-
-
-```
-
-Another important operation when working with soil data is to remove NA values. NA values are empty cells that for instance do not contain coordinates. In the following case, we are going to check whether the locations dataset has NA values in the x column. To this end, we can use the `is.na` function. This function returns logical (TRUE or FALSE) values. Based on these values, any NA observations that have NA values in the x column can be removed from the dataset. For that we use again squared brackets `[]` and the logical operator `!` that equals `is not` to select all observations of locations that don't have NA values in the x column.
-
-```{r, echo = T, eval = T}
-# identify NAs
-is.na(locations$x)
-
-locations <- locations[!is.na(locations$x),]
-head(locations)
-```
-
-Finally, another common source of error arises from wrongly classified columns. For instance, if the column containing the pH measurements is not numeric but is classified as character (means text). To check which classes were assigned to each column after reading in the data, it is recommendable to use `str()` and `summary()` to get an overview of the dataset.
-In case the variables are not assigned to the correct class one can use the `as.numeric` or `as.character` functions to convert the respective column. However, in the present case all variables are assigned correctly. If it is not the case with your soil data, there might be issues with some observations, e.g. text values in certain observations.
-
-```{r, echo = T, eval = T}
-# check for class
-str(data)
-summary(data)
-# change class of columns
-
-# to numeric
-#data$ph <- as.numeric(data$ph)
-
-# to character
-#data$LabID <- as.character(data$LabID)
-
-```
 
 For further guidance and more in-depth techniques to administer and handle soil data in **R**, it is recommended to check the GitHub repository on soil database management of the GSP: [FAO-GSP Soil DB](https://github.com/FAO-GSP/SoilDB). There, not only training data but also extensive example codes are available.
 For now, we continue working with the example dataset and assume that the dataset you are using complies with the format specified at the beginning.

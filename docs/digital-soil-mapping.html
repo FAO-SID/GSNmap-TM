@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Digital Soil Mapping |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Digital Soil Mapping |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I" />
   <meta property="og:type" content="book" />
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="setting-up-the-software-environment.html"/>
-<link rel="next" href="arranging-soil-data-in-r.html"/>
+<link rel="next" href="the-training-dataset-and-basic-computations-in-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -53,6 +53,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -60,16 +62,16 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -212,22 +214,21 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html"><i class="fa fa-check"></i><b>4</b> Digital Soil Mapping</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#principles"><i class="fa fa-check"></i><b>4.1</b> Principles</a></li>
-<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#environmental-covariates"><i class="fa fa-check"></i><b>4.2</b> Environmental covariates</a></li>
+<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#covariates"><i class="fa fa-check"></i><b>4.2</b> Covariates</a></li>
 <li class="chapter" data-level="4.3" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#machine-learning-techniques"><i class="fa fa-check"></i><b>4.3</b> Machine learning techniques</a></li>
 <li class="chapter" data-level="4.4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes"><i class="fa fa-check"></i><b>4.4</b> Mapping of soil nutrients and associated soil attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html"><i class="fa fa-check"></i><b>5</b> Arranging soil data in <strong>R</strong></a>
+<li class="chapter" data-level="5" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html"><i class="fa fa-check"></i><b>5</b> The training dataset and basic computations in <strong>R</strong></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
+<li class="chapter" data-level="5.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
-<li class="chapter" data-level="5.1.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
+<li class="chapter" data-level="5.1.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
-<li class="chapter" data-level="5.3" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
+<li class="chapter" data-level="5.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
-<li class="chapter" data-level="5.3.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#basic-data-handling-operations"><i class="fa fa-check"></i><b>5.3.2</b> Basic data handling operations</a></li>
+<li class="chapter" data-level="5.3.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>6</b> Step 1: soil data preparation</a>
@@ -242,8 +243,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariatesand cropland mask with Google Earth Engine (GEE)</a>
+<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-and-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates and cropland mask with Google Earth Engine (GEE)</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
 <li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of interest (ROI)</a></li>
@@ -319,26 +320,26 @@ Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</p></a>
 \end{equation}\]</span></p>
 <p>Where <span class="math inline">\(S\)</span> is the soil classes or attributes (to be modelled) as a function of “<span class="math inline">\(s\)</span>” as other soil properties, “<span class="math inline">\(c\)</span>” as climatic properties, “<span class="math inline">\(o\)</span>” as organisms, including land cover and human activity, “<span class="math inline">\(r\)</span>” as terrain attributes, “<span class="math inline">\(p\)</span>” as parent material, “<span class="math inline">\(a\)</span>” as soil age, and “<span class="math inline">\(n\)</span>” as the geographic position.</p>
 </div>
-<div id="environmental-covariates" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Environmental covariates<a href="digital-soil-mapping.html#environmental-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There is an constantly increasing range of global datasets that can be used as environmental covariates. Covariates usually provide information on the soil forming factors. However, they are always only an approximation to the reality in the field. The selection of covariates aims to give the most accurate picture of the reality and thus complement each other. In the case of climatic covariates for instance, useful covariates should not only cover the long-term mean annual temperature or precipitation over an climatic reference period (30 years) but also inform about seasonal patterns or even diurnal variability. Still, when selecting covariates one has to keep in mind that there is a trade-off between accurate representation of reality and overfitting the model used for modelling.</p>
+<div id="covariates" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Covariates<a href="digital-soil-mapping.html#covariates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Covariates are geospatially referenced parameters that constitute pivotal determinants within the domain of digital soil mapping. Covariates encapsulate the underlying drivers shaping soil variability, aiding in the prediction of soil properties across landscapes. These variables consist of a diverse range of factors, including topography, vegetation, climate variables, and land use information among others. Careful selection of relevant covariates is essential, as their choice directly impacts the accuracy of soil property predictions.</p>
 </div>
 <div id="machine-learning-techniques" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Machine learning techniques<a href="digital-soil-mapping.html#machine-learning-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A broad range of modelling approaches coexist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped. The plethora of methods cannot be listed here as it was summarised in multiple review papers <span class="citation">(<a href="#ref-khaledian2020" role="doc-biblioref">Khaledian and Miller, 2020</a>; <a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>; <a href="#ref-ma2019" role="doc-biblioref">Ma <em>et al.</em>, 2019</a>; <a href="#ref-padarian2019" role="doc-biblioref">Padarian, Minasny and McBratney, 2019</a>; <a href="#ref-wadoux2020" role="doc-biblioref">Wadoux, Minasny and McBratney, 2020</a>)</span>.
+<p>A broad range of modelling approaches exist in order to establish quantitative relationships between environmental covariates and the target soil properties to be mapped.
 Traditionally, multiple linear regression models can be used to quantify the relationships which continues to be the most applied mapping method to map for instance soil organic carbon <span class="citation">(<a href="#ref-lamichhane2019" role="doc-biblioref">Lamichhane, Kumar and Wilson, 2019</a>)</span>. In addition to that, regression Kriging methods combine linear regressions and an stochastic interpolation of the regression residuals based on their spatial autocorrelation <span class="citation">(<a href="#ref-yigini2018" role="doc-biblioref">Yigini <em>et al.</em>, 2018</a>)</span>.
 However, machine learning algorithms with more flexible assumptions, i.e. non-linear relationships, have become more and more popular as the mapping performance was substantially improved and the versatility of the algorithms can be detect more complex relationships.
-Among the most commonly used non-linear machine learning models is random forest <span class="citation">(<a href="#ref-Breiman2001" role="doc-biblioref">Breiman, 2001</a>)</span>. The random forest algorithm splits a dataset into subsets and uses a random selection of covariates (predictors) to identify homogeneous groups. The procedure of classifying is repeated many times and in the end the prediction is averaged. Finally, quantile regression forests (QRF) derive from random forest models <span class="citation">(<a href="#ref-Meinshausen2006" role="doc-biblioref">Meinshausen, 2006</a>)</span>. The benefit of QRF is the ability to predict not only the mean of the prediction but also to provide more information on the uncertainty and probability distribution.</p>
+Among the most commonly used non-linear machine learning models is random forest <span class="citation">(<a href="#ref-Breiman2001" role="doc-biblioref">Breiman, 2001</a>)</span>. The random forest algorithm splits a dataset into subsets and uses a random selection of covariates (predictors) to identify homogeneous groups. The procedure of classifying is repeated many times and in the end the prediction is averaged. Traditional random forests output the mean prediction from the random trees. Quantile regression forests (QRF) is an extension of random forests developed by Nicolai Meinshausen <span class="citation">(<a href="#ref-Meinshausen2006" role="doc-biblioref">Meinshausen, 2006</a>)</span> that provides non-parametric estimates of the median predicted value as well as prediction quantiles. The benefit of QRF is the ability to predict not only the mean of the prediction but also to provide more information on the uncertainty and probability distribution.</p>
 </div>
 <div id="mapping-of-soil-nutrients-and-associated-soil-attributes" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Mapping of soil nutrients and associated soil attributes<a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>DSM has been used to produce maps of soil nutrients at regional to continental scales. For instance, <span class="citation">Hengl <em>et al.</em> (<a href="#ref-Hengl2017" role="doc-biblioref">2017</a>)</span> predicted 15 soil nutrients at a 250 m resolution in Africa using a random forest model <span class="citation">(<a href="#ref-wright2016" role="doc-biblioref">Wright, Ziegler and König, 2016</a>)</span>. The soil nutrient observations were collected for topsoils at locations that were unevenly distributed over the continent and a set of spatially-explicit environmental covariates including soil properties. In 2021, the map resolution was increased to 30 x 30 m by using additional soil samples <span class="citation">(<a href="#ref-hengl2021" role="doc-biblioref">Hengl <em>et al.</em>, 2021</a>)</span>.
 In Europe maps of chemical soil properties, including macronutrients like potassium and phosphorus, were mapped based on a gaussian process regression using the LUCAS soil database <span class="citation">(<a href="#ref-ballabio2019" role="doc-biblioref">Ballabio <em>et al.</em>, 2019</a>)</span>.
-Global efforts to map nutrients in a harmonised way are suffering of constraints due to limited availability of appropriate soil data. The country-driven approach of the GSP has therefore the potential to improve data availability through the country-driven approach as it uses largely unexplored soil data, a harmonised mapping approach combined with national expertise on the regional soil resources. Therefore, in this technical manual, we present a DSM framework to map soil nutrients and associated properties using soil observations with latitude and longitude coordinates (point-support) (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
+Global efforts to map soil nutrients in a harmonised way are hampered by the limited availability of appropriate soil data. The country-driven approach of the GSP can potentially overcome this limitation by fostering and leveraging national expertise. To implement the GSP’s country-driven global mapping exercise, this Technical Manual provides step-by-step guidelines to map soil nutrients and associated properties using georeferenced soil observations following a digital soil mapping approach using the quantile regression forest algorithm (Figure <a href="digital-soil-mapping.html#fig:workflow1">4.1</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:workflow1"></span>
-<img src="images/workflow_lat_long_data.png" alt="Digital soil mapping approach for point-support data. Circles are the steps." width="409" />
+<img src="images/workflow_lat_long_data.png" alt="Digital soil mapping approach for the GSNmap Phase I. Circles are the steps." width="409" />
 <p class="caption">
-Figure 4.1: Digital soil mapping approach for point-support data. Circles are the steps.
+Figure 4.1: Digital soil mapping approach for the GSNmap Phase I. Circles are the steps.
 </p>
 </div>
 
@@ -364,26 +365,14 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
 <div id="ref-Jenny1941" class="csl-entry">
 <strong>Jenny, H.</strong> 1941. A system of quantitative pedology. In <span>“factors of soil formation”</span>. McGraw Hill: New York.
 </div>
-<div id="ref-khaledian2020" class="csl-entry">
-<strong>Khaledian, Y. &amp; Miller, B.A.</strong> 2020. Selecting appropriate machine learning methods for digital soil mapping. <em>Applied Mathematical Modelling</em>, 81: 401–418.
-</div>
 <div id="ref-lamichhane2019" class="csl-entry">
 <strong>Lamichhane, S., Kumar, L. &amp; Wilson, B.</strong> 2019. Digital soil mapping algorithms and covariates for soil organic carbon mapping and their implications: A review. <em>Geoderma</em>, 352: 395–413.
-</div>
-<div id="ref-ma2019" class="csl-entry">
-<strong>Ma, Y., Minasny, B., Malone, B.P. &amp; Mcbratney, A.B.</strong> 2019. Pedology and digital soil mapping (DSM). <em>European Journal of Soil Science</em>, 70(2): 216–235.
 </div>
 <div id="ref-McBratney2003" class="csl-entry">
 <strong>McBratney, A.B., Santos, M.L.M. &amp; Minasny, B.</strong> 2003. On digital soil mapping, 117: 3–52. <a href="https://doi.org/10.1016/s0016-7061(03)00223-4">https://doi.org/10.1016/s0016-7061(03)00223-4</a>
 </div>
 <div id="ref-Meinshausen2006" class="csl-entry">
 <strong>Meinshausen, Ni.</strong> 2006. Quantile regression forests. <em>Journal of Machine Learning Research</em>, 7(6).
-</div>
-<div id="ref-padarian2019" class="csl-entry">
-<strong>Padarian, J., Minasny, B. &amp; McBratney, A.B.</strong> 2019. Using deep learning for digital soil mapping. <em>Soil</em>, 5(1): 79–89.
-</div>
-<div id="ref-wadoux2020" class="csl-entry">
-<strong>Wadoux, A.M.-C., Minasny, B. &amp; McBratney, A.B.</strong> 2020. Machine learning for digital soil mapping: Applications, challenges and suggested solutions. <em>Earth-Science Reviews</em>, 210: 103359.
 </div>
 <div id="ref-wright2016" class="csl-entry">
 <strong>Wright, M.N., Ziegler, A. &amp; König, I.R.</strong> 2016. Do little interactions get lost in dark random forests? <em>BMC bioinformatics</em>, 17(1): 1–10.
@@ -398,7 +387,7 @@ Figure 4.1: Digital soil mapping approach for point-support data. Circles are th
         </div>
       </div>
 <a href="setting-up-the-software-environment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="arranging-soil-data-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-training-dataset-and-basic-computations-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

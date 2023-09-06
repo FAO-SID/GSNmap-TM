@@ -1,5 +1,5 @@
 # Step 1: soil data preparation
-This chapter builds on the previous one as it requires basic understanding of the data handling using **R**. From this point onwards, the steps base on each other and are needed to complete the mapping process. The instructions covered in this chapter provide step-by-step instructions on the following items:
+This chapter builds on the previous one as it requires basic understanding of **R**. From this point onwards, each step needs to be executed to complete the mapping process. The instructions covered in this chapter provide step-by-step instructions on the following items:
 
 1. Perform a quality check of the data
 2. Estimate bulk density using PTF
@@ -8,42 +8,29 @@ This chapter builds on the previous one as it requires basic understanding of th
 4. Plot and save the formatted soil data
 
 ## Load national data
-As specified in the previous Chapter in regards to [pre-processing](preproc), at first the necessary steps in *RStudio* are taken: set the working directory and load the necessary R packages. Note that there are many ways to install packages besides the most common way using the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. In these instances additional packages such as `devtools` or `remotes` are needed (see example in code below). These packages are then able to install packages from for instance GitHub repositories.
+As specified in the previous Chapter in regards to [pre-processing](preproc), at first the necessary steps in *RStudio* are taken: set the working directory and load the necessary R packages. Note that there are many ways to install packages besides the most common way using the function `install.packages()`. For instance, to install the `terra` package, one has to write `install.packages("terra")`. This installs the package from CRAN. However, there are a few exceptions where development versions of R packages are required. Notice that in this script and all subsequent ones the rstudioapi method is used to set the working directory. This approach is covered in chapter 5. 
 
 ```{r, eval = F}
-# 0 - User-defined variables ===================================================
-#wd <- 'C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping'
-#wd <- "C:/GIT/GSNmap-TM/Digital-Soil-Mapping"
-
 # 1 - Set working directory and load necessary packages ========================
-setwd(wd) # change the path accordingly
+# Working directory
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("..")
 
 library(tidyverse) # for data management and reshaping
 library(readxl) # for importing excel files
 library(mapview) # for seeing the profiles in a map
 library(sf) # to manage spatial data (shp vectors) 
 library(aqp) # for soil profile data
-#install.packages("devtools") 
-#devtools::install_bitbucket("brendo1001/ithir/pkg") #install ithir package
 library(mpspline2) # for horizon harmonization
-
-
-
+library(plotly) # interactive plots
+library(ggplot2)
 ```
 
 
-```{r include=FALSE}
-library(kableExtra)
-library(data.table)
-library(mpspline2)
-library(plotly)
-
-
-```
 
 The next step is to load the national soil data into *R Studio*. For that, it is recommendable to have the data in either Microsoft Excel format (.xlsx) or as comma separated value table (.csv). In both cases, each row represents a sample (or horizon) and each column represents a variable. Then, the datasets can be loaded from the specified folder using the respective functions specified in the code below. It is noteworthy that in **R** datasets also need to be assigned to a user-defined variable in order to be saved in the "global environment".
 
-In this example, the three different data tables are loaded into *RStudio*. The soil profile database of SISINTA (`hor`), the chemical (`chem`) and physical soil property tables (`phys`). After reading in the file, the package `tidyverse` comes into play. By using the `select()` and `unique()` functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
+In this example, the three different data tables are loaded into *RStudio*. The soil profile database (`hor`), the chemical (`chem`) and physical soil property tables (`phys`). After reading in the file, the package `tidyverse` comes into play. By using the `select()` and `unique()` functions, the user can select only the necessary columns from the table and ensure that no duplicates are included. At this point it may be necessary to rename certain columns, as shown for the Profile and Horizon ID columns in the code below.
 Finally, every time new datasets are loaded into *RStudio*, it is recommendable to check the data. Using the `summary()` function, users can see the class of each variable (= column) and descriptive statistics (for numerical variables). Classes are 'character' (`chr`) for text, integer (`int`) for whole numbers, and numeric (`num`) for numeric variables. 
 
 
@@ -82,7 +69,7 @@ summary(hor)
 
 ```
 
-The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below).
+The selection of useful columns is very important since it ensures that users keep a good overview and a clean environment. Using the `select()` function, it is also possible to rename the variables right away (see code below). The new column name is specified on the left while the old column name on the right of the equal sign (e.g. ph=ph_h2o ). 
 
 ```{r select, eval = T}
 # 3 - select useful columns ====================================================
@@ -100,7 +87,7 @@ Datasets need to be checked for their quality as especially manually entered dat
 * there are no duplicated profiles; and
 * the depth logic within a profile is not violated.
 
-To check the first point, the dataframe needs to be converted into a spatial object using the `st_as_sf()` function of the `sf` package. It is necessary to indicate the columns that contains latitude and longitude, as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, locally more appropriate CRS can be found on the following website: https://epsg.io/. The `mapview()` command (from `mapview` package) offers the possibility to visualize the profile locations in an interactive map. Finally, the `filter()` function can be used to remove rows that contain profiles with wrong locations.
+To check the first point, the dataframe needs to be converted into a spatial object using the `st_as_sf()` function of the `sf` package. It is necessary to indicate the columns that contains latitude and longitude, as well as a coordinate reference system (CRS). We recommend WGS84 which corresponds to an EPSG code of 4326. However, if the coordinates were stored using a different local unspecified CRS, the CRS can be found using the following website: https://epsg.io/. The `mapview()` command (from `mapview` package) offers the possibility to visualize the profile locations in an interactive map. Finally, the `filter()` function can be used to remove rows that contain profiles with wrong locations. In the example below a specific point that falls outside the area of interest is excluded from the dataset using the filter function. 
 
 ```{r aqp, echo=FALSE, message=FALSE}
 # 4 - Quality check ============================================================
@@ -118,7 +105,7 @@ site <- filter(site, ProfID != 2823)
 
 To visualize the profile locations, the soil data table was converted into a shapefile. Still, to check whether the database complies with the depth logic within each profile, it is necessary to convert the data table into a so-called soil profile collection that allows for very specific operations. These operations were bundled in the package `aqp` (AQP = Algorithms for Quantitative Pedology) [@beaudette2013].
 With the first lines of code below, the dataset is converted into a soil profile collection and profiles and horizon tables are joined based on the site information.
-Now the profile collection can be visualised for any soil property. In this case, only the first 20 profiles are selected for the cation exchange capacity (CEC).
+Now the profile collection can be visualized for any soil property. In this case, only the first 20 profiles are selected for the cation exchange capacity (CEC).
 Using the `checkHzDepthLogic()` function, users can assess that all profiles do not have gaps or overlaps of neighbouring horizons. 
 
 
@@ -173,11 +160,11 @@ dat <- select(dat, ProfID, HorID, x, y, top, bottom, ph:cec )
 
 ## Calculation of pedo-transfer functions
 
-In the cases of single-layer samples, which is common in sampling for nutrient determination, a locally calibrated pedotransfer function (PTF) should be applied. PTF will be also required to harmonise the laboratory methods. Experts from GLOSOLAN will provide advice in this regard.
+In the cases of single-layer samples, which is common in sampling for nutrient determination, a locally calibrated pedotransfer function (PTF) should be applied. PTF will be also required to harmonise the laboratory methods. Experts from the Global Soil Laboratory Network (GLOSOLAN) will provide advice in this regard.
 
 Therefore, a customised function is introduced to our working environment. Users can write their own functions in **R**. This is often necessary when existing functions need to be customised or very specific calculations need to be performed. Functions greatly increase the efficiency of our code. For further information, it is recommendable to consult online resources on the topic (e.g. https://hbctraining.github.io/Intro-to-R/lessons/03_introR-functions-and-arguments.html).
 
-The function `estimateBD` below calculates various PTFs that estimate BD. Which equation is used is determined by the user that has to choose one of the methods and also specify the SOC value of the respective horizon. The SOC values is first converted to OM by using the conversion factor of 1.724 and then inserted in the respective PTF. The return() command tells **R** which value to output. 
+The function `estimateBD` below calculates various PTFs that estimate bulk density (BD). Which equation is used is determined by the user that has to choose one of the methods and also specify the SOC value of the respective horizon. The SOC values is first converted to OM by using the conversion factor of 1.724 and then inserted in the respective PTF. The return() command tells **R** which value to output. 
 
 ```{r, eval = T, message = F}
 # 5 - Estimate BD using pedotransfer functions =================================
@@ -244,10 +231,9 @@ plot.bd <- BD_test %>%
 plot.bd
 
 # Dymanic plot with plotly 
-ggplotly(plot.bd)
+plotly::ggplotly(plot.bd)
 
-ggplotly(plot.bd) %>%
-  layout(hovermode = "x")
+plotly::ggplotly(plot.bd) 
 
 # Plot the Selected function again
 BD_test %>% 
@@ -258,13 +244,12 @@ BD_test %>%
   geom_density() + xlim(c(0,2.5))
 
 # Same dynamic plot 
-ggplotly(BD_test %>% 
+plotly::ggplotly(BD_test %>% 
            select(-SOC) %>% 
            pivot_longer(cols = c("BD_observed", "Honeyset_Ratkowsky1989"), 
                         names_to = "Method", values_to = "BD") %>% 
            ggplot(aes(x = BD, color = Method)) + 
-           geom_density() + xlim(c(0,2.5))) %>%
-  layout(hovermode = "x")
+           geom_density() + xlim(c(0,2.5))) 
 
 ```
 
@@ -329,9 +314,9 @@ ggplot(x, aes(x = soil_property, y = value, fill = soil_property)) +
 ## Harmonise soil layer depths
 The last step towards a soil data table that can be used for mapping, is to harmonize the soil depth layers to 0-30 cm (or 30-60, or 60-100 cm respectively). This is necessary since we want to produce maps that cover exactly those depths and do not differ across soil profile locations. Thus, the relevant columns are selected from the dataframe, target soil properties, and upper and lower limit of the harmonised soil layer are specified (in depths).
 
-In the following a new dataframe 'd' is created in which the standard depth layers are stored and named. The code below shows a for loop that calculates the values for the standard depth for each target soil property automatically using the ea_spline function of the 'ithir' package.
+In the following a new dataframe 'd' is created in which the standard depth layers are stored and named. To achieve this the function apply_mpspline_all from mpslpine2 is used.
 
-```{r harmonize, eval = T, message = F, warning = F, results = 'hide'}
+```{r harmonize, eval = F, message = F, warning = F, results = 'hide'}
 # 6 - Harmonize soil layers ====================================================
 source("Digital-Soil-Mapping/03-Scripts/spline_functions.R") 
 ## 6.1 - Set target soil properties and depths ---------------------------------
@@ -342,12 +327,13 @@ target <- c("ph", "k", "soc",  "bd", "cec")
 depths <- c(0,30)
 
 ## 6.2 - Create standard layers ------------------------------------------------
-splines <- apply_mpspline_all(df = dat, properties = target, depth_range = depths)
+splines <-apply_mpspline_all(df = dat, properties = target, depth_range = depths)
 summary(splines)
 
 # merge splines with x and y
 d <- unique(select(dat, ProfID, x, y))
 d <- left_join(d, splines)
+
 
 ```
 
@@ -371,7 +357,7 @@ Units are of paramount importance to deliver a high-quality map product. Therefo
 
 In the following, the available Potassium measurements from the soil profile data is converted from cmol~c~/kg to ppm. In addition, total N is converted from percent to ppm and the soil texture class values from g/kg to percent.
 
-```{r, eval = T}
+```{r, eval = F}
 
 # Units soil profile data (dataframe d)
 # 
@@ -394,7 +380,7 @@ phys$silt_0_30 <-phys$silt_0_30/10
 
 Finally, the different spreadsheets are merged into one single dataframe. For that, it is important to have matching column names in the dataframes that are to be merged.
 
-```{r, eval = T}
+```{r, eval = F}
 # Add chemical and physical properties from additional datasets ==========================
   
 
@@ -435,7 +421,7 @@ ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
   facet_wrap(~soil_property, scales = "free")
 
 
-ggplotly(ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
+plotly::ggplotly(ggplot(x, aes(x = depth, y = value, fill = soil_property)) +
            geom_boxplot() + 
            facet_wrap(~soil_property, scales = "free"))
 

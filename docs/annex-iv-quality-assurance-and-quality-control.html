@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Annex IV: Quality assurance and quality control |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Annex IV: Quality assurance and quality control |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -60,16 +62,16 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -212,22 +214,21 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html"><i class="fa fa-check"></i><b>4</b> Digital Soil Mapping</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#principles"><i class="fa fa-check"></i><b>4.1</b> Principles</a></li>
-<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#environmental-covariates"><i class="fa fa-check"></i><b>4.2</b> Environmental covariates</a></li>
+<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#covariates"><i class="fa fa-check"></i><b>4.2</b> Covariates</a></li>
 <li class="chapter" data-level="4.3" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#machine-learning-techniques"><i class="fa fa-check"></i><b>4.3</b> Machine learning techniques</a></li>
 <li class="chapter" data-level="4.4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes"><i class="fa fa-check"></i><b>4.4</b> Mapping of soil nutrients and associated soil attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html"><i class="fa fa-check"></i><b>5</b> Arranging soil data in <strong>R</strong></a>
+<li class="chapter" data-level="5" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html"><i class="fa fa-check"></i><b>5</b> The training dataset and basic computations in <strong>R</strong></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
+<li class="chapter" data-level="5.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
-<li class="chapter" data-level="5.1.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
+<li class="chapter" data-level="5.1.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
-<li class="chapter" data-level="5.3" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
+<li class="chapter" data-level="5.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
-<li class="chapter" data-level="5.3.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#basic-data-handling-operations"><i class="fa fa-check"></i><b>5.3.2</b> Basic data handling operations</a></li>
+<li class="chapter" data-level="5.3.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>6</b> Step 1: soil data preparation</a>
@@ -242,8 +243,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariatesand cropland mask with Google Earth Engine (GEE)</a>
+<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-and-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates and cropland mask with Google Earth Engine (GEE)</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
 <li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of interest (ROI)</a></li>
@@ -920,139 +921,139 @@ NA
 <div id="qaqc-script" class="section level2 unnumbered hasAnchor">
 <h2>QA/QC Script<a href="annex-iv-quality-assurance-and-quality-control.html#qaqc-script" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following script automates the for Steps described in the previous sections. It is important to note that the script’s main objective is to provide a fast alternative to check the output layers and that it does not replace the need to visually assess the final maps based on expert knowledge.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
-<span id="cb139-2"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb139-3"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QA/QC</span></span>
-<span id="cb139-4"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Property Mapping</span></span>
-<span id="cb139-5"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb139-6"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSP-Secretariat</span></span>
-<span id="cb139-7"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact: Isabel.Luotto@fao.org</span></span>
-<span id="cb139-8"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          Marcos.Angelini@fao.org</span></span>
-<span id="cb139-9"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-9" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
-<span id="cb139-10"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-11"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache </span></span>
-<span id="cb139-12"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb139-13"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
-<span id="cb139-14"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-15"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Content of this script =======================================================</span></span>
-<span id="cb139-16"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory and packages</span></span>
-<span id="cb139-17"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Step 1: Completeness of layers </span></span>
-<span id="cb139-18"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Step 2: Check the projection and resolution of all data products</span></span>
-<span id="cb139-19"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Step 3: Check the extent</span></span>
-<span id="cb139-20"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Step 4: Check the units, ranges, and outliers</span></span>
-<span id="cb139-21"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb139-22"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Export QA/QC report</span></span>
-<span id="cb139-23"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-23" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
-<span id="cb139-24"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-25"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-26"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory, soil attribute, and packages ======================</span></span>
-<span id="cb139-27"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-28"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
-<span id="cb139-29"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-29" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&#39;C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping&#39;</span></span>
-<span id="cb139-30"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-30" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- &#39;C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping&#39;</span></span>
-<span id="cb139-31"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-31" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
-<span id="cb139-32"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-33"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Define country of interes throuhg 3-digit ISO code</span></span>
-<span id="cb139-34"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-34" aria-hidden="true" tabindex="-1"></a>ISO <span class="ot">=</span><span class="st">&#39;ISO&#39;</span></span>
-<span id="cb139-35"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-36"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-36" aria-hidden="true" tabindex="-1"></a><span class="co">#load packages</span></span>
-<span id="cb139-37"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb139-38"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb139-39"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-40"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Load reference values</span></span>
-<span id="cb139-41"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-41" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;C:/Users/luottoi/Documents/GitHub/GSNmap-TM/tables/wosis_dist.xlsx&quot;</span>)</span>
-<span id="cb139-42"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-42" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> dt[<span class="sc">!</span>(dt<span class="sc">$</span><span class="st">`</span><span class="at">Soil property</span><span class="st">`</span> <span class="sc">%in%</span><span class="fu">c</span>( <span class="st">&quot;P Bray I&quot;</span>,<span class="st">&quot;P Olsen&quot;</span> )),]</span>
-<span id="cb139-43"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-44"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-44" aria-hidden="true" tabindex="-1"></a><span class="co"># In case old naming system was used</span></span>
-<span id="cb139-45"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-45" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>old_prop_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Ntot&#39;</span>, <span class="st">&#39;Pav&#39;</span>, <span class="st">&#39;CEC&#39;</span>,<span class="st">&#39;pH&#39;</span>, <span class="st">&#39;Clay&#39;</span>, <span class="st">&#39;Silt&#39;</span>, <span class="st">&#39;Sand&#39;</span>, <span class="st">&#39;SOC&#39;</span>, <span class="st">&#39;BD&#39;</span>, <span class="st">&#39;Kav&#39;</span>)</span>
-<span id="cb139-46"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-47"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-48"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Set potential ranges for Available K in ppm</span></span>
-<span id="cb139-49"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-50"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-50" aria-hidden="true" tabindex="-1"></a>dt[dt<span class="sc">$</span>property_id<span class="sc">==</span><span class="st">&#39;k_0_30&#39;</span>,<span class="st">&#39;Min&#39;</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb139-51"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-51" aria-hidden="true" tabindex="-1"></a>dt[dt<span class="sc">$</span>property_id<span class="sc">==</span><span class="st">&#39;k_0_30&#39;</span>,<span class="st">&#39;Max&#39;</span>] <span class="ot">&lt;-</span> <span class="dv">150</span></span>
-<span id="cb139-52"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Step 1: Completeness of layers -------------------------------------------</span></span>
-<span id="cb139-53"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-54"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Check number of layers</span></span>
-<span id="cb139-55"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-56"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify number of soil property maps generated (not including the uncertainty layers)</span></span>
-<span id="cb139-57"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-58"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Check if all layers were correctly generated (including uncertainty layers)</span></span>
-<span id="cb139-59"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-59" aria-hidden="true" tabindex="-1"></a><span class="co"># and if the correct ISO code and soil property ids were included in the files names</span></span>
-<span id="cb139-60"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-60" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern=</span> <span class="st">&#39;.tif&#39;</span>, <span class="at">full.names =</span> T)</span>
-<span id="cb139-61"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-61" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">list.files</span>( <span class="at">pattern=</span> <span class="st">&#39;.tif&#39;</span>, <span class="at">full.names =</span> F)</span>
-<span id="cb139-62"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-62" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;.tif&#39;</span>, <span class="st">&#39;&#39;</span>, names)</span>
-<span id="cb139-63"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-64"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-65"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch depending on the naming system (i.e. files have e.g. Pav instead of p_0_30)</span></span>
-<span id="cb139-66"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Step1 &lt;-data.frame(property_id =dt$property_id)</span></span>
-<span id="cb139-67"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-67" aria-hidden="true" tabindex="-1"></a>Step1 <span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">property_id =</span>dt<span class="sc">$</span>old_prop_ids) <span class="co">#old naming system</span></span>
-<span id="cb139-68"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-69"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-69" aria-hidden="true" tabindex="-1"></a>Step1<span class="sc">$</span>Names <span class="ot">&lt;-</span> <span class="st">&#39;Rename layer&#39;</span></span>
-<span id="cb139-70"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-70" aria-hidden="true" tabindex="-1"></a>Step1<span class="sc">$</span>Uncertainty <span class="ot">&lt;-</span> <span class="st">&#39;Missing&#39;</span></span>
-<span id="cb139-71"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-72"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-72" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(Step1<span class="sc">$</span>property_id)){</span>
-<span id="cb139-73"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-74"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-74" aria-hidden="true" tabindex="-1"></a>  t11 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;SD_GSNmap_&#39;</span>,i), files)<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;sd_&#39;</span>,i), files)</span>
-<span id="cb139-75"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-75" aria-hidden="true" tabindex="-1"></a>  t12 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), files)<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), files)</span>
-<span id="cb139-76"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-76" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-77"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-77" aria-hidden="true" tabindex="-1"></a>  t13 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(ISO, files)</span>
-<span id="cb139-78"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-78" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-79"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-79" aria-hidden="true" tabindex="-1"></a>  Step1[Step1<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;Names&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t12[[<span class="dv">1</span>]] <span class="sc">==</span>T <span class="sc">&amp;</span> t13[[<span class="dv">1</span>]] <span class="sc">==</span>T, <span class="st">&#39;Correctly named&#39;</span>, <span class="st">&#39;Rename layer&#39;</span>)</span>
-<span id="cb139-80"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-80" aria-hidden="true" tabindex="-1"></a>  Step1[Step1<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;Uncertainty&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t11[[<span class="dv">1</span>]] <span class="sc">==</span>T , <span class="st">&#39;Generated&#39;</span>, <span class="st">&#39;Missing&#39;</span>)</span>
-<span id="cb139-81"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-81" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-82"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-82" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb139-83"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-84"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-85"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-85" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Step 2: Check the projection and resolution of all data products ---------</span></span>
-<span id="cb139-86"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-86" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">rast</span>(files)</span>
-<span id="cb139-87"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-87" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(r) <span class="ot">&lt;-</span> names</span>
-<span id="cb139-88"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Check projection (WGS 84)</span></span>
-<span id="cb139-89"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-89" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step21=</span><span class="fu">crs</span>(r, <span class="at">describe=</span><span class="cn">TRUE</span>)<span class="sc">$</span>name <span class="sc">==</span><span class="st">&#39;WGS 84&#39;</span>)</span>
-<span id="cb139-90"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-91"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Check resolution (250 m)</span></span>
-<span id="cb139-92"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-92" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step22=</span><span class="fu">round</span>(<span class="fu">res</span>(r)[[<span class="dv">1</span>]], <span class="dv">5</span>) <span class="sc">==</span> <span class="fl">0.00225</span>)</span>
-<span id="cb139-93"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-94"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-94" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Step 3: Check the extent -------------------------------------------------</span></span>
-<span id="cb139-95"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the layers were masked with a cropland mask</span></span>
-<span id="cb139-96"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-97"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-97" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">&#39;mask/mask.tif&#39;</span>)</span>
-<span id="cb139-98"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-98" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">project</span>(mask, r[[<span class="dv">1</span>]])</span>
-<span id="cb139-99"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-100"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-100" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> r[[<span class="dv">1</span>]]</span>
-<span id="cb139-101"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-101" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">ifel</span>(<span class="sc">!</span><span class="fu">is.na</span>(t),<span class="dv">1</span>, <span class="cn">NA</span>)</span>
-<span id="cb139-102"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-103"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-103" aria-hidden="true" tabindex="-1"></a>t3 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">values</span>(t, <span class="at">na.rm=</span>T))<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">values</span>(mask, <span class="at">na.rm=</span>T))</span>
-<span id="cb139-104"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-105"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-105" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step3=</span> t3 <span class="sc">&lt;=</span><span class="dv">10</span>)</span>
-<span id="cb139-106"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-107"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-108"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-109"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-109" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Step 4: Check the units, ranges, and outliers ----------------------------</span></span>
-<span id="cb139-110"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-110" aria-hidden="true" tabindex="-1"></a>Step4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">property_id=</span>Step1<span class="sc">$</span>property_id)</span>
-<span id="cb139-111"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-111" aria-hidden="true" tabindex="-1"></a><span class="co">#Step4 &lt;- data.frame(property_id =dt$property_id)</span></span>
-<span id="cb139-112"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-112" aria-hidden="true" tabindex="-1"></a>Step4<span class="sc">$</span>in_range <span class="ot">&lt;-</span> <span class="st">&#39;Values not in range&#39;</span></span>
-<span id="cb139-113"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-114"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-114" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(Step4<span class="sc">$</span>property_id)){</span>
-<span id="cb139-115"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-115" aria-hidden="true" tabindex="-1"></a>  t41 <span class="ot">&lt;-</span><span class="fu">min</span>(<span class="fu">values</span>(r[[<span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), <span class="fu">names</span>(r))<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), <span class="fu">names</span>(r))]],<span class="at">na.rm=</span>T)) <span class="sc">&gt;=</span>dt[Step4<span class="sc">$</span>property_id <span class="sc">==</span> i, <span class="st">&#39;Min&#39;</span>]</span>
-<span id="cb139-116"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-116" aria-hidden="true" tabindex="-1"></a>  t42 <span class="ot">&lt;-</span><span class="fu">max</span>(<span class="fu">values</span>(r[[<span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), <span class="fu">names</span>(r))<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), <span class="fu">names</span>(r))]],<span class="at">na.rm=</span>T)) <span class="sc">&lt;=</span>dt[Step4<span class="sc">$</span>property_id <span class="sc">==</span> i, <span class="st">&#39;Max&#39;</span>]</span>
-<span id="cb139-117"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-117" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-118"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-118" aria-hidden="true" tabindex="-1"></a>  Step4[Step4<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;in_range&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t41[[<span class="dv">1</span>]] <span class="sc">==</span>T <span class="sc">&amp;</span> t42[[<span class="dv">1</span>]] <span class="sc">==</span>T, <span class="st">&#39;Values in range&#39;</span>, <span class="st">&#39;Values not in range&#39;</span>)</span>
-<span id="cb139-119"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-119" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-120"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-120" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb139-121"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-122"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-123"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-124"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-124" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Export QA/QC report ------------------------------------------------------</span></span>
-<span id="cb139-125"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-125" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">merge</span>(Step4, Step1, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&#39;property_id&#39;</span>))</span>
-<span id="cb139-126"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-127"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-127" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>projection <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step21, <span class="st">&#39;WGS 84&#39;</span>, <span class="st">&#39;Reproject layer&#39;</span>)</span>
-<span id="cb139-128"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-128" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>resolution <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step21, <span class="st">&#39;250 m&#39;</span>, <span class="st">&#39;Resample layer&#39;</span>)</span>
-<span id="cb139-129"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-129" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>extent <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step3, <span class="st">&#39;Croplands&#39;</span>, <span class="st">&#39;Mask out layer&#39;</span>)</span>
-<span id="cb139-130"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-131"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-131" aria-hidden="true" tabindex="-1"></a>report</span>
-<span id="cb139-132"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-133"><a href="annex-iv-quality-assurance-and-quality-control.html#cb139-133" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(report, <span class="fu">paste0</span>(<span class="st">&#39;QA_QC_&#39;</span>, ISO, <span class="st">&#39;.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb113-2"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb113-3"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QA/QC</span></span>
+<span id="cb113-4"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Soil Property Mapping</span></span>
+<span id="cb113-5"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb113-6"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSP-Secretariat</span></span>
+<span id="cb113-7"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact: Isabel.Luotto@fao.org</span></span>
+<span id="cb113-8"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          Marcos.Angelini@fao.org</span></span>
+<span id="cb113-9"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb113-10"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-11"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Empty environment and cache </span></span>
+<span id="cb113-12"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb113-13"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
+<span id="cb113-14"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-15"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Content of this script =======================================================</span></span>
+<span id="cb113-16"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory and packages</span></span>
+<span id="cb113-17"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Step 1: Completeness of layers </span></span>
+<span id="cb113-18"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Step 2: Check the projection and resolution of all data products</span></span>
+<span id="cb113-19"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Step 3: Check the extent</span></span>
+<span id="cb113-20"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Step 4: Check the units, ranges, and outliers</span></span>
+<span id="cb113-21"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb113-22"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Export QA/QC report</span></span>
+<span id="cb113-23"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-23" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb113-24"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-25"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-26"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 - Set working directory, soil attribute, and packages ======================</span></span>
+<span id="cb113-27"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-28"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Working directory</span></span>
+<span id="cb113-29"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-29" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">&#39;C:/Users/hp/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping&#39;</span></span>
+<span id="cb113-30"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-30" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- &#39;C:/Users/luottoi/Documents/GitHub/GSNmap-TM/Digital-Soil-Mapping&#39;</span></span>
+<span id="cb113-31"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-31" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
+<span id="cb113-32"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-33"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Define country of interes throuhg 3-digit ISO code</span></span>
+<span id="cb113-34"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-34" aria-hidden="true" tabindex="-1"></a>ISO <span class="ot">=</span><span class="st">&#39;ISO&#39;</span></span>
+<span id="cb113-35"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-36"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-36" aria-hidden="true" tabindex="-1"></a><span class="co">#load packages</span></span>
+<span id="cb113-37"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb113-38"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb113-39"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-40"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Load reference values</span></span>
+<span id="cb113-41"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-41" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;C:/Users/luottoi/Documents/GitHub/GSNmap-TM/tables/wosis_dist.xlsx&quot;</span>)</span>
+<span id="cb113-42"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-42" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> dt[<span class="sc">!</span>(dt<span class="sc">$</span><span class="st">`</span><span class="at">Soil property</span><span class="st">`</span> <span class="sc">%in%</span><span class="fu">c</span>( <span class="st">&quot;P Bray I&quot;</span>,<span class="st">&quot;P Olsen&quot;</span> )),]</span>
+<span id="cb113-43"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-44"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-44" aria-hidden="true" tabindex="-1"></a><span class="co"># In case old naming system was used</span></span>
+<span id="cb113-45"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-45" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>old_prop_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Ntot&#39;</span>, <span class="st">&#39;Pav&#39;</span>, <span class="st">&#39;CEC&#39;</span>,<span class="st">&#39;pH&#39;</span>, <span class="st">&#39;Clay&#39;</span>, <span class="st">&#39;Silt&#39;</span>, <span class="st">&#39;Sand&#39;</span>, <span class="st">&#39;SOC&#39;</span>, <span class="st">&#39;BD&#39;</span>, <span class="st">&#39;Kav&#39;</span>)</span>
+<span id="cb113-46"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-47"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-48"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Set potential ranges for Available K in ppm</span></span>
+<span id="cb113-49"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-50"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-50" aria-hidden="true" tabindex="-1"></a>dt[dt<span class="sc">$</span>property_id<span class="sc">==</span><span class="st">&#39;k_0_30&#39;</span>,<span class="st">&#39;Min&#39;</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb113-51"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-51" aria-hidden="true" tabindex="-1"></a>dt[dt<span class="sc">$</span>property_id<span class="sc">==</span><span class="st">&#39;k_0_30&#39;</span>,<span class="st">&#39;Max&#39;</span>] <span class="ot">&lt;-</span> <span class="dv">150</span></span>
+<span id="cb113-52"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 - Step 1: Completeness of layers -------------------------------------------</span></span>
+<span id="cb113-53"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-54"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Check number of layers</span></span>
+<span id="cb113-55"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-56"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify number of soil property maps generated (not including the uncertainty layers)</span></span>
+<span id="cb113-57"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-58"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Check if all layers were correctly generated (including uncertainty layers)</span></span>
+<span id="cb113-59"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-59" aria-hidden="true" tabindex="-1"></a><span class="co"># and if the correct ISO code and soil property ids were included in the files names</span></span>
+<span id="cb113-60"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-60" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern=</span> <span class="st">&#39;.tif&#39;</span>, <span class="at">full.names =</span> T)</span>
+<span id="cb113-61"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-61" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">list.files</span>( <span class="at">pattern=</span> <span class="st">&#39;.tif&#39;</span>, <span class="at">full.names =</span> F)</span>
+<span id="cb113-62"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-62" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&#39;.tif&#39;</span>, <span class="st">&#39;&#39;</span>, names)</span>
+<span id="cb113-63"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-64"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-65"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch depending on the naming system (i.e. files have e.g. Pav instead of p_0_30)</span></span>
+<span id="cb113-66"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Step1 &lt;-data.frame(property_id =dt$property_id)</span></span>
+<span id="cb113-67"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-67" aria-hidden="true" tabindex="-1"></a>Step1 <span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">property_id =</span>dt<span class="sc">$</span>old_prop_ids) <span class="co">#old naming system</span></span>
+<span id="cb113-68"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-69"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-69" aria-hidden="true" tabindex="-1"></a>Step1<span class="sc">$</span>Names <span class="ot">&lt;-</span> <span class="st">&#39;Rename layer&#39;</span></span>
+<span id="cb113-70"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-70" aria-hidden="true" tabindex="-1"></a>Step1<span class="sc">$</span>Uncertainty <span class="ot">&lt;-</span> <span class="st">&#39;Missing&#39;</span></span>
+<span id="cb113-71"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-72"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-72" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(Step1<span class="sc">$</span>property_id)){</span>
+<span id="cb113-73"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-74"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-74" aria-hidden="true" tabindex="-1"></a>  t11 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;SD_GSNmap_&#39;</span>,i), files)<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;sd_&#39;</span>,i), files)</span>
+<span id="cb113-75"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-75" aria-hidden="true" tabindex="-1"></a>  t12 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), files)<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), files)</span>
+<span id="cb113-76"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-77"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-77" aria-hidden="true" tabindex="-1"></a>  t13 <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="sc">%in%</span> <span class="fu">grepl</span>(ISO, files)</span>
+<span id="cb113-78"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-79"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-79" aria-hidden="true" tabindex="-1"></a>  Step1[Step1<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;Names&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t12[[<span class="dv">1</span>]] <span class="sc">==</span>T <span class="sc">&amp;</span> t13[[<span class="dv">1</span>]] <span class="sc">==</span>T, <span class="st">&#39;Correctly named&#39;</span>, <span class="st">&#39;Rename layer&#39;</span>)</span>
+<span id="cb113-80"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-80" aria-hidden="true" tabindex="-1"></a>  Step1[Step1<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;Uncertainty&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t11[[<span class="dv">1</span>]] <span class="sc">==</span>T , <span class="st">&#39;Generated&#39;</span>, <span class="st">&#39;Missing&#39;</span>)</span>
+<span id="cb113-81"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-82"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-82" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb113-83"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-84"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-85"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-85" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 - Step 2: Check the projection and resolution of all data products ---------</span></span>
+<span id="cb113-86"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-86" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">rast</span>(files)</span>
+<span id="cb113-87"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-87" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(r) <span class="ot">&lt;-</span> names</span>
+<span id="cb113-88"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Check projection (WGS 84)</span></span>
+<span id="cb113-89"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-89" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step21=</span><span class="fu">crs</span>(r, <span class="at">describe=</span><span class="cn">TRUE</span>)<span class="sc">$</span>name <span class="sc">==</span><span class="st">&#39;WGS 84&#39;</span>)</span>
+<span id="cb113-90"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-91"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Check resolution (250 m)</span></span>
+<span id="cb113-92"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-92" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step22=</span><span class="fu">round</span>(<span class="fu">res</span>(r)[[<span class="dv">1</span>]], <span class="dv">5</span>) <span class="sc">==</span> <span class="fl">0.00225</span>)</span>
+<span id="cb113-93"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-94"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-94" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 - Step 3: Check the extent -------------------------------------------------</span></span>
+<span id="cb113-95"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the layers were masked with a cropland mask</span></span>
+<span id="cb113-96"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-97"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-97" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">&#39;mask/mask.tif&#39;</span>)</span>
+<span id="cb113-98"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-98" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">project</span>(mask, r[[<span class="dv">1</span>]])</span>
+<span id="cb113-99"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-100"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-100" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> r[[<span class="dv">1</span>]]</span>
+<span id="cb113-101"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-101" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">ifel</span>(<span class="sc">!</span><span class="fu">is.na</span>(t),<span class="dv">1</span>, <span class="cn">NA</span>)</span>
+<span id="cb113-102"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-103"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-103" aria-hidden="true" tabindex="-1"></a>t3 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">values</span>(t, <span class="at">na.rm=</span>T))<span class="sc">-</span><span class="fu">sum</span>(<span class="fu">values</span>(mask, <span class="at">na.rm=</span>T))</span>
+<span id="cb113-104"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-105"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-105" aria-hidden="true" tabindex="-1"></a>(<span class="at">Step3=</span> t3 <span class="sc">&lt;=</span><span class="dv">10</span>)</span>
+<span id="cb113-106"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-107"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-108"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-109"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-109" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 - Step 4: Check the units, ranges, and outliers ----------------------------</span></span>
+<span id="cb113-110"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-110" aria-hidden="true" tabindex="-1"></a>Step4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">property_id=</span>Step1<span class="sc">$</span>property_id)</span>
+<span id="cb113-111"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-111" aria-hidden="true" tabindex="-1"></a><span class="co">#Step4 &lt;- data.frame(property_id =dt$property_id)</span></span>
+<span id="cb113-112"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-112" aria-hidden="true" tabindex="-1"></a>Step4<span class="sc">$</span>in_range <span class="ot">&lt;-</span> <span class="st">&#39;Values not in range&#39;</span></span>
+<span id="cb113-113"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-114"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-114" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(Step4<span class="sc">$</span>property_id)){</span>
+<span id="cb113-115"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-115" aria-hidden="true" tabindex="-1"></a>  t41 <span class="ot">&lt;-</span><span class="fu">min</span>(<span class="fu">values</span>(r[[<span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), <span class="fu">names</span>(r))<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), <span class="fu">names</span>(r))]],<span class="at">na.rm=</span>T)) <span class="sc">&gt;=</span>dt[Step4<span class="sc">$</span>property_id <span class="sc">==</span> i, <span class="st">&#39;Min&#39;</span>]</span>
+<span id="cb113-116"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-116" aria-hidden="true" tabindex="-1"></a>  t42 <span class="ot">&lt;-</span><span class="fu">max</span>(<span class="fu">values</span>(r[[<span class="fu">grepl</span>(<span class="fu">paste0</span>(<span class="st">&#39;mean_&#39;</span>,i), <span class="fu">names</span>(r))<span class="sc">|</span><span class="fu">grepl</span>(<span class="fu">paste0</span>(ISO,<span class="st">&#39;_GSNmap_&#39;</span>,i), <span class="fu">names</span>(r))]],<span class="at">na.rm=</span>T)) <span class="sc">&lt;=</span>dt[Step4<span class="sc">$</span>property_id <span class="sc">==</span> i, <span class="st">&#39;Max&#39;</span>]</span>
+<span id="cb113-117"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-117" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-118"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-118" aria-hidden="true" tabindex="-1"></a>  Step4[Step4<span class="sc">$</span>property_id <span class="sc">==</span>i, <span class="st">&#39;in_range&#39;</span>] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(t41[[<span class="dv">1</span>]] <span class="sc">==</span>T <span class="sc">&amp;</span> t42[[<span class="dv">1</span>]] <span class="sc">==</span>T, <span class="st">&#39;Values in range&#39;</span>, <span class="st">&#39;Values not in range&#39;</span>)</span>
+<span id="cb113-119"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-119" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-120"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-120" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb113-121"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-122"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-123"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-124"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-124" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 - Export QA/QC report ------------------------------------------------------</span></span>
+<span id="cb113-125"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-125" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">merge</span>(Step4, Step1, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&#39;property_id&#39;</span>))</span>
+<span id="cb113-126"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-127"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-127" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>projection <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step21, <span class="st">&#39;WGS 84&#39;</span>, <span class="st">&#39;Reproject layer&#39;</span>)</span>
+<span id="cb113-128"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-128" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>resolution <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step21, <span class="st">&#39;250 m&#39;</span>, <span class="st">&#39;Resample layer&#39;</span>)</span>
+<span id="cb113-129"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-129" aria-hidden="true" tabindex="-1"></a>report<span class="sc">$</span>extent <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(Step3, <span class="st">&#39;Croplands&#39;</span>, <span class="st">&#39;Mask out layer&#39;</span>)</span>
+<span id="cb113-130"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-131"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-131" aria-hidden="true" tabindex="-1"></a>report</span>
+<span id="cb113-132"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-133"><a href="annex-iv-quality-assurance-and-quality-control.html#cb113-133" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(report, <span class="fu">paste0</span>(<span class="st">&#39;QA_QC_&#39;</span>, ISO, <span class="st">&#39;.csv&#39;</span>))</span></code></pre></div>
 
 </div>
 </div>

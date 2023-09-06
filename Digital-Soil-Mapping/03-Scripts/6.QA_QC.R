@@ -107,18 +107,26 @@ t3 <- sum(values(t, na.rm=T))-sum(values(mask, na.rm=T))
 
 
 # 4 - Step 4: Check the units, ranges, and outliers ----------------------------
-Step4 <- data.frame(property_id=Step1$property_id)
-#Step4 <- data.frame(property_id =dt$property_id)
-Step4$in_range <- 'Values not in range'
+# 4 - Step 4: Check the units, ranges, and outliers ----------------------------
+Step4 <- data.frame()
 
-for (i in unique(Step4$property_id)){
-  t41 <-min(values(r[[grepl(paste0('mean_',i), names(r))|grepl(paste0(ISO,'_GSNmap_',i), names(r))]],na.rm=T)) >=dt[Step4$property_id == i, 'Min']
-  t42 <-max(values(r[[grepl(paste0('mean_',i), names(r))|grepl(paste0(ISO,'_GSNmap_',i), names(r))]],na.rm=T)) <=dt[Step4$property_id == i, 'Max']
+for (i in unique(dt$property_id)){
   
-  Step4[Step4$property_id ==i, 'in_range'] <- ifelse(t41[[1]] ==T & t42[[1]] ==T, 'Values in range', 'Values not in range')
-  
+  if (TRUE %in% grepl(i, names(r))){
+    
+    t41 <-min(values(r[[grepl(paste0('mean_',i), names(r))|grepl(paste0(ISO,'_GSNmap_',i), names(r))]],na.rm=T)) >=dt[dt$property_id == i, 'Min']
+    t42 <-max(values(r[[grepl(paste0('mean_',i), names(r))|grepl(paste0(ISO,'_GSNmap_',i), names(r))]],na.rm=T)) <=dt[dt$property_id == i, 'Max']
+    
+    step<-data.frame(property_id =i,range= ifelse(t41[[1]] ==T & t42[[1]] ==T, 'Values in range', 'Values not in range'))
+    Step4 <- rbind(Step4,step)
+    
+  }else if( !(TRUE%in% grepl(i, names(r)))){
+    step<-data.frame(property_id =i,range= 'Layer not submitted')
+    Step4 <- rbind(Step4,step)
+    
+    
+  }
 }
-
 
 
 # 5 - Export QA/QC report ------------------------------------------------------

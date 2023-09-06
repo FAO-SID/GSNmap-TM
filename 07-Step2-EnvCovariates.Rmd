@@ -4,6 +4,7 @@
 
 The SCORPAN equation (Eq. \@ref(eq:scorpan)) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table \@ref(tab:covs1) lists all the environmental covariates that can be implemented under the present DSM framework. Apart from the environmental covariates mentioned in Table \@ref(tab:covs1), other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table \@ref(tab:covs1). Thus, the selection of suitable covariate layers needs to be assessed with common sense and applying expert knowledge. 
 
+
 ```{r covs1, echo = F}
 
 
@@ -28,9 +29,9 @@ kable_styling(bootstrap_options = "striped", full_width = F) %>%
 
 ```
 
-## Download covariatesand cropland mask with Google Earth Engine (GEE)
+## Download covariates and cropland mask with Google Earth Engine (GEE)
 
-The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates by reducing the need to clip and download layers from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script.
+The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates clipped to national borders from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script written in JavaScript. 
 
 You can find the JavaScript code in the material provided in this technical manual under [03-scripts/3.0.Download_Covariates_&_Mask.txt](https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts). To use the code, simply copy and paste the text in the GEE console as shown in the figure below.
 
@@ -41,7 +42,7 @@ knitr::include_graphics("images/javaScript_GEE.png")
 
 If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our **R** session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the "Digital-Soil-Mapping-GSP-FAO" based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission. 
 
-The following text explains the structure of the script that will be executed in GEE, and which parts of the script need to be modified to extract the covariates from the area of interest (AOI).
+The following text explains the structure of the script that will be executed in GEE, and which parts of the script need to be modified to extract the covariates from the area of interest (AOI). 
 
 ### Assets
 
@@ -118,7 +119,11 @@ var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m",
 "projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m",
-"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m"];
+"projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/hfp2013_merisINT",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/night_lights_stable_2013",
+"projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020"];
+
 ```
 
 

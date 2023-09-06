@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Way forward |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</title>
   <meta name="description" content="GSNmap - Technical Manual" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Way forward |  Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -60,16 +62,16 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -212,22 +214,21 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html"><i class="fa fa-check"></i><b>4</b> Digital Soil Mapping</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#principles"><i class="fa fa-check"></i><b>4.1</b> Principles</a></li>
-<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#environmental-covariates"><i class="fa fa-check"></i><b>4.2</b> Environmental covariates</a></li>
+<li class="chapter" data-level="4.2" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#covariates"><i class="fa fa-check"></i><b>4.2</b> Covariates</a></li>
 <li class="chapter" data-level="4.3" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#machine-learning-techniques"><i class="fa fa-check"></i><b>4.3</b> Machine learning techniques</a></li>
 <li class="chapter" data-level="4.4" data-path="digital-soil-mapping.html"><a href="digital-soil-mapping.html#mapping-of-soil-nutrients-and-associated-soil-attributes"><i class="fa fa-check"></i><b>4.4</b> Mapping of soil nutrients and associated soil attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html"><i class="fa fa-check"></i><b>5</b> Arranging soil data in <strong>R</strong></a>
+<li class="chapter" data-level="5" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html"><i class="fa fa-check"></i><b>5</b> The training dataset and basic computations in <strong>R</strong></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
+<li class="chapter" data-level="5.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#study-area-and-training-material"><i class="fa fa-check"></i><b>5.1</b> Study area and training material</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
-<li class="chapter" data-level="5.1.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
+<li class="chapter" data-level="5.1.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#georeferenced-topsoil-data"><i class="fa fa-check"></i><b>5.1.1</b> Georeferenced topsoil data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#soil-profile-data"><i class="fa fa-check"></i><b>5.1.2</b> Soil profile data</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
-<li class="chapter" data-level="5.3" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
+<li class="chapter" data-level="5.2" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#preproc"><i class="fa fa-check"></i><b>5.2</b> Format requirements of soil data</a></li>
+<li class="chapter" data-level="5.3" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#pre-processing-steps"><i class="fa fa-check"></i><b>5.3</b> Pre-processing steps</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
-<li class="chapter" data-level="5.3.2" data-path="arranging-soil-data-in-r.html"><a href="arranging-soil-data-in-r.html#basic-data-handling-operations"><i class="fa fa-check"></i><b>5.3.2</b> Basic data handling operations</a></li>
+<li class="chapter" data-level="5.3.1" data-path="the-training-dataset-and-basic-computations-in-r.html"><a href="the-training-dataset-and-basic-computations-in-r.html#set-the-scene-set-working-directory-packages-load-data"><i class="fa fa-check"></i><b>5.3.1</b> Set the scene (set working directory, packages, load data)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="step-1-soil-data-preparation.html"><a href="step-1-soil-data-preparation.html"><i class="fa fa-check"></i><b>6</b> Step 1: soil data preparation</a>
@@ -242,8 +243,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html"><i class="fa fa-check"></i><b>7</b> Step 2: download environmental covariates</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates-1"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
-<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariatesand-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariatesand cropland mask with Google Earth Engine (GEE)</a>
+<li class="chapter" data-level="7.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#environmental-covariates"><i class="fa fa-check"></i><b>7.1</b> Environmental covariates</a></li>
+<li class="chapter" data-level="7.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#download-covariates-and-cropland-mask-with-google-earth-engine-gee"><i class="fa fa-check"></i><b>7.2</b> Download covariates and cropland mask with Google Earth Engine (GEE)</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#assets"><i class="fa fa-check"></i><b>7.2.1</b> Assets</a></li>
 <li class="chapter" data-level="7.2.2" data-path="step-2-download-environmental-covariates.html"><a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi"><i class="fa fa-check"></i><b>7.2.2</b> Define the region of interest (ROI)</a></li>
@@ -311,7 +312,7 @@ Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</p></a>
 <div id="way-forward" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Way forward<a href="way-forward.html#way-forward" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This technical manual provided step-by-step guidance on how to generate nutrient maps by means of quantile regression forest models within a digital soil mapping framework. The array of maps produced belongs to the first implementation phase of the GSNmap initiative and provides urgently needed data on nutrient stocks and soil properties that govern nutrient availability. Policymakers will be able to use this data to derive conclusions on where to concentrate efforts to improve soil and land management to strengthen agrifood systems.
-The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group. The technical documentation towards implementing the second phase will be made available in mid 2023.</p>
+The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group.</p>
 <div id="frequent-asked-questions-and-troubleshooting-answers" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Frequent asked questions and Troubleshooting answers<a href="way-forward.html#frequent-asked-questions-and-troubleshooting-answers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To be developed soon…</p>
@@ -330,9 +331,6 @@ The second phase of the GSNmap will make use of the first phase data products to
 <li><code>tidyverse</code> package <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a></li>
 <li><code>sf</code> package <a href="https://r-spatial.github.io/sf/">https://r-spatial.github.io/sf/</a></li>
 </ul>
-<p>If these links do not help you, contact us including the following text:</p>
-<p><em>I am [FULL NAME], responsible for producing the GSNmap of [COUNTRY].</em></p>
-<p><a href="mailto:marcos.angelini@fao.org">marcos.angelini@fao.org</a></p>
 
 </div>
 </div>

@@ -1,7 +1,7 @@
 # Way forward
 
 This technical manual provided step-by-step guidance on how to generate nutrient maps by means of quantile regression forest models within a digital soil mapping framework. The array of maps produced belongs to the first implementation phase of the GSNmap initiative and provides urgently needed data on nutrient stocks and soil properties that govern nutrient availability. Policymakers will be able to use this data to derive conclusions on where to concentrate efforts to improve soil and land management to strengthen agrifood systems.
-The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group. The technical documentation towards implementing the second phase will be made available in mid 2023.
+The second phase of the GSNmap will make use of the first phase data products to derive nutrient budget maps. Therefore, additional datasets will be used for calculating input and output terms of nutrient stocks. The methodology is currently under development by the GSNmap working group.
 
 ## Frequent asked questions and Troubleshooting answers
 
@@ -20,8 +20,3 @@ Please, report any issue in the GSNmap Technical Manual in its issues GitHub pag
 - ```tidyverse``` package [https://r4ds.had.co.nz/](https://r4ds.had.co.nz/)
 - ```sf``` package [https://r-spatial.github.io/sf/](https://r-spatial.github.io/sf/)
 
-If these links do not help you, contact us including the following text:
-
-*I am [FULL NAME], responsible for producing the GSNmap of [COUNTRY].*
-
-[marcos.angelini@fao.org](mailto:marcos.angelini@fao.org)
