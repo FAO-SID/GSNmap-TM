@@ -41,6 +41,7 @@ header-includes:
     - \usepackage{xcolor}
     - \DeclareUnicodeCharacter{2212}{\textendash}
     - \usepackage{rotating, graphicx}
+    - \usepackage{listings}
 documentclass: book
 csl: food-and-agriculture-organization-of-the-united-nations.csl
 bibliography: "reference-list.bib"
@@ -60,10 +61,10 @@ options(width = 60)
 options(scipen=999)
 
 library(kableExtra)
-library(formatR)
+
 
 # Cache results
-knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40,tidy=TRUE, size="tiny"), fig.cap = T,dev = 'jpeg')
+knitr::opts_chunk$set(cache=F,fig.pos = 'H', fig.cap = T,dev = 'jpeg')
 
 ```
 
@@ -78,6 +79,7 @@ knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40,tidy=
 \listoffigures
 \listoftables
 \nopagebreak[5]
+\lstset{breaklines=true}
 
 ```{r, echo = F, eval = T, fig.cap = ""}
 knitr::include_graphics("images/frontcover.jpg")

@@ -53,7 +53,8 @@ The following code reads the assets that have been created by the GSP in GEE. Th
 
 ```{js assets, eval=FALSE, include=TRUE}
 #Empty environment and cache
-var assets = ["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
+var assets = 
+["projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1",
 "projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12",
 "projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13",
 "projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14",
@@ -135,16 +136,20 @@ This script in GEE loads borders of a specific country or a user-defined shapefi
 ```{js roi, eval=FALSE, include=TRUE}
 // Load borders 
 
-/// Using LSIB 2017 (replace the countries that you want to download)
-var country_list = ['Italy'];
-var aoi = ee.FeatureCollection('USDOS/LSIB_SIMPLE/2017')
-  .filter(ee.Filter.inList('country_na', country_list));
+/// Using UN 2020 (replace the countries to download)
+var ISO = ['ITA'];
+var aoi =
+ee.FeatureCollection(
+'projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY'
+)
+  .filter(ee.Filter.inList('ISO3CD', ISO));
 var region = aoi.geometry();
 
 /// Using a shapefile
 /// 1. Upload the borders of your countries as an asset
 /// 2. Replace 'your_shapefile' with the path to your shapefile
-// var shapefile = ee.FeatureCollection('users/your_username/your_shapefile');
+// var shapefile = 
+// ee.FeatureCollection('users/your_username/your_shapefile');
 // var region = shapefile.geometry();
 
 ```
@@ -179,7 +184,8 @@ In some areas, the FPAR MODIS product contains no data values in areas where the
 // Function to replace masked values with zeroes for fpar bands
 function replaceMaskedFpar(img) {
   var allBands = img.bandNames();
-  var fparBands = allBands.filter(ee.Filter.stringStartsWith('item', 'fpar'));
+  var fparBands = 
+  allBands.filter(ee.Filter.stringStartsWith('item', 'fpar'));
   var nonFparBands = allBands.removeAll(fparBands);
   
   var fparImg = img.select(fparBands).unmask(0);
@@ -193,7 +199,8 @@ function replaceMaskedFpar(img) {
   return ee.Image(result);
 }
 
-// Clip each image in the collection to the region of interest and replace masked values for fpar bands
+// Clip each image in the collection to the region 
+//of interest and replace masked values for fpar bands
 var clippedCollection = assetsCollection.map(function(img){
   var clippedImg = img.clip(region).toFloat();
   return replaceMaskedFpar(clippedImg);
@@ -224,7 +231,8 @@ In the second part of the script, the Export.image.toDrive() function is used to
 
 ```{js vis1, eval=FALSE, include=TRUE}
 // Visualize the result
-// Set a visualization parameter (you can adjust the colors as desired)
+// Set a visualization parameter 
+// (you can adjust the colors as desired)
 var visParams = {
   bands: 'bio1',
   min: 19248,
@@ -257,7 +265,8 @@ This script loads an image collection of global land cover, selects the 'discret
 /* Create mask for croplands ----------------------------*/
 
 // Load the Copernicus Global Land Service image collection
-var imageCollection = ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
+var imageCollection = 
+ee.Image("COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019")
   .select("discrete_classification")
   .clip(region)
 
@@ -278,9 +287,11 @@ This script reclassifies the land cover classes of the image1 using the remap fu
 
 ```{js reclass, eval=FALSE, include=TRUE}
 // Reclassify the land cover classes
-var inList = [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 111, 112, 113, 114, 115, 116, 
+var inList = [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 111, 
+               112, 113, 114, 115, 116, 
               121, 122, 123, 124, 125, 126, 200];
-var outList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var outList = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 var FAO_lu = image1.remap(inList, outList)
   .toDouble()
@@ -320,7 +331,7 @@ Export.image.toDrive({
   scale: res, // Add your desired scale here
   region: region,
   crs: crs, // Add your desired CRS here
-  maxPixels: 1e13 // Add a maximum number of pixels for export if needed
+  maxPixels: 1e13 // Add a maximum number of pixels for export 
 });
 ```
 

@@ -52,13 +52,16 @@ footnote(general = "Only the ten first rows are shown.", general_title = "")
 
 The distribution of points is shown in the following map for available Phosphorus values as points. This dataset is used in [Chapter 8](https://fao-gsp.github.io/GSNmap-TM/step-3-mapping-continuous-soil-properties.html) for mapping.
 
+
 ```{r exploratory1, eval=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(sf)
 library(mapview)
 
 mapviewOptions(fgb = FALSE)
-data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
+
+data <- 
+  read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
 s <- st_as_sf(data, coords = c("x", "y"), crs = 4326)
 mapview(s, zcol = "p_bray", cex = 2.5, lwd = 0)
 ```
@@ -76,11 +79,14 @@ footnote(general = "Only ten rows are shown.", general_title = "")
 ```
 
 ```{r exploratory data 3, eval=TRUE, message=FALSE, warning=FALSE}
+
 library(tidyverse)
 library(sf)
 library(mapview)
+
 mapviewOptions(fgb = FALSE)
-data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
+data <- 
+  read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
 s <- data %>% filter(top==0)
 s <- st_as_sf(s, coords = c("x", "y"), crs = 4326)
 mapview(s, zcol = "k", cex = 2.5, lwd = 0)
@@ -126,11 +132,12 @@ knitr::include_graphics("images/file-explorer.png")
 The file path will appear with the following format: `C:\Users\GSNmap-TM\Digital-Soil-Mapping`. In order to enable **R** to read this as file path, it is necessary to replace the `\` by `/`. The resulting file path should look similar to this one: `C:/Users/GSNmap-TM/Digital-Soil-Mapping`. Once this is done, we can assign the file path that represents the WD file path to an **R** object. This is done by defining a character value (in this case the file path) on the right side of the arrow (`<-`) and name the **R** object on the left side (wd) (see code). Once this is done we use the function `setwd()` to set the WD to the file path that is specified in the object `wd`.
 
 ```{r, echo = T, eval = F}
-# 0 - User-defined variables ===================================================
+# 0 - User-defined variables ====================================
+
 wd <- 'C:/Users/hp/Documents/GitHub/Digital-Soil-Mapping'
 #wd <- "C:/GIT/Digital-Soil-Mapping"
 
-# 1 - Set working directory and load necessary packages ========================
+# 1 - Set working directory and load necessary packages =========
 setwd(wd) # change the path accordingly
 ```
 
@@ -139,9 +146,11 @@ An alternative and more automatic approach for setting the working directory mak
 ```{r, echo = T, eval = F}
 
 #Set the working directory automatically using rstudioapi 
-# It is important to note that the directory is set to the folder containing the script
+# It is important to note that the directory is set to the folder
+#containing the script
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-# The ".." is used to go up a directory (in this case our project folder)
+# The ".." is used to go up a directory 
+#(in this case our project folder)
 setwd("..")
 ```
 
@@ -156,7 +165,8 @@ library(tidyverse)
 library(dplyr)
 
 # load in data
-data <- read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
+data <- 
+  read_csv("Digital-Soil-Mapping/01-Data/soil_chem_data030.csv")
 head(data)
 
 ```

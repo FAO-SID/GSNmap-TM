@@ -252,6 +252,7 @@
 \usepackage{xcolor}
 \DeclareUnicodeCharacter{2212}{\textendash}
 \usepackage{rotating, graphicx}
+\usepackage{listings}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -327,6 +328,7 @@ Technical Manual\\}}
 \listoffigures
 \listoftables
 \nopagebreak[5]
+\lstset{breaklines=true}
 
 \includegraphics{images/frontcover.jpg}
 
@@ -792,7 +794,9 @@ The distribution of points is shown in the following map for available Phosphoru
 \FunctionTok{library}\NormalTok{(mapview)}
 
 \FunctionTok{mapviewOptions}\NormalTok{(}\AttributeTok{fgb =} \ConstantTok{FALSE}\NormalTok{)}
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
+
+\NormalTok{data }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
 \NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{st\_as\_sf}\NormalTok{(data, }\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \FunctionTok{mapview}\NormalTok{(s, }\AttributeTok{zcol =} \StringTok{"p\_bray"}\NormalTok{, }\AttributeTok{cex =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{0}\NormalTok{)}
 \end{Highlighting}
@@ -832,8 +836,10 @@ id\_prof & id\_hor & x & y & top & bottom & ph\_h2o & k & soc & bd\\
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(sf)}
 \FunctionTok{library}\NormalTok{(mapview)}
+
 \FunctionTok{mapviewOptions}\NormalTok{(}\AttributeTok{fgb =} \ConstantTok{FALSE}\NormalTok{)}
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
 \NormalTok{s }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(top}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)}
 \NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{st\_as\_sf}\NormalTok{(s, }\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \FunctionTok{mapview}\NormalTok{(s, }\AttributeTok{zcol =} \StringTok{"k"}\NormalTok{, }\AttributeTok{cex =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{0}\NormalTok{)}
@@ -888,11 +894,12 @@ The file path will appear with the following format: \texttt{C:\textbackslash{}U
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 0 {-} User{-}defined variables ===================================================}
+\CommentTok{\# 0 {-} User{-}defined variables ====================================}
+
 \NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}C:/Users/hp/Documents/GitHub/Digital{-}Soil{-}Mapping\textquotesingle{}}
 \CommentTok{\#wd \textless{}{-} "C:/GIT/Digital{-}Soil{-}Mapping"}
 
-\CommentTok{\# 1 {-} Set working directory and load necessary packages ========================}
+\CommentTok{\# 1 {-} Set working directory and load necessary packages =========}
 \FunctionTok{setwd}\NormalTok{(wd) }\CommentTok{\# change the path accordingly}
 \end{Highlighting}
 \end{Shaded}
@@ -902,9 +909,11 @@ An alternative and more automatic approach for setting the working directory mak
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#Set the working directory automatically using rstudioapi }
-\CommentTok{\# It is important to note that the directory is set to the folder containing the script}
+\CommentTok{\# It is important to note that the directory is set to the folder}
+\CommentTok{\#containing the script}
 \FunctionTok{setwd}\NormalTok{(}\FunctionTok{dirname}\NormalTok{(rstudioapi}\SpecialCharTok{::}\FunctionTok{getActiveDocumentContext}\NormalTok{()}\SpecialCharTok{$}\NormalTok{path))}
-\CommentTok{\# The ".." is used to go up a directory (in this case our project folder)}
+\CommentTok{\# The ".." is used to go up a directory }
+\CommentTok{\#(in this case our project folder)}
 \FunctionTok{setwd}\NormalTok{(}\StringTok{".."}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -919,7 +928,8 @@ Next to in-built base R functions, there is a vast amount of so-called packages 
 \FunctionTok{library}\NormalTok{(dplyr)}
 
 \CommentTok{\# load in data}
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -980,7 +990,7 @@ As specified in the previous Chapter in regards to \href{preproc}{pre-processing
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1 {-} Set working directory and load necessary packages ========================}
+\CommentTok{\# 1 {-} Set working directory and load necessary packages =========}
 \CommentTok{\# Working directory}
 \FunctionTok{setwd}\NormalTok{(}\FunctionTok{dirname}\NormalTok{(rstudioapi}\SpecialCharTok{::}\FunctionTok{getActiveDocumentContext}\NormalTok{()}\SpecialCharTok{$}\NormalTok{path))}
 \FunctionTok{setwd}\NormalTok{(}\StringTok{".."}\NormalTok{)}
@@ -1003,11 +1013,12 @@ Finally, every time new datasets are loaded into \emph{RStudio}, it is recommend
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 2 {-} Import national data =====================================================}
-\CommentTok{\# Save your national soil dataset in the data folder /01{-}Data as a .csv file or }
+\CommentTok{\# 2 {-} Import national data ======================================}
+\CommentTok{\# Save your national soil dataset in the data folder }
+\CommentTok{\#/01{-}Data as a .csv file or }
 \CommentTok{\# as a .xlsx file}
 
-\DocumentationTok{\#\# 2.1 {-} for .xlsx files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.1 {-} for .xlsx files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Import horizon data }
 \CommentTok{\# hor \textless{}{-} read\_excel("01{-}Data/soil\_data.xlsx", sheet = 2)}
 \CommentTok{\# \# Import site{-}level data}
@@ -1016,11 +1027,15 @@ Finally, every time new datasets are loaded into \emph{RStudio}, it is recommend
 \CommentTok{\# phys \textless{}{-} read\_excel("01{-}Data/soil\_data.xlsx", sheet = 3)}
 
 
-\DocumentationTok{\#\# 2.2 {-} for .csv files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.2 {-} for .csv files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Import horizon data }
-\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
-\NormalTok{chem }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
-\NormalTok{phys }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_phys\_data030.csv"}\NormalTok{)}
+\NormalTok{hor }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} 
+            \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
+\NormalTok{chem }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} 
+            \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_chem\_data030.csv"}\NormalTok{)}
+\NormalTok{phys }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =}
+            \StringTok{"Digital{-}Soil{-}Mapping/01{-}Data/soil\_phys\_data030.csv"}\NormalTok{)}
 
 \NormalTok{site }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, id\_prof, x, y) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{unique}\NormalTok{()}
 \NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, id\_prof, id\_hor, top}\SpecialCharTok{:}\NormalTok{cec)}
@@ -1102,9 +1117,10 @@ The selection of useful columns is very important since it ensures that users ke
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 3 {-} select useful columns ====================================================}
-\DocumentationTok{\#\# 3.1 {-} select columns {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, ProfID, HorID, top, bottom, }\AttributeTok{ph=}\NormalTok{ph\_h2o, k, soc, bd, cec)}
+\CommentTok{\# 3 {-} select useful columns =====================================}
+\DocumentationTok{\#\# 3.1 {-} select columns {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, ProfID, HorID, top, }
+\NormalTok{              bottom, }\AttributeTok{ph=}\NormalTok{ph\_h2o, k, soc, bd, cec)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1132,7 +1148,7 @@ Using the \texttt{checkHzDepthLogic()} function, users can assess that all profi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 4.2 {-} Convert data into a Soil Profile Collection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.2 {-} Convert data into a Soil Profile Collection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{library}\NormalTok{(aqp)}
 \end{Highlighting}
 \end{Shaded}
@@ -1207,7 +1223,7 @@ Using the \texttt{checkHzDepthLogic()} function, users can assess that all profi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 4.3 {-} plot first 20 profiles using pH as color {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.3 {-} plot first 20 profiles using pH as color {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{plotSPC}\NormalTok{(}\AttributeTok{x =}\NormalTok{ profiles[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{], }\AttributeTok{name =} \StringTok{"cec"}\NormalTok{, }\AttributeTok{color =} \StringTok{"cec"}\NormalTok{,}
         \AttributeTok{name.style =} \StringTok{"center{-}center"}\NormalTok{)}
 \end{Highlighting}
@@ -1217,12 +1233,15 @@ Using the \texttt{checkHzDepthLogic()} function, users can assess that all profi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 4.4 {-} check data integrity {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# A valid profile is TRUE if all of the following criteria are false:}
+\DocumentationTok{\#\# 4.4 {-} check data integrity {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# A valid profile is TRUE if all of the }
+\CommentTok{\# following criteria are false:}
 \CommentTok{\#    + depthLogic : boolean, errors related to depth logic}
-\CommentTok{\#    + sameDepth : boolean, errors related to same top/bottom depths}
+\CommentTok{\#    + sameDepth : boolean, errors related to same }
+\CommentTok{\#    top/bottom depths}
 \CommentTok{\#    + missingDepth : boolean, NA in top / bottom depths}
-\CommentTok{\#    + overlapOrGap : boolean, gaps or overlap in adjacent horizons}
+\CommentTok{\#    + overlapOrGap : boolean, gaps or overlap }
+\CommentTok{\#    in adjacent horizons}
 \NormalTok{aqp}\SpecialCharTok{::}\FunctionTok{checkHzDepthLogic}\NormalTok{(profiles)}
 \end{Highlighting}
 \end{Shaded}
@@ -1592,7 +1611,8 @@ Using the \texttt{checkHzDepthLogic()} function, users can assess that all profi
 \begin{Highlighting}[]
 \CommentTok{\# Identify non{-}valid profiles }
 \NormalTok{dl }\OtherTok{\textless{}{-}} \FunctionTok{checkHzDepthLogic}\NormalTok{(profiles)}
-\NormalTok{dl[dl}\SpecialCharTok{$}\NormalTok{depthLogic}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{sameDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{missingDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{overlapOrGap}\SpecialCharTok{==}\NormalTok{T,}\StringTok{"ProfID"}\NormalTok{]}
+\NormalTok{dl[dl}\SpecialCharTok{$}\NormalTok{depthLogic}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{sameDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|} 
+\NormalTok{     dl}\SpecialCharTok{$}\NormalTok{missingDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{overlapOrGap}\SpecialCharTok{==}\NormalTok{T,}\StringTok{"ProfID"}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1687,7 +1707,7 @@ If there are profiles that violate the depth logic rules (i.e.~overlapping horiz
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 4.5 {-} keep only valid profiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.5 {-} keep only valid profiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{clean\_prof }\OtherTok{\textless{}{-}} \FunctionTok{HzDepthLogicSubset}\NormalTok{(profiles)}
 \end{Highlighting}
 \end{Shaded}
@@ -1710,7 +1730,7 @@ If there are profiles that violate the depth logic rules (i.e.~overlapping horiz
 \begin{Highlighting}[]
 \CommentTok{\# write\_rds(clean\_prof, "01{-}Data/soilProfileCollection.rds")}
 
-\DocumentationTok{\#\# 4.6 convert soilProfileCollection to a table {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.6 convert soilProfileCollection to a table {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(clean\_prof}\SpecialCharTok{@}\NormalTok{site, clean\_prof}\SpecialCharTok{@}\NormalTok{horizons)}
 \end{Highlighting}
 \end{Shaded}
@@ -1736,22 +1756,23 @@ The function \texttt{estimateBD} below calculates various PTFs that estimate bul
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 5 {-} Estimate BD using pedotransfer functions =================================}
+\CommentTok{\# 5 {-} Estimate BD using pedotransfer functions ==================}
 
 \CommentTok{\# create the function with all PTF}
-\NormalTok{method\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{, }\StringTok{"Grigal1989"}\NormalTok{, }
+\NormalTok{method\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{, }
+                  \StringTok{"Grigal1989"}\NormalTok{, }
                   \StringTok{"Adams1973"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{) }
 
 \NormalTok{estimateBD }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{SOC=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{method=}\ConstantTok{NULL}\NormalTok{) \{}
 \NormalTok{  OM }\OtherTok{\textless{}{-}}\NormalTok{ SOC }\SpecialCharTok{*} \FloatTok{1.724}
 \NormalTok{  BD }\OtherTok{\textless{}{-}} \ControlFlowTok{switch}\NormalTok{(method,}
-               \StringTok{"Saini1996"} \OtherTok{=} \FloatTok{1.62} \SpecialCharTok{{-}} \FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM,}
-               \StringTok{"Drew1973"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.6268} \SpecialCharTok{+} \FloatTok{0.0361} \SpecialCharTok{*}\NormalTok{ OM),}
-               \StringTok{"Jeffrey1979"} \OtherTok{=} \FloatTok{1.482} \SpecialCharTok{{-}} \FloatTok{0.6786} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{log}\NormalTok{(OM)),}
-               \StringTok{"Grigal1989"} \OtherTok{=} \FloatTok{0.669} \SpecialCharTok{+} \FloatTok{0.941} \SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM),}
-               \StringTok{"Adams1973"} \OtherTok{=} \DecValTok{100} \SpecialCharTok{/}\NormalTok{ (OM }\SpecialCharTok{/} \FloatTok{0.244} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{100} \SpecialCharTok{{-}}\NormalTok{ OM) }\SpecialCharTok{/} \FloatTok{2.65}\NormalTok{),}
-               \StringTok{"Honeyset\_Ratkowsky1989"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.564} \SpecialCharTok{+} \FloatTok{0.0556} \SpecialCharTok{*}\NormalTok{ OM),}
-               \FunctionTok{stop}\NormalTok{(}\StringTok{"Invalid method specified."}\NormalTok{)}
+           \StringTok{"Saini1996"} \OtherTok{=} \FloatTok{1.62} \SpecialCharTok{{-}} \FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM,}
+           \StringTok{"Drew1973"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.6268} \SpecialCharTok{+} \FloatTok{0.0361} \SpecialCharTok{*}\NormalTok{ OM),}
+           \StringTok{"Jeffrey1979"} \OtherTok{=} \FloatTok{1.482} \SpecialCharTok{{-}} \FloatTok{0.6786} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{log}\NormalTok{(OM)),}
+           \StringTok{"Grigal1989"} \OtherTok{=} \FloatTok{0.669} \SpecialCharTok{+} \FloatTok{0.941} \SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM),}
+           \StringTok{"Adams1973"} \OtherTok{=} \DecValTok{100} \SpecialCharTok{/}\NormalTok{ (OM }\SpecialCharTok{/} \FloatTok{0.244} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{100} \SpecialCharTok{{-}}\NormalTok{ OM) }\SpecialCharTok{/} \FloatTok{2.65}\NormalTok{),}
+           \StringTok{"Honeyset\_Ratkowsky1989"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.564} \SpecialCharTok{+} \FloatTok{0.0556} \SpecialCharTok{*}\NormalTok{ OM),}
+           \FunctionTok{stop}\NormalTok{(}\StringTok{"Invalid method specified."}\NormalTok{)}
 \NormalTok{  )}
   \FunctionTok{return}\NormalTok{(BD)}
 \NormalTok{\}}
@@ -1763,7 +1784,7 @@ Now, the test dataframe is complemented by the estimated BDs derived from the PT
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 5.1 {-} Select a pedotransfer function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.1 {-} Select a pedotransfer function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Create a test dataset with BD and SOC data}
 \NormalTok{BD\_test }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{SOC =}\NormalTok{ dat}\SpecialCharTok{$}\NormalTok{soc, }\AttributeTok{BD\_observed =}\NormalTok{ dat}\SpecialCharTok{$}\NormalTok{bd)}
 
@@ -1772,7 +1793,7 @@ Now, the test dataframe is complemented by the estimated BDs derived from the PT
 \NormalTok{BD\_test }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(BD\_test) }
 
 
-\CommentTok{\# 5.2 {-} Estimate BLD for a subset using the pedotransfer functions {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 5.2 {-} Estimate BLD for a subset using the pedotransfer function}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ method\_names) \{}
 \NormalTok{  BD\_test[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{estimateBD}\NormalTok{(BD\_test}\SpecialCharTok{$}\NormalTok{SOC, }\AttributeTok{method =}\NormalTok{ i)}
 \NormalTok{\}}
@@ -1809,7 +1830,7 @@ The calculated BDs can now be compared using the \texttt{summary()} function. Ho
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 5.3 Compare results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.3 Compare results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \CommentTok{\# Observed values:}
 \FunctionTok{summary}\NormalTok{(BD\_test)}
@@ -1838,8 +1859,10 @@ The calculated BDs can now be compared using the \texttt{summary()} function. Ho
 \CommentTok{\# Compare data distributions for observed and predicted BLD}
 \NormalTok{plot.bd }\OtherTok{\textless{}{-}}\NormalTok{ BD\_test }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{SOC) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{,}
-                        \StringTok{"Grigal1989"}\NormalTok{, }\StringTok{"Adams1973"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{,}
+                        \StringTok{"Jeffrey1979"}\NormalTok{,}
+                        \StringTok{"Grigal1989"}\NormalTok{, }\StringTok{"Adams1973"}\NormalTok{, }
+                        \StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
                \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"BD"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_density}\NormalTok{()}
@@ -1882,7 +1905,8 @@ The calculated BDs can now be compared using the \texttt{summary()} function. Ho
 \CommentTok{\# Same dynamic plot }
 \NormalTok{plotly}\SpecialCharTok{::}\FunctionTok{ggplotly}\NormalTok{(BD\_test }\SpecialCharTok{\%\textgreater{}\%} 
            \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{SOC) }\SpecialCharTok{\%\textgreater{}\%} 
-           \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
+           \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }
+                                 \StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
                         \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"BD"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
            \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
            \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{xlim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{2.5}\NormalTok{))) }
@@ -1893,9 +1917,10 @@ The PTF to be chosen for estimating the BD of the missing horizons should be the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 5.4 Estimate BD for the missing horizons {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.4 Estimate BD for the missing horizons {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat}\SpecialCharTok{$}\NormalTok{bd[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd)] }\OtherTok{\textless{}{-}}
-  \FunctionTok{estimateBD}\NormalTok{(dat[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd),]}\SpecialCharTok{$}\NormalTok{soc, }\AttributeTok{method=}\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{)}
+\FunctionTok{estimateBD}\NormalTok{(dat[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd),]}\SpecialCharTok{$}\NormalTok{soc, }
+           \AttributeTok{method=}\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{)}
 
 \CommentTok{\# Explore the results}
 \FunctionTok{summary}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd)}
@@ -1916,7 +1941,8 @@ The PTF to be chosen for estimating the BD of the missing horizons should be the
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{xlim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{2.5}\NormalTok{))}
-\NormalTok{g }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{bd, }\AttributeTok{color =} \StringTok{"Predicted +}\SpecialCharTok{\textbackslash{}n}\StringTok{ observed"}\NormalTok{))}
+\NormalTok{g }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{bd, }
+                              \AttributeTok{color =} \StringTok{"Predicted +}\SpecialCharTok{\textbackslash{}n}\StringTok{ observed"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1935,12 +1961,15 @@ Such evaluation can also be conducted visually for several properties at the sam
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 5.5 {-} Explore outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Outliers should be carefully explored and compared with literature values.}
-\CommentTok{\# Only if it is clear that outliers represent impossible or highly unlikely }
+\DocumentationTok{\#\# 5.5 {-} Explore outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Outliers should be carefully explored and compared with }
+\CommentTok{\# literature values.}
+\CommentTok{\# Only if it is clear that outliers represent impossible }
+\CommentTok{\# or highly unlikely }
 \CommentTok{\# values, they should be removed as errors.}
 \CommentTok{\# }
-\CommentTok{\# Carbon content higher than 15\% is only typical for organic soil (histosols)}
+\CommentTok{\# Carbon content higher than 15\% is only typical for organic soil}
+\CommentTok{\# (histosols)}
 \CommentTok{\# We will remove all atypically high SOC as outliers}
 \FunctionTok{summary}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{soc)}
 \end{Highlighting}
@@ -1999,7 +2028,8 @@ Such evaluation can also be conducted visually for several properties at the sam
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat[dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{!=} \DecValTok{6915}\NormalTok{,]}
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat[dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{!=} \DecValTok{7726}\NormalTok{,]}
 
-\NormalTok{dat}\OtherTok{\textless{}{-}}\NormalTok{ dat[}\SpecialCharTok{!}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{\%in\%}\NormalTok{ dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{][}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{])]),]}
+\NormalTok{dat}\OtherTok{\textless{}{-}}\NormalTok{ dat[}\SpecialCharTok{!}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{\%in\%} 
+\NormalTok{    dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{][}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{])]),]}
 
 \CommentTok{\# Explore bulk density data, identify outliers}
 \CommentTok{\# remove layers with Bulk Density \textless{} 1 g/cm\^{}3}
@@ -2010,7 +2040,8 @@ Such evaluation can also be conducted visually for several properties at the sam
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(dat, }\AttributeTok{cols =}\NormalTok{ ph}\SpecialCharTok{:}\NormalTok{cec, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
                   \AttributeTok{names\_to =} \StringTok{"soil\_property"}\NormalTok{)}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(x)}
-\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ soil\_property, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
+\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ soil\_property, }
+              \AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{)}
 \end{Highlighting}
@@ -2027,17 +2058,19 @@ In the following a new dataframe `d' is created in which the standard depth laye
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 6 {-} Harmonize soil layers ====================================================}
+\CommentTok{\# 6 {-} Harmonize soil layers =====================================}
 \FunctionTok{source}\NormalTok{(}\StringTok{"Digital{-}Soil{-}Mapping/03{-}Scripts/spline\_functions.R"}\NormalTok{) }
-\DocumentationTok{\#\# 6.1 {-} Set target soil properties and depths {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.1 {-} Set target soil properties and depths {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{names}\NormalTok{(dat)}
-\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dat, ProfID, HorID, x, y, }
+\NormalTok{              top, bottom, ph, k, soc, bd, cec)}
 
 \NormalTok{target }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ph"}\NormalTok{, }\StringTok{"k"}\NormalTok{, }\StringTok{"soc"}\NormalTok{,  }\StringTok{"bd"}\NormalTok{, }\StringTok{"cec"}\NormalTok{)}
 \NormalTok{depths }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{30}\NormalTok{)}
 
-\DocumentationTok{\#\# 6.2 {-} Create standard layers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{splines }\OtherTok{\textless{}{-}}\FunctionTok{apply\_mpspline\_all}\NormalTok{(}\AttributeTok{df =}\NormalTok{ dat, }\AttributeTok{properties =}\NormalTok{ target, }\AttributeTok{depth\_range =}\NormalTok{ depths)}
+\DocumentationTok{\#\# 6.2 {-} Create standard layers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{splines }\OtherTok{\textless{}{-}}\FunctionTok{apply\_mpspline\_all}\NormalTok{(}\AttributeTok{df =}\NormalTok{ dat, }\AttributeTok{properties =} 
+\NormalTok{                               target, }\AttributeTok{depth\_range =}\NormalTok{ depths)}
 \FunctionTok{summary}\NormalTok{(splines)}
 
 \CommentTok{\# merge splines with x and y}
@@ -2053,7 +2086,7 @@ Units are of paramount importance to deliver a high-quality map product. Therefo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 7 {-} Harmonise units ==========================================================}
+\CommentTok{\# 7 {-} Harmonise units ===========================================}
 \CommentTok{\#Harmonise units if different from target units}
 \CommentTok{\# Mandatory Soil Properties and corresponding units:}
 \CommentTok{\# Total N {-} ppm}
@@ -2094,7 +2127,7 @@ Finally, the different spreadsheets are merged into one single dataframe. For th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Add chemical and physical properties from additional datasets ==========================}
+\CommentTok{\# Add chemical and physical properties from additional datasets =}
   
 
 \CommentTok{\# Rename columns to match the main data set}
@@ -2105,7 +2138,8 @@ Finally, the different spreadsheets are merged into one single dataframe. For th
 \FunctionTok{names}\NormalTok{(chem)[}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}n\_0\_30\textquotesingle{}}
 
 
-\CommentTok{\#The chem dataframe comes from and independent dataset we need to create new unique ProfIDs }
+\CommentTok{\#The chem dataframe comes from and independent dataset we need to }
+\CommentTok{\#create new unique ProfIDs }
 \CommentTok{\#Create unique ProfID }
 \NormalTok{chem}\SpecialCharTok{$}\NormalTok{ProfID }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{max}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{ProfID)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,}\FunctionTok{max}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{ProfID)}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\FunctionTok{nrow}\NormalTok{(chem)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
 
@@ -2113,7 +2147,8 @@ Finally, the different spreadsheets are merged into one single dataframe. For th
 \CommentTok{\# automatically for the not measured properties in the chem dataset}
 \NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(d, chem)}
 
-\CommentTok{\#The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)}
+\CommentTok{\#The phys dataframe with the texture instead shares the same }
+\CommentTok{\#ProfIDs (we can directly merge)}
 \NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(d, phys, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}ProfID\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -2125,9 +2160,10 @@ Before finalising the soil data preparation, it is recommendable to check again 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 8 {-} Plot  and save results ===================================================}
+\CommentTok{\# 8 {-} Plot  and save results ====================================}
 \FunctionTok{names}\NormalTok{(d)}
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(d, }\AttributeTok{cols =}\NormalTok{ ph\_0\_30}\SpecialCharTok{:}\NormalTok{silt\_0\_30, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(d, }\AttributeTok{cols =}\NormalTok{ ph\_0\_30}\SpecialCharTok{:}\NormalTok{silt\_0\_30, }
+                  \AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
                   \AttributeTok{names\_sep =} \StringTok{"\_"}\NormalTok{, }
                   \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"soil\_property"}\NormalTok{, }\StringTok{"top"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(x, }\AttributeTok{depth =} \FunctionTok{paste}\NormalTok{(top, }\StringTok{"{-}"}\NormalTok{ , bottom))}
@@ -2137,7 +2173,8 @@ Before finalising the soil data preparation, it is recommendable to check again 
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{)}
 
 
-\NormalTok{plotly}\SpecialCharTok{::}\FunctionTok{ggplotly}\NormalTok{(}\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
+\NormalTok{plotly}\SpecialCharTok{::}\FunctionTok{ggplotly}\NormalTok{(}\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{y =}\NormalTok{ value, }
+                               \AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
            \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
            \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{))}
 
@@ -2301,7 +2338,8 @@ The following code reads the assets that have been created by the GSP in GEE. Th
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{\#Empty environment and cache}
-\KeywordTok{var}\NormalTok{ assets }\OperatorTok{=}\NormalTok{ [}\StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio1"}\OperatorTok{,}
+\KeywordTok{var}\NormalTok{ assets }\OperatorTok{=} 
+\NormalTok{[}\StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio1"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio12"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio13"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio14"}\OperatorTok{,}
@@ -2384,16 +2422,20 @@ This script in GEE loads borders of a specific country or a user-defined shapefi
 \begin{Highlighting}[]
 \CommentTok{// Load borders }
 
-\CommentTok{/// Using LSIB 2017 (replace the countries that you want to download)}
-\KeywordTok{var}\NormalTok{ country\_list }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Italy\textquotesingle{}}\NormalTok{]}\OperatorTok{;}
-\KeywordTok{var}\NormalTok{ aoi }\OperatorTok{=}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{FeatureCollection}\NormalTok{(}\StringTok{\textquotesingle{}USDOS/LSIB\_SIMPLE/2017\textquotesingle{}}\NormalTok{)}
-  \OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{inList}\NormalTok{(}\StringTok{\textquotesingle{}country\_na\textquotesingle{}}\OperatorTok{,}\NormalTok{ country\_list))}\OperatorTok{;}
+\CommentTok{/// Using UN 2020 (replace the countries to download)}
+\KeywordTok{var}\NormalTok{ ISO }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}ITA\textquotesingle{}}\NormalTok{]}\OperatorTok{;}
+\KeywordTok{var}\NormalTok{ aoi }\OperatorTok{=}
+\NormalTok{ee}\OperatorTok{.}\FunctionTok{FeatureCollection}\NormalTok{(}
+\StringTok{\textquotesingle{}projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/UN\_BORDERS/BNDA\_CTY\textquotesingle{}}
+\NormalTok{)}
+  \OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{inList}\NormalTok{(}\StringTok{\textquotesingle{}ISO3CD\textquotesingle{}}\OperatorTok{,}\NormalTok{ ISO))}\OperatorTok{;}
 \KeywordTok{var}\NormalTok{ region }\OperatorTok{=}\NormalTok{ aoi}\OperatorTok{.}\FunctionTok{geometry}\NormalTok{()}\OperatorTok{;}
 
 \CommentTok{/// Using a shapefile}
 \CommentTok{/// 1. Upload the borders of your countries as an asset}
 \CommentTok{/// 2. Replace \textquotesingle{}your\_shapefile\textquotesingle{} with the path to your shapefile}
-\CommentTok{// var shapefile = ee.FeatureCollection(\textquotesingle{}users/your\_username/your\_shapefile\textquotesingle{});}
+\CommentTok{// var shapefile = }
+\CommentTok{// ee.FeatureCollection(\textquotesingle{}users/your\_username/your\_shapefile\textquotesingle{});}
 \CommentTok{// var region = shapefile.geometry();}
 \end{Highlighting}
 \end{Shaded}
@@ -2432,7 +2474,8 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 \CommentTok{// Function to replace masked values with zeroes for fpar bands}
 \KeywordTok{function} \FunctionTok{replaceMaskedFpar}\NormalTok{(img) \{}
   \KeywordTok{var}\NormalTok{ allBands }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{bandNames}\NormalTok{()}\OperatorTok{;}
-  \KeywordTok{var}\NormalTok{ fparBands }\OperatorTok{=}\NormalTok{ allBands}\OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{stringStartsWith}\NormalTok{(}\StringTok{\textquotesingle{}item\textquotesingle{}}\OperatorTok{,} \StringTok{\textquotesingle{}fpar\textquotesingle{}}\NormalTok{))}\OperatorTok{;}
+  \KeywordTok{var}\NormalTok{ fparBands }\OperatorTok{=} 
+\NormalTok{  allBands}\OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{stringStartsWith}\NormalTok{(}\StringTok{\textquotesingle{}item\textquotesingle{}}\OperatorTok{,} \StringTok{\textquotesingle{}fpar\textquotesingle{}}\NormalTok{))}\OperatorTok{;}
   \KeywordTok{var}\NormalTok{ nonFparBands }\OperatorTok{=}\NormalTok{ allBands}\OperatorTok{.}\FunctionTok{removeAll}\NormalTok{(fparBands)}\OperatorTok{;}
   
   \KeywordTok{var}\NormalTok{ fparImg }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{select}\NormalTok{(fparBands)}\OperatorTok{.}\FunctionTok{unmask}\NormalTok{(}\DecValTok{0}\NormalTok{)}\OperatorTok{;}
@@ -2446,7 +2489,8 @@ The rest of the script in this section is to reclip the rasters, stack them in a
   \ControlFlowTok{return}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(result)}\OperatorTok{;}
 \NormalTok{\}}
 
-\CommentTok{// Clip each image in the collection to the region of interest and replace masked values for fpar bands}
+\CommentTok{// Clip each image in the collection to the region }
+\CommentTok{//of interest and replace masked values for fpar bands}
 \KeywordTok{var}\NormalTok{ clippedCollection }\OperatorTok{=}\NormalTok{ assetsCollection}\OperatorTok{.}\FunctionTok{map}\NormalTok{(}\KeywordTok{function}\NormalTok{(img)\{}
   \KeywordTok{var}\NormalTok{ clippedImg }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{clip}\NormalTok{(region)}\OperatorTok{.}\FunctionTok{toFloat}\NormalTok{()}\OperatorTok{;}
   \ControlFlowTok{return} \FunctionTok{replaceMaskedFpar}\NormalTok{(clippedImg)}\OperatorTok{;}
@@ -2480,7 +2524,8 @@ In the second part of the script, the Export.image.toDrive() function is used to
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{// Visualize the result}
-\CommentTok{// Set a visualization parameter (you can adjust the colors as desired)}
+\CommentTok{// Set a visualization parameter }
+\CommentTok{// (you can adjust the colors as desired)}
 \KeywordTok{var}\NormalTok{ visParams }\OperatorTok{=}\NormalTok{ \{}
   \DataTypeTok{bands}\OperatorTok{:} \StringTok{\textquotesingle{}bio1\textquotesingle{}}\OperatorTok{,}
   \DataTypeTok{min}\OperatorTok{:} \DecValTok{19248}\OperatorTok{,}
@@ -2515,7 +2560,8 @@ This script loads an image collection of global land cover, selects the `discret
 \CommentTok{/* Create mask for croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}*/}
 
 \CommentTok{// Load the Copernicus Global Land Service image collection}
-\KeywordTok{var}\NormalTok{ imageCollection }\OperatorTok{=}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(}\StringTok{"COPERNICUS/Landcover/100m/Proba{-}V{-}C3/Global/2019"}\NormalTok{)}
+\KeywordTok{var}\NormalTok{ imageCollection }\OperatorTok{=} 
+\NormalTok{ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(}\StringTok{"COPERNICUS/Landcover/100m/Proba{-}V{-}C3/Global/2019"}\NormalTok{)}
   \OperatorTok{.}\FunctionTok{select}\NormalTok{(}\StringTok{"discrete\_classification"}\NormalTok{)}
   \OperatorTok{.}\FunctionTok{clip}\NormalTok{(region)}
 
@@ -2539,9 +2585,11 @@ This script reclassifies the land cover classes of the image1 using the remap fu
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{// Reclassify the land cover classes}
-\KeywordTok{var}\NormalTok{ inList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{20}\OperatorTok{,} \DecValTok{30}\OperatorTok{,} \DecValTok{40}\OperatorTok{,} \DecValTok{50}\OperatorTok{,} \DecValTok{60}\OperatorTok{,} \DecValTok{70}\OperatorTok{,} \DecValTok{80}\OperatorTok{,} \DecValTok{90}\OperatorTok{,} \DecValTok{100}\OperatorTok{,} \DecValTok{111}\OperatorTok{,} \DecValTok{112}\OperatorTok{,} \DecValTok{113}\OperatorTok{,} \DecValTok{114}\OperatorTok{,} \DecValTok{115}\OperatorTok{,} \DecValTok{116}\OperatorTok{,} 
+\KeywordTok{var}\NormalTok{ inList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{20}\OperatorTok{,} \DecValTok{30}\OperatorTok{,} \DecValTok{40}\OperatorTok{,} \DecValTok{50}\OperatorTok{,} \DecValTok{60}\OperatorTok{,} \DecValTok{70}\OperatorTok{,} \DecValTok{80}\OperatorTok{,} \DecValTok{90}\OperatorTok{,} \DecValTok{100}\OperatorTok{,} \DecValTok{111}\OperatorTok{,} 
+               \DecValTok{112}\OperatorTok{,} \DecValTok{113}\OperatorTok{,} \DecValTok{114}\OperatorTok{,} \DecValTok{115}\OperatorTok{,} \DecValTok{116}\OperatorTok{,} 
               \DecValTok{121}\OperatorTok{,} \DecValTok{122}\OperatorTok{,} \DecValTok{123}\OperatorTok{,} \DecValTok{124}\OperatorTok{,} \DecValTok{125}\OperatorTok{,} \DecValTok{126}\OperatorTok{,} \DecValTok{200}\NormalTok{]}\OperatorTok{;}
-\KeywordTok{var}\NormalTok{ outList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\NormalTok{]}\OperatorTok{;}
+\KeywordTok{var}\NormalTok{ outList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,}
+\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\NormalTok{]}\OperatorTok{;}
 
 \KeywordTok{var}\NormalTok{ FAO\_lu }\OperatorTok{=}\NormalTok{ image1}\OperatorTok{.}\FunctionTok{remap}\NormalTok{(inList}\OperatorTok{,}\NormalTok{ outList)}
   \OperatorTok{.}\FunctionTok{toDouble}\NormalTok{()}
@@ -2583,7 +2631,7 @@ The code sets up visualization parameters for the reclassified land cover image 
   \DataTypeTok{scale}\OperatorTok{:}\NormalTok{ res}\OperatorTok{,} \CommentTok{// Add your desired scale here}
   \DataTypeTok{region}\OperatorTok{:}\NormalTok{ region}\OperatorTok{,}
   \DataTypeTok{crs}\OperatorTok{:}\NormalTok{ crs}\OperatorTok{,} \CommentTok{// Add your desired CRS here}
-  \DataTypeTok{maxPixels}\OperatorTok{:} \FloatTok{1e13} \CommentTok{// Add a maximum number of pixels for export if needed}
+  \DataTypeTok{maxPixels}\OperatorTok{:} \FloatTok{1e13} \CommentTok{// Add a maximum number of pixels for export }
 \NormalTok{\})}\OperatorTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -2626,7 +2674,7 @@ To begin, we open \emph{RStudio} and empty our global environment. Then, we set 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 \CommentTok{\#}
 \CommentTok{\# Quantile Regression Forest}
 \CommentTok{\# Soil Property Mapping}
@@ -2636,13 +2684,13 @@ To begin, we open \emph{RStudio} and empty our global environment. Then, we set 
 \CommentTok{\#               Marcos E. Angelini (GSP{-}FAO)}
 \CommentTok{\#               Luis Rodríguez Lado (GSP{-}FAO)}
 \CommentTok{\#               Stephen Roecker (NRCS{-}USDA)}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 \CommentTok{\#Empty environment and cache }
 \FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
 \FunctionTok{gc}\NormalTok{()}
 
-\CommentTok{\# Content of this script =======================================================}
+\CommentTok{\# Content of this script ========================================}
 \CommentTok{\# 0 {-} Set working directory, soil attribute, and packages}
 \CommentTok{\# 1 {-} Merge soil data with environmental covariates }
 \CommentTok{\# 2 {-} Covariate selection}
@@ -2650,10 +2698,10 @@ To begin, we open \emph{RStudio} and empty our global environment. Then, we set 
 \CommentTok{\# 4 {-} Uncertainty assessment}
 \CommentTok{\# 5 {-} Prediction}
 \CommentTok{\# 6 {-} Export final maps}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 
-\CommentTok{\# 0 {-} Set working directory, soil attribute, and packages ======================}
+\CommentTok{\# 0 {-} Set working directory, soil attribute, and packages =======}
 
 \CommentTok{\# Working directory}
 \FunctionTok{setwd}\NormalTok{(}\FunctionTok{dirname}\NormalTok{(rstudioapi}\SpecialCharTok{::}\FunctionTok{getActiveDocumentContext}\NormalTok{()}\SpecialCharTok{$}\NormalTok{path))}
@@ -2684,16 +2732,18 @@ Since soil data and environmental covariates are stored in different files and f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1 {-} Merge soil data with environmental covariates ============================}
+\CommentTok{\# 1 {-} Merge soil data with environmental covariates =============}
 
-\DocumentationTok{\#\# 1.1 {-} Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{covs }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"01{-}Data/covs/Covariates.tif"}\NormalTok{) }\CommentTok{\# match case of the file name}
+\DocumentationTok{\#\# 1.1 {-} Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{covs }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"01{-}Data/covs/Covariates.tif"}\NormalTok{) }\CommentTok{\# match case of the }
+\CommentTok{\#file name}
 \NormalTok{ncovs }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(covs)}
 
-\DocumentationTok{\#\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}Outputs/harmonized\_soil\_data.csv"}\NormalTok{)}
 
-\CommentTok{\# Convert soil data into a spatial object (check https://epsg.io/6204)}
+\CommentTok{\# Convert soil data into a spatial object}
+\CommentTok{\#(check https://epsg.io/6204)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{vect}\NormalTok{(dat, }\AttributeTok{geom=}\FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \FunctionTok{crs}\NormalTok{(covs))}
 \end{Highlighting}
 \end{Shaded}
@@ -2702,7 +2752,8 @@ The shapefile can be reprojected to match the CRS of the covariates using the pr
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Reproject point coordinates to match coordinate system of covariates}
+\CommentTok{\# Reproject point coordinates to match coordinate system }
+\CommentTok{\# of covariates}
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{project}\NormalTok{(dat, covs)}
 \FunctionTok{names}\NormalTok{(dat) }
 \end{Highlighting}
@@ -2712,7 +2763,7 @@ Afterwards, the extract function can be used to sample the values of each covari
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}}
 \NormalTok{pv }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{extract}\NormalTok{(}\AttributeTok{x =}\NormalTok{ covs, }\AttributeTok{y =}\NormalTok{ dat, }\AttributeTok{xy=}\NormalTok{F)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(dat,pv)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(dat)}
@@ -2731,20 +2782,22 @@ The feature importance can be displayed in a graph showing different colors acco
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# 2 {-} Covariate selection with Boruta package ==================================}
+  \CommentTok{\# 2 {-} Covariate selection with Boruta package =================}
   \CommentTok{\# Wrapper feature selection algorithm}
-  \DocumentationTok{\#\# 2.1 {-} Run the Boruta algorithm {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{  fs\_bor }\OtherTok{\textless{}{-}} \FunctionTok{Boruta}\NormalTok{(}\AttributeTok{y =}\NormalTok{ d[,soilatt], }\AttributeTok{x =}\NormalTok{ d[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\AttributeTok{maxRuns =} \DecValTok{100}\NormalTok{, }\AttributeTok{doTrace =} \DecValTok{1}\NormalTok{)}
+  \DocumentationTok{\#\# 2.1 {-} Run the Boruta algorithm {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{  fs\_bor }\OtherTok{\textless{}{-}}
+  \FunctionTok{Boruta}\NormalTok{(}\AttributeTok{y =}\NormalTok{ d[,soilatt], }\AttributeTok{x =}\NormalTok{ d[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\AttributeTok{maxRuns =} \DecValTok{100}\NormalTok{, }\AttributeTok{doTrace =} \DecValTok{1}\NormalTok{)}
   
-  \DocumentationTok{\#\# 2.2 {-} Plot variable importance and selected features {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 2.2 {-} Plot variable importance and selected features {-}{-}{-}{-}{-}{-}{-}}
   \FunctionTok{png}\NormalTok{(}\AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/importance\_"}\NormalTok{,soilatt,}\StringTok{".png"}\NormalTok{), }
        \AttributeTok{width =} \DecValTok{15}\NormalTok{, }\AttributeTok{height =} \DecValTok{25}\NormalTok{, }\AttributeTok{units =} \StringTok{"cm"}\NormalTok{, }\AttributeTok{res =} \DecValTok{600}\NormalTok{)}
   \FunctionTok{par}\NormalTok{(}\AttributeTok{las =} \DecValTok{2}\NormalTok{, }\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.1}\NormalTok{)}
 \NormalTok{  Boruta}\SpecialCharTok{:::}\FunctionTok{plot.Boruta}\NormalTok{(fs\_bor, }\AttributeTok{horizontal =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{,}
                        \AttributeTok{xlab =} \StringTok{"Importance"}\NormalTok{, }\AttributeTok{cex.axis=}\FloatTok{0.60}\NormalTok{)}
   \FunctionTok{dev.off}\NormalTok{()}
-  \DocumentationTok{\#\# 2.3 {-} Extract the selected feature variables {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{  (fs\_vars }\OtherTok{\textless{}{-}} \FunctionTok{getSelectedAttributes}\NormalTok{(fs\_bor, }\AttributeTok{withTentative =} \ConstantTok{TRUE}\NormalTok{))}
+  \DocumentationTok{\#\# 2.3 {-} Extract the selected feature variables {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{  (fs\_vars }\OtherTok{\textless{}{-}} 
+     \FunctionTok{getSelectedAttributes}\NormalTok{(fs\_bor, }\AttributeTok{withTentative =} \ConstantTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2781,14 +2834,14 @@ Repeated cross validation has been nicely implemented in the caret R package (\p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# 3 {-} QRF Model calibration with ranger ========================================}
-  \DocumentationTok{\#\# 3.1 {-} Set training parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \CommentTok{\# 3 {-} QRF Model calibration with ranger =======================}
+  \DocumentationTok{\#\# 3.1 {-} Set training parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  fitControl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"repeatedcv"}\NormalTok{,}
-                             \AttributeTok{number =} \DecValTok{10}\NormalTok{,         }\DocumentationTok{\#\# 10 {-}fold CV}
-                             \AttributeTok{repeats =} \DecValTok{10}\NormalTok{,        }\DocumentationTok{\#\# repeated 10 times}
+                             \AttributeTok{number =} \DecValTok{10}\NormalTok{,    }\DocumentationTok{\#\# 10 {-}fold CV}
+                             \AttributeTok{repeats =} \DecValTok{10}\NormalTok{, }\DocumentationTok{\#\# repeated 10 times}
                              \AttributeTok{savePredictions =} \ConstantTok{TRUE}\NormalTok{)}
   
-  \DocumentationTok{\#\# 3.2 {-} Tune hyperparameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 3.2 {-} Tune hyperparameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  mtry }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{length}\NormalTok{(fs\_vars)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{)}
 \NormalTok{  tuneGrid }\OtherTok{\textless{}{-}}  \FunctionTok{expand.grid}\NormalTok{(}
     \AttributeTok{mtry =} \FunctionTok{abs}\NormalTok{(}\FunctionTok{c}\NormalTok{(mtry}\SpecialCharTok{{-}}\FunctionTok{round}\NormalTok{(mtry}\SpecialCharTok{/}\DecValTok{2}\NormalTok{),}
@@ -2800,7 +2853,7 @@ Repeated cross validation has been nicely implemented in the caret R package (\p
     \AttributeTok{splitrule =} \FunctionTok{c}\NormalTok{(}\StringTok{"variance"}\NormalTok{, }\StringTok{"extratrees"}\NormalTok{, }\StringTok{"maxstat"}\NormalTok{)}
 \NormalTok{  )}
   
-  \DocumentationTok{\#\# 3.3 {-} Calibrate the ranger model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 3.3 {-} Calibrate the ranger model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
   \FunctionTok{print}\NormalTok{(soilatt)}
   \FunctionTok{print}\NormalTok{(}\StringTok{"training the model..."}\NormalTok{)}
 \NormalTok{  model\_rn }\OtherTok{\textless{}{-}}\NormalTok{ caret}\SpecialCharTok{::}\FunctionTok{train}\NormalTok{(}
@@ -2878,9 +2931,12 @@ Now, back to the mapping exercise: In practical terms, before calculating any of
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# 4 {-} Accuracy assessment ======================================================}
-  \DocumentationTok{\#\# 4.1 {-} extract observed and predicted values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{model\_rn }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{\textquotesingle{}Digital{-}Soil{-}Mapping/02{-}Outputs/models/ranger\_model\_soc\_0\_30.rds\textquotesingle{}}\NormalTok{)}
+  \CommentTok{\# 4 {-} Accuracy assessment =====================================}
+  \DocumentationTok{\#\# 4.1 {-} extract observed and predicted values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{model\_rn }\OtherTok{\textless{}{-}}
+\FunctionTok{readRDS}\NormalTok{(}
+\StringTok{\textquotesingle{}Digital{-}Soil{-}Mapping/02{-}Outputs/models/ranger\_model\_soc\_0\_30.rds\textquotesingle{}}
+\NormalTok{  )}
 
 \NormalTok{  o }\OtherTok{\textless{}{-}}\NormalTok{ model\_rn}\SpecialCharTok{$}\NormalTok{pred }\SpecialCharTok{\%\textgreater{}\%} 
     \FunctionTok{filter}\NormalTok{(mtry }\SpecialCharTok{==}\NormalTok{ model\_rn}\SpecialCharTok{$}\NormalTok{bestTune}\SpecialCharTok{$}\NormalTok{mtry, }
@@ -2900,7 +2956,7 @@ While solar diagrams (\protect\hyperlink{ref-Wadoux2022}{Wadoux, Walvoort and Br
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \DocumentationTok{\#\# 4.2 {-} Plot and save scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+  \DocumentationTok{\#\# 4.2 {-} Plot and save scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  (g1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ o, }\AttributeTok{y =}\NormalTok{ p)) }\SpecialCharTok{+} 
      \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+} 
      \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope =} \DecValTok{1}\NormalTok{, }\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
@@ -2914,7 +2970,8 @@ While solar diagrams (\protect\hyperlink{ref-Wadoux2022}{Wadoux, Walvoort and Br
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# ggsave(g1, filename = paste0("02{-}Outputs/residuals\_",soilatt,".png"), scale = 1,}
+  \CommentTok{\# ggsave(g1, filename = }
+\CommentTok{\#paste0("02{-}Outputs/residuals\_",soilatt,".png"), scale = 1,}
   \CommentTok{\#        units = "cm", width = 12, height = 12)}
 \end{Highlighting}
 \end{Shaded}
@@ -2923,7 +2980,7 @@ Additionally, it is necessary to calculate standard metrics of error estimation.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 4.2 {-} Print accuracy coeficients {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.2 {-} Print accuracy coeficients {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# https://github.com/AlexandreWadoux/MapQualityEvaluation}
 \FunctionTok{print}\NormalTok{(}\FunctionTok{eval}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{p,df}\SpecialCharTok{$}\NormalTok{o))}
 \end{Highlighting}
@@ -2958,12 +3015,14 @@ To prevent for potential computational power limitations, first the raster is sp
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# 5 {-} Prediction ===============================================================}
-  \CommentTok{\# Generation of maps (prediction of soil attributes) }
-  \DocumentationTok{\#\# 5.1 {-} Produce tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-  \CommentTok{\# r \textless{}{-}covs[[1]]}
-  \CommentTok{\# t \textless{}{-} rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))}
-  \CommentTok{\# tile \textless{}{-} makeTiles(r, t,overwrite=TRUE,filename="02{-}Outputs/tiles/tiles.tif")}
+\CommentTok{\# 5 {-} Prediction ==============================================}
+\CommentTok{\# Generation of maps (prediction of soil attributes) }
+\DocumentationTok{\#\# 5.1 {-} Produce tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# r \textless{}{-}covs[[1]]}
+\CommentTok{\# t \textless{}{-} rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))}
+\CommentTok{\# tile \textless{}{-}}
+\CommentTok{\#makeTiles(r, t,}
+\CommentTok{\#overwrite=TRUE,filename="02{-}Outputs/tiles/tiles.tif")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2971,7 +3030,7 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
   \CommentTok{\# loop to predict soilatt on each tile}
   
     \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(tile)) \{}
@@ -2981,7 +3040,8 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
     \CommentTok{\# crop the selected covariates with the tile j}
 \NormalTok{    covst }\OtherTok{\textless{}{-}} \FunctionTok{crop}\NormalTok{(covs[[fs\_vars]], t)}
     
-    \CommentTok{\# create a function to extract the predited values from ranger::predict.ranger()}
+    \CommentTok{\# create a function to extract the predited values from }
+    \CommentTok{\#ranger::predict.ranger()}
 \NormalTok{    pfun }\OtherTok{\textless{}{-}}\NormalTok{ \textbackslash{}(...) \{ }\FunctionTok{predict}\NormalTok{(...)}\SpecialCharTok{$}\NormalTok{predictions }\SpecialCharTok{|\textgreater{}} \FunctionTok{t}\NormalTok{() \}}
     
     \CommentTok{\# predict conditional standard deviation}
@@ -2991,8 +3051,9 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
                        \AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{, }
                        \AttributeTok{type =} \StringTok{"quantiles"}\NormalTok{, }
                        \AttributeTok{what=}\NormalTok{sd,}
-                       \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
-\NormalTok{                                         soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
+                       \AttributeTok{filename =} 
+                        \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
+\NormalTok{                                  soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
                        \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
     
     \CommentTok{\# predict conditional mean}
@@ -3002,8 +3063,9 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
                        \AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{, }
                        \AttributeTok{type =} \StringTok{"quantiles"}\NormalTok{, }
                        \AttributeTok{what=}\NormalTok{mean,}
-                       \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
-\NormalTok{                                         soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
+                       \AttributeTok{filename =} 
+                       \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
+\NormalTok{                                   soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
                        \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
     
     \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"tile"}\NormalTok{, j, }\StringTok{"of"}\NormalTok{, }\FunctionTok{length}\NormalTok{(tile)))}
@@ -3015,11 +3077,11 @@ As a result, 25 tiles for the predicted mean and 25 tiles for the predicted stan
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st.Dev {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st.Dev {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  f\_mean }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                       \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tile\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+          \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tile\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{  f\_sd }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                     \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+       \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{  r\_mean\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{  r\_sd\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
   
@@ -3046,7 +3108,8 @@ As a result, 25 tiles for the predicted mean and 25 tiles for the predicted stan
 \NormalTok{  pred\_sd }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(pred\_sd,aoi)}
   
   
-  \FunctionTok{plot}\NormalTok{(}\FunctionTok{c}\NormalTok{(pred\_mean, pred\_sd), }\AttributeTok{main =} \FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"mean"}\NormalTok{,}\StringTok{"sd"}\NormalTok{), soilatt), }
+  \FunctionTok{plot}\NormalTok{(}\FunctionTok{c}\NormalTok{(pred\_mean, pred\_sd), }\AttributeTok{main =} \FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"mean"}\NormalTok{,}\StringTok{"sd"}\NormalTok{), }
+\NormalTok{                                           soilatt), }
        \AttributeTok{col =} \FunctionTok{hcl.colors}\NormalTok{(}\DecValTok{100}\NormalTok{, }\StringTok{"Viridis"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -3057,8 +3120,8 @@ The final step then consists of applying a cropland mask that is applied to the 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \CommentTok{\# 6 {-} Export final maps ========================================================}
-  \DocumentationTok{\#\# 6.1 {-} Mask croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \CommentTok{\# 6 {-} Export final maps =======================================}
+  \DocumentationTok{\#\# 6.1 {-} Mask croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  msk }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"01{-}Data/covs/mask.tif"}\NormalTok{)}
   \CommentTok{\# plot(msk)}
 \NormalTok{  msk }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{project}\NormalTok{(msk, pred\_mean)}
@@ -3066,16 +3129,17 @@ The final step then consists of applying a cropland mask that is applied to the 
   \CommentTok{\# plot(pred\_mean)}
 \NormalTok{  pred\_sd }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(pred\_sd, msk)}
   \CommentTok{\# plot(pred\_sd)}
-  \FunctionTok{plot}\NormalTok{(pred\_sd}\SpecialCharTok{/}\NormalTok{pred\_mean}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{main =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Coeficient of variation"}\NormalTok{, soilatt), }
+  \FunctionTok{plot}\NormalTok{(pred\_sd}\SpecialCharTok{/}\NormalTok{pred\_mean}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{main =} 
+         \FunctionTok{paste}\NormalTok{(}\StringTok{"Coeficient of variation"}\NormalTok{, soilatt), }
        \AttributeTok{col =} \FunctionTok{hcl.colors}\NormalTok{(}\DecValTok{100}\NormalTok{, }\StringTok{"Viridis"}\NormalTok{))}
   
-  \DocumentationTok{\#\# 6.2 {-} Save results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-  \FunctionTok{writeRaster}\NormalTok{(pred\_mean, }
-              \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/maps/"}\NormalTok{,ISO,}\StringTok{"\_GSNmap\_mean\_"}\NormalTok{,soilatt, }\StringTok{".tif"}\NormalTok{),}
+  \DocumentationTok{\#\# 6.2 {-} Save results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\FunctionTok{writeRaster}\NormalTok{(pred\_mean, }
+ \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/maps/"}\NormalTok{,ISO,}\StringTok{"\_GSNmap\_mean\_"}\NormalTok{,soilatt, }\StringTok{".tif"}\NormalTok{),}
               \AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{)}
-  \FunctionTok{writeRaster}\NormalTok{(pred\_sd, }
-              \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/maps/"}\NormalTok{,ISO,}\StringTok{"\_GSNmap\_sd\_"}\NormalTok{,soilatt, }\StringTok{".tif"}\NormalTok{),}
-              \AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{writeRaster}\NormalTok{(pred\_sd, }
+ \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/maps/"}\NormalTok{,ISO,}\StringTok{"\_GSNmap\_sd\_"}\NormalTok{,soilatt, }\StringTok{".tif"}\NormalTok{),}
+ \AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3233,14 +3297,16 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \begin{Highlighting}[]
 \CommentTok{\# Introduction to R}
 
-\CommentTok{\# 0. Playground ================================================================}
+\CommentTok{\# 0. Playground =================================================}
 
 \CommentTok{\# learn important keyboard shortcuts}
 \CommentTok{\# Ctrl + enter for running code}
-\CommentTok{\# tab after writing the first three characters of the function name}
+\CommentTok{\# tab after writing the first three }
+\CommentTok{\# characters of the function name}
 \CommentTok{\# F1 to access the help}
 
-\CommentTok{\# explore the use of \textless{}{-}, $, [], ==, !=, c(), :, data.frame(), list(), as.factor()}
+\CommentTok{\# explore the use of \textless{}{-}, $, [], ==, !=, c(), :, }
+\CommentTok{\# data.frame(), list(), as.factor()}
 
 \NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{:}\DecValTok{15}
 \NormalTok{a[}\DecValTok{2}\NormalTok{]}
@@ -3270,10 +3336,10 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{a }\SpecialCharTok{==}\NormalTok{ b}
 \NormalTok{a }\SpecialCharTok{!=}\NormalTok{ b}
 
-\CommentTok{\# 1. Set working directory ===================================================== }
+\CommentTok{\# 1. Set working directory ======================================}
 \FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/GIT/Digital{-}Soil{-}Mapping/"}\NormalTok{)}
 
-\CommentTok{\# 2. Install and load packages =================================================}
+\CommentTok{\# 2. Install and load packages ==================================}
 \CommentTok{\# readxl, tidyverse, and data.table packages using the functions}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"readxl"}\NormalTok{)}
@@ -3282,43 +3348,43 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(data.table)}
 
-\CommentTok{\# 3. Import an spreadsheet =====================================================}
-\DocumentationTok{\#\# 3.1 Read the MS Excel file {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 3. Import an spreadsheet ======================================}
+\DocumentationTok{\#\# 3.1 Read the MS Excel file {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\#Read the soil\_data.xlsx file, spreadsheet 2, using read\_excel }
 \FunctionTok{read\_excel}\NormalTok{(}\AttributeTok{path =} \StringTok{"01{-}Data/soil\_data.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \DecValTok{2}\NormalTok{)}
 
-\DocumentationTok{\#\# 3.2 Read the csv file with the native function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.2 Read the csv file with the native function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# 01{-}Data/horizon.csv}
 \FunctionTok{read.csv}\NormalTok{(}\StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
 
-\DocumentationTok{\#\# 3.3 Read the csv file with the tidyverse function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.3 Read the csv file with the tidyverse function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
 
-\DocumentationTok{\#\# 3.4 Read the csv file with the data.table function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.4 Read the csv file with the data.table function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{fread}\NormalTok{(}\StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
 
-\DocumentationTok{\#\# 3.5 Assign the dataframe to an object called dat {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.5 Assign the dataframe to an object called dat {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{)}
 
-\CommentTok{\# 4. Tidyverse functions =======================================================}
-\DocumentationTok{\#\# 4.1 Select pid, hip, top, bottom, ph\_h2o, cec from dat {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 4. Tidyverse functions ========================================}
+\DocumentationTok{\#\# 4.1 Select pid, hip, top, bottom, ph\_h2o, cec from dat {-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat\_1 }\OtherTok{\textless{}{-}}\NormalTok{ dat }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{select}\NormalTok{(id\_prof, id\_hor, top, bottom, ph\_h2o, cec)}
 
-\DocumentationTok{\#\# 4.2 Filter: pick observations by their values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.2 Filter: pick observations by their values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# filter observations with cec \textgreater{} 50 cmolc/100g}
 
 \NormalTok{dat\_2 }\OtherTok{\textless{}{-}}\NormalTok{ dat\_1 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{filter}\NormalTok{(cec }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{)}
 
 \NormalTok{dat\_2}
-\DocumentationTok{\#\# 4.3 Mutate: create a new variable {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.3 Mutate: create a new variable {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# thickness = top {-} bottom}
 
 \NormalTok{dat\_3 }\OtherTok{\textless{}{-}}\NormalTok{ dat\_2 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{thickness =}\NormalTok{ bottom }\SpecialCharTok{{-}}\NormalTok{ top)}
 
-\DocumentationTok{\#\# 4.4 Group\_by and summarise {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.4 Group\_by and summarise {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# group by variable pid}
 \CommentTok{\# summarise taking the mean of pH and cec}
 
@@ -3327,15 +3393,17 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_ph =} \FunctionTok{mean}\NormalTok{(ph\_h2o),}
             \AttributeTok{mean\_cec =} \FunctionTok{mean}\NormalTok{(cec))}
 
-\DocumentationTok{\#\# 4.5 Reshape the table using pivot\_longer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.5 Reshape the table using pivot\_longer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# use dat\_3}
-\CommentTok{\# put the names of the variables ph\_h2o, cec and thickness in the column }
+\CommentTok{\# put the names of the variables ph\_h2o, }
+\CommentTok{\# cec and thickness in the column }
 \CommentTok{\# variable and keep the rest of the table. Save in dat\_5 }
 
 \NormalTok{dat\_5 }\OtherTok{\textless{}{-}}\NormalTok{ dat\_3 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{pivot\_longer}\NormalTok{(ph\_h2o}\SpecialCharTok{:}\NormalTok{thickness, }\AttributeTok{names\_to =} \StringTok{"soil\_property"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{)}
+  \FunctionTok{pivot\_longer}\NormalTok{(ph\_h2o}\SpecialCharTok{:}\NormalTok{thickness, }\AttributeTok{names\_to =} \StringTok{"soil\_property"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{)}
 
-\DocumentationTok{\#\# 4.6 Join the table sites.csv with dat\_3 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.6 Join the table sites.csv with dat\_3 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Load soil\_phys\_data030.csv (in 01{-}Data folder) }
 \CommentTok{\# Join its columns with dat\_3 keeping all the rows of dat\_3}
 \CommentTok{\# save the result as dat\_6}
@@ -3350,13 +3418,13 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{dat\_6 }\OtherTok{\textless{}{-}}\NormalTok{ phys }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{right\_join}\NormalTok{(dat\_3)}
 
-\CommentTok{\# 5. Data visualization with ggplot2 ===========================================}
-\DocumentationTok{\#\# 5.1 1D plot: histograms {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 5. Data visualization with ggplot2 ============================}
+\DocumentationTok{\#\# 5.1 1D plot: histograms {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# histograms of cec and ph\_h2o}
 
 \FunctionTok{ggplot}\NormalTok{(dat\_3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cec)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{()}
 
-\DocumentationTok{\#\# 5.2 2D plot: scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.2 2D plot: scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Scatterplot bottom vs. ph\_h2o}
 
 \FunctionTok{ggplot}\NormalTok{(dat\_3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bottom, }\AttributeTok{y =}\NormalTok{ ph\_h2o)) }\SpecialCharTok{+} 
@@ -3368,19 +3436,22 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{ )}
 
-\DocumentationTok{\#\# 5.3 3D plot: scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Scatterplot bottom vs. ph\_h2o, add clay as color and size inside the }
+\DocumentationTok{\#\# 5.3 3D plot: scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Scatterplot bottom vs. ph\_h2o, add clay as color }
+\CommentTok{\# and size inside the }
 \CommentTok{\# function aes()}
 
-\FunctionTok{ggplot}\NormalTok{(dat\_3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bottom, }\AttributeTok{y =}\NormalTok{ ph\_h2o, }\AttributeTok{color =}\NormalTok{ cec, }\AttributeTok{size =}\NormalTok{ cec)) }\SpecialCharTok{+} 
+\FunctionTok{ggplot}\NormalTok{(dat\_3, }
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bottom, }\AttributeTok{y =}\NormalTok{ ph\_h2o, }\AttributeTok{color =}\NormalTok{ cec, }\AttributeTok{size =}\NormalTok{ cec)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_point}\NormalTok{()}
 
-\CommentTok{\# 6. Geospatial data with terra ================================================}
+\CommentTok{\# 6. Geospatial data with terra =================================}
 \DocumentationTok{\#\# Load packages (install them if needed)}
 \FunctionTok{library}\NormalTok{(terra)}
-\DocumentationTok{\#\# 6.1 Load a raster and a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.1 Load a raster and a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Load 01{-}Data/covs/grass.tif using rast() function, then plot it}
-\CommentTok{\# Load 01{-}Data/soil map/SoilTypes.shp using vect() function and plot it }
+\CommentTok{\# Load 01{-}Data/soil map/SoilTypes.shp using vect() function and }
+\CommentTok{\# plot it }
 \CommentTok{\# explore the attributes of these layers}
 
 \NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"01{-}Data/Macedonia/grass.tif"}\NormalTok{)}
@@ -3389,24 +3460,31 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{v }\OtherTok{\textless{}{-}} \FunctionTok{vect}\NormalTok{(}\StringTok{"01{-}Data/Macedonia/SoilTypes.shp"}\NormalTok{)}
 \FunctionTok{plot}\NormalTok{(v)}
 
-\DocumentationTok{\#\# 6.2 Load a raster and a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.2 Load a raster and a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Check the current CRS (EPSG) of the raster and the vector. }
-\CommentTok{\# Find a *projected* CRS in http://epsg.io for Macedonia and copy the number}
-\CommentTok{\# Check the Arguments of function project (?project) that need to be defined}
+\CommentTok{\# Find a *projected* CRS in http://epsg.io for Macedonia and }
+\CommentTok{\# copy the number}
+\CommentTok{\# Check the Arguments of function project (?project) that need to}
+\CommentTok{\# be defined}
 \CommentTok{\# Save the new object as r\_proj and v\_proj}
 \CommentTok{\# plot both objects}
 
-\NormalTok{r\_proj }\OtherTok{\textless{}{-}} \FunctionTok{project}\NormalTok{(}\AttributeTok{x =}\NormalTok{ r, }\AttributeTok{y =} \StringTok{"epsg:6204"}\NormalTok{, }\AttributeTok{method =} \StringTok{"bilinear"}\NormalTok{, }\AttributeTok{res =} \DecValTok{250}\NormalTok{)}
+\NormalTok{r\_proj }\OtherTok{\textless{}{-}} \FunctionTok{project}\NormalTok{(}\AttributeTok{x =}\NormalTok{ r, }\AttributeTok{y =} \StringTok{"epsg:6204"}\NormalTok{, }\AttributeTok{method =} \StringTok{"bilinear"}\NormalTok{,}
+                  \AttributeTok{res =} \DecValTok{250}\NormalTok{)}
 \FunctionTok{plot}\NormalTok{(r\_proj)}
 \NormalTok{v\_proj }\OtherTok{\textless{}{-}} \FunctionTok{project}\NormalTok{(}\AttributeTok{x =}\NormalTok{ v, }\AttributeTok{y =} \StringTok{"epsg:6204"}\NormalTok{)}
 \FunctionTok{plot}\NormalTok{(v\_proj, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
 
-\DocumentationTok{\#\# 6.3 Cropping and masking a raster {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Compute the area of the polygons in v\_proj (search for a function) and}
+\DocumentationTok{\#\# 6.3 Cropping and masking a raster {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Compute the area of the polygons in v\_proj }
+\CommentTok{\# (search for a function) and}
 \CommentTok{\# assign the values to a new column named area}
-\CommentTok{\# select the largest polygon using [], $, == and max() func. and save it as pol}
-\CommentTok{\# crop the raster with pol using the crop() function and save it as r\_pol}
-\CommentTok{\# mask the raster r\_pol with the polygon pol and save it with the same name}
+\CommentTok{\# select the largest polygon using [], $, == and max() func. }
+\CommentTok{\# and save it as pol}
+\CommentTok{\# crop the raster with pol using the crop() function and save }
+\CommentTok{\#it as r\_pol}
+\CommentTok{\# mask the raster r\_pol with the polygon pol and save it }
+\CommentTok{\# with the same name}
 \CommentTok{\# plot each result}
 
 \NormalTok{v\_proj}\SpecialCharTok{$}\NormalTok{area }\OtherTok{\textless{}{-}} \FunctionTok{expanse}\NormalTok{(v\_proj, }\AttributeTok{unit =} \StringTok{"ha"}\NormalTok{)}
@@ -3418,15 +3496,16 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{r\_pol }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(r\_pol, pol)}
 \FunctionTok{plot}\NormalTok{(r\_pol)}
 
-\DocumentationTok{\#\# 6.4 Replace values in a raster by filtering their cells {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Explore the following link to understand how terra manage cell values}
+\DocumentationTok{\#\# 6.4 Replace values in a raster by filtering their cells {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Explore the following link to understand how terra }
+\CommentTok{\#manage cell values}
 \CommentTok{\# https://rspatial.org/terra/pkg/4{-}algebra.html }
 \CommentTok{\# Replace values lower than 5 in r+pol by 0}
 
 \NormalTok{r\_pol[r\_pol}\SpecialCharTok{$}\NormalTok{grass }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
 \FunctionTok{plot}\NormalTok{(r\_pol)}
 
-\DocumentationTok{\#\# 6.5 Rasterize a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.5 Rasterize a vector layer {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Use rasterize() function to convert v\_proj to raster}
 \CommentTok{\# Use r\_proj as reference raster}
 \CommentTok{\# Use field Symbol to assign cell values, and plot the new map}
@@ -3436,12 +3515,14 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{v\_class}
 \FunctionTok{activeCat}\NormalTok{(v\_class) }\OtherTok{\textless{}{-}} \DecValTok{1}
 
-\DocumentationTok{\#\# 6.6 Extracting raster values using points {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Covert dat\_6 to spatial points using vect() function (check help of vect())}
+\DocumentationTok{\#\# 6.6 Extracting raster values using points {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Covert dat\_6 to spatial points using vect() function }
+\CommentTok{\# (check help of vect())}
 \CommentTok{\# Note that the EPSG number is 6204}
 \CommentTok{\# Save the points as s}
 \CommentTok{\# Plot s and r\_proj together in the same map (Argument add=TRUE)}
-\CommentTok{\# Extract the values of the raster using extract() function (check the help)}
+\CommentTok{\# Extract the values of the raster using extract() }
+\CommentTok{\# function (check the help)}
 \CommentTok{\# Remove the ID column of the extracted values}
 \CommentTok{\# merge the extracted data with s using cbind() function}
 \CommentTok{\# Convert s as a dataframe}
@@ -3455,12 +3536,14 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{d}
 \CommentTok{\#GGally::ggscatmat(d)}
 
-\DocumentationTok{\#\# 6.7 Zonal statistics using polygons and rasters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Use the extract() func. to estimate the mean value of r\_proj at each polygon}
+\DocumentationTok{\#\# 6.7 Zonal statistics using polygons and rasters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Use the extract() func. to estimate the mean value of }
+\CommentTok{\# r\_proj at each polygon}
 \CommentTok{\# Use the fun= argument (check the help)}
 \CommentTok{\# Use the cbind() func. to merge v\_proj and the extracted values}
 \CommentTok{\# convert v\_proj to a dataframe}
-\CommentTok{\# Create a ggplot boxplot (geom\_boxplot) with x=Symbol and y=grass }
+\CommentTok{\# Create a ggplot boxplot (geom\_boxplot) with x=Symbol}
+\CommentTok{\# and y=grass }
 
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{extract}\NormalTok{(r\_proj, v\_proj, }\AttributeTok{fun =}\NormalTok{ mean, }\AttributeTok{ID=}\ConstantTok{FALSE}\NormalTok{)}
 \NormalTok{v\_proj }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(v\_proj, x)}
@@ -3472,7 +3555,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{ylab}\NormalTok{(}\StringTok{"Grass probability"}\NormalTok{)}
 
-\DocumentationTok{\#\# 6.8 Bonus track: use zonal() function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.8 Bonus track: use zonal() function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \FunctionTok{zonal}\NormalTok{(r\_proj, v\_class, }\AttributeTok{na.rm=}\NormalTok{T)}
 \end{Highlighting}
@@ -3492,14 +3575,15 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# GSP{-}Secretariat}
 \CommentTok{\# Contact: Isabel.Luotto@fao.org}
 \CommentTok{\#          Marcos.Angelini@fao.org}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 \CommentTok{\#Empty environment and cache }
 \FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
 \FunctionTok{gc}\NormalTok{()}
 
-\CommentTok{\# Content of this script =======================================================}
-\CommentTok{\# The goal of this script is to organise the soil data for mapping, including:}
+\CommentTok{\# Content of this script ========================================}
+\CommentTok{\# The goal of this script is to organise the soil data for }
+\CommentTok{\# mapping, including:}
 \CommentTok{\# }
 \CommentTok{\# 0 {-} User{-}defined variables }
 \CommentTok{\# 1 {-} Set working directory and load necessary packages}
@@ -3510,15 +3594,15 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# 6 {-} Harmonize soil layers}
 \CommentTok{\# 7 {-} Add chemical properties from additional dataset}
 \CommentTok{\# 8 {-} Plot and save results}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
-\CommentTok{\# 0 {-} User{-}defined variables ===================================================}
-\NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}C:/Users/luottoi/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
-\CommentTok{\#wd \textless{}{-} "C:/GIT/GSNmap{-}TM/Digital{-}Soil{-}Mapping"}
+\CommentTok{\# 0 {-} User{-}defined variables ====================================}
+
+\NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{"C:/GIT/GSNmap{-}TM/Digital{-}Soil{-}Mapping"}
 \CommentTok{\#wd \textless{}{-} \textquotesingle{}C:/Users/hp/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
-\CommentTok{\#wd \textless{}{-} "/Users/luislado/Library/CloudStorage/Dropbox/GeoForsk/Clientes/FAO/GSNmap/Training Material/Digital{-}Soil{-}Mapping"}
 
-\CommentTok{\# 1 {-} Set working directory and load necessary packages ========================}
+
+\CommentTok{\# 1 {-} Set working directory and load necessary packages =========}
 \FunctionTok{setwd}\NormalTok{(wd) }\CommentTok{\# change the path accordingly}
 \CommentTok{\#(setwd(dirname(rstudioapi::getActiveDocumentContext()$path)))}
 
@@ -3530,11 +3614,12 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{library}\NormalTok{(mpspline2) }\CommentTok{\# for horizon harmonization}
 \FunctionTok{library}\NormalTok{(plotly) }\CommentTok{\# interactive plots}
 
-\CommentTok{\# 2 {-} Import national data =====================================================}
-\CommentTok{\# Save your national soil dataset in the data folder /01{-}Data as a .csv file or }
+\CommentTok{\# 2 {-} Import national data ======================================}
+\CommentTok{\# Save your national soil dataset in the data folder }
+\CommentTok{\# /01{-}Data as a .csv file or }
 \CommentTok{\# as a .xlsx file}
 
-\DocumentationTok{\#\# 2.1 {-} for .xlsx files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.1 {-} for .xlsx files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Import horizon data }
 \CommentTok{\# hor \textless{}{-} read\_excel("01{-}Data/soil\_data.xlsx", sheet = 2)}
 \CommentTok{\# \# Import site{-}level data}
@@ -3543,11 +3628,16 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# phys \textless{}{-} read\_excel("01{-}Data/soil\_data.xlsx", sheet = 3)}
 
 
-\DocumentationTok{\#\# 2.2 {-} for .csv files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.2 {-} for .csv files {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Import horizon data }
-\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
-\NormalTok{chem }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"01{-}Data/soil\_chem\_data030.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
-\NormalTok{phys }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"01{-}Data/soil\_phys\_data030.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{hor }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} 
+          \StringTok{"01{-}Data/soil\_profile\_data.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{chem }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} 
+          \StringTok{"01{-}Data/soil\_chem\_data030.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{phys }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\AttributeTok{file =} 
+          \StringTok{"01{-}Data/soil\_phys\_data030.csv"}\NormalTok{,}\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
 
 
 \NormalTok{site }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, id\_prof, x, y) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{unique}\NormalTok{()}
@@ -3563,29 +3653,34 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{summary}\NormalTok{(site)}
 \FunctionTok{summary}\NormalTok{(hor)}
 
-\CommentTok{\# 3 {-} select useful columns ====================================================}
-\DocumentationTok{\#\# 3.1 {-} select AND RENAME columns {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, ProfID, HorID, top, bottom, }\AttributeTok{ph=}\NormalTok{ph\_h2o, k, soc, bd, cec)}
+\CommentTok{\# 3 {-} select useful columns =====================================}
+\DocumentationTok{\#\# 3.1 {-} select AND RENAME columns {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{hor }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(hor, ProfID, HorID, top, bottom, }\AttributeTok{ph=}\NormalTok{ph\_h2o, }
+\NormalTok{              k, soc, bd, cec)}
 
-\CommentTok{\# 4 {-} Quality check ============================================================}
+\CommentTok{\# 4 {-} Quality check =============================================}
 
-\DocumentationTok{\#\# 4.1 {-} Check locations {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.1 {-} Check locations {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Macedonian State Coordinate System EPSG:6204  }
 \CommentTok{\# https://epsg.io/6204 }
 \NormalTok{site }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# convert to spatial object}
-  \FunctionTok{mapview}\NormalTok{(}\AttributeTok{zcol =} \StringTok{"ProfID"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.1}\NormalTok{) }\CommentTok{\# visualise in an interactive map}
+  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# convert to }
+  \CommentTok{\#spatial object}
+  \FunctionTok{mapview}\NormalTok{(}\AttributeTok{zcol =} \StringTok{"ProfID"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.1}\NormalTok{) }\CommentTok{\# visualise in an }
+\CommentTok{\#interactive map}
 
 \NormalTok{site\_sub }\OtherTok{\textless{}{-}}\NormalTok{ site[site}\SpecialCharTok{$}\NormalTok{ProfID}\SpecialCharTok{==}\StringTok{\textquotesingle{}2823\textquotesingle{}}\NormalTok{,] }
 
 \NormalTok{site\_sub }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# convert to spatial object}
-  \FunctionTok{mapview}\NormalTok{(}\AttributeTok{zcol =} \StringTok{"ProfID"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.1}\NormalTok{) }\CommentTok{\# visualise in an interactive map}
+  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# convert to }
+  \CommentTok{\#spatial object}
+  \FunctionTok{mapview}\NormalTok{(}\AttributeTok{zcol =} \StringTok{"ProfID"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.1}\NormalTok{) }\CommentTok{\# visualise in an }
+\CommentTok{\#interactive map}
 \CommentTok{\# profile 2823 is wrongly located, so let\textquotesingle{}s remove it}
 \NormalTok{site }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(site, ProfID }\SpecialCharTok{!=} \DecValTok{2823}\NormalTok{)}
 
 
-\DocumentationTok{\#\# 4.2 {-} Convert data into a Soil Profile Collection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.2 {-} Convert data into a Soil Profile Collection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{aqp}\SpecialCharTok{::}\FunctionTok{depths}\NormalTok{(hor) }\OtherTok{\textless{}{-}}\NormalTok{ ProfID }\SpecialCharTok{\textasciitilde{}}\NormalTok{ top }\SpecialCharTok{+}\NormalTok{ bottom }
 \NormalTok{hor}\SpecialCharTok{@}\NormalTok{site}\SpecialCharTok{$}\NormalTok{ProfID }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(hor}\SpecialCharTok{@}\NormalTok{site}\SpecialCharTok{$}\NormalTok{ProfID) }
 \FunctionTok{site}\NormalTok{(hor) }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(}\FunctionTok{site}\NormalTok{(hor), site)}
@@ -3593,59 +3688,64 @@ This chapter contains the complete list of R scripts to run the process of mappi
 
 \NormalTok{profiles}
 
-\DocumentationTok{\#\# 4.3 {-} plot first 20 profiles using pH as color {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.3 {-} plot first 20 profiles using pH as color {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{plotSPC}\NormalTok{(}\AttributeTok{x =}\NormalTok{ profiles[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{], }\AttributeTok{name =} \StringTok{"pH"}\NormalTok{, }\AttributeTok{color =} \StringTok{"ph"}\NormalTok{,}
         \AttributeTok{name.style =} \StringTok{"center{-}center"}\NormalTok{)}
 
 
-\DocumentationTok{\#\# 4.4 {-} check data integrity {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# A valid profile is TRUE if all of the following criteria are false:}
+\DocumentationTok{\#\# 4.4 {-} check data integrity {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# A valid profile is TRUE if all of the }
+\CommentTok{\#following criteria are false:}
 \CommentTok{\#    + depthLogic : boolean, errors related to depth logic}
-\CommentTok{\#    + sameDepth : boolean, errors related to same top/bottom depths}
+\CommentTok{\#    + sameDepth : boolean, errors related to same top/bottom }
+\CommentTok{\#depths}
 \CommentTok{\#    + missingDepth : boolean, NA in top / bottom depths}
-\CommentTok{\#    + overlapOrGap : boolean, gaps or overlap in adjacent horizons}
+\CommentTok{\#    + overlapOrGap : boolean, gaps or overlap in adjacent}
+\CommentTok{\#horizons}
 \NormalTok{aqp}\SpecialCharTok{::}\FunctionTok{checkHzDepthLogic}\NormalTok{(profiles)}
 
 \CommentTok{\# Identify non{-}valid profiles }
 \NormalTok{dl }\OtherTok{\textless{}{-}} \FunctionTok{checkHzDepthLogic}\NormalTok{(profiles)}
-\NormalTok{dl[dl}\SpecialCharTok{$}\NormalTok{depthLogic}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{sameDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{missingDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{overlapOrGap}\SpecialCharTok{==}\NormalTok{T,}\StringTok{"ProfID"}\NormalTok{]}
+\NormalTok{dl[dl}\SpecialCharTok{$}\NormalTok{depthLogic}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{sameDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|}\NormalTok{ dl}\SpecialCharTok{$}\NormalTok{missingDepth}\SpecialCharTok{==}\NormalTok{T }\SpecialCharTok{|} 
+\NormalTok{     dl}\SpecialCharTok{$}\NormalTok{overlapOrGap}\SpecialCharTok{==}\NormalTok{T,}\StringTok{"ProfID"}\NormalTok{]}
 
 \CommentTok{\# visualize some of these profiles by the pid}
 \FunctionTok{subset}\NormalTok{(profiles, }\FunctionTok{grepl}\NormalTok{(}\DecValTok{6566}\NormalTok{, ProfID, }\AttributeTok{ignore.case =} \ConstantTok{TRUE}\NormalTok{))}
 \FunctionTok{subset}\NormalTok{(profiles, }\FunctionTok{grepl}\NormalTok{(}\DecValTok{7410}\NormalTok{ , ProfID, }\AttributeTok{ignore.case =} \ConstantTok{TRUE}\NormalTok{))}
 \FunctionTok{subset}\NormalTok{(profiles, }\FunctionTok{grepl}\NormalTok{(}\DecValTok{8002}\NormalTok{, ProfID, }\AttributeTok{ignore.case =} \ConstantTok{TRUE}\NormalTok{))}
 
-\DocumentationTok{\#\# 4.5 {-} keep only valid profiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.5 {-} keep only valid profiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{clean\_prof }\OtherTok{\textless{}{-}} \FunctionTok{HzDepthLogicSubset}\NormalTok{(profiles)}
 \FunctionTok{metadata}\NormalTok{(clean\_prof)}\SpecialCharTok{$}\NormalTok{removed.profiles}
 \CommentTok{\# write\_rds(clean\_prof, "01{-}Data/soilProfileCollection.rds")}
 
-\DocumentationTok{\#\# 4.6 convert soilProfileCollection to a table {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.6 convert soilProfileCollection to a table {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(clean\_prof}\SpecialCharTok{@}\NormalTok{site, clean\_prof}\SpecialCharTok{@}\NormalTok{horizons)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dat, ProfID, HorID, x, y, top, bottom, ph}\SpecialCharTok{:}\NormalTok{cec )}
 
 
-\CommentTok{\# 5 {-} Estimate BD using pedotransfer functions =================================}
+\CommentTok{\# 5 {-} Estimate BD using pedotransfer functions ==================}
 
 \CommentTok{\# create the function with all PTF}
-\NormalTok{method\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{, }\StringTok{"Grigal1989"}\NormalTok{, }
+\NormalTok{method\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{, }
+                  \StringTok{"Grigal1989"}\NormalTok{, }
                   \StringTok{"Adams1973"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{) }
 
 \NormalTok{estimateBD }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{SOC=}\ConstantTok{NULL}\NormalTok{, }\AttributeTok{method=}\ConstantTok{NULL}\NormalTok{) \{}
 \NormalTok{  OM }\OtherTok{\textless{}{-}}\NormalTok{ SOC }\SpecialCharTok{*} \FloatTok{1.724}
 \NormalTok{  BD }\OtherTok{\textless{}{-}} \ControlFlowTok{switch}\NormalTok{(method,}
-               \StringTok{"Saini1996"} \OtherTok{=} \FloatTok{1.62} \SpecialCharTok{{-}} \FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM,}
-               \StringTok{"Drew1973"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.6268} \SpecialCharTok{+} \FloatTok{0.0361} \SpecialCharTok{*}\NormalTok{ OM),}
-               \StringTok{"Jeffrey1979"} \OtherTok{=} \FloatTok{1.482} \SpecialCharTok{{-}} \FloatTok{0.6786} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{log}\NormalTok{(OM)),}
-               \StringTok{"Grigal1989"} \OtherTok{=} \FloatTok{0.669} \SpecialCharTok{+} \FloatTok{0.941} \SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM),}
-               \StringTok{"Adams1973"} \OtherTok{=} \DecValTok{100} \SpecialCharTok{/}\NormalTok{ (OM }\SpecialCharTok{/} \FloatTok{0.244} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{100} \SpecialCharTok{{-}}\NormalTok{ OM) }\SpecialCharTok{/} \FloatTok{2.65}\NormalTok{),}
-               \StringTok{"Honeyset\_Ratkowsky1989"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.564} \SpecialCharTok{+} \FloatTok{0.0556} \SpecialCharTok{*}\NormalTok{ OM),}
-               \FunctionTok{stop}\NormalTok{(}\StringTok{"Invalid method specified."}\NormalTok{)}
+            \StringTok{"Saini1996"} \OtherTok{=} \FloatTok{1.62} \SpecialCharTok{{-}} \FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM,}
+            \StringTok{"Drew1973"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.6268} \SpecialCharTok{+} \FloatTok{0.0361} \SpecialCharTok{*}\NormalTok{ OM),}
+            \StringTok{"Jeffrey1979"} \OtherTok{=} \FloatTok{1.482} \SpecialCharTok{{-}} \FloatTok{0.6786} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{log}\NormalTok{(OM)),}
+            \StringTok{"Grigal1989"} \OtherTok{=} \FloatTok{0.669} \SpecialCharTok{+} \FloatTok{0.941} \SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.06} \SpecialCharTok{*}\NormalTok{ OM),}
+            \StringTok{"Adams1973"} \OtherTok{=} \DecValTok{100} \SpecialCharTok{/}\NormalTok{ (OM }\SpecialCharTok{/} \FloatTok{0.244} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{100} \SpecialCharTok{{-}}\NormalTok{ OM) }\SpecialCharTok{/} \FloatTok{2.65}\NormalTok{),}
+            \StringTok{"Honeyset\_Ratkowsky1989"} \OtherTok{=} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.564} \SpecialCharTok{+} \FloatTok{0.0556} \SpecialCharTok{*}\NormalTok{ OM),}
+            \FunctionTok{stop}\NormalTok{(}\StringTok{"Invalid method specified."}\NormalTok{)}
 \NormalTok{  )}
   \FunctionTok{return}\NormalTok{(BD)}
 \NormalTok{\}}
 
-\CommentTok{\# 5.1 {-} Select a pedotransfer function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 5.1 {-} Select a pedotransfer function {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 
 \CommentTok{\# Create a test dataset with BD and SOC data}
@@ -3656,7 +3756,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{BD\_test }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(BD\_test) }
 
 
-\CommentTok{\# 5.2 {-} Estimate BLD for a subset using the pedotransfer functions {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 5.2 {-} Estimate BLD for a subset using the }
+\CommentTok{\# pedotransfer functions {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ method\_names) \{}
 \NormalTok{  BD\_test[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{estimateBD}\NormalTok{(BD\_test}\SpecialCharTok{$}\NormalTok{SOC, }\AttributeTok{method =}\NormalTok{ i)}
 \NormalTok{\}}
@@ -3665,15 +3766,17 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{BD\_test}
 
 
-\DocumentationTok{\#\# 5.3 Compare results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.3 Compare results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Observed values:}
 \FunctionTok{summary}\NormalTok{(BD\_test)}
 
 \CommentTok{\# Compare data distributions for observed and predicted BLD}
 \NormalTok{plot.bd }\OtherTok{\textless{}{-}}\NormalTok{ BD\_test }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{SOC) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }\StringTok{"Jeffrey1979"}\NormalTok{,}
-                        \StringTok{"Grigal1989"}\NormalTok{, }\StringTok{"Adams1973"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Saini1996"}\NormalTok{, }\StringTok{"Drew1973"}\NormalTok{, }
+                        \StringTok{"Jeffrey1979"}\NormalTok{,}
+                        \StringTok{"Grigal1989"}\NormalTok{, }\StringTok{"Adams1973"}\NormalTok{, }
+                        \StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
                \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"BD"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_density}\NormalTok{()}
@@ -3697,15 +3800,17 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# Same dynamic plot }
 \FunctionTok{ggplotly}\NormalTok{(BD\_test }\SpecialCharTok{\%\textgreater{}\%} 
            \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{SOC) }\SpecialCharTok{\%\textgreater{}\%} 
-           \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
-                        \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"BD"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+           \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{"BD\_observed"}\NormalTok{, }
+                                 \StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{), }
+                       \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"BD"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
            \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
            \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{xlim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{2.5}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{layout}\NormalTok{(}\AttributeTok{hovermode =} \StringTok{"x"}\NormalTok{)}
 
-\DocumentationTok{\#\# 5.4 Estimate BD for the missing horizons {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.4 Estimate BD for the missing horizons {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat}\SpecialCharTok{$}\NormalTok{bd[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd)] }\OtherTok{\textless{}{-}}
-  \FunctionTok{estimateBD}\NormalTok{(dat[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd),]}\SpecialCharTok{$}\NormalTok{soc, }\AttributeTok{method=}\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{)}
+  \FunctionTok{estimateBD}\NormalTok{(dat[}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd),]}\SpecialCharTok{$}\NormalTok{soc,}
+             \AttributeTok{method=}\StringTok{"Honeyset\_Ratkowsky1989"}\NormalTok{)}
 
 \CommentTok{\# Explore the results}
 \FunctionTok{summary}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{bd)}
@@ -3717,15 +3822,19 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ BD, }\AttributeTok{color =}\NormalTok{ Method)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{xlim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{2.5}\NormalTok{))}
-\NormalTok{g }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{bd, }\AttributeTok{color =} \StringTok{"Predicted +}\SpecialCharTok{\textbackslash{}n}\StringTok{ observed"}\NormalTok{))}
+\NormalTok{g }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{bd, }
+                              \AttributeTok{color =} \StringTok{"Predicted +}\SpecialCharTok{\textbackslash{}n}\StringTok{ observed"}\NormalTok{))}
 
 
-\DocumentationTok{\#\# 5.5 {-} Explore outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\# Outliers should be carefully explored and compared with literature values.}
-\CommentTok{\# Only if it is clear that outliers represent impossible or highly unlikely }
+\DocumentationTok{\#\# 5.5 {-} Explore outliers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Outliers should be carefully explored and compared with }
+\CommentTok{\#literature values.}
+\CommentTok{\# Only if it is clear that outliers represent }
+\CommentTok{\#impossible or highly unlikely }
 \CommentTok{\# values, they should be removed as errors.}
 \CommentTok{\# }
-\CommentTok{\# Carbon content higher than 15\% is only typical for organic soil (histosols)}
+\CommentTok{\# Carbon content higher than 15\% is only typical for organic soil}
+\CommentTok{\# (histosols)}
 \CommentTok{\# We will remove all atypically high SOC as outliers}
 \FunctionTok{summary}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{soc)}
 \FunctionTok{na.omit}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{])}
@@ -3734,7 +3843,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat[dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{!=} \DecValTok{6915}\NormalTok{,]}
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ dat[dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{!=} \DecValTok{7726}\NormalTok{,]}
 
-\NormalTok{dat}\OtherTok{\textless{}{-}}\NormalTok{ dat[}\SpecialCharTok{!}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{\%in\%}\NormalTok{ dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{][}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{])]),]}
+\NormalTok{dat}\OtherTok{\textless{}{-}}\NormalTok{ dat[}\SpecialCharTok{!}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID }\SpecialCharTok{\%in\%}\NormalTok{ dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{]}
+\NormalTok{            [}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dat}\SpecialCharTok{$}\NormalTok{ProfID[dat}\SpecialCharTok{$}\NormalTok{soc }\SpecialCharTok{\textgreater{}} \DecValTok{10}\NormalTok{])]),]}
 
 \CommentTok{\# Explore bulk density data, identify outliers}
 \CommentTok{\# remove layers with Bulk Density \textless{} 1 g/cm\^{}3}
@@ -3745,22 +3855,25 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(dat, }\AttributeTok{cols =}\NormalTok{ ph}\SpecialCharTok{:}\NormalTok{cec, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
                   \AttributeTok{names\_to =} \StringTok{"soil\_property"}\NormalTok{)}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(x)}
-\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ soil\_property, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
+\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ soil\_property, }\AttributeTok{y =}\NormalTok{ value, }
+              \AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{)}
 
 
-\CommentTok{\# 6 {-} Harmonize soil layers ====================================================}
+\CommentTok{\# 6 {-} Harmonize soil layers =====================================}
 \FunctionTok{source}\NormalTok{(}\StringTok{"03{-}Scripts/.spline\_functions.R"}\NormalTok{) }
-\DocumentationTok{\#\# 6.1 {-} Set target soil properties and depths {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.1 {-} Set target soil properties and depths {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{names}\NormalTok{(dat)}
-\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dat, ProfID, HorID, x, y, top, bottom, ph, k, soc, bd, cec)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dat, ProfID, HorID, x, y, top, bottom, }
+\NormalTok{              ph, k, soc, bd, cec)}
 
 \NormalTok{target }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ph"}\NormalTok{, }\StringTok{"k"}\NormalTok{, }\StringTok{"soc"}\NormalTok{,  }\StringTok{"bd"}\NormalTok{, }\StringTok{"cec"}\NormalTok{)}
 \NormalTok{depths }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{30}\NormalTok{)}
 
-\DocumentationTok{\#\# 6.2 {-} Create standard layers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{splines }\OtherTok{\textless{}{-}} \FunctionTok{apply\_mpspline\_all}\NormalTok{(}\AttributeTok{df =}\NormalTok{ dat, }\AttributeTok{properties =}\NormalTok{ target, }\AttributeTok{depth\_range =}\NormalTok{ depths)}
+\DocumentationTok{\#\# 6.2 {-} Create standard layers {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{splines }\OtherTok{\textless{}{-}} \FunctionTok{apply\_mpspline\_all}\NormalTok{(}\AttributeTok{df =}\NormalTok{ dat, }\AttributeTok{properties =}\NormalTok{ target,}
+                              \AttributeTok{depth\_range =}\NormalTok{ depths)}
 \FunctionTok{summary}\NormalTok{(splines)}
 
 \CommentTok{\# merge splines with x and y}
@@ -3769,7 +3882,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 
 
 
-\CommentTok{\# 7 {-} Harmonize units ==========================================================}
+\CommentTok{\# 7 {-} Harmonize units ===========================================}
 \CommentTok{\#Harmonize units if different from target units}
 \CommentTok{\# Mandatory Soil Propertes and corresponing units:}
 \CommentTok{\# Total N {-} ppm}
@@ -3802,7 +3915,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{phys}\SpecialCharTok{$}\NormalTok{clay\_0\_30[phys}\SpecialCharTok{$}\NormalTok{clay\_0\_30}\SpecialCharTok{\textless{}}\DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
 
 
-\CommentTok{\# Add chemical and physical properties from additional datasets ==========================}
+\CommentTok{\# Add chemical and physical properties from additional datasets =}
 
 
 \CommentTok{\# Rename columns to match the main data set}
@@ -3813,22 +3926,28 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{names}\NormalTok{(chem)[}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}n\_0\_30\textquotesingle{}}
 
 
-\CommentTok{\#The chem dataframe comes from and independent dataset we need to create new unique ProfIDs }
+\CommentTok{\#The chem dataframe comes from and independent }
+\CommentTok{\#dataset we need to create new unique ProfIDs }
 \CommentTok{\#Create unique ProfID }
 \NormalTok{chem}\SpecialCharTok{$}\NormalTok{ProfID }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{max}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{ProfID)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{,}\FunctionTok{max}\NormalTok{(d}\SpecialCharTok{$}\NormalTok{ProfID)}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\FunctionTok{nrow}\NormalTok{(chem)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
 
-\CommentTok{\# Add the new data as new rows using dplyr we can add empty rows}
-\CommentTok{\# automatically for the not measured properties in the chem dataset}
+\CommentTok{\# Add the new data as new rows using dplyr}
+\CommentTok{\# we can add empty rows}
+\CommentTok{\# automatically for the not measured}
+\CommentTok{\# properties in the chem dataset}
 \NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(d, chem)}
 
-\CommentTok{\#The phys dataframe with the texture instead shares the same ProfIDs (we can directly merge)}
+\CommentTok{\#The phys dataframe with the texture instead shares the }
+\CommentTok{\# same ProfIDs (we can directly merge)}
 \NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(d, phys, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}ProfID\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{))}
 
-\CommentTok{\# 8 {-} Plot  and save results ===================================================}
+\CommentTok{\# 8 {-} Plot  and save results ====================================}
 \FunctionTok{names}\NormalTok{(d)}
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(d, }\AttributeTok{cols =}\NormalTok{ ph\_0\_30}\SpecialCharTok{:}\NormalTok{silt\_0\_30, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(d, }\AttributeTok{cols =}\NormalTok{ ph\_0\_30}\SpecialCharTok{:}\NormalTok{silt\_0\_30, }
+                  \AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
                   \AttributeTok{names\_sep =} \StringTok{"\_"}\NormalTok{, }
-                  \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"soil\_property"}\NormalTok{, }\StringTok{"top"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
+                  \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"soil\_property"}\NormalTok{, }
+                               \StringTok{"top"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(x, }\AttributeTok{depth =} \FunctionTok{paste}\NormalTok{(top, }\StringTok{"{-}"}\NormalTok{ , bottom))}
 \CommentTok{\#x \textless{}{-} na.omit(x)}
 \FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
@@ -3836,7 +3955,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{)}
 
 
-\FunctionTok{ggplotly}\NormalTok{(}\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
+\FunctionTok{ggplotly}\NormalTok{(}\FunctionTok{ggplot}\NormalTok{(x, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{y =}\NormalTok{ value, }
+                       \AttributeTok{fill =}\NormalTok{ soil\_property)) }\SpecialCharTok{+}
            \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
            \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{soil\_property, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{))}
 
@@ -3851,7 +3971,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{var}\NormalTok{ assets }\OperatorTok{=}\NormalTok{ [}\StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio1"}\OperatorTok{,}
+\KeywordTok{var}\NormalTok{ assets }\OperatorTok{=} 
+\NormalTok{[}\StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio1"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio12"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio13"}\OperatorTok{,}
 \StringTok{"projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/CHELSA/bio14"}\OperatorTok{,}
@@ -3925,16 +4046,20 @@ This chapter contains the complete list of R scripts to run the process of mappi
 
 \CommentTok{// Load borders }
 
-\CommentTok{/// Using LSIB 2017 (replace the countries that you want to download)}
-\KeywordTok{var}\NormalTok{ country\_list }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Italy\textquotesingle{}}\NormalTok{]}\OperatorTok{;}
-\KeywordTok{var}\NormalTok{ aoi }\OperatorTok{=}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{FeatureCollection}\NormalTok{(}\StringTok{\textquotesingle{}USDOS/LSIB\_SIMPLE/2017\textquotesingle{}}\NormalTok{)}
-  \OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{inList}\NormalTok{(}\StringTok{\textquotesingle{}country\_na\textquotesingle{}}\OperatorTok{,}\NormalTok{ country\_list))}\OperatorTok{;}
+\CommentTok{/// Using UN 2020 (replace the countries to download)}
+\KeywordTok{var}\NormalTok{ ISO }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}ITA\textquotesingle{}}\NormalTok{]}\OperatorTok{;}
+\KeywordTok{var}\NormalTok{ aoi }\OperatorTok{=}
+\NormalTok{ee}\OperatorTok{.}\FunctionTok{FeatureCollection}\NormalTok{(}
+\StringTok{\textquotesingle{}projects/digital{-}soil{-}mapping{-}gsp{-}fao/assets/UN\_BORDERS/BNDA\_CTY\textquotesingle{}}
+\NormalTok{)}
+  \OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{inList}\NormalTok{(}\StringTok{\textquotesingle{}ISO3CD\textquotesingle{}}\OperatorTok{,}\NormalTok{ ISO))}\OperatorTok{;}
 \KeywordTok{var}\NormalTok{ region }\OperatorTok{=}\NormalTok{ aoi}\OperatorTok{.}\FunctionTok{geometry}\NormalTok{()}\OperatorTok{;}
 
 \CommentTok{/// Using a shapefile}
 \CommentTok{/// 1. Upload the borders of your countries as an asset}
 \CommentTok{/// 2. Replace \textquotesingle{}your\_shapefile\textquotesingle{} with the path to your shapefile}
-\CommentTok{// var shapefile = ee.FeatureCollection(\textquotesingle{}users/your\_username/your\_shapefile\textquotesingle{});}
+\CommentTok{// var shapefile = }
+\CommentTok{//ee.FeatureCollection(\textquotesingle{}users/your\_username/your\_shapefile\textquotesingle{});}
 \CommentTok{// var region = shapefile.geometry().bounds();}
 
 
@@ -3949,7 +4074,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{// Function to replace masked values with zeroes for fpar bands}
 \KeywordTok{function} \FunctionTok{replaceMaskedFpar}\NormalTok{(img) \{}
   \KeywordTok{var}\NormalTok{ allBands }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{bandNames}\NormalTok{()}\OperatorTok{;}
-  \KeywordTok{var}\NormalTok{ fparBands }\OperatorTok{=}\NormalTok{ allBands}\OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{stringStartsWith}\NormalTok{(}\StringTok{\textquotesingle{}item\textquotesingle{}}\OperatorTok{,} \StringTok{\textquotesingle{}fpar\textquotesingle{}}\NormalTok{))}\OperatorTok{;}
+  \KeywordTok{var}\NormalTok{ fparBands }\OperatorTok{=}
+\NormalTok{  allBands}\OperatorTok{.}\FunctionTok{filter}\NormalTok{(ee}\OperatorTok{.}\AttributeTok{Filter}\OperatorTok{.}\FunctionTok{stringStartsWith}\NormalTok{(}\StringTok{\textquotesingle{}item\textquotesingle{}}\OperatorTok{,} \StringTok{\textquotesingle{}fpar\textquotesingle{}}\NormalTok{))}\OperatorTok{;}
   \KeywordTok{var}\NormalTok{ nonFparBands }\OperatorTok{=}\NormalTok{ allBands}\OperatorTok{.}\FunctionTok{removeAll}\NormalTok{(fparBands)}\OperatorTok{;}
   
   \KeywordTok{var}\NormalTok{ fparImg }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{select}\NormalTok{(fparBands)}\OperatorTok{.}\FunctionTok{unmask}\NormalTok{(}\DecValTok{0}\NormalTok{)}\OperatorTok{;}
@@ -3963,13 +4089,15 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \ControlFlowTok{return}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(result)}\OperatorTok{;}
 \NormalTok{\}}
 
-\CommentTok{// Clip each image in the collection to the region of interest and replace masked values for fpar bands}
+\CommentTok{// Clip each image in the collection to the region of }
+\CommentTok{//interest and replace masked values for fpar bands}
 \KeywordTok{var}\NormalTok{ clippedCollection }\OperatorTok{=}\NormalTok{ assetsCollection}\OperatorTok{.}\FunctionTok{map}\NormalTok{(}\KeywordTok{function}\NormalTok{(img)\{}
   \KeywordTok{var}\NormalTok{ clippedImg }\OperatorTok{=}\NormalTok{ img}\OperatorTok{.}\FunctionTok{clip}\NormalTok{(region)}\OperatorTok{.}\FunctionTok{toFloat}\NormalTok{()}\OperatorTok{;}
   \ControlFlowTok{return} \FunctionTok{replaceMaskedFpar}\NormalTok{(clippedImg)}\OperatorTok{;}
 \NormalTok{\})}\OperatorTok{;}
 
-\CommentTok{// Stack the layers and maintain the layer names in the final file}
+\CommentTok{// Stack the layers and maintain the }
+\CommentTok{//layer names in the final file}
 \KeywordTok{var}\NormalTok{ stacked }\OperatorTok{=}\NormalTok{ clippedCollection}\OperatorTok{.}\FunctionTok{toBands}\NormalTok{()}\OperatorTok{;}
 
 \CommentTok{// Get the list of asset names}
@@ -3982,7 +4110,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{print}\NormalTok{(renamed}\OperatorTok{,} \StringTok{\textquotesingle{}Covariates to be exported\textquotesingle{}}\NormalTok{)}
 
 \CommentTok{// Visualize the result}
-\CommentTok{// Set a visualization parameter (you can adjust the colors as desired)}
+\CommentTok{// Set a visualization parameter }
+\CommentTok{// (you can adjust the colors as desired)}
 \KeywordTok{var}\NormalTok{ visParams }\OperatorTok{=}\NormalTok{ \{}
   \DataTypeTok{bands}\OperatorTok{:} \StringTok{\textquotesingle{}bio1\textquotesingle{}}\OperatorTok{,}
   \DataTypeTok{min}\OperatorTok{:} \DecValTok{0}\OperatorTok{,}
@@ -4006,7 +4135,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{/* Create mask for croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}*/}
 
 \CommentTok{// Load the Copernicus Global Land Service image collection}
-\KeywordTok{var}\NormalTok{ imageCollection }\OperatorTok{=}\NormalTok{ ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(}\StringTok{"COPERNICUS/Landcover/100m/Proba{-}V{-}C3/Global/2019"}\NormalTok{)}
+\KeywordTok{var}\NormalTok{ imageCollection }\OperatorTok{=} 
+\NormalTok{ee}\OperatorTok{.}\FunctionTok{Image}\NormalTok{(}\StringTok{"COPERNICUS/Landcover/100m/Proba{-}V{-}C3/Global/2019"}\NormalTok{)}
   \OperatorTok{.}\FunctionTok{select}\NormalTok{(}\StringTok{"discrete\_classification"}\NormalTok{)}
   \OperatorTok{.}\FunctionTok{clip}\NormalTok{(region)}
 
@@ -4021,9 +4151,11 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{  \})}\OperatorTok{;}
 
 \CommentTok{// Reclassify the land cover classes}
-\KeywordTok{var}\NormalTok{ inList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{20}\OperatorTok{,} \DecValTok{30}\OperatorTok{,} \DecValTok{40}\OperatorTok{,} \DecValTok{50}\OperatorTok{,} \DecValTok{60}\OperatorTok{,} \DecValTok{70}\OperatorTok{,} \DecValTok{80}\OperatorTok{,} \DecValTok{90}\OperatorTok{,} \DecValTok{100}\OperatorTok{,} \DecValTok{111}\OperatorTok{,} \DecValTok{112}\OperatorTok{,} \DecValTok{113}\OperatorTok{,} \DecValTok{114}\OperatorTok{,} \DecValTok{115}\OperatorTok{,} \DecValTok{116}\OperatorTok{,} 
+\KeywordTok{var}\NormalTok{ inList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{20}\OperatorTok{,} \DecValTok{30}\OperatorTok{,} \DecValTok{40}\OperatorTok{,} \DecValTok{50}\OperatorTok{,} \DecValTok{60}\OperatorTok{,} \DecValTok{70}\OperatorTok{,} \DecValTok{80}\OperatorTok{,} \DecValTok{90}\OperatorTok{,} \DecValTok{100}\OperatorTok{,} 
+               \DecValTok{111}\OperatorTok{,} \DecValTok{112}\OperatorTok{,} \DecValTok{113}\OperatorTok{,} \DecValTok{114}\OperatorTok{,} \DecValTok{115}\OperatorTok{,} \DecValTok{116}\OperatorTok{,} 
               \DecValTok{121}\OperatorTok{,} \DecValTok{122}\OperatorTok{,} \DecValTok{123}\OperatorTok{,} \DecValTok{124}\OperatorTok{,} \DecValTok{125}\OperatorTok{,} \DecValTok{126}\OperatorTok{,} \DecValTok{200}\NormalTok{]}\OperatorTok{;}
-\KeywordTok{var}\NormalTok{ outList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\NormalTok{]}\OperatorTok{;}
+\KeywordTok{var}\NormalTok{ outList }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,}
+               \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\NormalTok{]}\OperatorTok{;}
 
 \KeywordTok{var}\NormalTok{ FAO\_lu }\OperatorTok{=}\NormalTok{ image1}\OperatorTok{.}\FunctionTok{remap}\NormalTok{(inList}\OperatorTok{,}\NormalTok{ outList)}
   \OperatorTok{.}\FunctionTok{toDouble}\NormalTok{()}
@@ -4056,7 +4188,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \DataTypeTok{scale}\OperatorTok{:}\NormalTok{ res}\OperatorTok{,} \CommentTok{// Add your desired scale here}
   \DataTypeTok{region}\OperatorTok{:}\NormalTok{ region}\OperatorTok{,}
   \DataTypeTok{crs}\OperatorTok{:}\NormalTok{ crs}\OperatorTok{,} \CommentTok{// Add your desired CRS here}
-  \DataTypeTok{maxPixels}\OperatorTok{:} \FloatTok{1e13} \CommentTok{// Add a maximum number of pixels for export if needed}
+  \DataTypeTok{maxPixels}\OperatorTok{:} \FloatTok{1e13} \CommentTok{// Add a maximum number of pixels }
+  \CommentTok{//for export if needed}
 \NormalTok{\})}\OperatorTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -4067,7 +4200,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 \CommentTok{\#}
 \CommentTok{\# Quantile Regression Forest}
 \CommentTok{\# Soil Property Mapping}
@@ -4075,13 +4208,13 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# GSP{-}Secretariat}
 \CommentTok{\# Contact: Isabel.Luotto@fao.org}
 \CommentTok{\#          Marcos.Angelini@fao.org}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 \CommentTok{\#Empty environment and cache }
 \FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
 \FunctionTok{gc}\NormalTok{()}
 
-\CommentTok{\# Content of this script =======================================================}
+\CommentTok{\# Content of this script ========================================}
 \CommentTok{\# 0 {-} Set working directory, soil attribute, and packages}
 \CommentTok{\# 1 {-} Merge soil data with environmental covariates }
 \CommentTok{\# 2 {-} Covariate selection}
@@ -4089,13 +4222,13 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# 4 {-} Uncertainty assessment}
 \CommentTok{\# 5 {-} Prediction}
 \CommentTok{\# 6 {-} Export final maps}
-\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 
 
-\CommentTok{\# 0 {-} Set working directory, soil attribute, and packages ======================}
+\CommentTok{\# 0 {-} Set working directory, soil attribute, and packages =======}
 
 \CommentTok{\# Working directory}
-\NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}C:/Users/luottoi/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
+\NormalTok{wd }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}C:/User/Documents/GitHub/GSNmap{-}TM/Digital{-}Soil{-}Mapping\textquotesingle{}}
 \FunctionTok{setwd}\NormalTok{(wd)}
 
 \CommentTok{\# Define country of interes throuhg 3{-}digit ISO code}
@@ -4105,8 +4238,10 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{AOI }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}01{-}Data/AOI.shp\textquotesingle{}}
 
 \CommentTok{\# Terget soil attribute (Mandatory 10)}
-\NormalTok{target\_properties}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ph\_0\_30"}\NormalTok{, }\StringTok{"k\_0\_30"}\NormalTok{ , }\StringTok{"soc\_0\_30"}\NormalTok{ ,}\StringTok{"bd\_0\_30"}\NormalTok{, }\StringTok{"cec\_0\_30"}\NormalTok{,}\StringTok{"p\_0\_30"}\NormalTok{,   }
-                      \StringTok{"n\_0\_30"}\NormalTok{,}\StringTok{"clay\_0\_30"}\NormalTok{, }\StringTok{"sand\_0\_30"}\NormalTok{ ,}\StringTok{"silt\_0\_30"}\NormalTok{)}
+\NormalTok{target\_properties}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ph\_0\_30"}\NormalTok{, }\StringTok{"k\_0\_30"}\NormalTok{ ,}
+                      \StringTok{"soc\_0\_30"}\NormalTok{ ,}\StringTok{"bd\_0\_30"}\NormalTok{, }\StringTok{"cec\_0\_30"}\NormalTok{,}\StringTok{"p\_0\_30"}\NormalTok{,   }
+                      \StringTok{"n\_0\_30"}\NormalTok{,}\StringTok{"clay\_0\_30"}\NormalTok{, }\StringTok{"sand\_0\_30"} 
+\NormalTok{                      ,}\StringTok{"silt\_0\_30"}\NormalTok{)}
 
 \CommentTok{\# Function for Uncertainty Assessment}
 \FunctionTok{load}\NormalTok{(}\AttributeTok{file =} \StringTok{"03{-}Scripts/eval.RData"}\NormalTok{)}
@@ -4121,12 +4256,15 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{library}\NormalTok{(doParallel)}
 
 
-\CommentTok{\# 1 {-} Merge soil data with environmental covariates ============================}
+\CommentTok{\# 1 {-} Merge soil data with environmental covariates =============}
 
-\DocumentationTok{\#\# 1.1 {-} Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=} \StringTok{\textquotesingle{}01{-}Data/covs/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern =} \StringTok{\textquotesingle{}.tif$\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ T)}
-\NormalTok{ncovs }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=} \StringTok{\textquotesingle{}01{-}Data/covs/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern =} \StringTok{\textquotesingle{}.tif$\textquotesingle{}}\NormalTok{, }\AttributeTok{full.names =}\NormalTok{ F)}
-\CommentTok{\#In case of extent error, or if covariates other than the default ones are added}
+\DocumentationTok{\#\# 1.1 {-} Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=} \StringTok{\textquotesingle{}01{-}Data/covs/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern =} \StringTok{\textquotesingle{}.tif$\textquotesingle{}}\NormalTok{, }
+                    \AttributeTok{full.names =}\NormalTok{ T)}
+\NormalTok{ncovs }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=} \StringTok{\textquotesingle{}01{-}Data/covs/\textquotesingle{}}\NormalTok{, }\AttributeTok{pattern =} \StringTok{\textquotesingle{}.tif$\textquotesingle{}}\NormalTok{,}
+                    \AttributeTok{full.names =}\NormalTok{ F)}
+\CommentTok{\#In case of extent error, or if covariates other }
+\CommentTok{\#than the default ones are added}
 \CommentTok{\# ref \textless{}{-} rast(files[1])}
 \CommentTok{\# covs \textless{}{-} list()}
 \CommentTok{\# for (i in seq\_along(files)) \{}
@@ -4144,17 +4282,19 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{names}\NormalTok{(covs) }\OtherTok{\textless{}{-}}\NormalTok{ ncovs}
 
 
-\DocumentationTok{\#\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}Outputs/harmonized\_soil\_data.csv"}\NormalTok{)}
 
-\CommentTok{\# Convert soil data into a spatial object (check https://epsg.io/6204)}
+\CommentTok{\# Convert soil data into a spatial object }
+\CommentTok{\#(check https://epsg.io/6204)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{vect}\NormalTok{(dat, }\AttributeTok{geom=}\FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \FunctionTok{crs}\NormalTok{(covs))}
 
-\CommentTok{\# Reproject point coordinates to match coordinate system of covariates}
+\CommentTok{\# Reproject point coordinates to match coordinate }
+\CommentTok{\#system of covariates}
 \NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{project}\NormalTok{(dat, covs)}
 \FunctionTok{names}\NormalTok{(dat)}
 
-\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}}
 \NormalTok{pv }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{extract}\NormalTok{(}\AttributeTok{x =}\NormalTok{ covs, }\AttributeTok{y =}\NormalTok{ dat, }\AttributeTok{xy=}\NormalTok{F)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(dat,pv)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(dat)}
@@ -4166,12 +4306,12 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \ControlFlowTok{for}\NormalTok{(soilatt }\ControlFlowTok{in} \FunctionTok{unique}\NormalTok{(target\_properties))\{}
 
 
-\DocumentationTok{\#\# 1.4 {-} Target soil attribute + covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.4 {-} Target soil attribute + covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{d }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(dat, soilatt, }\FunctionTok{names}\NormalTok{(covs))}
 \NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(d)}
 
-\CommentTok{\# 2 {-} Covariate selection with RFE =============================================}
-\DocumentationTok{\#\# 2.1 {-} Setting parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 2 {-} Covariate selection with RFE ==============================}
+\DocumentationTok{\#\# 2.1 {-} Setting parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Repeatedcv = 3{-}times repeated 10{-}fold cross{-}validation}
 \NormalTok{fitControl }\OtherTok{\textless{}{-}} \FunctionTok{rfeControl}\NormalTok{(}\AttributeTok{functions =}\NormalTok{ rfFuncs,}
                          \AttributeTok{method =} \StringTok{"repeatedcv"}\NormalTok{,}
@@ -4190,7 +4330,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{registerDoParallel}\NormalTok{(cl)}
 
 
-\DocumentationTok{\#\# 2.2 {-} Calibrate a RFE model to select covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.2 {-} Calibrate a RFE model to select covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{covsel }\OtherTok{\textless{}{-}} \FunctionTok{rfe}\NormalTok{(fm,}
               \AttributeTok{data =}\NormalTok{ d,  }
               \AttributeTok{sizes =} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{10}\NormalTok{, }\AttributeTok{to=}\FunctionTok{length}\NormalTok{(ncovs)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{by =} \DecValTok{5}\NormalTok{),}
@@ -4200,22 +4340,23 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{stopCluster}\NormalTok{(cl)}
 \FunctionTok{saveRDS}\NormalTok{(covsel, }\StringTok{"02{-}Outputs/models/covsel.rda"}\NormalTok{)}
 
-\DocumentationTok{\#\# 2.3 {-} Plot selection of covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 2.3 {-} Plot selection of covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{trellis.par.set}\NormalTok{(}\FunctionTok{caretTheme}\NormalTok{())}
 \FunctionTok{plot}\NormalTok{(covsel, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"g"}\NormalTok{, }\StringTok{"o"}\NormalTok{))}
 
 \CommentTok{\# Extract selection of covariates and subset covs}
 \NormalTok{opt\_covs }\OtherTok{\textless{}{-}} \FunctionTok{predictors}\NormalTok{(covsel)}
 
-\CommentTok{\# 3 {-} QRF Model calibration ====================================================}
-\DocumentationTok{\#\# 3.1 {-} Update formula with the selected covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{fm }\OtherTok{\textless{}{-}} \FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(soilatt,}\StringTok{" \textasciitilde{}"}\NormalTok{, }\FunctionTok{paste0}\NormalTok{(opt\_covs, }\AttributeTok{collapse =} \StringTok{"+"}\NormalTok{)))}
+\CommentTok{\# 3 {-} QRF Model calibration =====================================}
+\DocumentationTok{\#\# 3.1 {-} Update formula with the selected covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{fm }\OtherTok{\textless{}{-}} \FunctionTok{as.formula}\NormalTok{(}\FunctionTok{paste}\NormalTok{(soilatt,}\StringTok{" \textasciitilde{}"}\NormalTok{,}
+                       \FunctionTok{paste0}\NormalTok{(opt\_covs, }\AttributeTok{collapse =} \StringTok{"+"}\NormalTok{)))}
 
 \CommentTok{\# parallel processing}
 \NormalTok{cl }\OtherTok{\textless{}{-}} \FunctionTok{makeCluster}\NormalTok{(}\FunctionTok{detectCores}\NormalTok{()}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
 \FunctionTok{registerDoParallel}\NormalTok{(cl)}
 
-\DocumentationTok{\#\# 3.2 {-} Set training parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.2 {-} Set training parameters {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{fitControl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"repeatedcv"}\NormalTok{,}
                            \AttributeTok{number =} \DecValTok{10}\NormalTok{,         }\DocumentationTok{\#\# 10 {-}fold CV}
                            \AttributeTok{repeats =} \DecValTok{3}\NormalTok{,        }\DocumentationTok{\#\# repeated 3 times}
@@ -4225,7 +4366,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \NormalTok{mtry }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{length}\NormalTok{(opt\_covs)}\SpecialCharTok{/}\DecValTok{3}\NormalTok{)}
 \NormalTok{tuneGrid }\OtherTok{\textless{}{-}}  \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{mtry =} \FunctionTok{c}\NormalTok{(mtry}\DecValTok{{-}5}\NormalTok{, mtry, mtry}\SpecialCharTok{+}\DecValTok{5}\NormalTok{))}
 
-\DocumentationTok{\#\# 3.3 {-} Calibrate the QRF model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.3 {-} Calibrate the QRF model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{model }\OtherTok{\textless{}{-}}\NormalTok{ caret}\SpecialCharTok{::}\FunctionTok{train}\NormalTok{(fm,}
                       \AttributeTok{data =}\NormalTok{ d,}
                       \AttributeTok{method =} \StringTok{"qrf"}\NormalTok{,}
@@ -4241,31 +4382,33 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \DocumentationTok{\#\# 3.4 {-} Extract predictor importance as relative values (\%)}
 \NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ randomForest}\SpecialCharTok{::}\FunctionTok{importance}\NormalTok{(model}\SpecialCharTok{$}\NormalTok{finalModel)}
 \NormalTok{model}\SpecialCharTok{$}\NormalTok{importance }\OtherTok{\textless{}{-}}\NormalTok{ x}
-\DocumentationTok{\#\# 3.5 {-} Print and save model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 3.5 {-} Print and save model {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \FunctionTok{print}\NormalTok{(model)}
-\FunctionTok{saveRDS}\NormalTok{(model, }\AttributeTok{file =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/models/model\_"}\NormalTok{,soilatt,}\StringTok{".rds"}\NormalTok{))}
+\FunctionTok{saveRDS}\NormalTok{(model, }\AttributeTok{file =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/models/model\_"}\NormalTok{,}
+\NormalTok{                             soilatt,}\StringTok{".rds"}\NormalTok{))}
 
-\CommentTok{\# 4 {-} Uncertainty assessment ===================================================}
+\CommentTok{\# 4 {-} Uncertainty assessment ====================================}
 \CommentTok{\# extract observed and predicted values}
 \NormalTok{o }\OtherTok{\textless{}{-}}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{pred}\SpecialCharTok{$}\NormalTok{obs}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{pred}\SpecialCharTok{$}\NormalTok{pred}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(o,p)}
 
-\DocumentationTok{\#\# 4.1 {-} Plot and save scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# 4.1 {-} Plot and save scatterplot {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{(g1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ o, }\AttributeTok{y =}\NormalTok{ p)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+} 
    \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope =} \DecValTok{1}\NormalTok{, }\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(o), }\FunctionTok{max}\NormalTok{(o))) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{aspect.ratio=}\DecValTok{1}\NormalTok{)}\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =}\NormalTok{ soilatt) }\SpecialCharTok{+} 
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Observed"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Predicted"}\NormalTok{))}
-\CommentTok{\# ggsave(g1, filename = paste0("02{-}Outputs/residuals\_",soilatt,".png"), scale = 1, }
+\CommentTok{\# ggsave(g1, filename = paste0("02{-}Outputs/residuals\_",}
+\NormalTok{soilatt,}\StringTok{".png"}\ErrorTok{)}\NormalTok{, scale }\OtherTok{=} \DecValTok{1}\NormalTok{, }
 \CommentTok{\#        units = "cm", width = 12, height = 12)}
 
-\DocumentationTok{\#\# 4.2 {-} Print accuracy coeficients {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.2 {-} Print accuracy coeficients {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# https://github.com/AlexandreWadoux/MapQualityEvaluation}
 \FunctionTok{eval}\NormalTok{(p,o)}
 
-\DocumentationTok{\#\# 4.3 {-} Plot Covariate importance {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 4.3 {-} Plot Covariate importance {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{(g2 }\OtherTok{\textless{}{-}} \FunctionTok{varImpPlot}\NormalTok{(model}\SpecialCharTok{$}\NormalTok{finalModel, }\AttributeTok{main =}\NormalTok{ soilatt, }\AttributeTok{type =} \DecValTok{1}\NormalTok{))}
 
 \CommentTok{\# png(filename = paste0("02{-}Outputs/importance\_",soilatt,".png"), }
@@ -4273,14 +4416,15 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \CommentTok{\# g2}
 \CommentTok{\# dev.off()}
 
-\CommentTok{\# 5 {-} Prediction ===============================================================}
+\CommentTok{\# 5 {-} Prediction ================================================}
 \CommentTok{\# Generation of maps (prediction of soil attributes) }
-\DocumentationTok{\#\# 5.1 {-} Produce tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.1 {-} Produce tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{r }\OtherTok{\textless{}{-}}\NormalTok{covs[[}\DecValTok{1}\NormalTok{]]}
 \NormalTok{t }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\AttributeTok{nrows =} \DecValTok{5}\NormalTok{, }\AttributeTok{ncols =} \DecValTok{5}\NormalTok{, }\AttributeTok{extent =} \FunctionTok{ext}\NormalTok{(r), }\AttributeTok{crs =} \FunctionTok{crs}\NormalTok{(r))}
-\NormalTok{tile }\OtherTok{\textless{}{-}} \FunctionTok{makeTiles}\NormalTok{(r, t,}\AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{filename=}\StringTok{"02{-}Outputs/tiles/tiles.tif"}\NormalTok{)}
+\NormalTok{tile }\OtherTok{\textless{}{-}} \FunctionTok{makeTiles}\NormalTok{(r, t,}\AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{filename=}
+                    \StringTok{"02{-}Outputs/tiles/tiles.tif"}\NormalTok{)}
 
-\DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# loop to predict on each tile}
 
 \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(tile)) \{}
@@ -4290,14 +4434,17 @@ This chapter contains the complete list of R scripts to run the process of mappi
   
   
   \CommentTok{\# plot(r)\# }
-\NormalTok{  pred\_mean }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{predict}\NormalTok{(covst, }\AttributeTok{model =}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{finalModel, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{,  }
+\NormalTok{  pred\_mean }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{predict}\NormalTok{(covst, }\AttributeTok{model =} 
+\NormalTok{                                model}\SpecialCharTok{$}\NormalTok{finalModel, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{,  }
                               \AttributeTok{cpkgs=}\StringTok{"quantregForest"}\NormalTok{, }\AttributeTok{what=}\NormalTok{mean)}
-\NormalTok{  pred\_sd }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{predict}\NormalTok{(covst, }\AttributeTok{model =}\NormalTok{ model}\SpecialCharTok{$}\NormalTok{finalModel, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{,  }
+\NormalTok{  pred\_sd }\OtherTok{\textless{}{-}}\NormalTok{ terra}\SpecialCharTok{::}\FunctionTok{predict}\NormalTok{(covst, }\AttributeTok{model =} 
+\NormalTok{                              model}\SpecialCharTok{$}\NormalTok{finalModel, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{,  }
                             \AttributeTok{cpkgs=}\StringTok{"quantregForest"}\NormalTok{, }\AttributeTok{what=}\NormalTok{sd)  }
   
   
   
-  \CommentTok{\# \#\#\#\#\#\# Raster package solution (in case terra results in many NA pixels)}
+  \CommentTok{\# \#\#\#\#\#\# Raster package solution (in case terra results }
+  \CommentTok{\# in many NA pixels)}
   \CommentTok{\# library(raster)}
   \CommentTok{\# covst \textless{}{-} stack(covst)}
   \CommentTok{\# class(final\_mod$finalModel) \textless{}{-}"quantregForest"}
@@ -4310,11 +4457,11 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#  }
   
   \FunctionTok{writeRaster}\NormalTok{(pred\_mean, }
-              \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
+            \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
 \NormalTok{                                soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
               \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
   \FunctionTok{writeRaster}\NormalTok{(pred\_sd, }
-              \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
+            \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{,}
 \NormalTok{                                soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{, j, }\StringTok{".tif"}\NormalTok{), }
               \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{)}
   
@@ -4325,11 +4472,13 @@ This chapter contains the complete list of R scripts to run the process of mappi
   \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"tile"}\NormalTok{,tile[j]))}
 \NormalTok{\}}
 
-\DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st.Dev {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st.Dev {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{f\_mean }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                     \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tile\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+                     \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tile\_"}\NormalTok{), }
+                     \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{f\_sd }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                   \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+                   \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(soilatt,}\StringTok{"\_tileSD\_"}\NormalTok{), }
+                   \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{r\_mean\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{r\_sd\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 
@@ -4359,8 +4508,8 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{plot}\NormalTok{(pred\_sd)}
 
 
-\CommentTok{\# 6 {-} Export final maps ========================================================}
-\DocumentationTok{\#\# 6.1 {-} Mask croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 6 {-} Export final maps =========================================}
+\DocumentationTok{\#\# 6.1 {-} Mask croplands {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{msk }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"01{-}Data/mask.tif"}\NormalTok{)}
 \FunctionTok{plot}\NormalTok{(msk)}
 \NormalTok{pred\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(pred\_mean, msk)}
@@ -4369,7 +4518,7 @@ This chapter contains the complete list of R scripts to run the process of mappi
 \FunctionTok{plot}\NormalTok{(pred\_sd)}
 \FunctionTok{plot}\NormalTok{(pred\_sd}\SpecialCharTok{/}\NormalTok{pred\_mean}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{main =} \FunctionTok{paste}\NormalTok{(}\StringTok{"CV"}\NormalTok{,soilatt))}
 
-\DocumentationTok{\#\# 6.2 {-} Save results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 6.2 {-} Save results {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \CommentTok{\# Harmonized naming }
 \ControlFlowTok{if}\NormalTok{ (soilatt }\SpecialCharTok{==} \StringTok{\textquotesingle{}ph\_0\_30\textquotesingle{}}\NormalTok{)\{}
@@ -4415,7 +4564,7 @@ Script to estimate Organic Carbon Stock
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Estimate Organic Carbon Stock (ocs) ======================================}
+\CommentTok{\# Estimate Organic Carbon Stock (ocs) ===========================}
 \CommentTok{\# SOC must be in g/kg (\% * 10)}
 \CommentTok{\# BLD in kg/m3}
 \CommentTok{\# CRF in percentage}
@@ -4441,7 +4590,8 @@ Script to mosaic tiles from covariates downloaded from GEE
 \FunctionTok{setwd}\NormalTok{(}\FunctionTok{dirname}\NormalTok{(rstudioapi}\SpecialCharTok{::}\FunctionTok{getActiveDocumentContext}\NormalTok{()}\SpecialCharTok{$}\NormalTok{path))}
 \FunctionTok{setwd}\NormalTok{(}\StringTok{".."}\NormalTok{)}
 \CommentTok{\# read the tiles}
-\NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"01{-}Data/covs/"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{".tif$"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"01{-}Data/covs/"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{".tif$"}\NormalTok{, }
+                \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \CommentTok{\# put the tiles in a list}
 \NormalTok{r\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(f))\{}
@@ -4463,18 +4613,19 @@ Part I:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# 1.1 {-} Load covariates files (list of GEE tiles of covariates) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.1 {-} Load covariates files(list of GEE tiles of covariates){-}{-}}
 \NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{"01{-}Data/covs"}\NormalTok{, }\StringTok{".tif$"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{covs }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(f[}\DecValTok{1}\NormalTok{])}
 \NormalTok{ncovs }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(covs)}
 
-\CommentTok{\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 1.2 {-} Load the soil data (Script 2) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}Outputs/harmonized\_AFACI\_soil\_data.csv"}\NormalTok{)}
 \NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ dat}
-\CommentTok{\# Convert soil data into a spatial object (check https://epsg.io/6204)}
+\CommentTok{\# Convert soil data into a spatial object }
+\CommentTok{\#(check https://epsg.io/6204)}
 \NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{vect}\NormalTok{(dat, }\AttributeTok{geom=}\FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \FunctionTok{crs}\NormalTok{(covs))}
 
-\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 1.3 {-} Extract values from covariates to the soil points {-}{-}{-}{-}{-}{-}}
 \NormalTok{X}\SpecialCharTok{$}\NormalTok{ID }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(X)}
 
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(f)) \{}
@@ -4487,7 +4638,8 @@ Part I:
     \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(ids)}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{) \{}
 \NormalTok{      ID.idx }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\FunctionTok{names}\NormalTok{(X)}\SpecialCharTok{==}\StringTok{"ID"}\NormalTok{)}
 \NormalTok{      X.ncol }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(X)}
-\NormalTok{      X[,ID.idx}\SpecialCharTok{:}\NormalTok{X.ncol] }\OtherTok{\textless{}{-}} \FunctionTok{map2\_df}\NormalTok{(X[,ID.idx}\SpecialCharTok{:}\NormalTok{X.ncol], pv, }\SpecialCharTok{\textasciitilde{}} \FunctionTok{coalesce}\NormalTok{(.x, .y))}
+\NormalTok{      X[,ID.idx}\SpecialCharTok{:}\NormalTok{X.ncol] }\OtherTok{\textless{}{-}}
+        \FunctionTok{map2\_df}\NormalTok{(X[,ID.idx}\SpecialCharTok{:}\NormalTok{X.ncol], pv, }\SpecialCharTok{\textasciitilde{}} \FunctionTok{coalesce}\NormalTok{(.x, .y))}
 \NormalTok{    \}}
 \NormalTok{  \}}
   \FunctionTok{print}\NormalTok{(i)}
@@ -4496,7 +4648,8 @@ Part I:
 \FunctionTok{summary}\NormalTok{(X)}
 
 \NormalTok{X}\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  sf}\SpecialCharTok{::}\FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# convert to spatial object}
+\NormalTok{  sf}\SpecialCharTok{::}\FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{), }\AttributeTok{crs =} \DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\# convert to spatial object}
 \NormalTok{  mapview}\SpecialCharTok{::}\FunctionTok{mapview}\NormalTok{(}\AttributeTok{zcol =} \StringTok{"dtm\_twi\_500m"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.1}\NormalTok{)}
 
 \FunctionTok{write\_csv}\NormalTok{(X, }\StringTok{"02{-}Outputs/regression\_matrix.csv"}\NormalTok{)}
@@ -4507,7 +4660,7 @@ Part II:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# Load covariates {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{terra}\SpecialCharTok{::}\FunctionTok{terraOptions}\NormalTok{(}\AttributeTok{memfrac =} \FloatTok{0.9}\NormalTok{)}
 \NormalTok{covs }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{f }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{"01{-}Data/covs"}\NormalTok{, }\StringTok{".tif$"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
@@ -4516,14 +4669,16 @@ Part II:
 \NormalTok{\}}
 \NormalTok{ncovs }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(covs[[i]])}
 
-\DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\DocumentationTok{\#\# 5.2 {-} Predict soil attributes per tiles {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# country borders}
 \NormalTok{v }\OtherTok{\textless{}{-}} \FunctionTok{vect}\NormalTok{(shp)}
 
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(target\_properties)) \{}
 \NormalTok{  (soilatt }\OtherTok{\textless{}{-}}\NormalTok{ target\_properties[i])}
   \CommentTok{\#load model}
-\NormalTok{  model\_rn }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/models/ranger\_model\_"}\NormalTok{,soilatt,}\StringTok{".rds"}\NormalTok{))}
+\NormalTok{  model\_rn }\OtherTok{\textless{}{-}} 
+    \FunctionTok{read\_rds}\NormalTok{(}
+      \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/models/ranger\_model\_"}\NormalTok{,soilatt,}\StringTok{".rds"}\NormalTok{))}
 
   \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(covs)) \{}
     
@@ -4533,13 +4688,15 @@ Part II:
 \NormalTok{    r }\OtherTok{\textless{}{-}}\NormalTok{ covs[[j]][[}\DecValTok{1}\NormalTok{]]}
     \CommentTok{\# Split GEE tiles into 4 smaller tiles}
 \NormalTok{    t }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\AttributeTok{nrows =} \DecValTok{4}\NormalTok{, }\AttributeTok{ncols =} \DecValTok{1}\NormalTok{, }\AttributeTok{extent =} \FunctionTok{ext}\NormalTok{(r), }\AttributeTok{crs =} \FunctionTok{crs}\NormalTok{(r))}
-\NormalTok{    tile }\OtherTok{\textless{}{-}} \FunctionTok{makeTiles}\NormalTok{(r, t,}\AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{filename=} \StringTok{"02{-}Outputs/tiles/tiles.tif"}\NormalTok{)}
+\NormalTok{    tile }\OtherTok{\textless{}{-}} \FunctionTok{makeTiles}\NormalTok{(r, t,}\AttributeTok{overwrite=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{filename=} 
+                        \StringTok{"02{-}Outputs/tiles/tiles.tif"}\NormalTok{)}
     
     \ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(tile)) \{}
 \NormalTok{      t }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(tile[n])}
 \NormalTok{      covst }\OtherTok{\textless{}{-}} \FunctionTok{crop}\NormalTok{(covs[[j]], t)}
       
-      \CommentTok{\# create a function to extract the predited values from ranger::predict.ranger()}
+      \CommentTok{\# create a function to extract the predited }
+      \CommentTok{\# values from ranger::predict.ranger()}
 \NormalTok{      pfun }\OtherTok{\textless{}{-}}\NormalTok{ \textbackslash{}(...) \{ }\FunctionTok{predict}\NormalTok{(...)}\SpecialCharTok{$}\NormalTok{predictions }\SpecialCharTok{|\textgreater{}} \FunctionTok{t}\NormalTok{() \}}
       
       \CommentTok{\# predict conditional standard deviation}
@@ -4549,9 +4706,10 @@ Part II:
                          \AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{, }
                          \AttributeTok{type =} \StringTok{"quantiles"}\NormalTok{, }
                          \AttributeTok{what=}\NormalTok{sd,}
-                         \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/sd\_"}\NormalTok{,}
-\NormalTok{                                           soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j,}\StringTok{"\_"}\NormalTok{,n, }\StringTok{".tif"}\NormalTok{), }
-                         \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gdal=}\FunctionTok{c}\NormalTok{(}\StringTok{"COMPRESS=DEFLATE"}\NormalTok{))}
+                         \AttributeTok{filename =} 
+                    \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/sd\_"}\NormalTok{,}
+\NormalTok{                      soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j,}\StringTok{"\_"}\NormalTok{,n, }\StringTok{".tif"}\NormalTok{), }
+                   \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gdal=}\FunctionTok{c}\NormalTok{(}\StringTok{"COMPRESS=DEFLATE"}\NormalTok{))}
       \FunctionTok{gc}\NormalTok{()}
       \CommentTok{\# predict conditional mean}
 \NormalTok{      terra}\SpecialCharTok{::}\FunctionTok{interpolate}\NormalTok{(covst, }
@@ -4560,19 +4718,21 @@ Part II:
                          \AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{, }
                          \AttributeTok{type =} \StringTok{"quantiles"}\NormalTok{, }
                          \AttributeTok{what=}\NormalTok{mean,}
-                         \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/mean\_"}\NormalTok{,}
-\NormalTok{                                           soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j,}\StringTok{"\_"}\NormalTok{,n, }\StringTok{".tif"}\NormalTok{), }
-                         \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gdal=}\FunctionTok{c}\NormalTok{(}\StringTok{"COMPRESS=DEFLATE"}\NormalTok{))}
+       \AttributeTok{filename =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"02{-}Outputs/tiles/soilatt\_tiles/mean\_"}\NormalTok{,}
+\NormalTok{                     soilatt,}\StringTok{"\_tile\_"}\NormalTok{, j,}\StringTok{"\_"}\NormalTok{,n, }\StringTok{".tif"}\NormalTok{), }
+                 \AttributeTok{overwrite =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gdal=}\FunctionTok{c}\NormalTok{(}\StringTok{"COMPRESS=DEFLATE"}\NormalTok{))}
       \FunctionTok{gc}\NormalTok{()}
       \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"tile"}\NormalTok{, j,}\StringTok{"\_"}\NormalTok{, n, }\StringTok{"of"}\NormalTok{, }\FunctionTok{length}\NormalTok{(covs)))}
 \NormalTok{    \}}
     
 \NormalTok{  \}}
-  \DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \DocumentationTok{\#\# 5.3 {-} Merge tiles both prediction and st {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{  f\_mean }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                     \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"mean\_"}\NormalTok{, soilatt), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+                     \AttributeTok{pattern =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"mean\_"}\NormalTok{, soilatt), }
+                     \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{  f\_sd }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"02{-}Outputs/tiles/soilatt\_tiles/"}\NormalTok{, }
-                     \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(}\StringTok{"sd\_"}\NormalTok{, soilatt), }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+                     \AttributeTok{pattern =}  \FunctionTok{paste0}\NormalTok{(}\StringTok{"sd\_"}\NormalTok{, soilatt), }
+                     \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{  r\_mean\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{  r\_sd\_l }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
   

@@ -22,7 +22,7 @@ To begin, we open *RStudio* and empty our global environment. Then, we set the w
 
 ```{r, eval = F, message = F, warning = F}
 
-#_______________________________________________________________________________
+#________________________________________________________________
 #
 # Quantile Regression Forest
 # Soil Property Mapping
@@ -32,13 +32,13 @@ To begin, we open *RStudio* and empty our global environment. Then, we set the w
 #               Marcos E. Angelini (GSP-FAO)
 #               Luis Rodríguez Lado (GSP-FAO)
 #               Stephen Roecker (NRCS-USDA)
-#_______________________________________________________________________________
+#________________________________________________________________
 
 #Empty environment and cache 
 rm(list = ls())
 gc()
 
-# Content of this script =======================================================
+# Content of this script ========================================
 # 0 - Set working directory, soil attribute, and packages
 # 1 - Merge soil data with environmental covariates 
 # 2 - Covariate selection
@@ -46,10 +46,10 @@ gc()
 # 4 - Uncertainty assessment
 # 5 - Prediction
 # 6 - Export final maps
-#_______________________________________________________________________________
+#________________________________________________________________
 
 
-# 0 - Set working directory, soil attribute, and packages ======================
+# 0 - Set working directory, soil attribute, and packages =======
 
 # Working directory
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
@@ -80,16 +80,18 @@ library(ranger)
 Since soil data and environmental covariates are stored in different files and formats, it is necessary to first merge them into one dataframe. For this purpose, the covariate raster file is loaded into **R** from the covariates folder. Secondly, the table with the cleaned and quality checked soil data is loaded and converted to a shapefile using the lat/long coordinates columns.
 
 ```{r, eval = F, message = F, warning = F}
-# 1 - Merge soil data with environmental covariates ============================
+# 1 - Merge soil data with environmental covariates =============
 
-## 1.1 - Load covariates -------------------------------------------------------
-covs <- rast("01-Data/covs/Covariates.tif") # match case of the file name
+## 1.1 - Load covariates ----------------------------------------
+covs <- rast("01-Data/covs/Covariates.tif") # match case of the 
+#file name
 ncovs <- names(covs)
 
-## 1.2 - Load the soil data (Script 2) -----------------------------------------
+## 1.2 - Load the soil data (Script 2) --------------------------
 dat <- read_csv("02-Outputs/harmonized_soil_data.csv")
 
-# Convert soil data into a spatial object (check https://epsg.io/6204)
+# Convert soil data into a spatial object
+#(check https://epsg.io/6204)
 dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
 
 ```
@@ -97,7 +99,8 @@ dat <- vect(dat, geom=c("x", "y"), crs = crs(covs))
 The shapefile can be reprojected to match the CRS of the covariates using the project function of the terra package. 
 
 ```{r, eval = F}
-# Reproject point coordinates to match coordinate system of covariates
+# Reproject point coordinates to match coordinate system 
+# of covariates
 dat <- terra::project(dat, covs)
 names(dat) 
 ```
@@ -105,7 +108,7 @@ names(dat)
 Afterwards, the extract function can be used to sample the values of each covariate raster layer at the point location of each soil profile. This data is then merged in the dat dataframe. After checking the descriptive statistics of dat with the `summary()` command, the target soil attribute is selected together with the covariates. Finally, NA values (empty row values) are removed using the `na.omit()` function.
 
 ```{r, eval = F}
-## 1.3 - Extract values from covariates to the soil points ---------------------
+## 1.3 - Extract values from covariates to the soil points ------
 pv <- terra::extract(x = covs, y = dat, xy=F)
 dat <- cbind(dat,pv)
 dat <- as.data.frame(dat)
@@ -121,20 +124,22 @@ The algorithm goes through a series of iterations, where it progressively elimin
 The feature importance can be displayed in a graph showing different colors according to the importance of each feature in the model, with ‘green’, ‘yellow’, ‘red’ and ‘blue’ colors for ‘confirmed’, ‘tentative’, ‘rejected’ and ‘shadow’ features respectively (see \@ref(fig:borutaplot)). Only those marked in green color are retained as valuable predictors.
 
 ```{r, eval = F}
-  # 2 - Covariate selection with Boruta package ==================================
+  # 2 - Covariate selection with Boruta package =================
   # Wrapper feature selection algorithm
-  ## 2.1 - Run the Boruta algorithm ----------------------------------------------
-  fs_bor <- Boruta(y = d[,soilatt], x = d[-1], maxRuns = 100, doTrace = 1)
+  ## 2.1 - Run the Boruta algorithm -----------------------------
+  fs_bor <-
+  Boruta(y = d[,soilatt], x = d[-1], maxRuns = 100, doTrace = 1)
   
-  ## 2.2 - Plot variable importance and selected features ------------------------
+  ## 2.2 - Plot variable importance and selected features -------
   png(filename = paste0("02-Outputs/importance_",soilatt,".png"), 
        width = 15, height = 25, units = "cm", res = 600)
   par(las = 2, mar = c(4, 10, 4, 2) + 0.1)
   Boruta:::plot.Boruta(fs_bor, horizontal = TRUE, ylab = "",
                        xlab = "Importance", cex.axis=0.60)
   dev.off()
-  ## 2.3 - Extract the selected feature variables --------------------------------
-  (fs_vars <- getSelectedAttributes(fs_bor, withTentative = TRUE))
+  ## 2.3 - Extract the selected feature variables ---------------
+  (fs_vars <- 
+     getSelectedAttributes(fs_bor, withTentative = TRUE))
 
 ```
 
@@ -173,14 +178,14 @@ Repeated cross validation has been nicely implemented in the caret R package [@K
 
 
 ```{r, eval = F}
-  # 3 - QRF Model calibration with ranger ========================================
-  ## 3.1 - Set training parameters -----------------------------------------------
+  # 3 - QRF Model calibration with ranger =======================
+  ## 3.1 - Set training parameters ------------------------------
   fitControl <- trainControl(method = "repeatedcv",
-                             number = 10,         ## 10 -fold CV
-                             repeats = 10,        ## repeated 10 times
+                             number = 10,    ## 10 -fold CV
+                             repeats = 10, ## repeated 10 times
                              savePredictions = TRUE)
   
-  ## 3.2 - Tune hyperparameters --------------------------------------------------
+  ## 3.2 - Tune hyperparameters ---------------------------------
   mtry <- round(length(fs_vars)/3)
   tuneGrid <-  expand.grid(
     mtry = abs(c(mtry-round(mtry/2),
@@ -192,7 +197,7 @@ Repeated cross validation has been nicely implemented in the caret R package [@K
     splitrule = c("variance", "extratrees", "maxstat")
   )
   
-  ## 3.3 - Calibrate the ranger model --------------------------------------------
+  ## 3.3 - Calibrate the ranger model ---------------------------
   print(soilatt)
   print("training the model...")
   model_rn <- caret::train(
@@ -273,9 +278,12 @@ Now, back to the mapping exercise: In practical terms, before calculating any of
 
 
 ```{r, eval = T, message = F, warning = F}
-  # 4 - Accuracy assessment ======================================================
-  ## 4.1 - extract observed and predicted values ---------------------------------
-model_rn <- readRDS('Digital-Soil-Mapping/02-Outputs/models/ranger_model_soc_0_30.rds')
+  # 4 - Accuracy assessment =====================================
+  ## 4.1 - extract observed and predicted values ----------------
+model_rn <-
+readRDS(
+'Digital-Soil-Mapping/02-Outputs/models/ranger_model_soc_0_30.rds'
+  )
 
   o <- model_rn$pred %>% 
     filter(mtry == model_rn$bestTune$mtry, 
@@ -293,14 +301,15 @@ model_rn <- readRDS('Digital-Soil-Mapping/02-Outputs/models/ranger_model_soc_0_3
 While solar diagrams [@Wadoux2022] are desired, we propose to produce a scatterplot of the observed vs predicted values maintaining the same range and scale for the X and Y axes. The dataframe is used for this purpose to plot observed values on the x-axis and predicted values on the y-axis.
 
 ```{r, eval = T, message = F}
-  ## 4.2 - Plot and save scatterplot --------------------------------------------- 
+  ## 4.2 - Plot and save scatterplot ----------------------------
   (g1 <- ggplot(df, aes(x = o, y = p)) + 
      geom_point(alpha = 0.3) + 
      geom_abline(slope = 1, intercept = 0, color = "red")+
      ylim(c(min(o), max(o))) + theme(aspect.ratio=1)+ 
      labs(title = soilatt) + 
      xlab("Observed") + ylab("Predicted"))
-  # ggsave(g1, filename = paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1,
+  # ggsave(g1, filename = 
+#paste0("02-Outputs/residuals_",soilatt,".png"), scale = 1,
   #        units = "cm", width = 12, height = 12)
 ```
 
@@ -323,7 +332,7 @@ load(file = "Digital-Soil-Mapping/03-Scripts/eval.RData")
 ```
 
 ```{r echo=TRUE}
-## 4.2 - Print accuracy coeficients --------------------------------------------
+## 4.2 - Print accuracy coeficients -----------------------------
 # https://github.com/AlexandreWadoux/MapQualityEvaluation
 print(eval(df$p,df$o))
 ```
@@ -332,7 +341,8 @@ print(eval(df$p,df$o))
 library(dplyr)
 library(kableExtra)
 dt <- read.csv("tables/eval.csv", sep = ",")
-kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Accuracy statistics.') %>%
+kable(booktabs = T, dt, col.names = gsub("[.]", " ", 
+            names(dt)), caption = 'Accuracy statistics.') %>%
 kable_classic(full_width = F)
 ```
 
@@ -347,12 +357,14 @@ To prevent for potential computational power limitations, first the raster is sp
 
 
 ```{r, eval = F}
-  # 5 - Prediction ===============================================================
-  # Generation of maps (prediction of soil attributes) 
-  ## 5.1 - Produce tiles ---------------------------------------------------------
-  # r <-covs[[1]]
-  # t <- rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))
-  # tile <- makeTiles(r, t,overwrite=TRUE,filename="02-Outputs/tiles/tiles.tif")
+# 5 - Prediction ==============================================
+# Generation of maps (prediction of soil attributes) 
+## 5.1 - Produce tiles ----------------------------------------
+# r <-covs[[1]]
+# t <- rast(nrows = 5, ncols = 5, extent = ext(r), crs = crs(r))
+# tile <-
+#makeTiles(r, t,
+#overwrite=TRUE,filename="02-Outputs/tiles/tiles.tif")
 
 
 ```
@@ -360,7 +372,7 @@ To prevent for potential computational power limitations, first the raster is sp
 Next, a for loop is formulated to predict each soil attribute for each tile. The tiling significantly improves the computational speed of the prediction. For each tile the mean and the standard deviation are stored in two separated objects that are then saved as raster files.
 
 ```{r, eval = F}
-  ## 5.2 - Predict soil attributes per tiles -------------------------------------
+  ## 5.2 - Predict soil attributes per tiles --------------------
   # loop to predict soilatt on each tile
   
     for (j in seq_along(tile)) {
@@ -370,7 +382,8 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
     # crop the selected covariates with the tile j
     covst <- crop(covs[[fs_vars]], t)
     
-    # create a function to extract the predited values from ranger::predict.ranger()
+    # create a function to extract the predited values from 
+    #ranger::predict.ranger()
     pfun <- \(...) { predict(...)$predictions |> t() }
     
     # predict conditional standard deviation
@@ -380,8 +393,9 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
                        na.rm=TRUE, 
                        type = "quantiles", 
                        what=sd,
-                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                         soilatt,"_tileSD_", j, ".tif"), 
+                       filename = 
+                        paste0("02-Outputs/tiles/soilatt_tiles/",
+                                  soilatt,"_tileSD_", j, ".tif"), 
                        overwrite = TRUE)
     
     # predict conditional mean
@@ -391,8 +405,9 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
                        na.rm=TRUE, 
                        type = "quantiles", 
                        what=mean,
-                       filename = paste0("02-Outputs/tiles/soilatt_tiles/",
-                                         soilatt,"_tile_", j, ".tif"), 
+                       filename = 
+                       paste0("02-Outputs/tiles/soilatt_tiles/",
+                                   soilatt,"_tile_", j, ".tif"), 
                        overwrite = TRUE)
     
     print(paste("tile", j, "of", length(tile)))
@@ -402,11 +417,11 @@ Next, a for loop is formulated to predict each soil attribute for each tile. The
 As a result, 25 tiles for the predicted mean and 25 tiles for the predicted standard deviation were produced using the QRF model. The next step is to merge these tiles to produce a map of the predicted mean and one of the predicted standard deviation. For this, again for loops are employed that read all raster file tiles. These are then put together by the mosaic() function of the terra package. Finally, they are masked to the AOI and then can be visualised in a figure.
 
 ```{r, eval = F}
-  ## 5.3 - Merge tiles both prediction and st.Dev --------------------------------
+  ## 5.3 - Merge tiles both prediction and st.Dev ---------------
   f_mean <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
-                       pattern = paste0(soilatt,"_tile_"), full.names = TRUE)
+          pattern = paste0(soilatt,"_tile_"), full.names = TRUE)
   f_sd <- list.files(path = "02-Outputs/tiles/soilatt_tiles/", 
-                     pattern =  paste0(soilatt,"_tileSD_"), full.names = TRUE)
+       pattern =  paste0(soilatt,"_tileSD_"), full.names = TRUE)
   r_mean_l <- list()
   r_sd_l <- list()
   
@@ -433,15 +448,20 @@ As a result, 25 tiles for the predicted mean and 25 tiles for the predicted stan
   pred_sd <- mask(pred_sd,aoi)
   
   
-  plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt), 
+  plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), 
+                                           soilatt), 
        col = hcl.colors(100, "Viridis"))
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(terra)
-pred_mean <- rast("Digital-Soil-Mapping/02-Outputs/noMaskedMaps/mean_n_0_30.tif")
-pred_sd <- rast("Digital-Soil-Mapping/02-Outputs/noMaskedMaps/sd_n_0_30.tif")
-plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"), soilatt), 
+pred_mean <- 
+rast(
+  "Digital-Soil-Mapping/02-Outputs/noMaskedMaps/mean_n_0_30.tif")
+pred_sd <- rast(
+  "Digital-Soil-Mapping/02-Outputs/noMaskedMaps/sd_n_0_30.tif")
+plot(c(pred_mean, pred_sd), main = paste(c("mean","sd"),
+                                         soilatt), 
        col = hcl.colors(100, "Viridis"))
 ```
 
@@ -450,8 +470,8 @@ The final step then consists of applying a cropland mask that is applied to the 
 
 
 ```{r, eval = F}
-  # 6 - Export final maps ========================================================
-  ## 6.1 - Mask croplands --------------------------------------------------------
+  # 6 - Export final maps =======================================
+  ## 6.1 - Mask croplands ---------------------------------------
   msk <- rast("01-Data/covs/mask.tif")
   # plot(msk)
   msk <- terra::project(msk, pred_mean)
@@ -459,16 +479,17 @@ The final step then consists of applying a cropland mask that is applied to the 
   # plot(pred_mean)
   pred_sd <- mask(pred_sd, msk)
   # plot(pred_sd)
-  plot(pred_sd/pred_mean*100, main = paste("Coeficient of variation", soilatt), 
+  plot(pred_sd/pred_mean*100, main = 
+         paste("Coeficient of variation", soilatt), 
        col = hcl.colors(100, "Viridis"))
   
-  ## 6.2 - Save results ----------------------------------------------------------
-  writeRaster(pred_mean, 
-              paste0("02-Outputs/maps/",ISO,"_GSNmap_mean_",soilatt, ".tif"),
+  ## 6.2 - Save results -----------------------------------------
+writeRaster(pred_mean, 
+ paste0("02-Outputs/maps/",ISO,"_GSNmap_mean_",soilatt, ".tif"),
               overwrite=TRUE)
-  writeRaster(pred_sd, 
-              paste0("02-Outputs/maps/",ISO,"_GSNmap_sd_",soilatt, ".tif"),
-              overwrite=TRUE)
+writeRaster(pred_sd, 
+ paste0("02-Outputs/maps/",ISO,"_GSNmap_sd_",soilatt, ".tif"),
+ overwrite=TRUE)
 ```
 
 
