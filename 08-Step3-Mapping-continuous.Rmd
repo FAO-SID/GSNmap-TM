@@ -144,7 +144,7 @@ The selected covariates can be visualised in Trellis displays. Finally, the opti
 soilatt <- "n_0_30"
 ```
 
-```{r borutaplot, echo = FALSE, fig.cap = "Covariates selecction for Total Nitrogen using Boruta algorithm."}
+```{r borutaplot, echo = FALSE, fig.cap = "Covariates selecction for Total Nitrogen using Boruta algorithm.", out.width='100%'}
 knitr::include_graphics("images/importance_n_0_30.png")
 ```
 
@@ -165,7 +165,7 @@ As cross-validation plays a crucial role in the model calibration step, we expla
 By employing repeated k-fold cross-validation, we can obtain a comprehensive assessment of the model's performance, ensuring reliable and robust parameter estimations for the final model.
 
 
-```{r cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process."}
+```{r cv, echo = FALSE, fig.cap = "Schematic representation of the repeated cross-validation process.", out.width='100%'}
 knitr::include_graphics("images/cv.png")
 ```
 

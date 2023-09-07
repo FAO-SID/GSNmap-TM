@@ -460,7 +460,7 @@ Depending on national data availability and technical capacities, ad-hoc solutio
 The present document is a technical manual on the phase I of the GSNmap initiative. It provides the scientific background on the importance of soil nutrients and guidance on the digital soil mapping techniques to map nutrients and soil properties that govern nutrient availability. It also comprises a compendium with all necessary scripts to generate national GSNmaps. These scripts are described step-by-step in 4 steps that cover soil data preparation (Step 1), covariate download (Step 2), the mapping process itself (Step 3), and the automatic generation of national reports (Step 4). The general workflow is shown in Figure \ref{fig:steps}.
 
 \begin{figure}
-\includegraphics[width=28.12in]{images/Manual-Workflow} \caption{Overview of the steps to follow for the GSNmap generation.}\label{fig:steps}
+\includegraphics[width=1\linewidth]{images/Manual-Workflow} \caption{Overview of the steps to follow for the GSNmap generation.}\label{fig:steps}
 \end{figure}
 
 The chapters are structured as following:
@@ -592,7 +592,7 @@ Beginners will find it very hard to start using \textbf{R} because it has no Gra
 \end{enumerate}
 
 \begin{figure}
-\includegraphics[width=18.97in]{images/2_RStudio-interface} \caption{R Studio interface.}\label{fig:Rstudio}
+\includegraphics[width=1\linewidth]{images/2_RStudio-interface} \caption{R Studio interface.}\label{fig:Rstudio}
 \end{figure}
 
 The \textbf{RStudio} interface is structured by four compartments (see Fig. \ref{fig:Rstudio}). The code editor is located in the upper left. Scripts that contain codes are displayed here. New scripts can be opened by clicking on the left most \emph{New} button in the quick access tool bar (highlighted in green). Lines of code can be executed by clickinig on \emph{Run} (highlighted in blue) or by pressing \emph{ctrl + enter} on your keyboard.
@@ -641,7 +641,7 @@ The right panel is composed of three functionalities. The ``Inspector'' provides
 In addition to that, the data catalog can be accessed via the search bar on the top of the page. Here, key information on the available datasets, origin, resolution and related publications can be found.
 
 \begin{figure}
-\includegraphics[width=26.69in]{images/2.1_GEE_codeeditor} \caption{Google Earth Engine code editor.}\label{fig:GEE2}
+\includegraphics[width=1\linewidth]{images/2.1_GEE_codeeditor} \caption{Google Earth Engine code editor.}\label{fig:GEE2}
 \end{figure}
 
 \hypertarget{digital-soil-mapping}{%
@@ -680,7 +680,7 @@ In Europe maps of chemical soil properties, including macronutrients like potass
 Global efforts to map soil nutrients in a harmonised way are hampered by the limited availability of appropriate soil data. The country-driven approach of the GSP can potentially overcome this limitation by fostering and leveraging national expertise. To implement the GSP's country-driven global mapping exercise, this Technical Manual provides step-by-step guidelines to map soil nutrients and associated properties using georeferenced soil observations following a digital soil mapping approach using the quantile regression forest algorithm (Figure \ref{fig:workflow1}).
 
 \begin{figure}
-\includegraphics[width=11.36in]{images/workflow_lat_long_data} \caption{Digital soil mapping approach for the GSNmap Phase I. Circles are the steps.}\label{fig:workflow1}
+\includegraphics[width=1\linewidth]{images/workflow_lat_long_data} \caption{Digital soil mapping approach for the GSNmap Phase I. Circles are the steps.}\label{fig:workflow1}
 \end{figure}
 
 \hypertarget{the-training-dataset-and-basic-computations-in-r}{%
@@ -850,6 +850,7 @@ Soil data generally consists of measurements at a specific geographical location
 \caption{\label{tab:data1}Example format of a database.}
 \centering
 \begin{threeparttable}
+\fontsize{5}{7}\selectfont
 \begin{tabular}[t]{rlrrrrrrrrrrrr}
 \toprule
 Profile ID & Horizon ID & Lat & Long & Year & Top & Bottom & cec & ph & clay & silt & sand & soc & bd\\
@@ -880,7 +881,7 @@ One option is to right click on `Session' menu \textgreater{} `Set working direc
 In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Since the file paths differ depending on where you stored the file on your computer, it is crucial to identify the correct file path. This can be done by accessing the \emph{file explorer}. There you can browse to your training material folder and then right-click on the bar highlighted in red in the Figure \ref{fig:explorer}.
 
 \begin{figure}
-\includegraphics[width=17.42in]{images/file-explorer} \caption{Get file path from file explorer.}\label{fig:explorer}
+\includegraphics[width=1\linewidth]{images/file-explorer} \caption{Get file path from file explorer.}\label{fig:explorer}
 \end{figure}
 
 The file path will appear with the following format: \texttt{C:\textbackslash{}Users\textbackslash{}GSNmap-TM\textbackslash{}Digital-Soil-Mapping}. In order to enable \textbf{R} to read this as file path, it is necessary to replace the \texttt{\textbackslash{}} by \texttt{/}. The resulting file path should look similar to this one: \texttt{C:/Users/GSNmap-TM/Digital-Soil-Mapping}. Once this is done, we can assign the file path that represents the WD file path to an \textbf{R} object. This is done by defining a character value (in this case the file path) on the right side of the arrow (\texttt{\textless{}-}) and name the \textbf{R} object on the left side (wd) (see code). Once this is done we use the function \texttt{setwd()} to set the WD to the file path that is specified in the object \texttt{wd}.
@@ -924,7 +925,7 @@ Next to in-built base R functions, there is a vast amount of so-called packages 
 
 \begin{verbatim}
 ## Rows: 119 Columns: 6
-## -- Column specification --------------------------------------------------------
+## -- Column specification ----------------------------------
 ## Delimiter: ","
 ## chr (1): LabID
 ## dbl (5): x, y, p_bray, k, tn
@@ -1920,7 +1921,8 @@ The PTF to be chosen for estimating the BD of the missing horizons should be the
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Removed 356 rows containing non-finite values (`stat_density()`).
+## Warning: Removed 356 rows containing non-finite values
+## (`stat_density()`).
 \end{verbatim}
 
 \includegraphics{GSNmap_Technical_Manual_files/figure-latex/unnamed-chunk-12-1.pdf}
@@ -2152,14 +2154,23 @@ Before finalising the soil data preparation, it is recommendable to check again 
 
 The SCORPAN equation (Eq. \eqref{eq:scorpan}) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table \ref{tab:covs1} lists all the environmental covariates that can be implemented under the present DSM framework. Apart from the environmental covariates mentioned in Table \ref{tab:covs1}, other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table \ref{tab:covs1}. Thus, the selection of suitable covariate layers needs to be assessed with common sense and applying expert knowledge.
 
-\begin{table}
+\begingroup\fontsize{7}{9}\selectfont
 
-\caption{\label{tab:covs1}List of environmental covariates.}
-\centering
-\begin{tabular}[t]{lll}
+\begin{longtable}[t]{lll}
+\caption{\label{tab:covs1}List of environmental covariates.}\\
 \toprule
 Description & Code & Resolution  m \\
 \midrule
+\endfirsthead
+\caption[]{\label{tab:covs1}List of environmental covariates. }\\
+\toprule
+Description & Code & Resolution  m \\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
 \addlinespace[0.3em]
 \multicolumn{3}{l}{\textbf{Temperature}}\\
 \hspace{1em}Mean air temperature (annual) & bio1 & 1000\\
@@ -2261,10 +2272,9 @@ Description & Code & Resolution  m \\
 \hspace{1em}Multiresolution of valley bottom flatness & vbf & 250\\
 Global terrestrial Human Footprint dataset from 2013 & hfp2013\_merisINT & 1000\\
 DMSP-OLS Nighttime Lights Time Series & night\_lights\_stable\_2013 & 1000\\
-Global Human Settlement Layer 2020 & population\_density\_2020 & 1000\\
-\bottomrule
-\end{tabular}
-\end{table}
+Global Human Settlement Layer 2020 & population\_density\_2020 & 1000\\*
+\end{longtable}
+\endgroup{}
 
 \hypertarget{download-covariates-and-cropland-mask-with-google-earth-engine-gee}{%
 \section{Download covariates and cropland mask with Google Earth Engine (GEE)}\label{download-covariates-and-cropland-mask-with-google-earth-engine-gee}}
@@ -2274,7 +2284,7 @@ The following are the steps to access and download the environmental covariates 
 You can find the JavaScript code in the material provided in this technical manual under \href{https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts}{03-scripts/3.0.Download\_Covariates\_\&\_Mask.txt}. To use the code, simply copy and paste the text in the GEE console as shown in the figure below.
 
 \begin{figure}
-\includegraphics[width=25.68in]{images/javaScript_GEE} \caption{Copy and paste script in the code editor.}\label{fig:screenshot}
+\includegraphics[width=1\linewidth]{images/javaScript_GEE} \caption{Copy and paste script in the code editor.}\label{fig:screenshot}
 \end{figure}
 
 If not done already, it is necessary to specify the working directory and a file path directory to the output folder where the clipped covariate layers are going to be saved. In case users want to use their own shapefile of the AOI, it is necessary to specify the file path to load it into our \textbf{R} session later. Alternatively, the shapefile of the AOI can be clipped from the official UN map shapefile that is available in the ``Digital-Soil-Mapping-GSP-FAO'' based on the 3-digit ISO code (ISO3CD column in the attribute table). The process to do this will be explained in a few steps. Finally, it is also necessary to specify the resolution to 250 x 250 m for the covariate layers and set the CRS to WGS84 (equals EPSG code 4326). Note that the target resolution of the GSNmap is at 250 m, which can be considered a moderate resolution for a global layer. However, those countries that require a higher resolution are free to develop higher resolution maps and aggregate the resulting maps to the target resolution of GSNmap for submission.
@@ -2584,7 +2594,7 @@ The code sets up visualization parameters for the reclassified land cover image 
 To execute a script in GEE, you can run it by clicking the ``Run'' button in the upper right-hand corner of the code editor. The ``Run'' button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the ``Tasks'' tab.
 
 \begin{figure}
-\includegraphics[width=26.26in]{images/GEE_export} \caption{Run button in code editor and RUN task in Tasks bar.}\label{fig:RUN}
+\includegraphics[width=1\linewidth]{images/GEE_export} \caption{Run button in code editor and RUN task in Tasks bar.}\label{fig:RUN}
 \end{figure}
 
 To run a task for exporting files to Google Drive in GEE, the Export.image.toDrive() function exports the image Google Drive. To start the task, you need to RUN the task, and it will be added to the GEE task list. You can monitor its progress and download the exported file once the task is complete.
@@ -2741,7 +2751,7 @@ The feature importance can be displayed in a graph showing different colors acco
 The selected covariates can be visualised in Trellis displays. Finally, the optimal predictors are stored in a dedicated R object.
 
 \begin{figure}
-\includegraphics[width=49.21in]{images/importance_n_0_30} \caption{Covariates selecction for Total Nitrogen using Boruta algorithm.}\label{fig:borutaplot}
+\includegraphics[width=1\linewidth]{images/importance_n_0_30} \caption{Covariates selecction for Total Nitrogen using Boruta algorithm.}\label{fig:borutaplot}
 \end{figure}
 
 \hypertarget{model-calibration}{%
@@ -2764,7 +2774,7 @@ As cross-validation plays a crucial role in the model calibration step, we expla
 By employing repeated k-fold cross-validation, we can obtain a comprehensive assessment of the model's performance, ensuring reliable and robust parameter estimations for the final model.
 
 \begin{figure}
-\includegraphics[width=27.78in]{images/cv} \caption{Schematic representation of the repeated cross-validation process.}\label{fig:cv}
+\includegraphics[width=1\linewidth]{images/cv} \caption{Schematic representation of the repeated cross-validation process.}\label{fig:cv}
 \end{figure}
 
 Repeated cross validation has been nicely implemented in the caret R package (\protect\hyperlink{ref-Kuhn2022}{Kuhn, 2022}), along with several calibration methods. Here, we use the \texttt{Boruta()} function to specify the modalities of the cross-validation that contain the abovementioned settings. These settings are stored in an object called ``fitControl''. Next, the user has to specify a formula that will be used in a regression. In line with the purpose of mapping the target soil property, the formula has Potassium as target variable (dependent variable) and all covariates as independent or explanatory variables.
@@ -4625,7 +4635,7 @@ Part II:
 This chapter provides step-by-step instructions in case the soil measurements do not have point coordinates but come with information on the sampling region, i.e.~location within an administrative unit. In this approach, soil samples are randomly distributed across the respective area (see Figure \ref{fig:workflow2}).
 
 \begin{figure}
-\includegraphics[width=16.1in]{images/workflow_county_data} \caption{Digital soil mapping approach for area-support data. Circles are the steps.}\label{fig:workflow2}
+\includegraphics[width=1\linewidth]{images/workflow_county_data} \caption{Digital soil mapping approach for area-support data. Circles are the steps.}\label{fig:workflow2}
 \end{figure}
 
 The steps are similar to the ones specified in Step 3. After merging the soil and environmental covariate data, the ones with most explanatory power are selected for model calibration. The uncertainty model is then assessed and finally the target soil property predicted. This is followed by the exporting of the final map products.
@@ -5026,6 +5036,7 @@ All 10 soil property and soil nutrient maps with their corresponding 10 uncertai
 
 \caption{\label{tab:products}\label{tab:products}Data product overview.}
 \centering
+\fontsize{7}{9}\selectfont
 \begin{tabular}[t]{ll}
 \toprule
 Product & Filename\\
@@ -5086,6 +5097,7 @@ The following table (Table 10.2) presents ranges of possible values for 9 of the
 
 \caption{\label{tab:ranges}\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.}
 \centering
+\fontsize{7}{9}\selectfont
 \begin{tabular}[t]{lllrrrrrr}
 \toprule
 Soil property & property\_id & Unit & Min & 1st Quartile & Median & 3st Quartile & Max & n\\

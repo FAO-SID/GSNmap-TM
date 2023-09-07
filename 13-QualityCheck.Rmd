@@ -17,13 +17,13 @@ The following Table \ref(tab:products) gives an overview of all the GSNmap produ
 
 All 10 soil property and soil nutrient maps with their corresponding 10 uncertainty layers must be georeferenced TIF (.tif) files.
 
-```{r products, echo = FALSE, message=F, warning=F}
+```{r products, echo = FALSE, message=F, warning=F,tidy=TRUE}
 
 library(dplyr)
 library(kableExtra)
 dt <- read.csv("tables/Table_Product-overview.csv", sep = ",")
 kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:products}Data product overview.') %>%
-kable_classic(full_width = F) %>%
+kable_classic(full_width = F,font_size = 7) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
   kableExtra::group_rows(group_label = "Major nutrients (3 files)", start_row = 1, end_row = 3) %>%
   kableExtra::group_rows(group_label = "Associated soil properties (7 files)", start_row = 4, end_row = 10) %>% 
@@ -49,7 +49,8 @@ library(readxl)
 
 dt <- read_xlsx("tables/wosis_dist.xlsx")
 kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = '\\label{tab:ranges}Possible soil property and soil nutrient values based on the distribution of the values within the World Soil Information Service (WoSIS), specifically the WoSIS snapshot 2019.') %>%
-kable_classic(full_width = F)
+kable_classic(full_width = F,font_size = 7)
+
 ```
 
 ## QA/QC Script {-}  

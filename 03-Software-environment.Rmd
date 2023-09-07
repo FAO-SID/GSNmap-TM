@@ -25,7 +25,7 @@ Beginners will find it very hard to start using **R** because it has no Graphica
 3. Pick an installation file for your platform.
 4. Follow the installation instruction on your local device.
 
-```{r Rstudio, echo = FALSE, fig.cap = "R Studio interface."}
+```{r Rstudio, echo = FALSE, fig.cap = "R Studio interface.",out.width='100%'}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2_RStudio-interface.png")
 ```
@@ -66,7 +66,7 @@ The middle panel contains the scripts that can be run by clicking on the "Run" b
 The right panel is composed of three functionalities. The "Inspector" provides basic information on a pixel of a layer displayed in the map below. The information consists of longitude, latitude, and - if layers are loaded - values of the pixel. The "Console" is the place where certain commands expressed in the code are shown. The most common expressions shown here are print() commands or figures derived from the loaded data. Finally, the "Tasks" button shows all tasks that were formulated in the code/script and are to be submitted to the server for computation. Once a task is submitted, the user has to click on the "Run" button appearing in the "Tasks" section to submit the task to the server.
 In addition to that, the data catalog can be accessed via the search bar on the top of the page. Here, key information on the available datasets, origin, resolution and related publications can be found. 
 
-```{r GEE2, echo = FALSE, fig.cap = "Google Earth Engine code editor."}
+```{r GEE2, echo = FALSE, fig.cap = "Google Earth Engine code editor.",out.width='100%'}
 #settings needed for pdf-document: fig.width = 7, out.width = "12cm"
 knitr::include_graphics("images/2.1_GEE_codeeditor.png")
 ```

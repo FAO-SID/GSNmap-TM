@@ -13,6 +13,8 @@ output:
     config:
       fig_caption: yes
       download: ["pdf"]
+  latex_engine: xelatex # Use XeLaTeX for better figure handling
+  out.width: '0.9\\textwidth' # Adjust this value as needed
 header-includes:
     - \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
     - \usepackage{titling}
@@ -58,34 +60,11 @@ options(width = 60)
 options(scipen=999)
 
 library(kableExtra)
-library(data.table)
-library(mpspline2)
-library(tidyverse)
-library(ggplot2)
-library(plotly)
+library(formatR)
 
 # Cache results
-knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40),tidy=FALSE, size="tiny", fig.cap = T)
+knitr::opts_chunk$set(cache=F,fig.pos = 'H',tidy.opts=list(width.cutoff=40,tidy=TRUE, size="tiny"), fig.cap = T,dev = 'jpeg')
 
-#reduce pdf file size
-knitr::opts_chunk$set(dev = 'jpeg')
-
-## redefine str for the width option
-str <- function(...){
-  utils::str(..., strict.width = "cut")}
-
-addline_format <- function(x,...){
-  gsub('\\s','\n',x)
-}
-underscore_to_space <- function(x,...){
-  gsub("_", " ",x)
-}
-
-
-#bookdown::render_book("index.Rmd", "bookdown::gitbook")
-#bookdown::clean_book(TRUE)
-#bookdown::render_book("index.Rmd", "bookdown::pdf_book")
-#bookdown::render_book("index.Rmd", "bookdown::word_document2")
 ```
 
 
@@ -111,8 +90,7 @@ The GSNmap Technical Manual is made available under the Creative Commons Attribu
 
 [CC BY-NC-SA 3.0 IGO](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/legalcode).
 
-<!-- *Recommended citation:* -->
-<!-- Angelini, M.E, Mainka, M., Luotto, I., Omuto Thine, C., Yigini, Y., Tong, Y., 2022. Technical Manual for Global Soil Nutrient and Nutrient Budgets map (GSNmap). Food & Agriculture Org. -->
+
 
 
 # Abbreviations and acronyms {-}

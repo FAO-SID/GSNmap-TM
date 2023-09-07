@@ -53,7 +53,7 @@ Depending on national data availability and technical capacities, ad-hoc solutio
 
 The present document is a technical manual on the phase I of the GSNmap initiative. It provides the scientific background on the importance of soil nutrients and guidance on the digital soil mapping techniques to map nutrients and soil properties that govern nutrient availability. It also comprises a compendium with all necessary scripts to generate national GSNmaps. These scripts are described step-by-step in 4 steps that cover soil data preparation (Step 1), covariate download (Step 2), the mapping process itself (Step 3), and the automatic generation of national reports (Step 4). The general workflow is shown in Figure \@ref(fig:steps).
 
-```{r steps, echo = FALSE, fig.cap = "Overview of the steps to follow for the GSNmap generation."}
+```{r steps, echo = FALSE, fig.cap = "Overview of the steps to follow for the GSNmap generation.",out.width='100%'}
 knitr::include_graphics("images/Manual-Workflow.png")
 
 ```

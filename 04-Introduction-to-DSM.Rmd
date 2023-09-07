@@ -25,7 +25,7 @@ DSM has been used to produce maps of soil nutrients at regional to continental s
 In Europe maps of chemical soil properties, including macronutrients like potassium and phosphorus, were mapped based on a gaussian process regression using the LUCAS soil database [@ballabio2019].
 Global efforts to map soil nutrients in a harmonised way are hampered by the limited availability of appropriate soil data. The country-driven approach of the GSP can potentially overcome this limitation by fostering and leveraging national expertise. To implement the GSP's country-driven global mapping exercise, this Technical Manual provides step-by-step guidelines to map soil nutrients and associated properties using georeferenced soil observations following a digital soil mapping approach using the quantile regression forest algorithm  (Figure \@ref(fig:workflow1)).
 
-```{r workflow1, echo = FALSE, fig.cap = "Digital soil mapping approach for the GSNmap Phase I. Circles are the steps."}
+```{r workflow1, echo = FALSE, fig.cap = "Digital soil mapping approach for the GSNmap Phase I. Circles are the steps.",out.width='100%'}
 knitr::include_graphics("images/workflow_lat_long_data.png")
 ```
 

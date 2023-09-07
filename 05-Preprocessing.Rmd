@@ -71,7 +71,7 @@ Finally, the third dataset belongs to the Soil Information System of Argentina (
 data <- read_csv("Digital-Soil-Mapping/01-Data/soil_profile_data.csv")
 kable(booktabs = T, data[c(1:10),1:10], col.names = gsub("[.]", " ", names(data)[1:10]), caption = 'Soil profile dataset.',  digits = c(0,0,6,6,0,0,0,1,1,2)) %>%
 kable_classic(full_width = F) %>%
-  #kable_styling(latex_options = 'striped', font_size = 10) %>%
+ kable_styling("scale_down") %>%
 footnote(general = "Only ten rows are shown.", general_title = "")
 ```
 
@@ -98,7 +98,8 @@ dt <- read.csv("tables/Table_5.1.csv", sep = ",")
 kable(booktabs = T, dt, col.names = gsub("[.]", " ", names(dt)), caption = 'Example format of a database.') %>%
 kable_classic(full_width = F) %>%
   #kable_styling(latex_options = 'striped', font_size = 10) %>%
-footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique layer identifier, Lat = latitude in decimal degrees, Long = longitude in decimal degrees, Year = sampling year, Top = upper limit of the layer in cm, Bottom = lower limit of the layer in cm, cec = Cation Exchange Capacity (cmol_c/kg), ph = pH in water, clay = Clay (g/100g soil), silt = Silt (g/100g soil), sand = Sand ((g/100g soil), soc = Soil Organic Carbon (g/100g soil), bd = Bulk Density (g/cm3).", threeparttable = TRUE)
+footnote(general = "Profile ID = unique profile identifier, Horizon ID = unique layer identifier, Lat = latitude in decimal degrees, Long = longitude in decimal degrees, Year = sampling year, Top = upper limit of the layer in cm, Bottom = lower limit of the layer in cm, cec = Cation Exchange Capacity (cmol_c/kg), ph = pH in water, clay = Clay (g/100g soil), silt = Silt (g/100g soil), sand = Sand ((g/100g soil), soc = Soil Organic Carbon (g/100g soil), bd = Bulk Density (g/cm3).", threeparttable = TRUE)%>%
+ kable_styling("scale_down",font_size =5) 
   #add_header_above(c("Approach for developing national information on soil erosion" = 2), bold = T) %>% 
   #kableExtra::group_rows(group_label = "Approach for developing national information on soil erosion", start_row = 1, end_row = 3) %>%
   #kableExtra::group_rows(group_label = "Input data preparation (see Table 3.1)", start_row = 4, end_row = 10) %>% 
@@ -117,7 +118,7 @@ One option is to right click on 'Session' menu > 'Set working directory ...' and
 
 In this manual we propose an alternative way that allows for more customization and flexibility since sometimes multiple WDs are needed to for instance save the final map in a different folder than the covariates. Since the file paths differ depending on where you stored the file on your computer, it is crucial to identify the correct file path. This can be done by accessing the *file explorer*. There you can browse to your training material folder and then right-click on the bar highlighted in red in the Figure \@ref(fig:explorer).
 
-```{r explorer, echo = FALSE, fig.cap = "Get file path from file explorer."}
+```{r explorer, echo = FALSE, fig.cap = "Get file path from file explorer.", out.width='100%'}
 knitr::include_graphics("images/file-explorer.png")
 
 ```
