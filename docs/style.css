@@ -20,7 +20,7 @@
 }
 p.caption {
   color: #777;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 p code {
   white-space: inherit;
@@ -47,7 +47,7 @@ blockquote > p:first-child {
 }
 .level1 .header-section-number {
   display: inline-block;
-  border-bottom: 2px solid;
+  border-bottom: 3px solid;
 }
 .level1 h1 {
   border-bottom: 1px solid;
@@ -56,12 +56,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   color: #993d0f;
 }
+
+
 h1.title {
   font-weight: 700;
 }
 .book .book-body .page-wrapper .page-inner section.normal strong {
   font-weight: 500;
-}
-body {
-  text-align: justify;
 }

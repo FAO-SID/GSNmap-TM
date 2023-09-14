@@ -139,7 +139,7 @@ plotSPC(x = profiles[1:20], name = "cec", color = "cec",
 #    + missingDepth : boolean, NA in top / bottom depths
 #    + overlapOrGap : boolean, gaps or overlap 
 #    in adjacent horizons
-aqp::checkHzDepthLogic(profiles)
+head(aqp::checkHzDepthLogic(profiles))
 
 # Identify non-valid profiles 
 dl <- checkHzDepthLogic(profiles)

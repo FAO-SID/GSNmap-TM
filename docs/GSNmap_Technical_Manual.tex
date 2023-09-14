@@ -227,6 +227,7 @@
 	urlcolor=astral,
 	citecolor=astral
 }
+
 \AtBeginDocument{\renewcommand{\chaptername}{Chapter}}
 \usepackage{titling}
 \usepackage{natbib}
@@ -328,7 +329,6 @@ Technical Manual\\}}
 \listoffigures
 \listoftables
 \nopagebreak[5]
-\lstset{breaklines=true}
 
 \includegraphics{images/frontcover.jpg}
 
@@ -935,7 +935,7 @@ Next to in-built base R functions, there is a vast amount of so-called packages 
 
 \begin{verbatim}
 ## Rows: 119 Columns: 6
-## -- Column specification ----------------------------------
+## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
 ## chr (1): LabID
 ## dbl (5): x, y, p_bray, k, tn
@@ -1242,369 +1242,18 @@ Using the \texttt{checkHzDepthLogic()} function, users can assess that all profi
 \CommentTok{\#    + missingDepth : boolean, NA in top / bottom depths}
 \CommentTok{\#    + overlapOrGap : boolean, gaps or overlap }
 \CommentTok{\#    in adjacent horizons}
-\NormalTok{aqp}\SpecialCharTok{::}\FunctionTok{checkHzDepthLogic}\NormalTok{(profiles)}
+\FunctionTok{head}\NormalTok{(aqp}\SpecialCharTok{::}\FunctionTok{checkHzDepthLogic}\NormalTok{(profiles))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##     ProfID valid depthLogic sameDepth missingDepth overlapOrGap
-## 1      154  TRUE      FALSE     FALSE        FALSE        FALSE
-## 2      197  TRUE      FALSE     FALSE        FALSE        FALSE
-## 3      262  TRUE      FALSE     FALSE        FALSE        FALSE
-## 4     2700  TRUE      FALSE     FALSE        FALSE        FALSE
-## 5     2702  TRUE      FALSE     FALSE        FALSE        FALSE
-## 6     2705  TRUE      FALSE     FALSE        FALSE        FALSE
-## 7     2706  TRUE      FALSE     FALSE        FALSE        FALSE
-## 8     2709  TRUE      FALSE     FALSE        FALSE        FALSE
-## 9     2710  TRUE      FALSE     FALSE        FALSE        FALSE
-## 10    2711  TRUE      FALSE     FALSE        FALSE        FALSE
-## 11    2712  TRUE      FALSE     FALSE        FALSE        FALSE
-## 12    2714  TRUE      FALSE     FALSE        FALSE        FALSE
-## 13    2715  TRUE      FALSE     FALSE        FALSE        FALSE
-## 14    2716  TRUE      FALSE     FALSE        FALSE        FALSE
-## 15    2717  TRUE      FALSE     FALSE        FALSE        FALSE
-## 16    2718  TRUE      FALSE     FALSE        FALSE        FALSE
-## 17    2719  TRUE      FALSE     FALSE        FALSE        FALSE
-## 18    2720  TRUE      FALSE     FALSE        FALSE        FALSE
-## 19    2721  TRUE      FALSE     FALSE        FALSE        FALSE
-## 20    2723  TRUE      FALSE     FALSE        FALSE        FALSE
-## 21    2725  TRUE      FALSE     FALSE        FALSE        FALSE
-## 22    2726  TRUE      FALSE     FALSE        FALSE        FALSE
-## 23    2761  TRUE      FALSE     FALSE        FALSE        FALSE
-## 24    2762  TRUE      FALSE     FALSE        FALSE        FALSE
-## 25    2763  TRUE      FALSE     FALSE        FALSE        FALSE
-## 26    2764  TRUE      FALSE     FALSE        FALSE        FALSE
-## 27    2767  TRUE      FALSE     FALSE        FALSE        FALSE
-## 28    2768  TRUE      FALSE     FALSE        FALSE        FALSE
-## 29    2769  TRUE      FALSE     FALSE        FALSE        FALSE
-## 30    2770  TRUE      FALSE     FALSE        FALSE        FALSE
-## 31    2771  TRUE      FALSE     FALSE        FALSE        FALSE
-## 32    2772  TRUE      FALSE     FALSE        FALSE        FALSE
-## 33    2773  TRUE      FALSE     FALSE        FALSE        FALSE
-## 34    2774  TRUE      FALSE     FALSE        FALSE        FALSE
-## 35    2775  TRUE      FALSE     FALSE        FALSE        FALSE
-## 36    2796  TRUE      FALSE     FALSE        FALSE        FALSE
-## 37    2797  TRUE      FALSE     FALSE        FALSE        FALSE
-## 38    2798  TRUE      FALSE     FALSE        FALSE        FALSE
-## 39    2799  TRUE      FALSE     FALSE        FALSE        FALSE
-## 40    2800  TRUE      FALSE     FALSE        FALSE        FALSE
-## 41    2801  TRUE      FALSE     FALSE        FALSE        FALSE
-## 42    2802  TRUE      FALSE     FALSE        FALSE        FALSE
-## 43    2803  TRUE      FALSE     FALSE        FALSE        FALSE
-## 44    2804  TRUE      FALSE     FALSE        FALSE        FALSE
-## 45    2805  TRUE      FALSE     FALSE        FALSE        FALSE
-## 46    2806  TRUE      FALSE     FALSE        FALSE        FALSE
-## 47    2807  TRUE      FALSE     FALSE        FALSE        FALSE
-## 48    2808  TRUE      FALSE     FALSE        FALSE        FALSE
-## 49    2809  TRUE      FALSE     FALSE        FALSE        FALSE
-## 50    2810  TRUE      FALSE     FALSE        FALSE        FALSE
-## 51    2811  TRUE      FALSE     FALSE        FALSE        FALSE
-## 52    2812  TRUE      FALSE     FALSE        FALSE        FALSE
-## 53    2813  TRUE      FALSE     FALSE        FALSE        FALSE
-## 54    2814  TRUE      FALSE     FALSE        FALSE        FALSE
-## 55    2815  TRUE      FALSE     FALSE        FALSE        FALSE
-## 56    2816  TRUE      FALSE     FALSE        FALSE        FALSE
-## 57    2817  TRUE      FALSE     FALSE        FALSE        FALSE
-## 58    2818  TRUE      FALSE     FALSE        FALSE        FALSE
-## 59    2819  TRUE      FALSE     FALSE        FALSE        FALSE
-## 60    2820  TRUE      FALSE     FALSE        FALSE        FALSE
-## 61    2821  TRUE      FALSE     FALSE        FALSE        FALSE
-## 62    2822  TRUE      FALSE     FALSE        FALSE        FALSE
-## 63    2823  TRUE      FALSE     FALSE        FALSE        FALSE
-## 64    2824  TRUE      FALSE     FALSE        FALSE        FALSE
-## 65    2825  TRUE      FALSE     FALSE        FALSE        FALSE
-## 66    2826  TRUE      FALSE     FALSE        FALSE        FALSE
-## 67    2827  TRUE      FALSE     FALSE        FALSE        FALSE
-## 68    2828  TRUE      FALSE     FALSE        FALSE        FALSE
-## 69    2891  TRUE      FALSE     FALSE        FALSE        FALSE
-## 70    2892  TRUE      FALSE     FALSE        FALSE        FALSE
-## 71    2911  TRUE      FALSE     FALSE        FALSE        FALSE
-## 72    2948  TRUE      FALSE     FALSE        FALSE        FALSE
-## 73    2979  TRUE      FALSE     FALSE        FALSE        FALSE
-## 74    3026  TRUE      FALSE     FALSE        FALSE        FALSE
-## 75    3027  TRUE      FALSE     FALSE        FALSE        FALSE
-## 76    3029  TRUE      FALSE     FALSE        FALSE        FALSE
-## 77    3172  TRUE      FALSE     FALSE        FALSE        FALSE
-## 78    3174  TRUE      FALSE     FALSE        FALSE        FALSE
-## 79    3175  TRUE      FALSE     FALSE        FALSE        FALSE
-## 80    3204  TRUE      FALSE     FALSE        FALSE        FALSE
-## 81      51  TRUE      FALSE     FALSE        FALSE        FALSE
-## 82    6180  TRUE      FALSE     FALSE        FALSE        FALSE
-## 83    6181  TRUE      FALSE     FALSE        FALSE        FALSE
-## 84    6182  TRUE      FALSE     FALSE        FALSE        FALSE
-## 85    6506  TRUE      FALSE     FALSE        FALSE        FALSE
-## 86    6507  TRUE      FALSE     FALSE        FALSE        FALSE
-## 87    6508  TRUE      FALSE     FALSE        FALSE        FALSE
-## 88    6509  TRUE      FALSE     FALSE        FALSE        FALSE
-## 89    6510  TRUE      FALSE     FALSE        FALSE        FALSE
-## 90    6511  TRUE      FALSE     FALSE        FALSE        FALSE
-## 91    6512  TRUE      FALSE     FALSE        FALSE        FALSE
-## 92    6513  TRUE      FALSE     FALSE        FALSE        FALSE
-## 93    6516  TRUE      FALSE     FALSE        FALSE        FALSE
-## 94    6518  TRUE      FALSE     FALSE        FALSE        FALSE
-## 95    6519  TRUE      FALSE     FALSE        FALSE        FALSE
-## 96    6520  TRUE      FALSE     FALSE        FALSE        FALSE
-## 97    6521  TRUE      FALSE     FALSE        FALSE        FALSE
-## 98    6522  TRUE      FALSE     FALSE        FALSE        FALSE
-## 99    6523  TRUE      FALSE     FALSE        FALSE        FALSE
-## 100   6524  TRUE      FALSE     FALSE        FALSE        FALSE
-## 101   6525  TRUE      FALSE     FALSE        FALSE        FALSE
-## 102   6526  TRUE      FALSE     FALSE        FALSE        FALSE
-## 103   6534  TRUE      FALSE     FALSE        FALSE        FALSE
-## 104   6535  TRUE      FALSE     FALSE        FALSE        FALSE
-## 105   6536  TRUE      FALSE     FALSE        FALSE        FALSE
-## 106   6537  TRUE      FALSE     FALSE        FALSE        FALSE
-## 107   6539  TRUE      FALSE     FALSE        FALSE        FALSE
-## 108   6540  TRUE      FALSE     FALSE        FALSE        FALSE
-## 109   6541  TRUE      FALSE     FALSE        FALSE        FALSE
-## 110   6542  TRUE      FALSE     FALSE        FALSE        FALSE
-## 111   6543  TRUE      FALSE     FALSE        FALSE        FALSE
-## 112   6544  TRUE      FALSE     FALSE        FALSE        FALSE
-## 113   6545  TRUE      FALSE     FALSE        FALSE        FALSE
-## 114   6548  TRUE      FALSE     FALSE        FALSE        FALSE
-## 115   6555  TRUE      FALSE     FALSE        FALSE        FALSE
-## 116   6556  TRUE      FALSE     FALSE        FALSE        FALSE
-## 117   6557  TRUE      FALSE     FALSE        FALSE        FALSE
-## 118   6558  TRUE      FALSE     FALSE        FALSE        FALSE
-## 119   6559  TRUE      FALSE     FALSE        FALSE        FALSE
-## 120   6561  TRUE      FALSE     FALSE        FALSE        FALSE
-## 121   6562  TRUE      FALSE     FALSE        FALSE        FALSE
-## 122   6563  TRUE      FALSE     FALSE        FALSE        FALSE
-## 123   6564  TRUE      FALSE     FALSE        FALSE        FALSE
-## 124   6565  TRUE      FALSE     FALSE        FALSE        FALSE
-## 125   6566 FALSE      FALSE     FALSE        FALSE         TRUE
-## 126   6567  TRUE      FALSE     FALSE        FALSE        FALSE
-## 127   6569  TRUE      FALSE     FALSE        FALSE        FALSE
-## 128   6571  TRUE      FALSE     FALSE        FALSE        FALSE
-## 129   6572  TRUE      FALSE     FALSE        FALSE        FALSE
-## 130   6578  TRUE      FALSE     FALSE        FALSE        FALSE
-## 131   6579  TRUE      FALSE     FALSE        FALSE        FALSE
-## 132   6585  TRUE      FALSE     FALSE        FALSE        FALSE
-## 133   6606  TRUE      FALSE     FALSE        FALSE        FALSE
-## 134   6695  TRUE      FALSE     FALSE        FALSE        FALSE
-## 135   6697  TRUE      FALSE     FALSE        FALSE        FALSE
-## 136   6698  TRUE      FALSE     FALSE        FALSE        FALSE
-## 137   6699  TRUE      FALSE     FALSE        FALSE        FALSE
-## 138   6700  TRUE      FALSE     FALSE        FALSE        FALSE
-## 139   6701  TRUE      FALSE     FALSE        FALSE        FALSE
-## 140   6702  TRUE      FALSE     FALSE        FALSE        FALSE
-## 141   6703  TRUE      FALSE     FALSE        FALSE        FALSE
-## 142   6706  TRUE      FALSE     FALSE        FALSE        FALSE
-## 143   6708  TRUE      FALSE     FALSE        FALSE        FALSE
-## 144   6709  TRUE      FALSE     FALSE        FALSE        FALSE
-## 145   6711  TRUE      FALSE     FALSE        FALSE        FALSE
-## 146   6717  TRUE      FALSE     FALSE        FALSE        FALSE
-## 147   6720  TRUE      FALSE     FALSE        FALSE        FALSE
-## 148   6721  TRUE      FALSE     FALSE        FALSE        FALSE
-## 149   6722  TRUE      FALSE     FALSE        FALSE        FALSE
-## 150   6723  TRUE      FALSE     FALSE        FALSE        FALSE
-## 151   6724  TRUE      FALSE     FALSE        FALSE        FALSE
-## 152   6726  TRUE      FALSE     FALSE        FALSE        FALSE
-## 153   6727  TRUE      FALSE     FALSE        FALSE        FALSE
-## 154   6729  TRUE      FALSE     FALSE        FALSE        FALSE
-## 155   6731  TRUE      FALSE     FALSE        FALSE        FALSE
-## 156   6732  TRUE      FALSE     FALSE        FALSE        FALSE
-## 157   6733  TRUE      FALSE     FALSE        FALSE        FALSE
-## 158   6752  TRUE      FALSE     FALSE        FALSE        FALSE
-## 159   6753  TRUE      FALSE     FALSE        FALSE        FALSE
-## 160   6754  TRUE      FALSE     FALSE        FALSE        FALSE
-## 161   6902  TRUE      FALSE     FALSE        FALSE        FALSE
-## 162   6903  TRUE      FALSE     FALSE        FALSE        FALSE
-## 163   6913  TRUE      FALSE     FALSE        FALSE        FALSE
-## 164   6915  TRUE      FALSE     FALSE        FALSE        FALSE
-## 165   6916  TRUE      FALSE     FALSE        FALSE        FALSE
-## 166   6921  TRUE      FALSE     FALSE        FALSE        FALSE
-## 167   6922  TRUE      FALSE     FALSE        FALSE        FALSE
-## 168   6923  TRUE      FALSE     FALSE        FALSE        FALSE
-## 169   6924  TRUE      FALSE     FALSE        FALSE        FALSE
-## 170   6947  TRUE      FALSE     FALSE        FALSE        FALSE
-## 171   6948  TRUE      FALSE     FALSE        FALSE        FALSE
-## 172   6950  TRUE      FALSE     FALSE        FALSE        FALSE
-## 173   6958  TRUE      FALSE     FALSE        FALSE        FALSE
-## 174   6959  TRUE      FALSE     FALSE        FALSE        FALSE
-## 175   6960  TRUE      FALSE     FALSE        FALSE        FALSE
-## 176   6961  TRUE      FALSE     FALSE        FALSE        FALSE
-## 177   6962  TRUE      FALSE     FALSE        FALSE        FALSE
-## 178   7002  TRUE      FALSE     FALSE        FALSE        FALSE
-## 179   7092  TRUE      FALSE     FALSE        FALSE        FALSE
-## 180   7093  TRUE      FALSE     FALSE        FALSE        FALSE
-## 181   7094  TRUE      FALSE     FALSE        FALSE        FALSE
-## 182   7123  TRUE      FALSE     FALSE        FALSE        FALSE
-## 183   7124  TRUE      FALSE     FALSE        FALSE        FALSE
-## 184   7125  TRUE      FALSE     FALSE        FALSE        FALSE
-## 185   7127  TRUE      FALSE     FALSE        FALSE        FALSE
-## 186   7131  TRUE      FALSE     FALSE        FALSE        FALSE
-## 187   7132  TRUE      FALSE     FALSE        FALSE        FALSE
-## 188   7133  TRUE      FALSE     FALSE        FALSE        FALSE
-## 189   7134  TRUE      FALSE     FALSE        FALSE        FALSE
-## 190   7136  TRUE      FALSE     FALSE        FALSE        FALSE
-## 191   7137  TRUE      FALSE     FALSE        FALSE        FALSE
-## 192   7138  TRUE      FALSE     FALSE        FALSE        FALSE
-## 193   7139  TRUE      FALSE     FALSE        FALSE        FALSE
-## 194   7140  TRUE      FALSE     FALSE        FALSE        FALSE
-## 195   7141  TRUE      FALSE     FALSE        FALSE        FALSE
-## 196   7142  TRUE      FALSE     FALSE        FALSE        FALSE
-## 197   7145  TRUE      FALSE     FALSE        FALSE        FALSE
-## 198   7153  TRUE      FALSE     FALSE        FALSE        FALSE
-## 199   7154  TRUE      FALSE     FALSE        FALSE        FALSE
-## 200   7155  TRUE      FALSE     FALSE        FALSE        FALSE
-## 201   7156  TRUE      FALSE     FALSE        FALSE        FALSE
-## 202   7157  TRUE      FALSE     FALSE        FALSE        FALSE
-## 203   7158  TRUE      FALSE     FALSE        FALSE        FALSE
-## 204   7159  TRUE      FALSE     FALSE        FALSE        FALSE
-## 205   7161  TRUE      FALSE     FALSE        FALSE        FALSE
-## 206   7162  TRUE      FALSE     FALSE        FALSE        FALSE
-## 207   7163  TRUE      FALSE     FALSE        FALSE        FALSE
-## 208   7164  TRUE      FALSE     FALSE        FALSE        FALSE
-## 209   7165  TRUE      FALSE     FALSE        FALSE        FALSE
-## 210   7166  TRUE      FALSE     FALSE        FALSE        FALSE
-## 211   7170  TRUE      FALSE     FALSE        FALSE        FALSE
-## 212   7172  TRUE      FALSE     FALSE        FALSE        FALSE
-## 213   7174  TRUE      FALSE     FALSE        FALSE        FALSE
-## 214   7175  TRUE      FALSE     FALSE        FALSE        FALSE
-## 215   7176  TRUE      FALSE     FALSE        FALSE        FALSE
-## 216   7202  TRUE      FALSE     FALSE        FALSE        FALSE
-## 217   7207  TRUE      FALSE     FALSE        FALSE        FALSE
-## 218   7208  TRUE      FALSE     FALSE        FALSE        FALSE
-## 219   7209  TRUE      FALSE     FALSE        FALSE        FALSE
-## 220   7210  TRUE      FALSE     FALSE        FALSE        FALSE
-## 221   7211  TRUE      FALSE     FALSE        FALSE        FALSE
-## 222   7212  TRUE      FALSE     FALSE        FALSE        FALSE
-## 223   7213  TRUE      FALSE     FALSE        FALSE        FALSE
-## 224   7219  TRUE      FALSE     FALSE        FALSE        FALSE
-## 225   7220  TRUE      FALSE     FALSE        FALSE        FALSE
-## 226   7222  TRUE      FALSE     FALSE        FALSE        FALSE
-## 227   7223  TRUE      FALSE     FALSE        FALSE        FALSE
-## 228   7224  TRUE      FALSE     FALSE        FALSE        FALSE
-## 229   7225  TRUE      FALSE     FALSE        FALSE        FALSE
-## 230   7226  TRUE      FALSE     FALSE        FALSE        FALSE
-## 231   7228  TRUE      FALSE     FALSE        FALSE        FALSE
-## 232   7329  TRUE      FALSE     FALSE        FALSE        FALSE
-## 233   7330  TRUE      FALSE     FALSE        FALSE        FALSE
-## 234   7331  TRUE      FALSE     FALSE        FALSE        FALSE
-## 235   7336  TRUE      FALSE     FALSE        FALSE        FALSE
-## 236   7337  TRUE      FALSE     FALSE        FALSE        FALSE
-## 237   7338  TRUE      FALSE     FALSE        FALSE        FALSE
-## 238   7339  TRUE      FALSE     FALSE        FALSE        FALSE
-## 239   7340  TRUE      FALSE     FALSE        FALSE        FALSE
-## 240   7341  TRUE      FALSE     FALSE        FALSE        FALSE
-## 241   7342  TRUE      FALSE     FALSE        FALSE        FALSE
-## 242   7343  TRUE      FALSE     FALSE        FALSE        FALSE
-## 243   7344  TRUE      FALSE     FALSE        FALSE        FALSE
-## 244   7345  TRUE      FALSE     FALSE        FALSE        FALSE
-## 245   7346  TRUE      FALSE     FALSE        FALSE        FALSE
-## 246   7349  TRUE      FALSE     FALSE        FALSE        FALSE
-## 247   7350  TRUE      FALSE     FALSE        FALSE        FALSE
-## 248   7351  TRUE      FALSE     FALSE        FALSE        FALSE
-## 249   7352  TRUE      FALSE     FALSE        FALSE        FALSE
-## 250   7353  TRUE      FALSE     FALSE        FALSE        FALSE
-## 251   7354  TRUE      FALSE     FALSE        FALSE        FALSE
-## 252   7355  TRUE      FALSE     FALSE        FALSE        FALSE
-## 253   7356  TRUE      FALSE     FALSE        FALSE        FALSE
-## 254   7359  TRUE      FALSE     FALSE        FALSE        FALSE
-## 255   7360  TRUE      FALSE     FALSE        FALSE        FALSE
-## 256   7361  TRUE      FALSE     FALSE        FALSE        FALSE
-## 257   7362  TRUE      FALSE     FALSE        FALSE        FALSE
-## 258   7363  TRUE      FALSE     FALSE        FALSE        FALSE
-## 259   7364  TRUE      FALSE     FALSE        FALSE        FALSE
-## 260   7365  TRUE      FALSE     FALSE        FALSE        FALSE
-## 261   7367  TRUE      FALSE     FALSE        FALSE        FALSE
-## 262   7368  TRUE      FALSE     FALSE        FALSE        FALSE
-## 263   7374  TRUE      FALSE     FALSE        FALSE        FALSE
-## 264   7376  TRUE      FALSE     FALSE        FALSE        FALSE
-## 265   7378  TRUE      FALSE     FALSE        FALSE        FALSE
-## 266   7379  TRUE      FALSE     FALSE        FALSE        FALSE
-## 267   7382  TRUE      FALSE     FALSE        FALSE        FALSE
-## 268   7383  TRUE      FALSE     FALSE        FALSE        FALSE
-## 269   7384  TRUE      FALSE     FALSE        FALSE        FALSE
-## 270   7385  TRUE      FALSE     FALSE        FALSE        FALSE
-## 271   7386  TRUE      FALSE     FALSE        FALSE        FALSE
-## 272   7387  TRUE      FALSE     FALSE        FALSE        FALSE
-## 273   7388  TRUE      FALSE     FALSE        FALSE        FALSE
-## 274   7389  TRUE      FALSE     FALSE        FALSE        FALSE
-## 275   7390  TRUE      FALSE     FALSE        FALSE        FALSE
-## 276   7391  TRUE      FALSE     FALSE        FALSE        FALSE
-## 277   7392  TRUE      FALSE     FALSE        FALSE        FALSE
-## 278   7393  TRUE      FALSE     FALSE        FALSE        FALSE
-## 279   7394  TRUE      FALSE     FALSE        FALSE        FALSE
-## 280   7395  TRUE      FALSE     FALSE        FALSE        FALSE
-## 281   7408  TRUE      FALSE     FALSE        FALSE        FALSE
-## 282   7410 FALSE      FALSE     FALSE        FALSE         TRUE
-## 283   7411  TRUE      FALSE     FALSE        FALSE        FALSE
-## 284   7420  TRUE      FALSE     FALSE        FALSE        FALSE
-## 285   7421  TRUE      FALSE     FALSE        FALSE        FALSE
-## 286   7422  TRUE      FALSE     FALSE        FALSE        FALSE
-## 287   7423  TRUE      FALSE     FALSE        FALSE        FALSE
-## 288   7424  TRUE      FALSE     FALSE        FALSE        FALSE
-## 289   7426  TRUE      FALSE     FALSE        FALSE        FALSE
-## 290   7434  TRUE      FALSE     FALSE        FALSE        FALSE
-## 291   7435  TRUE      FALSE     FALSE        FALSE        FALSE
-## 292   7436  TRUE      FALSE     FALSE        FALSE        FALSE
-## 293   7437  TRUE      FALSE     FALSE        FALSE        FALSE
-## 294   7438  TRUE      FALSE     FALSE        FALSE        FALSE
-## 295   7439  TRUE      FALSE     FALSE        FALSE        FALSE
-## 296   7440  TRUE      FALSE     FALSE        FALSE        FALSE
-## 297   7441  TRUE      FALSE     FALSE        FALSE        FALSE
-## 298   7442  TRUE      FALSE     FALSE        FALSE        FALSE
-## 299   7443  TRUE      FALSE     FALSE        FALSE        FALSE
-## 300   7444  TRUE      FALSE     FALSE        FALSE        FALSE
-## 301   7447  TRUE      FALSE     FALSE        FALSE        FALSE
-## 302   7448  TRUE      FALSE     FALSE        FALSE        FALSE
-## 303   7451  TRUE      FALSE     FALSE        FALSE        FALSE
-## 304   7452  TRUE      FALSE     FALSE        FALSE        FALSE
-## 305   7455  TRUE      FALSE     FALSE        FALSE        FALSE
-## 306   7456  TRUE      FALSE     FALSE        FALSE        FALSE
-## 307   7457  TRUE      FALSE     FALSE        FALSE        FALSE
-## 308   7458  TRUE      FALSE     FALSE        FALSE        FALSE
-## 309   7459  TRUE      FALSE     FALSE        FALSE        FALSE
-## 310   7687  TRUE      FALSE     FALSE        FALSE        FALSE
-## 311   7697  TRUE      FALSE     FALSE        FALSE        FALSE
-## 312   7726  TRUE      FALSE     FALSE        FALSE        FALSE
-## 313   7833  TRUE      FALSE     FALSE        FALSE        FALSE
-## 314   7882  TRUE      FALSE     FALSE        FALSE        FALSE
-## 315   7907  TRUE      FALSE     FALSE        FALSE        FALSE
-## 316   7922  TRUE      FALSE     FALSE        FALSE        FALSE
-## 317   7933  TRUE      FALSE     FALSE        FALSE        FALSE
-## 318   7937  TRUE      FALSE     FALSE        FALSE        FALSE
-## 319   7941  TRUE      FALSE     FALSE        FALSE        FALSE
-## 320   7950  TRUE      FALSE     FALSE        FALSE        FALSE
-## 321   7955  TRUE      FALSE     FALSE        FALSE        FALSE
-## 322   7965  TRUE      FALSE     FALSE        FALSE        FALSE
-## 323   7966  TRUE      FALSE     FALSE        FALSE        FALSE
-## 324   7973  TRUE      FALSE     FALSE        FALSE        FALSE
-## 325   7978  TRUE      FALSE     FALSE        FALSE        FALSE
-## 326   7981  TRUE      FALSE     FALSE        FALSE        FALSE
-## 327   7986  TRUE      FALSE     FALSE        FALSE        FALSE
-## 328   7987  TRUE      FALSE     FALSE        FALSE        FALSE
-## 329   7988  TRUE      FALSE     FALSE        FALSE        FALSE
-## 330   7990  TRUE      FALSE     FALSE        FALSE        FALSE
-## 331   7991  TRUE      FALSE     FALSE        FALSE        FALSE
-## 332   7993  TRUE      FALSE     FALSE        FALSE        FALSE
-## 333   7994  TRUE      FALSE     FALSE        FALSE        FALSE
-## 334   7997  TRUE      FALSE     FALSE        FALSE        FALSE
-## 335   8000  TRUE      FALSE     FALSE        FALSE        FALSE
-## 336   8002 FALSE      FALSE     FALSE        FALSE         TRUE
-## 337   8004  TRUE      FALSE     FALSE        FALSE        FALSE
-## 338   8006  TRUE      FALSE     FALSE        FALSE        FALSE
-## 339   8010  TRUE      FALSE     FALSE        FALSE        FALSE
-## 340   8011  TRUE      FALSE     FALSE        FALSE        FALSE
-## 341   8012  TRUE      FALSE     FALSE        FALSE        FALSE
-## 342   8018  TRUE      FALSE     FALSE        FALSE        FALSE
-## 343   8021  TRUE      FALSE     FALSE        FALSE        FALSE
-## 344   8023  TRUE      FALSE     FALSE        FALSE        FALSE
-## 345   8025  TRUE      FALSE     FALSE        FALSE        FALSE
-## 346   8026  TRUE      FALSE     FALSE        FALSE        FALSE
-## 347   8027  TRUE      FALSE     FALSE        FALSE        FALSE
-## 348   8028  TRUE      FALSE     FALSE        FALSE        FALSE
-## 349   8067  TRUE      FALSE     FALSE        FALSE        FALSE
-## 350   8069  TRUE      FALSE     FALSE        FALSE        FALSE
-## 351   8070  TRUE      FALSE     FALSE        FALSE        FALSE
-## 352   8075  TRUE      FALSE     FALSE        FALSE        FALSE
-## 353   8083  TRUE      FALSE     FALSE        FALSE        FALSE
-## 354   8093  TRUE      FALSE     FALSE        FALSE        FALSE
-## 355   8099  TRUE      FALSE     FALSE        FALSE        FALSE
-## 356   8122  TRUE      FALSE     FALSE        FALSE        FALSE
-## 357   8128  TRUE      FALSE     FALSE        FALSE        FALSE
+##   ProfID valid depthLogic sameDepth missingDepth overlapOrGap
+## 1    154  TRUE      FALSE     FALSE        FALSE        FALSE
+## 2    197  TRUE      FALSE     FALSE        FALSE        FALSE
+## 3    262  TRUE      FALSE     FALSE        FALSE        FALSE
+## 4   2700  TRUE      FALSE     FALSE        FALSE        FALSE
+## 5   2702  TRUE      FALSE     FALSE        FALSE        FALSE
+## 6   2705  TRUE      FALSE     FALSE        FALSE        FALSE
 \end{verbatim}
 
 \begin{Shaded}
@@ -1947,8 +1596,7 @@ The PTF to be chosen for estimating the BD of the missing horizons should be the
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Removed 356 rows containing non-finite values
-## (`stat_density()`).
+## Warning: Removed 356 rows containing non-finite values (`stat_density()`).
 \end{verbatim}
 
 \includegraphics{GSNmap_Technical_Manual_files/figure-latex/unnamed-chunk-12-1.pdf}
@@ -2682,7 +2330,7 @@ To begin, we open \emph{RStudio} and empty our global environment. Then, we set 
 \CommentTok{\# GSP{-}Secretariat}
 \CommentTok{\# Contributors: Isabel Luotto (GSP{-}FAO)}
 \CommentTok{\#               Marcos E. Angelini (GSP{-}FAO)}
-\CommentTok{\#               Luis Rodríguez Lado (GSP{-}FAO)}
+\CommentTok{\#               Luis Rodriguez Lado (GSP{-}FAO)}
 \CommentTok{\#               Stephen Roecker (NRCS{-}USDA)}
 \CommentTok{\#\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 

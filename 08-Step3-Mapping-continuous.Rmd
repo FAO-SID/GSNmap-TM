@@ -30,7 +30,7 @@ To begin, we open *RStudio* and empty our global environment. Then, we set the w
 # GSP-Secretariat
 # Contributors: Isabel Luotto (GSP-FAO)
 #               Marcos E. Angelini (GSP-FAO)
-#               Luis Rodríguez Lado (GSP-FAO)
+#               Luis Rodriguez Lado (GSP-FAO)
 #               Stephen Roecker (NRCS-USDA)
 #________________________________________________________________
 

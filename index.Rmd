@@ -57,8 +57,8 @@ template: null
 
 ```{r set-options, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE, eval = FALSE}
 
-options(width = 60)
-options(scipen=999)
+options(width = 65 ,scipen=999)
+
 
 library(kableExtra)
 
@@ -79,7 +79,7 @@ knitr::opts_chunk$set(cache=F,fig.pos = 'H', fig.cap = T,dev = 'jpeg')
 \listoffigures
 \listoftables
 \nopagebreak[5]
-\lstset{breaklines=true}
+
 
 ```{r, echo = F, eval = T, fig.cap = ""}
 knitr::include_graphics("images/frontcover.jpg")

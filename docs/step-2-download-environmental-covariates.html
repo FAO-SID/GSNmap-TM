@@ -313,925 +313,14 @@ Global Soil Nutrient and Nutrient Budgets maps (GSNmap) Phase I</p></a>
 <h1><span class="header-section-number">Chapter 7</span> Step 2: download environmental covariates<a href="step-2-download-environmental-covariates.html#step-2-download-environmental-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="environmental-covariates" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Environmental covariates<a href="step-2-download-environmental-covariates.html#environmental-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The SCORPAN equation (Eq. <a href="digital-soil-mapping.html#eq:scorpan">(4.1)</a>) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table <a href="step-2-download-environmental-covariates.html#tab:covs1">7.1</a> lists all the environmental covariates that can be implemented under the present DSM framework. Apart from the environmental covariates mentioned in Table <a href="step-2-download-environmental-covariates.html#tab:covs1">7.1</a>, other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table <a href="step-2-download-environmental-covariates.html#tab:covs1">7.1</a>. Thus, the selection of suitable covariate layers needs to be assessed with common sense and applying expert knowledge.</p>
-<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:covs1">Table 7.1: </span>List of environmental covariates.
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Description
-</th>
-<th style="text-align:left;">
-Code
-</th>
-<th style="text-align:left;">
-Resolution m
-</th>
-</tr>
-</thead>
-<tbody>
-<tr grouplength="3">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Temperature</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean air temperature (annual)
-</td>
-<td style="text-align:left;">
-bio1
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean daily temperature of warmest month
-</td>
-<td style="text-align:left;">
-bio5
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean daily temperature of coldest month
-</td>
-<td style="text-align:left;">
-bio6
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="5">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Precipitation</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean annual precipitation
-</td>
-<td style="text-align:left;">
-bio12
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean precipitation of wettest month
-</td>
-<td style="text-align:left;">
-bio13
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean precipitation of driest month
-</td>
-<td style="text-align:left;">
-bio14
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean monthly precipitation of wettest quarter
-</td>
-<td style="text-align:left;">
-bio16
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean monthly precipitation of driest quarter
-</td>
-<td style="text-align:left;">
-bio17
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="4">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Potential evapotranspiration (PET)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean monthly PET
-</td>
-<td style="text-align:left;">
-pet_penman_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Minimum monthly PET
-</td>
-<td style="text-align:left;">
-pet_penman_min
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Range monthly PET
-</td>
-<td style="text-align:left;">
-pet_penman_range
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Maximum monthly PET
-</td>
-<td style="text-align:left;">
-pet_penman_max
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="3">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Wind</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Minimum monthly wind speed
-</td>
-<td style="text-align:left;">
-sfcWind_min
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Maximum monthly wind speed
-</td>
-<td style="text-align:left;">
-sfcWind_max
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Range monthly wind speed
-</td>
-<td style="text-align:left;">
-sfcWind_range
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="2">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Growing season</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Number of days with mean daily air
-</td>
-<td style="text-align:left;">
-ngd10
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-temperature above 10 degrees Celsius
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr grouplength="8">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Vegetation indices (NDVI) (MOD13Q1)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean March-May from 2000-2022
-</td>
-<td style="text-align:left;">
-ndvi_030405_mean
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean June-August from 2000-2022
-</td>
-<td style="text-align:left;">
-ndvi_060708_mean
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean September-November from 2000-2022
-</td>
-<td style="text-align:left;">
-ndvi_091011_mean
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean December-February from 2000-2022
-</td>
-<td style="text-align:left;">
-ndvi_120102_mean
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation March-May (2000-2022)
-</td>
-<td style="text-align:left;">
-ndvi_030405_sd
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation June-August (2000-2022)
-</td>
-<td style="text-align:left;">
-ndvi_060708_sd
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Sept.-Nov. (2000-2022)
-</td>
-<td style="text-align:left;">
-ndvi_091011_sd
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Dec.-Feb. (2000-2022)
-</td>
-<td style="text-align:left;">
-ndvi_120102_sd
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr grouplength="8">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Fraction of photosynthetically active radiation (FPAR) (MOD15A2H)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean March-May from 2000-2022
-</td>
-<td style="text-align:left;">
-fpar_030405_mean
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean June-August from 2000-2022
-</td>
-<td style="text-align:left;">
-fpar_060708_mean
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean September-November from 2000-2022
-</td>
-<td style="text-align:left;">
-fpar_091011_mean
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean December-February from 2000-2022
-</td>
-<td style="text-align:left;">
-fpar_120102_mean
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation March-May (2000-2022)
-</td>
-<td style="text-align:left;">
-fpar_030405_sd
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation June-August (2000-2022)
-</td>
-<td style="text-align:left;">
-fpar_060708_sd
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Sept.-Nov. (2000-2022)
-</td>
-<td style="text-align:left;">
-fpar_091011_sd
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Dec.-Feb. (2000-2022)
-</td>
-<td style="text-align:left;">
-fpar_120102_sd
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr grouplength="8">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Land surface temperature day (LSTD) (MOD11A2)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean March-May from 2000-2022
-</td>
-<td style="text-align:left;">
-lstd_030405_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean June-August from 2000-2022
-</td>
-<td style="text-align:left;">
-lstd_060708_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean September-November from 2000-2022
-</td>
-<td style="text-align:left;">
-lstd_091011_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean December-February from 2000-2022
-</td>
-<td style="text-align:left;">
-lstd_120102_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation March-May (2000-2022)
-</td>
-<td style="text-align:left;">
-lstd_030405_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation June-August (2000-2022)
-</td>
-<td style="text-align:left;">
-lstd_060708_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Sept.-Nov. (2000-2022)
-</td>
-<td style="text-align:left;">
-lstd_091011_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Dec.-Feb. (2000-2022)
-</td>
-<td style="text-align:left;">
-lstd_120102_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="8">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Normalised difference between LST day and LST night (MOD11A2)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean March-May from 2000-2022
-</td>
-<td style="text-align:left;">
-ndlstd_030405_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean June-August from 2000-2022
-</td>
-<td style="text-align:left;">
-ndlstd_060708_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean September-November from 2000-2022
-</td>
-<td style="text-align:left;">
-ndlstd_091011_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean December-February from 2000-2022
-</td>
-<td style="text-align:left;">
-ndlstd_120102_mean
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation March-May (2000-2022)
-</td>
-<td style="text-align:left;">
-ndlstd_030405_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation June-August (2000-2022)
-</td>
-<td style="text-align:left;">
-ndlstd_060708_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Sept.-Nov. (2000-2022)
-</td>
-<td style="text-align:left;">
-ndlstd_091011_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Standard deviation Dec.-Feb. (2000-2022)
-</td>
-<td style="text-align:left;">
-ndlstd_120102_sd
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Short-wave Infrared (SWIR) black-sky albedo for shortwave broadband (MCD43A3)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean June-August from 2000-2022
-</td>
-<td style="text-align:left;">
-swir_060708_mean
-</td>
-<td style="text-align:left;">
-5–
-</td>
-</tr>
-<tr grouplength="1">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>MODIS snow cover (MOD10A1)</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean snow cover
-</td>
-<td style="text-align:left;">
-mean_snow_cover
-</td>
-<td style="text-align:left;">
-500
-</td>
-</tr>
-<tr grouplength="9">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Land cover dynamic world 10m near real-time land use/land cover (LULC) dataset</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean estimated probability of complete coverage by trees
-</td>
-<td style="text-align:left;">
-trees
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean estimated probability of complete coverage
-</td>
-<td style="text-align:left;">
-shrub_and_scrub
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-by shrub and scrub
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean estimated probability of complete coverage
-</td>
-<td style="text-align:left;">
-flooded_vegetation
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-by flooded vegetation
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean estimated probability of complete coverage
-</td>
-<td style="text-align:left;">
-grass
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-by grasses
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Mean estimated probability of complete coverage
-</td>
-<td style="text-align:left;">
-crop
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-by bare
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr grouplength="13">
-<td colspan="3" style="background-color: #666; color: #fff;">
-<strong>Terrain</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Profile curvature
-</td>
-<td style="text-align:left;">
-curvature
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Downslope curvature
-</td>
-<td style="text-align:left;">
-downslopecurvature
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Upslope curvature
-</td>
-<td style="text-align:left;">
-upslopecurvature
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Deviation from mean value
-</td>
-<td style="text-align:left;">
-dvm
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-deviation from mean value
-</td>
-<td style="text-align:left;">
-dvm2
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Elevation
-</td>
-<td style="text-align:left;">
-elevation
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Melton ruggedness number
-</td>
-<td style="text-align:left;">
-mrn
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Negative openness
-</td>
-<td style="text-align:left;">
-neg_openness
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Positive openness
-</td>
-<td style="text-align:left;">
-pos_openness
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Slope
-</td>
-<td style="text-align:left;">
-slope
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Topographic position index
-</td>
-<td style="text-align:left;">
-tpi
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Terrain wetness index
-</td>
-<td style="text-align:left;">
-twi
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Multiresolution of valley bottom flatness
-</td>
-<td style="text-align:left;">
-vbf
-</td>
-<td style="text-align:left;">
-250
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Global terrestrial Human Footprint dataset from 2013
-</td>
-<td style="text-align:left;">
-hfp2013_merisINT
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-DMSP-OLS Nighttime Lights Time Series
-</td>
-<td style="text-align:left;">
-night_lights_stable_2013
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Global Human Settlement Layer 2020
-</td>
-<td style="text-align:left;">
-population_density_2020
-</td>
-<td style="text-align:left;">
-1000
-</td>
-</tr>
-</tbody>
-</table>
+<p>The SCORPAN equation (Eq. <a href="digital-soil-mapping.html#eq:scorpan">(4.1)</a>) refers to the soil-forming factors that determine the spatial variation of soils. However, these factors cannot be measured directly. Instead, proxies of these soil forming factors are used. One essential characteristic of the environmental covariates is that they are spatially explicit, covering the whole study area. The following Table <a href="#tab:covs1"><strong>??</strong></a> lists all the environmental covariates that can be implemented under the present DSM framework. Apart from the environmental covariates mentioned in Table <a href="#tab:covs1"><strong>??</strong></a>, other types of maps could also be included, such as Global Surface Water Mapping Layers and Water Soil Erosion from the Joint Research Centre (JRC). At national level there may be very significant covariates that could complement or replace the covariates of Table <a href="#tab:covs1"><strong>??</strong></a>. Thus, the selection of suitable covariate layers needs to be assessed with common sense and applying expert knowledge.</p>
 </div>
 <div id="download-covariates-and-cropland-mask-with-google-earth-engine-gee" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Download covariates and cropland mask with Google Earth Engine (GEE)<a href="step-2-download-environmental-covariates.html#download-covariates-and-cropland-mask-with-google-earth-engine-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following are the steps to access and download the environmental covariates and cropland mask. The GSP has streamlined the process of downloading environmental covariates clipped to national borders from GEE. This chapter aims to guide you on how to download environmental covariates using a GEE script written in JavaScript.</p>
 <p>You can find the JavaScript code in the material provided in this technical manual under <a href="https://github.com/FAO-GSP/GSNmap-TM/tree/main/Digital-Soil-Mapping/03-Scripts">03-scripts/3.0.Download_Covariates_&amp;_Mask.txt</a>. To use the code, simply copy and paste the text in the GEE console as shown in the figure below.</p>
 <div class="figure"><span style="display:block;" id="fig:screenshot"></span>
-<img src="images/javaScript_GEE.png" alt="Copy and paste script in the code editor." width="924" />
+<img src="images/javaScript_GEE.png" alt="Copy and paste script in the code editor." width="100%" />
 <p class="caption">
 Figure 7.1: Copy and paste script in the code editor.
 </p>
@@ -1243,94 +332,99 @@ Figure 7.1: Copy and paste script in the code editor.
 <p>In GEE, an “asset” refers to any data or code that has been uploaded and stored in GEE’s cloud-based servers. Assets can include remote sensing data, vector data, and even scripts or functions.</p>
 <p>The following code reads the assets that have been created by the GSP in GEE. This means that the code accesses the data and scripts that GSP has uploaded to GEE, and uses them to perform specific tasks or analyses. By leveraging GEE’s cloud-based infrastructure and GSP’s assets, users can easily access and analyze large amounts of data without the need for local storage or processing power.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb72-1"><a href="step-2-download-environmental-covariates.html#cb72-1" aria-hidden="true" tabindex="-1"></a>#Empty environment and cache</span>
-<span id="cb72-2"><a href="step-2-download-environmental-covariates.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> assets <span class="op">=</span> [<span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1&quot;</span><span class="op">,</span></span>
-<span id="cb72-3"><a href="step-2-download-environmental-covariates.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12&quot;</span><span class="op">,</span></span>
-<span id="cb72-4"><a href="step-2-download-environmental-covariates.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13&quot;</span><span class="op">,</span></span>
-<span id="cb72-5"><a href="step-2-download-environmental-covariates.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14&quot;</span><span class="op">,</span></span>
-<span id="cb72-6"><a href="step-2-download-environmental-covariates.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio16&quot;</span><span class="op">,</span></span>
-<span id="cb72-7"><a href="step-2-download-environmental-covariates.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio17&quot;</span><span class="op">,</span></span>
-<span id="cb72-8"><a href="step-2-download-environmental-covariates.html#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio5&quot;</span><span class="op">,</span></span>
-<span id="cb72-9"><a href="step-2-download-environmental-covariates.html#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio6&quot;</span><span class="op">,</span></span>
-<span id="cb72-10"><a href="step-2-download-environmental-covariates.html#cb72-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/ngd10&quot;</span><span class="op">,</span></span>
-<span id="cb72-11"><a href="step-2-download-environmental-covariates.html#cb72-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_max&quot;</span><span class="op">,</span></span>
-<span id="cb72-12"><a href="step-2-download-environmental-covariates.html#cb72-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-13"><a href="step-2-download-environmental-covariates.html#cb72-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_min&quot;</span><span class="op">,</span></span>
-<span id="cb72-14"><a href="step-2-download-environmental-covariates.html#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_range&quot;</span><span class="op">,</span></span>
-<span id="cb72-15"><a href="step-2-download-environmental-covariates.html#cb72-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_max&quot;</span><span class="op">,</span></span>
-<span id="cb72-16"><a href="step-2-download-environmental-covariates.html#cb72-16" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-17"><a href="step-2-download-environmental-covariates.html#cb72-17" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_range&quot;</span><span class="op">,</span></span>
-<span id="cb72-18"><a href="step-2-download-environmental-covariates.html#cb72-18" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-19"><a href="step-2-download-environmental-covariates.html#cb72-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-20"><a href="step-2-download-environmental-covariates.html#cb72-20" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-21"><a href="step-2-download-environmental-covariates.html#cb72-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-22"><a href="step-2-download-environmental-covariates.html#cb72-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-23"><a href="step-2-download-environmental-covariates.html#cb72-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-24"><a href="step-2-download-environmental-covariates.html#cb72-24" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-25"><a href="step-2-download-environmental-covariates.html#cb72-25" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-26"><a href="step-2-download-environmental-covariates.html#cb72-26" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-27"><a href="step-2-download-environmental-covariates.html#cb72-27" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-28"><a href="step-2-download-environmental-covariates.html#cb72-28" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-29"><a href="step-2-download-environmental-covariates.html#cb72-29" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-30"><a href="step-2-download-environmental-covariates.html#cb72-30" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-31"><a href="step-2-download-environmental-covariates.html#cb72-31" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-32"><a href="step-2-download-environmental-covariates.html#cb72-32" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-33"><a href="step-2-download-environmental-covariates.html#cb72-33" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-34"><a href="step-2-download-environmental-covariates.html#cb72-34" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-35"><a href="step-2-download-environmental-covariates.html#cb72-35" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-36"><a href="step-2-download-environmental-covariates.html#cb72-36" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-37"><a href="step-2-download-environmental-covariates.html#cb72-37" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-38"><a href="step-2-download-environmental-covariates.html#cb72-38" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-39"><a href="step-2-download-environmental-covariates.html#cb72-39" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-40"><a href="step-2-download-environmental-covariates.html#cb72-40" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-41"><a href="step-2-download-environmental-covariates.html#cb72-41" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-42"><a href="step-2-download-environmental-covariates.html#cb72-42" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-43"><a href="step-2-download-environmental-covariates.html#cb72-43" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-44"><a href="step-2-download-environmental-covariates.html#cb72-44" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-45"><a href="step-2-download-environmental-covariates.html#cb72-45" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-46"><a href="step-2-download-environmental-covariates.html#cb72-46" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-47"><a href="step-2-download-environmental-covariates.html#cb72-47" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-48"><a href="step-2-download-environmental-covariates.html#cb72-48" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-49"><a href="step-2-download-environmental-covariates.html#cb72-49" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_sd&quot;</span><span class="op">,</span></span>
-<span id="cb72-50"><a href="step-2-download-environmental-covariates.html#cb72-50" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/snow_cover&quot;</span><span class="op">,</span></span>
-<span id="cb72-51"><a href="step-2-download-environmental-covariates.html#cb72-51" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/swir_060708_500m_mean&quot;</span><span class="op">,</span></span>
-<span id="cb72-52"><a href="step-2-download-environmental-covariates.html#cb72-52" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/crops&quot;</span><span class="op">,</span></span>
-<span id="cb72-53"><a href="step-2-download-environmental-covariates.html#cb72-53" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/flooded_vegetation&quot;</span><span class="op">,</span></span>
-<span id="cb72-54"><a href="step-2-download-environmental-covariates.html#cb72-54" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/grass&quot;</span><span class="op">,</span></span>
-<span id="cb72-55"><a href="step-2-download-environmental-covariates.html#cb72-55" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/shrub_and_scrub&quot;</span><span class="op">,</span></span>
-<span id="cb72-56"><a href="step-2-download-environmental-covariates.html#cb72-56" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/trees&quot;</span><span class="op">,</span></span>
-<span id="cb72-57"><a href="step-2-download-environmental-covariates.html#cb72-57" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_curvature_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-58"><a href="step-2-download-environmental-covariates.html#cb72-58" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_downslopecurvature_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-59"><a href="step-2-download-environmental-covariates.html#cb72-59" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm2_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-60"><a href="step-2-download-environmental-covariates.html#cb72-60" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-61"><a href="step-2-download-environmental-covariates.html#cb72-61" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_elevation_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-62"><a href="step-2-download-environmental-covariates.html#cb72-62" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_mrn_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-63"><a href="step-2-download-environmental-covariates.html#cb72-63" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_neg_openness_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-64"><a href="step-2-download-environmental-covariates.html#cb72-64" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_pos_openness_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-65"><a href="step-2-download-environmental-covariates.html#cb72-65" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_slope_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-66"><a href="step-2-download-environmental-covariates.html#cb72-66" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-67"><a href="step-2-download-environmental-covariates.html#cb72-67" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m&quot;</span><span class="op">,</span></span>
-<span id="cb72-68"><a href="step-2-download-environmental-covariates.html#cb72-68" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-69"><a href="step-2-download-environmental-covariates.html#cb72-69" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m&quot;</span><span class="op">,</span></span>
-<span id="cb72-70"><a href="step-2-download-environmental-covariates.html#cb72-70" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/hfp2013_merisINT&quot;</span><span class="op">,</span></span>
-<span id="cb72-71"><a href="step-2-download-environmental-covariates.html#cb72-71" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/night_lights_stable_2013&quot;</span><span class="op">,</span></span>
-<span id="cb72-72"><a href="step-2-download-environmental-covariates.html#cb72-72" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020&quot;</span>]<span class="op">;</span></span></code></pre></div>
+<span id="cb72-2"><a href="step-2-download-environmental-covariates.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> assets <span class="op">=</span> </span>
+<span id="cb72-3"><a href="step-2-download-environmental-covariates.html#cb72-3" aria-hidden="true" tabindex="-1"></a>[<span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio1&quot;</span><span class="op">,</span></span>
+<span id="cb72-4"><a href="step-2-download-environmental-covariates.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio12&quot;</span><span class="op">,</span></span>
+<span id="cb72-5"><a href="step-2-download-environmental-covariates.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio13&quot;</span><span class="op">,</span></span>
+<span id="cb72-6"><a href="step-2-download-environmental-covariates.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio14&quot;</span><span class="op">,</span></span>
+<span id="cb72-7"><a href="step-2-download-environmental-covariates.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio16&quot;</span><span class="op">,</span></span>
+<span id="cb72-8"><a href="step-2-download-environmental-covariates.html#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio17&quot;</span><span class="op">,</span></span>
+<span id="cb72-9"><a href="step-2-download-environmental-covariates.html#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio5&quot;</span><span class="op">,</span></span>
+<span id="cb72-10"><a href="step-2-download-environmental-covariates.html#cb72-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/bio6&quot;</span><span class="op">,</span></span>
+<span id="cb72-11"><a href="step-2-download-environmental-covariates.html#cb72-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/ngd10&quot;</span><span class="op">,</span></span>
+<span id="cb72-12"><a href="step-2-download-environmental-covariates.html#cb72-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_max&quot;</span><span class="op">,</span></span>
+<span id="cb72-13"><a href="step-2-download-environmental-covariates.html#cb72-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-14"><a href="step-2-download-environmental-covariates.html#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_min&quot;</span><span class="op">,</span></span>
+<span id="cb72-15"><a href="step-2-download-environmental-covariates.html#cb72-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/pet_penman_range&quot;</span><span class="op">,</span></span>
+<span id="cb72-16"><a href="step-2-download-environmental-covariates.html#cb72-16" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_max&quot;</span><span class="op">,</span></span>
+<span id="cb72-17"><a href="step-2-download-environmental-covariates.html#cb72-17" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-18"><a href="step-2-download-environmental-covariates.html#cb72-18" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/CHELSA/sfcWind_range&quot;</span><span class="op">,</span></span>
+<span id="cb72-19"><a href="step-2-download-environmental-covariates.html#cb72-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-20"><a href="step-2-download-environmental-covariates.html#cb72-20" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_030405_500m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-21"><a href="step-2-download-environmental-covariates.html#cb72-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-22"><a href="step-2-download-environmental-covariates.html#cb72-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_060708_500m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-23"><a href="step-2-download-environmental-covariates.html#cb72-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-24"><a href="step-2-download-environmental-covariates.html#cb72-24" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_091011_500m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-25"><a href="step-2-download-environmental-covariates.html#cb72-25" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-26"><a href="step-2-download-environmental-covariates.html#cb72-26" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/fpar_120102_500m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-27"><a href="step-2-download-environmental-covariates.html#cb72-27" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-28"><a href="step-2-download-environmental-covariates.html#cb72-28" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_030405_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-29"><a href="step-2-download-environmental-covariates.html#cb72-29" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-30"><a href="step-2-download-environmental-covariates.html#cb72-30" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_060708_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-31"><a href="step-2-download-environmental-covariates.html#cb72-31" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-32"><a href="step-2-download-environmental-covariates.html#cb72-32" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_091011_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-33"><a href="step-2-download-environmental-covariates.html#cb72-33" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-34"><a href="step-2-download-environmental-covariates.html#cb72-34" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/lstd_120102_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-35"><a href="step-2-download-environmental-covariates.html#cb72-35" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-36"><a href="step-2-download-environmental-covariates.html#cb72-36" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_030405_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-37"><a href="step-2-download-environmental-covariates.html#cb72-37" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-38"><a href="step-2-download-environmental-covariates.html#cb72-38" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_060708_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-39"><a href="step-2-download-environmental-covariates.html#cb72-39" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-40"><a href="step-2-download-environmental-covariates.html#cb72-40" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_091011_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-41"><a href="step-2-download-environmental-covariates.html#cb72-41" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-42"><a href="step-2-download-environmental-covariates.html#cb72-42" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndlst_120102_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-43"><a href="step-2-download-environmental-covariates.html#cb72-43" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-44"><a href="step-2-download-environmental-covariates.html#cb72-44" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_030405_250m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-45"><a href="step-2-download-environmental-covariates.html#cb72-45" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-46"><a href="step-2-download-environmental-covariates.html#cb72-46" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_060708_250m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-47"><a href="step-2-download-environmental-covariates.html#cb72-47" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-48"><a href="step-2-download-environmental-covariates.html#cb72-48" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_091011_250m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-49"><a href="step-2-download-environmental-covariates.html#cb72-49" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-50"><a href="step-2-download-environmental-covariates.html#cb72-50" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/ndvi_120102_250m_sd&quot;</span><span class="op">,</span></span>
+<span id="cb72-51"><a href="step-2-download-environmental-covariates.html#cb72-51" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/snow_cover&quot;</span><span class="op">,</span></span>
+<span id="cb72-52"><a href="step-2-download-environmental-covariates.html#cb72-52" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/MODIS/swir_060708_500m_mean&quot;</span><span class="op">,</span></span>
+<span id="cb72-53"><a href="step-2-download-environmental-covariates.html#cb72-53" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/crops&quot;</span><span class="op">,</span></span>
+<span id="cb72-54"><a href="step-2-download-environmental-covariates.html#cb72-54" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/flooded_vegetation&quot;</span><span class="op">,</span></span>
+<span id="cb72-55"><a href="step-2-download-environmental-covariates.html#cb72-55" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/grass&quot;</span><span class="op">,</span></span>
+<span id="cb72-56"><a href="step-2-download-environmental-covariates.html#cb72-56" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/shrub_and_scrub&quot;</span><span class="op">,</span></span>
+<span id="cb72-57"><a href="step-2-download-environmental-covariates.html#cb72-57" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/LANDCOVER/trees&quot;</span><span class="op">,</span></span>
+<span id="cb72-58"><a href="step-2-download-environmental-covariates.html#cb72-58" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_curvature_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-59"><a href="step-2-download-environmental-covariates.html#cb72-59" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_downslopecurvature_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-60"><a href="step-2-download-environmental-covariates.html#cb72-60" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm2_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-61"><a href="step-2-download-environmental-covariates.html#cb72-61" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_dvm_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-62"><a href="step-2-download-environmental-covariates.html#cb72-62" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_elevation_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-63"><a href="step-2-download-environmental-covariates.html#cb72-63" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_mrn_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-64"><a href="step-2-download-environmental-covariates.html#cb72-64" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_neg_openness_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-65"><a href="step-2-download-environmental-covariates.html#cb72-65" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_pos_openness_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-66"><a href="step-2-download-environmental-covariates.html#cb72-66" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_slope_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-67"><a href="step-2-download-environmental-covariates.html#cb72-67" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_tpi_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-68"><a href="step-2-download-environmental-covariates.html#cb72-68" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_twi_500m&quot;</span><span class="op">,</span></span>
+<span id="cb72-69"><a href="step-2-download-environmental-covariates.html#cb72-69" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_upslopecurvature_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-70"><a href="step-2-download-environmental-covariates.html#cb72-70" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/OPENLANDMAP/dtm_vbf_250m&quot;</span><span class="op">,</span></span>
+<span id="cb72-71"><a href="step-2-download-environmental-covariates.html#cb72-71" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/hfp2013_merisINT&quot;</span><span class="op">,</span></span>
+<span id="cb72-72"><a href="step-2-download-environmental-covariates.html#cb72-72" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/night_lights_stable_2013&quot;</span><span class="op">,</span></span>
+<span id="cb72-73"><a href="step-2-download-environmental-covariates.html#cb72-73" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;projects/digital-soil-mapping-gsp-fao/assets/POP/population_density_2020&quot;</span>]<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="define-the-region-of-interest-roi" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Define the region of interest (ROI)<a href="step-2-download-environmental-covariates.html#define-the-region-of-interest-roi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This script in GEE loads borders of a specific country or a user-defined shapefile into the workspace. It does this by creating a region of interest (ROI) based on the country borders. The script first specifies a list of countries to be included in the ROI and then loads the corresponding geometries from the ‘USDOS/LSIB_SIMPLE/2017’ feature collection in the case of the LSIB 2017 dataset. In the case of a user-defined shapefile, the script uploads the borders of the ROI as an asset and replaces ‘your_shapefile’ with the path to the uploaded shapefile. Finally, the region variable is assigned the geometry of the ROI, which can be used to clip and process data within the specified boundary. You must change either the name of the country or the shape file (as an asset) to download the covariates for your specific ROI.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb73-1"><a href="step-2-download-environmental-covariates.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Load borders </span></span>
 <span id="cb73-2"><a href="step-2-download-environmental-covariates.html#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-3"><a href="step-2-download-environmental-covariates.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co">/// Using LSIB 2017 (replace the countries that you want to download)</span></span>
-<span id="cb73-4"><a href="step-2-download-environmental-covariates.html#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> country_list <span class="op">=</span> [<span class="st">&#39;Italy&#39;</span>]<span class="op">;</span></span>
-<span id="cb73-5"><a href="step-2-download-environmental-covariates.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> aoi <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&#39;USDOS/LSIB_SIMPLE/2017&#39;</span>)</span>
-<span id="cb73-6"><a href="step-2-download-environmental-covariates.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">inList</span>(<span class="st">&#39;country_na&#39;</span><span class="op">,</span> country_list))<span class="op">;</span></span>
-<span id="cb73-7"><a href="step-2-download-environmental-covariates.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> region <span class="op">=</span> aoi<span class="op">.</span><span class="fu">geometry</span>()<span class="op">;</span></span>
-<span id="cb73-8"><a href="step-2-download-environmental-covariates.html#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-9"><a href="step-2-download-environmental-covariates.html#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="co">/// Using a shapefile</span></span>
-<span id="cb73-10"><a href="step-2-download-environmental-covariates.html#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="co">/// 1. Upload the borders of your countries as an asset</span></span>
-<span id="cb73-11"><a href="step-2-download-environmental-covariates.html#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="co">/// 2. Replace &#39;your_shapefile&#39; with the path to your shapefile</span></span>
-<span id="cb73-12"><a href="step-2-download-environmental-covariates.html#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="co">// var shapefile = ee.FeatureCollection(&#39;users/your_username/your_shapefile&#39;);</span></span>
-<span id="cb73-13"><a href="step-2-download-environmental-covariates.html#cb73-13" aria-hidden="true" tabindex="-1"></a><span class="co">// var region = shapefile.geometry();</span></span></code></pre></div>
+<span id="cb73-3"><a href="step-2-download-environmental-covariates.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co">/// Using UN 2020 (replace the countries to download)</span></span>
+<span id="cb73-4"><a href="step-2-download-environmental-covariates.html#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ISO <span class="op">=</span> [<span class="st">&#39;ITA&#39;</span>]<span class="op">;</span></span>
+<span id="cb73-5"><a href="step-2-download-environmental-covariates.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> aoi <span class="op">=</span></span>
+<span id="cb73-6"><a href="step-2-download-environmental-covariates.html#cb73-6" aria-hidden="true" tabindex="-1"></a>ee<span class="op">.</span><span class="fu">FeatureCollection</span>(</span>
+<span id="cb73-7"><a href="step-2-download-environmental-covariates.html#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;projects/digital-soil-mapping-gsp-fao/assets/UN_BORDERS/BNDA_CTY&#39;</span></span>
+<span id="cb73-8"><a href="step-2-download-environmental-covariates.html#cb73-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-9"><a href="step-2-download-environmental-covariates.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">inList</span>(<span class="st">&#39;ISO3CD&#39;</span><span class="op">,</span> ISO))<span class="op">;</span></span>
+<span id="cb73-10"><a href="step-2-download-environmental-covariates.html#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> region <span class="op">=</span> aoi<span class="op">.</span><span class="fu">geometry</span>()<span class="op">;</span></span>
+<span id="cb73-11"><a href="step-2-download-environmental-covariates.html#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-12"><a href="step-2-download-environmental-covariates.html#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="co">/// Using a shapefile</span></span>
+<span id="cb73-13"><a href="step-2-download-environmental-covariates.html#cb73-13" aria-hidden="true" tabindex="-1"></a><span class="co">/// 1. Upload the borders of your countries as an asset</span></span>
+<span id="cb73-14"><a href="step-2-download-environmental-covariates.html#cb73-14" aria-hidden="true" tabindex="-1"></a><span class="co">/// 2. Replace &#39;your_shapefile&#39; with the path to your shapefile</span></span>
+<span id="cb73-15"><a href="step-2-download-environmental-covariates.html#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="co">// var shapefile = </span></span>
+<span id="cb73-16"><a href="step-2-download-environmental-covariates.html#cb73-16" aria-hidden="true" tabindex="-1"></a><span class="co">// ee.FeatureCollection(&#39;users/your_username/your_shapefile&#39;);</span></span>
+<span id="cb73-17"><a href="step-2-download-environmental-covariates.html#cb73-17" aria-hidden="true" tabindex="-1"></a><span class="co">// var region = shapefile.geometry();</span></span></code></pre></div>
 </div>
 <div id="load-and-clip-the-covariates" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Load and clip the covariates<a href="step-2-download-environmental-covariates.html#load-and-clip-the-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1353,37 +447,39 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <div class="sourceCode" id="cb75"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb75-1"><a href="step-2-download-environmental-covariates.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function to replace masked values with zeroes for fpar bands</span></span>
 <span id="cb75-2"><a href="step-2-download-environmental-covariates.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">replaceMaskedFpar</span>(img) {</span>
 <span id="cb75-3"><a href="step-2-download-environmental-covariates.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> allBands <span class="op">=</span> img<span class="op">.</span><span class="fu">bandNames</span>()<span class="op">;</span></span>
-<span id="cb75-4"><a href="step-2-download-environmental-covariates.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fparBands <span class="op">=</span> allBands<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">stringStartsWith</span>(<span class="st">&#39;item&#39;</span><span class="op">,</span> <span class="st">&#39;fpar&#39;</span>))<span class="op">;</span></span>
-<span id="cb75-5"><a href="step-2-download-environmental-covariates.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> nonFparBands <span class="op">=</span> allBands<span class="op">.</span><span class="fu">removeAll</span>(fparBands)<span class="op">;</span></span>
-<span id="cb75-6"><a href="step-2-download-environmental-covariates.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-7"><a href="step-2-download-environmental-covariates.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fparImg <span class="op">=</span> img<span class="op">.</span><span class="fu">select</span>(fparBands)<span class="op">.</span><span class="fu">unmask</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb75-8"><a href="step-2-download-environmental-covariates.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> nonFparImg <span class="op">=</span> img<span class="op">.</span><span class="fu">select</span>(nonFparBands)<span class="op">;</span></span>
-<span id="cb75-9"><a href="step-2-download-environmental-covariates.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-10"><a href="step-2-download-environmental-covariates.html#cb75-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// If there are no fpar bands, return the original image</span></span>
-<span id="cb75-11"><a href="step-2-download-environmental-covariates.html#cb75-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> result <span class="op">=</span> ee<span class="op">.</span><span class="at">Algorithms</span><span class="op">.</span><span class="fu">If</span>(fparBands<span class="op">.</span><span class="fu">length</span>()<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)<span class="op">,</span></span>
-<span id="cb75-12"><a href="step-2-download-environmental-covariates.html#cb75-12" aria-hidden="true" tabindex="-1"></a>                                 img<span class="op">,</span></span>
-<span id="cb75-13"><a href="step-2-download-environmental-covariates.html#cb75-13" aria-hidden="true" tabindex="-1"></a>                                 nonFparImg<span class="op">.</span><span class="fu">addBands</span>(fparImg))<span class="op">;</span></span>
-<span id="cb75-14"><a href="step-2-download-environmental-covariates.html#cb75-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-15"><a href="step-2-download-environmental-covariates.html#cb75-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee<span class="op">.</span><span class="fu">Image</span>(result)<span class="op">;</span></span>
-<span id="cb75-16"><a href="step-2-download-environmental-covariates.html#cb75-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-17"><a href="step-2-download-environmental-covariates.html#cb75-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-18"><a href="step-2-download-environmental-covariates.html#cb75-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Clip each image in the collection to the region of interest and replace masked values for fpar bands</span></span>
-<span id="cb75-19"><a href="step-2-download-environmental-covariates.html#cb75-19" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clippedCollection <span class="op">=</span> assetsCollection<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(img){</span>
-<span id="cb75-20"><a href="step-2-download-environmental-covariates.html#cb75-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> clippedImg <span class="op">=</span> img<span class="op">.</span><span class="fu">clip</span>(region)<span class="op">.</span><span class="fu">toFloat</span>()<span class="op">;</span></span>
-<span id="cb75-21"><a href="step-2-download-environmental-covariates.html#cb75-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">replaceMaskedFpar</span>(clippedImg)<span class="op">;</span></span>
-<span id="cb75-22"><a href="step-2-download-environmental-covariates.html#cb75-22" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb75-23"><a href="step-2-download-environmental-covariates.html#cb75-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-24"><a href="step-2-download-environmental-covariates.html#cb75-24" aria-hidden="true" tabindex="-1"></a><span class="co">// Stack the layers and maintain the layer names in the final file</span></span>
-<span id="cb75-25"><a href="step-2-download-environmental-covariates.html#cb75-25" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> stacked <span class="op">=</span> clippedCollection<span class="op">.</span><span class="fu">toBands</span>()<span class="op">;</span></span>
-<span id="cb75-26"><a href="step-2-download-environmental-covariates.html#cb75-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-27"><a href="step-2-download-environmental-covariates.html#cb75-27" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the list of asset names</span></span>
-<span id="cb75-28"><a href="step-2-download-environmental-covariates.html#cb75-28" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> assetNames <span class="op">=</span> ee<span class="op">.</span><span class="fu">List</span>(assets)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(asset) {</span>
-<span id="cb75-29"><a href="step-2-download-environmental-covariates.html#cb75-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee<span class="op">.</span><span class="fu">String</span>(asset)<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;/&#39;</span>)<span class="op">.</span><span class="fu">get</span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb75-30"><a href="step-2-download-environmental-covariates.html#cb75-30" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb75-31"><a href="step-2-download-environmental-covariates.html#cb75-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-32"><a href="step-2-download-environmental-covariates.html#cb75-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Rename the bands with asset names</span></span>
-<span id="cb75-33"><a href="step-2-download-environmental-covariates.html#cb75-33" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> renamed <span class="op">=</span> stacked<span class="op">.</span><span class="fu">rename</span>(assetNames)<span class="op">;</span></span>
-<span id="cb75-34"><a href="step-2-download-environmental-covariates.html#cb75-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(renamed<span class="op">,</span> <span class="st">&#39;Covariates to be exported&#39;</span>)</span></code></pre></div>
+<span id="cb75-4"><a href="step-2-download-environmental-covariates.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fparBands <span class="op">=</span> </span>
+<span id="cb75-5"><a href="step-2-download-environmental-covariates.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  allBands<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">stringStartsWith</span>(<span class="st">&#39;item&#39;</span><span class="op">,</span> <span class="st">&#39;fpar&#39;</span>))<span class="op">;</span></span>
+<span id="cb75-6"><a href="step-2-download-environmental-covariates.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> nonFparBands <span class="op">=</span> allBands<span class="op">.</span><span class="fu">removeAll</span>(fparBands)<span class="op">;</span></span>
+<span id="cb75-7"><a href="step-2-download-environmental-covariates.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb75-8"><a href="step-2-download-environmental-covariates.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fparImg <span class="op">=</span> img<span class="op">.</span><span class="fu">select</span>(fparBands)<span class="op">.</span><span class="fu">unmask</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb75-9"><a href="step-2-download-environmental-covariates.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> nonFparImg <span class="op">=</span> img<span class="op">.</span><span class="fu">select</span>(nonFparBands)<span class="op">;</span></span>
+<span id="cb75-10"><a href="step-2-download-environmental-covariates.html#cb75-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb75-11"><a href="step-2-download-environmental-covariates.html#cb75-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// If there are no fpar bands, return the original image</span></span>
+<span id="cb75-12"><a href="step-2-download-environmental-covariates.html#cb75-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> result <span class="op">=</span> ee<span class="op">.</span><span class="at">Algorithms</span><span class="op">.</span><span class="fu">If</span>(fparBands<span class="op">.</span><span class="fu">length</span>()<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)<span class="op">,</span></span>
+<span id="cb75-13"><a href="step-2-download-environmental-covariates.html#cb75-13" aria-hidden="true" tabindex="-1"></a>                                 img<span class="op">,</span></span>
+<span id="cb75-14"><a href="step-2-download-environmental-covariates.html#cb75-14" aria-hidden="true" tabindex="-1"></a>                                 nonFparImg<span class="op">.</span><span class="fu">addBands</span>(fparImg))<span class="op">;</span></span>
+<span id="cb75-15"><a href="step-2-download-environmental-covariates.html#cb75-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb75-16"><a href="step-2-download-environmental-covariates.html#cb75-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee<span class="op">.</span><span class="fu">Image</span>(result)<span class="op">;</span></span>
+<span id="cb75-17"><a href="step-2-download-environmental-covariates.html#cb75-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb75-18"><a href="step-2-download-environmental-covariates.html#cb75-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-19"><a href="step-2-download-environmental-covariates.html#cb75-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Clip each image in the collection to the region </span></span>
+<span id="cb75-20"><a href="step-2-download-environmental-covariates.html#cb75-20" aria-hidden="true" tabindex="-1"></a><span class="co">//of interest and replace masked values for fpar bands</span></span>
+<span id="cb75-21"><a href="step-2-download-environmental-covariates.html#cb75-21" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clippedCollection <span class="op">=</span> assetsCollection<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(img){</span>
+<span id="cb75-22"><a href="step-2-download-environmental-covariates.html#cb75-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> clippedImg <span class="op">=</span> img<span class="op">.</span><span class="fu">clip</span>(region)<span class="op">.</span><span class="fu">toFloat</span>()<span class="op">;</span></span>
+<span id="cb75-23"><a href="step-2-download-environmental-covariates.html#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">replaceMaskedFpar</span>(clippedImg)<span class="op">;</span></span>
+<span id="cb75-24"><a href="step-2-download-environmental-covariates.html#cb75-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb75-25"><a href="step-2-download-environmental-covariates.html#cb75-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-26"><a href="step-2-download-environmental-covariates.html#cb75-26" aria-hidden="true" tabindex="-1"></a><span class="co">// Stack the layers and maintain the layer names in the final file</span></span>
+<span id="cb75-27"><a href="step-2-download-environmental-covariates.html#cb75-27" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> stacked <span class="op">=</span> clippedCollection<span class="op">.</span><span class="fu">toBands</span>()<span class="op">;</span></span>
+<span id="cb75-28"><a href="step-2-download-environmental-covariates.html#cb75-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-29"><a href="step-2-download-environmental-covariates.html#cb75-29" aria-hidden="true" tabindex="-1"></a><span class="co">// Get the list of asset names</span></span>
+<span id="cb75-30"><a href="step-2-download-environmental-covariates.html#cb75-30" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> assetNames <span class="op">=</span> ee<span class="op">.</span><span class="fu">List</span>(assets)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(asset) {</span>
+<span id="cb75-31"><a href="step-2-download-environmental-covariates.html#cb75-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee<span class="op">.</span><span class="fu">String</span>(asset)<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;/&#39;</span>)<span class="op">.</span><span class="fu">get</span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb75-32"><a href="step-2-download-environmental-covariates.html#cb75-32" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb75-33"><a href="step-2-download-environmental-covariates.html#cb75-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-34"><a href="step-2-download-environmental-covariates.html#cb75-34" aria-hidden="true" tabindex="-1"></a><span class="co">// Rename the bands with asset names</span></span>
+<span id="cb75-35"><a href="step-2-download-environmental-covariates.html#cb75-35" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> renamed <span class="op">=</span> stacked<span class="op">.</span><span class="fu">rename</span>(assetNames)<span class="op">;</span></span>
+<span id="cb75-36"><a href="step-2-download-environmental-covariates.html#cb75-36" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(renamed<span class="op">,</span> <span class="st">&#39;Covariates to be exported&#39;</span>)</span></code></pre></div>
 </div>
 <div id="visualize-and-export-the-covariates" class="section level3 hasAnchor" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> Visualize and export the covariates<a href="step-2-download-environmental-covariates.html#visualize-and-export-the-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1392,28 +488,29 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <p>Next, the script adds the renamed image (renamed) to the map and applies the visualization parameters defined in visParams. The Map.centerObject() function centers the map on the renamed image, and the Map.addLayer() function adds the image layer to the map with the specified name (‘Covariates’).</p>
 <p>In the second part of the script, the Export.image.toDrive() function is used to export the stacked image to Google Drive. This function exports the renamed image as a GeoTIFF file with the description ‘covariates’, which is saved in the ‘GEE’ folder in the user’s Google Drive (you have to either create the folder in GDrive, or indicate a different target folder). The scale parameter specifies the spatial resolution of the exported image, while the maxPixels parameter sets the maximum number of pixels that can be exported. Finally, the region parameter specifies the geographic extent of the exported image, which is set to the region variable defined earlier in the script.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb76-1"><a href="step-2-download-environmental-covariates.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Visualize the result</span></span>
-<span id="cb76-2"><a href="step-2-download-environmental-covariates.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Set a visualization parameter (you can adjust the colors as desired)</span></span>
-<span id="cb76-3"><a href="step-2-download-environmental-covariates.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> visParams <span class="op">=</span> {</span>
-<span id="cb76-4"><a href="step-2-download-environmental-covariates.html#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> <span class="st">&#39;bio1&#39;</span><span class="op">,</span></span>
-<span id="cb76-5"><a href="step-2-download-environmental-covariates.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">19248</span><span class="op">,</span></span>
-<span id="cb76-6"><a href="step-2-download-environmental-covariates.html#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">46139</span><span class="op">,</span></span>
-<span id="cb76-7"><a href="step-2-download-environmental-covariates.html#cb76-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;yellow&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span>]</span>
-<span id="cb76-8"><a href="step-2-download-environmental-covariates.html#cb76-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb76-9"><a href="step-2-download-environmental-covariates.html#cb76-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-10"><a href="step-2-download-environmental-covariates.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Add the layer to the map</span></span>
-<span id="cb76-11"><a href="step-2-download-environmental-covariates.html#cb76-11" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(renamed<span class="op">,</span> <span class="dv">6</span>)</span>
-<span id="cb76-12"><a href="step-2-download-environmental-covariates.html#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(renamed<span class="op">,</span> visParams<span class="op">,</span> <span class="st">&#39;Covariates&#39;</span>)<span class="op">;</span></span>
-<span id="cb76-13"><a href="step-2-download-environmental-covariates.html#cb76-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-2"><a href="step-2-download-environmental-covariates.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Set a visualization parameter </span></span>
+<span id="cb76-3"><a href="step-2-download-environmental-covariates.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co">// (you can adjust the colors as desired)</span></span>
+<span id="cb76-4"><a href="step-2-download-environmental-covariates.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> visParams <span class="op">=</span> {</span>
+<span id="cb76-5"><a href="step-2-download-environmental-covariates.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> <span class="st">&#39;bio1&#39;</span><span class="op">,</span></span>
+<span id="cb76-6"><a href="step-2-download-environmental-covariates.html#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">19248</span><span class="op">,</span></span>
+<span id="cb76-7"><a href="step-2-download-environmental-covariates.html#cb76-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">46139</span><span class="op">,</span></span>
+<span id="cb76-8"><a href="step-2-download-environmental-covariates.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;yellow&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span>]</span>
+<span id="cb76-9"><a href="step-2-download-environmental-covariates.html#cb76-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb76-10"><a href="step-2-download-environmental-covariates.html#cb76-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-11"><a href="step-2-download-environmental-covariates.html#cb76-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Add the layer to the map</span></span>
+<span id="cb76-12"><a href="step-2-download-environmental-covariates.html#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(renamed<span class="op">,</span> <span class="dv">6</span>)</span>
+<span id="cb76-13"><a href="step-2-download-environmental-covariates.html#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(renamed<span class="op">,</span> visParams<span class="op">,</span> <span class="st">&#39;Covariates&#39;</span>)<span class="op">;</span></span>
 <span id="cb76-14"><a href="step-2-download-environmental-covariates.html#cb76-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-15"><a href="step-2-download-environmental-covariates.html#cb76-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Export the stacked image to Google Drive</span></span>
-<span id="cb76-16"><a href="step-2-download-environmental-covariates.html#cb76-16" aria-hidden="true" tabindex="-1"></a>Export<span class="op">.</span><span class="at">image</span><span class="op">.</span><span class="fu">toDrive</span>({</span>
-<span id="cb76-17"><a href="step-2-download-environmental-covariates.html#cb76-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">image</span><span class="op">:</span> renamed<span class="op">,</span></span>
-<span id="cb76-18"><a href="step-2-download-environmental-covariates.html#cb76-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">description</span><span class="op">:</span> <span class="st">&#39;covariates&#39;</span><span class="op">,</span></span>
-<span id="cb76-19"><a href="step-2-download-environmental-covariates.html#cb76-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">folder</span><span class="op">:</span> <span class="st">&#39;GEE&#39;</span><span class="op">,</span></span>
-<span id="cb76-20"><a href="step-2-download-environmental-covariates.html#cb76-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scale</span><span class="op">:</span> <span class="dv">250</span><span class="op">,</span></span>
-<span id="cb76-21"><a href="step-2-download-environmental-covariates.html#cb76-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span><span class="op">,</span></span>
-<span id="cb76-22"><a href="step-2-download-environmental-covariates.html#cb76-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">region</span><span class="op">:</span> region</span>
-<span id="cb76-23"><a href="step-2-download-environmental-covariates.html#cb76-23" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<span id="cb76-15"><a href="step-2-download-environmental-covariates.html#cb76-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-16"><a href="step-2-download-environmental-covariates.html#cb76-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Export the stacked image to Google Drive</span></span>
+<span id="cb76-17"><a href="step-2-download-environmental-covariates.html#cb76-17" aria-hidden="true" tabindex="-1"></a>Export<span class="op">.</span><span class="at">image</span><span class="op">.</span><span class="fu">toDrive</span>({</span>
+<span id="cb76-18"><a href="step-2-download-environmental-covariates.html#cb76-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">image</span><span class="op">:</span> renamed<span class="op">,</span></span>
+<span id="cb76-19"><a href="step-2-download-environmental-covariates.html#cb76-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">description</span><span class="op">:</span> <span class="st">&#39;covariates&#39;</span><span class="op">,</span></span>
+<span id="cb76-20"><a href="step-2-download-environmental-covariates.html#cb76-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">folder</span><span class="op">:</span> <span class="st">&#39;GEE&#39;</span><span class="op">,</span></span>
+<span id="cb76-21"><a href="step-2-download-environmental-covariates.html#cb76-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scale</span><span class="op">:</span> <span class="dv">250</span><span class="op">,</span></span>
+<span id="cb76-22"><a href="step-2-download-environmental-covariates.html#cb76-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span><span class="op">,</span></span>
+<span id="cb76-23"><a href="step-2-download-environmental-covariates.html#cb76-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">region</span><span class="op">:</span> region</span>
+<span id="cb76-24"><a href="step-2-download-environmental-covariates.html#cb76-24" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="load-and-clip-the-copernicus-land-cover-map-and" class="section level3 hasAnchor" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Load and clip the Copernicus land cover map and<a href="step-2-download-environmental-covariates.html#load-and-clip-the-copernicus-land-cover-map-and" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1421,40 +518,43 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <div class="sourceCode" id="cb77"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb77-1"><a href="step-2-download-environmental-covariates.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Create mask for croplands ----------------------------*/</span></span>
 <span id="cb77-2"><a href="step-2-download-environmental-covariates.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-3"><a href="step-2-download-environmental-covariates.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Load the Copernicus Global Land Service image collection</span></span>
-<span id="cb77-4"><a href="step-2-download-environmental-covariates.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> imageCollection <span class="op">=</span> ee<span class="op">.</span><span class="fu">Image</span>(<span class="st">&quot;COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019&quot;</span>)</span>
-<span id="cb77-5"><a href="step-2-download-environmental-covariates.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>(<span class="st">&quot;discrete_classification&quot;</span>)</span>
-<span id="cb77-6"><a href="step-2-download-environmental-covariates.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(region)</span>
-<span id="cb77-7"><a href="step-2-download-environmental-covariates.html#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-8"><a href="step-2-download-environmental-covariates.html#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> crs <span class="op">=</span> <span class="st">&#39;EPSG:4326&#39;</span><span class="op">;</span> <span class="co">// WGS84</span></span>
-<span id="cb77-9"><a href="step-2-download-environmental-covariates.html#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> res <span class="op">=</span> <span class="dv">250</span><span class="op">;</span> <span class="co">// Resolution in decimal degrees</span></span>
-<span id="cb77-10"><a href="step-2-download-environmental-covariates.html#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-11"><a href="step-2-download-environmental-covariates.html#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Default resampling is nearest neighbor</span></span>
-<span id="cb77-12"><a href="step-2-download-environmental-covariates.html#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> image1 <span class="op">=</span> imageCollection<span class="op">.</span><span class="fu">resample</span>()</span>
-<span id="cb77-13"><a href="step-2-download-environmental-covariates.html#cb77-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">reproject</span>({</span>
-<span id="cb77-14"><a href="step-2-download-environmental-covariates.html#cb77-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">crs</span><span class="op">:</span> crs<span class="op">,</span> <span class="co">// Add your desired CRS here</span></span>
-<span id="cb77-15"><a href="step-2-download-environmental-covariates.html#cb77-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> res <span class="co">// Add your desired scale here</span></span>
-<span id="cb77-16"><a href="step-2-download-environmental-covariates.html#cb77-16" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span></code></pre></div>
+<span id="cb77-4"><a href="step-2-download-environmental-covariates.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> imageCollection <span class="op">=</span> </span>
+<span id="cb77-5"><a href="step-2-download-environmental-covariates.html#cb77-5" aria-hidden="true" tabindex="-1"></a>ee<span class="op">.</span><span class="fu">Image</span>(<span class="st">&quot;COPERNICUS/Landcover/100m/Proba-V-C3/Global/2019&quot;</span>)</span>
+<span id="cb77-6"><a href="step-2-download-environmental-covariates.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>(<span class="st">&quot;discrete_classification&quot;</span>)</span>
+<span id="cb77-7"><a href="step-2-download-environmental-covariates.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(region)</span>
+<span id="cb77-8"><a href="step-2-download-environmental-covariates.html#cb77-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-9"><a href="step-2-download-environmental-covariates.html#cb77-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> crs <span class="op">=</span> <span class="st">&#39;EPSG:4326&#39;</span><span class="op">;</span> <span class="co">// WGS84</span></span>
+<span id="cb77-10"><a href="step-2-download-environmental-covariates.html#cb77-10" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> res <span class="op">=</span> <span class="dv">250</span><span class="op">;</span> <span class="co">// Resolution in decimal degrees</span></span>
+<span id="cb77-11"><a href="step-2-download-environmental-covariates.html#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-12"><a href="step-2-download-environmental-covariates.html#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Default resampling is nearest neighbor</span></span>
+<span id="cb77-13"><a href="step-2-download-environmental-covariates.html#cb77-13" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> image1 <span class="op">=</span> imageCollection<span class="op">.</span><span class="fu">resample</span>()</span>
+<span id="cb77-14"><a href="step-2-download-environmental-covariates.html#cb77-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">reproject</span>({</span>
+<span id="cb77-15"><a href="step-2-download-environmental-covariates.html#cb77-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">crs</span><span class="op">:</span> crs<span class="op">,</span> <span class="co">// Add your desired CRS here</span></span>
+<span id="cb77-16"><a href="step-2-download-environmental-covariates.html#cb77-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> res <span class="co">// Add your desired scale here</span></span>
+<span id="cb77-17"><a href="step-2-download-environmental-covariates.html#cb77-17" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span></code></pre></div>
 </div>
 <div id="reclassify-the-land-cover-map" class="section level3 hasAnchor" number="7.2.7">
 <h3><span class="header-section-number">7.2.7</span> Reclassify the land cover map<a href="step-2-download-environmental-covariates.html#reclassify-the-land-cover-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This script reclassifies the land cover classes of the image1 using the remap function, which replaces the values in inList with the corresponding values in outList. We only keep class 40 which refer to Cultivated and managed vegetation / agriculture. The resulting image is then converted to a double data type, clipped to a specified region, and stored in the variable FAO_lu. The script then converts all 0 values in FAO_lu to NA values using the updateMask function and stores the resulting masked image in FAO_lu. The intermediate results are printed using the print function.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb78-1"><a href="step-2-download-environmental-covariates.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Reclassify the land cover classes</span></span>
-<span id="cb78-2"><a href="step-2-download-environmental-covariates.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> inList <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">60</span><span class="op">,</span> <span class="dv">70</span><span class="op">,</span> <span class="dv">80</span><span class="op">,</span> <span class="dv">90</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">111</span><span class="op">,</span> <span class="dv">112</span><span class="op">,</span> <span class="dv">113</span><span class="op">,</span> <span class="dv">114</span><span class="op">,</span> <span class="dv">115</span><span class="op">,</span> <span class="dv">116</span><span class="op">,</span> </span>
-<span id="cb78-3"><a href="step-2-download-environmental-covariates.html#cb78-3" aria-hidden="true" tabindex="-1"></a>              <span class="dv">121</span><span class="op">,</span> <span class="dv">122</span><span class="op">,</span> <span class="dv">123</span><span class="op">,</span> <span class="dv">124</span><span class="op">,</span> <span class="dv">125</span><span class="op">,</span> <span class="dv">126</span><span class="op">,</span> <span class="dv">200</span>]<span class="op">;</span></span>
-<span id="cb78-4"><a href="step-2-download-environmental-covariates.html#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> outList <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb78-5"><a href="step-2-download-environmental-covariates.html#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-6"><a href="step-2-download-environmental-covariates.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> FAO_lu <span class="op">=</span> image1<span class="op">.</span><span class="fu">remap</span>(inList<span class="op">,</span> outList)</span>
-<span id="cb78-7"><a href="step-2-download-environmental-covariates.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">toDouble</span>()</span>
-<span id="cb78-8"><a href="step-2-download-environmental-covariates.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(region)<span class="op">;</span></span>
-<span id="cb78-9"><a href="step-2-download-environmental-covariates.html#cb78-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-10"><a href="step-2-download-environmental-covariates.html#cb78-10" aria-hidden="true" tabindex="-1"></a><span class="co">// print(FAO_lu)</span></span>
+<span id="cb78-2"><a href="step-2-download-environmental-covariates.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> inList <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">60</span><span class="op">,</span> <span class="dv">70</span><span class="op">,</span> <span class="dv">80</span><span class="op">,</span> <span class="dv">90</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">111</span><span class="op">,</span> </span>
+<span id="cb78-3"><a href="step-2-download-environmental-covariates.html#cb78-3" aria-hidden="true" tabindex="-1"></a>               <span class="dv">112</span><span class="op">,</span> <span class="dv">113</span><span class="op">,</span> <span class="dv">114</span><span class="op">,</span> <span class="dv">115</span><span class="op">,</span> <span class="dv">116</span><span class="op">,</span> </span>
+<span id="cb78-4"><a href="step-2-download-environmental-covariates.html#cb78-4" aria-hidden="true" tabindex="-1"></a>              <span class="dv">121</span><span class="op">,</span> <span class="dv">122</span><span class="op">,</span> <span class="dv">123</span><span class="op">,</span> <span class="dv">124</span><span class="op">,</span> <span class="dv">125</span><span class="op">,</span> <span class="dv">126</span><span class="op">,</span> <span class="dv">200</span>]<span class="op">;</span></span>
+<span id="cb78-5"><a href="step-2-download-environmental-covariates.html#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> outList <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb78-6"><a href="step-2-download-environmental-covariates.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb78-7"><a href="step-2-download-environmental-covariates.html#cb78-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="step-2-download-environmental-covariates.html#cb78-8" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> FAO_lu <span class="op">=</span> image1<span class="op">.</span><span class="fu">remap</span>(inList<span class="op">,</span> outList)</span>
+<span id="cb78-9"><a href="step-2-download-environmental-covariates.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">toDouble</span>()</span>
+<span id="cb78-10"><a href="step-2-download-environmental-covariates.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(region)<span class="op">;</span></span>
 <span id="cb78-11"><a href="step-2-download-environmental-covariates.html#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-12"><a href="step-2-download-environmental-covariates.html#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Convert 0 to NA</span></span>
-<span id="cb78-13"><a href="step-2-download-environmental-covariates.html#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> mask <span class="op">=</span> FAO_lu<span class="op">.</span><span class="fu">neq</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb78-14"><a href="step-2-download-environmental-covariates.html#cb78-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mask)</span>
-<span id="cb78-15"><a href="step-2-download-environmental-covariates.html#cb78-15" aria-hidden="true" tabindex="-1"></a>FAO_lu <span class="op">=</span> FAO_lu<span class="op">.</span><span class="fu">updateMask</span>(mask)<span class="op">;</span></span>
-<span id="cb78-16"><a href="step-2-download-environmental-covariates.html#cb78-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-17"><a href="step-2-download-environmental-covariates.html#cb78-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FAO_lu<span class="op">,</span> <span class="st">&quot;Mask&quot;</span>)</span></code></pre></div>
+<span id="cb78-12"><a href="step-2-download-environmental-covariates.html#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="co">// print(FAO_lu)</span></span>
+<span id="cb78-13"><a href="step-2-download-environmental-covariates.html#cb78-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-14"><a href="step-2-download-environmental-covariates.html#cb78-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Convert 0 to NA</span></span>
+<span id="cb78-15"><a href="step-2-download-environmental-covariates.html#cb78-15" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> mask <span class="op">=</span> FAO_lu<span class="op">.</span><span class="fu">neq</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb78-16"><a href="step-2-download-environmental-covariates.html#cb78-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mask)</span>
+<span id="cb78-17"><a href="step-2-download-environmental-covariates.html#cb78-17" aria-hidden="true" tabindex="-1"></a>FAO_lu <span class="op">=</span> FAO_lu<span class="op">.</span><span class="fu">updateMask</span>(mask)<span class="op">;</span></span>
+<span id="cb78-18"><a href="step-2-download-environmental-covariates.html#cb78-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-19"><a href="step-2-download-environmental-covariates.html#cb78-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FAO_lu<span class="op">,</span> <span class="st">&quot;Mask&quot;</span>)</span></code></pre></div>
 </div>
 <div id="visualization-and-exporting-mask" class="section level3 hasAnchor" number="7.2.8">
 <h3><span class="header-section-number">7.2.8</span> Visualization and exporting mask<a href="step-2-download-environmental-covariates.html#visualization-and-exporting-mask" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1477,7 +577,7 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <span id="cb79-16"><a href="step-2-download-environmental-covariates.html#cb79-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scale</span><span class="op">:</span> res<span class="op">,</span> <span class="co">// Add your desired scale here</span></span>
 <span id="cb79-17"><a href="step-2-download-environmental-covariates.html#cb79-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">region</span><span class="op">:</span> region<span class="op">,</span></span>
 <span id="cb79-18"><a href="step-2-download-environmental-covariates.html#cb79-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">crs</span><span class="op">:</span> crs<span class="op">,</span> <span class="co">// Add your desired CRS here</span></span>
-<span id="cb79-19"><a href="step-2-download-environmental-covariates.html#cb79-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span> <span class="co">// Add a maximum number of pixels for export if needed</span></span>
+<span id="cb79-19"><a href="step-2-download-environmental-covariates.html#cb79-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span> <span class="co">// Add a maximum number of pixels for export </span></span>
 <span id="cb79-20"><a href="step-2-download-environmental-covariates.html#cb79-20" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 </div>
 </div>
@@ -1485,7 +585,7 @@ The rest of the script in this section is to reclip the rasters, stack them in a
 <h2><span class="header-section-number">7.3</span> Run and export in GEE<a href="step-2-download-environmental-covariates.html#run-and-export-in-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To execute a script in GEE, you can run it by clicking the “Run” button in the upper right-hand corner of the code editor. The “Run” button in GEE executes the script and any tasks specified in the script, such as exporting files to Google Drive. The status of the task can be monitored in the “Tasks” tab.</p>
 <div class="figure"><span style="display:block;" id="fig:RUN"></span>
-<img src="images/GEE_export.png" alt="Run button in code editor and RUN task in Tasks bar." width="946" />
+<img src="images/GEE_export.png" alt="Run button in code editor and RUN task in Tasks bar." width="100%" />
 <p class="caption">
 Figure 7.2: Run button in code editor and RUN task in Tasks bar.
 </p>

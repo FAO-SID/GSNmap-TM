@@ -1,7 +1,7 @@
 bookdown::pdf_book:
   citation_package: default  
   css: style.css
-  pandoc_args: [ "--csl", "food-and-agriculture-organization-of-the-united-nations.csl" ]
+  pandoc_args: [ "--csl", "food-and-agriculture-organization-of-the-united-nations.csl"]
   includes:
     in_header: preamble.tex
     before_body: ["frontcover.tex"]
